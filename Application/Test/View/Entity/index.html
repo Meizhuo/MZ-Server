@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据录入</title>
+</head>
+
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<body>
+    <div class="container-fluid">
+        <h2>数据录入</h2>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <td>证书类别</td>
+                    <td>职业(工种)和项目类别</td>
+                    <td>级别</td>
+                    <td>补贴金额（元）</td>
+                    <td>系列</td>
+                    <td>专业技术资格、职（执）业资格名称</td>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    <select id="certificate_type" class="form-control" >
+                        <option value="专业技术职称证书">专业技术职称证书</option>
+                        <option value="国家职业资格证书">国家职业资格证书</option>
+                        <option value="行业职业资格认证">行业职业资格认证</option>
+                        <option value="学历认证">学历认证</option>
+                    </select>
+                </td>
+                <td>
+                    <input id="kind" class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input id="level" class="form-control" type="text" placeholder="">
+                </td>
+                <td>
+                    <input id="money" class="form-control" type="text" placeholder="" >
+                </td>
+                <td>
+                    <input id="series" class="form-control" type="text" placeholder="" >
+                </td>
+                <td>
+                    <input id="title" class="form-control" type="text" placeholder="">
+                </td>
+            </tr>
+        </table>
+        <button id='submit' class='btn btn-primary btn-large btn-lg'>确认提交</button>
+    </div>
+</body>
+<script type="text/javascript">
+
+
+	(function($){
+		$('#submit').on('click',function(){
+			var certificate_type = $('#certificate_type').val();
+			var kind = $('#kind').val();
+			var level = $('#level').val();
+			var money = $('#money').val();
+			var series = $('#series').val();
+			var title = $('#title').val();
+
+			if(money===''){
+				alert("补贴金额不能为空");
+				return;
+			}
+			if(title ===''){
+				alert("资格名称不能为空");
+				return;
+			}
+		    $.post('{:U("Test/Entity/add")}',
+		    {
+		    	'certificate_type':certificate_type,
+		    	'kine':kind,
+		    	'level':level,
+		    	'money':money,
+		    	'series':series,
+		    	'title':title,
+
+		    },function(json){
+		    	console.log(json);
+		    },'json')
+		});
+	})(jQuery);
+	
+	
+</script>
+
+</html>
