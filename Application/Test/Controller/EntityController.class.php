@@ -20,7 +20,7 @@ class EntityController extends Controller {
           $this->ajaxReturn(array('status'=>'500'));
           
       }
-      \Think\Log::record(json_encode($project));
+      // \Think\Log::record(json_encode($project));
     }
     
     
