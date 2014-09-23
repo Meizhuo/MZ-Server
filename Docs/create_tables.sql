@@ -66,3 +66,12 @@ create table `mz_document_type` (
     PRIMARY KEY (`category_id`) 
 );
 
+-- 应用信息 
+DROP TABLE IF EXISTS `mz_appinfo`;
+create table `mz_appinfo` (
+    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+    `version_name` varchar(32) NOT NULL DEFAULT '1.0.0' COMMENT '版本代号',
+    `version_code`  int(10) NOT NULL DEFAULT '1'  COMMENT '版本号',
+    `description` text  COMMENT '版本描述',
+     PRIMARY KEY (`id`) 
+);
