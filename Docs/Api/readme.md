@@ -1,2 +1,6 @@
-添加用户信息页面
-/index.php/test/entity/index
+API List
+===
+e.g.基准url:http://61.29.161.61:88/mz/index.php
+
+* [应用信息](api_AppInfo.md)
+>更新信息
