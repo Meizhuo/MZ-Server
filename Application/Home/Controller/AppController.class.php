@@ -5,9 +5,11 @@ use Think\Controller;
 class AppController extends Controller {
 
     public function index() {
-        $this->ajaxReturn(mz_json_error("request method error"));
+        
     }
-
+    /**
+     * GET 获取当前版本信息
+     */
     public function getVersionInfo() {
         $new_version = M('appinfo');
         $data = $new_version->order('id desc')->limit(1)->select();
@@ -17,7 +19,9 @@ class AppController extends Controller {
             $this->ajaxReturn(mz_json_error("not any version info right now"));
         }
     }
-
+    /**
+     * POST 添加版本信息
+     */
     public function addNewVersion() {
         if (!IS_POST) {
             $this->ajaxReturn(mz_json_error("request method error"));
