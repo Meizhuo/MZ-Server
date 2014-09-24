@@ -79,7 +79,7 @@ create table `mz_appinfo` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用信息' AUTO_INCREMENT=1 ;
 
 
--- 表的结构 `mz_institution`
+-- 培训机构 `mz_institution`
 
 CREATE TABLE IF NOT EXISTS `mz_institution` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '机构id ',
@@ -94,3 +94,21 @@ CREATE TABLE IF NOT EXISTS `mz_institution` (
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '审核状态(-1审核失败 0未审核 1已审核)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训机构' AUTO_INCREMENT=1 ;
+
+
+--
+-- 培训课程 `mz_course`
+--
+
+CREATE TABLE IF NOT EXISTS `mz_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '课程id',
+  `name` varchar(64) NOT NULL COMMENT '课程名称',
+  `start_time` int(11) NOT NULL COMMENT '开课时间',
+  `address` varchar(256) NOT NULL COMMENT '开课地址',
+  `teacher` varchar(4096) NOT NULL COMMENT '授课老师',
+  `introduction` varchar(4096) NOT NULL COMMENT '课程介绍',
+  `cost` int(11) NOT NULL COMMENT '课程费用',
+  `end_time` int(11) NOT NULL COMMENT '开课结束时间',
+  `institution` int(11) NOT NULL COMMENT '所属的培训机构id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训课程' AUTO_INCREMENT=1 ;
