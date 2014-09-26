@@ -9,7 +9,7 @@ define('APP_DEBUG',True);
 
 //创建或绑定模块,创建完毕请注释
 // define ( 'BIND_MODULE','Test');
-
+// define ( 'BIND_MODULE','Admin');
 
 
 // 定义应用目录
