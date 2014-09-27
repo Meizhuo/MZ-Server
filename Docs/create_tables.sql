@@ -22,9 +22,10 @@ DROP TABLE IF EXISTS `mz_user`;
 CREATE TABLE `mz_user` (
   `uid` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id (主键)',
   `nickname` varchar(128) NOT NULL COMMENT ' 用户昵称',
-  `phone` varchar(32) NOT NULL COMMENT '手机号码(11位)',
+  `phone` varchar(32) DEFAULT NULL COMMENT '手机号码(11位)',
   `email` varchar(32) DEFAULT NULL COMMENT '邮箱',
-  `psw` varchar(64) NOT NULL COMMENT '密码md5',
+  `psw` varchar(64) NOT NULL COMMENT 'md5,8-16位数字or字母',
+  `reg_time` int(11) NOT NULL COMMENT '注册时间',
   `level` int(1) NOT NULL DEFAULT '1' COMMENT '权限等级(1个人用户 2 用人单位 4 培训机构8管理员16超级管理员 )',
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '审核状态(-1审核不通过 0 未审核1审核通过)',
   PRIMARY KEY (`uid`),
@@ -37,8 +38,7 @@ DROP TABLE IF EXISTS `mz_user_person`;
 CREATE TABLE `mz_user_person` (
   `uid` int(11) NOT NULL COMMENT 'uid用户id',
   `sex` varchar(2) DEFAULT NULL COMMENT '性别(男或女)',
-  `work_place` varchar(128) DEFAULT NULL COMMENT '工作地点',
-  `reg_time` int(11) NOT NULL COMMENT '注册时间'
+  `work_place` varchar(128) DEFAULT NULL COMMENT '工作地点'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='个人用户表';
 
 
@@ -47,15 +47,13 @@ DROP TABLE IF EXISTS `mz_user_employer`;
 CREATE TABLE  `mz_user_employer` (
   `uid` int(11) NOT NULL COMMENT '用户id',
   `phone` varchar(32) DEFAULT NULL COMMENT '联系电话',
-  `address` varchar(128) DEFAULT NULL COMMENT '用人单位地址',
-  `reg_time` int(11) NOT NULL COMMENT '注册时间'
+  `address` varchar(128) DEFAULT NULL COMMENT '用人单位地址'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用人单位';
 
 -- 管理员表
 DROP TABLE IF EXISTS `mz_user_admin`;
 CREATE TABLE `mz_user_admin` (
   `uid` int(11) NOT NULL COMMENT '用户id',
-  `reg_time` int(11) NOT NULL COMMENT '注册时间',
   `per_categorys_post` text  COMMENT '有权限起草/编辑的栏目 ',
   `per_categorys_check` text COMMENT '有权限管理的群组',
   `per_institution_check` text  COMMENT '有权限审核培训机构'
@@ -65,7 +63,6 @@ CREATE TABLE `mz_user_admin` (
 DROP TABLE IF EXISTS `mz_user_institution`;
 CREATE TABLE `mz_user_institution` (
   `uid` int(11) NOT NULL COMMENT '机构用户id',
-  `reg_time` int(11) NOT NULL COMMENT '注册时间',
   `name` varchar(128) DEFAULT NULL COMMENT '机构名称',
   `address` varchar(256) DEFAULT NULL COMMENT '机构地址',
   `manager` varchar(128) DEFAULT NULL COMMENT '机构负责人 ',
