@@ -56,9 +56,9 @@ CREATE TABLE  `mz_user_employer` (
 DROP TABLE IF EXISTS `mz_user_admin`;
 CREATE TABLE `mz_user_admin` (
   `uid` int(11) NOT NULL COMMENT '用户id',
-  `per_categorys_post` text  COMMENT '有权限起草/编辑的栏目 ',
-  `per_categorys_check` text COMMENT '有权限管理的群组',
-  `per_institution_check` text  COMMENT '有权限审核培训机构',
+  `per_categorys_post` text  COMMENT '有权限起草/编辑的栏目 (json)',
+  `per_categorys_check` text COMMENT '有权限管理的群组(json)',
+  `per_institution_check` text  COMMENT '有权限审核培训机构(0无权限1有权限)',
    UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
@@ -166,7 +166,35 @@ CREATE TABLE `mz_message` (
 -- 预定义数据
 -- ---------
 
--- 
+--
+-- 转存表中的数据 `mz_document_category`
+-- 基本栏目
+--
 
+INSERT INTO `mz_document_category` (`category_id`, `name`, `description`) VALUES
+(1, '基本职能', '职业培训-基本职能'),
+(2, '法律法规及政策', '职业培训-法律法规及政策'),
+(3, '相关新闻', '职业培训-相关新闻'),
+(4, '通知信息', '职业培训-通知信息'),
+(5, '政策法规', '职业技术鉴定-政策法规'),
+(6, '办事指南', '职业技术鉴定-办事指南'),
+(7, '全国统考', '职业技术鉴定-全国统考');
+
+
+--
+-- 转存表中的数据 `mz_user`
+-- 超级管理员 nickname:superadmin email:superadmin@mz.com psw:superadmin lv:16
+--
+
+INSERT INTO `mz_user` (`uid`, `nickname`, `phone`, `email`, `psw`, `reg_time`, `level`, `status`) VALUES
+(1, 'superadmin', NULL, 'superadmin@mz.com', '17c4520f6cfd1ab53d8745e84681eb49', 1411877304, 16, 1);
+
+--
+-- 转存表中的数据 `mz_user_admin`
+-- 超级管理员的资料/权限
+--
+
+INSERT INTO `mz_user_admin` (`uid`, `per_categorys_post`, `per_categorys_check`, `per_institution_check`) VALUES
+(1, '[1,2,3,4,5,6,7]', '[1,2,3,4,5,6,7]', '1');
 
 
