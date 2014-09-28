@@ -142,8 +142,8 @@ CREATE TABLE `mz_document_file` (
 
 
 -- 文档种类/栏目
-DROP TABLE IF EXISTS `mz_document_type`;
-CREATE TABLE `mz_document_type` (
+DROP TABLE IF EXISTS `mz_document_category`;
+CREATE TABLE `mz_document_category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `name` varchar(32) NOT NULL COMMENT '种类名称',
   `description` text COMMENT '描述',
@@ -161,6 +161,12 @@ CREATE TABLE `mz_message` (
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '发送状态(-1发送失败 0等待发送 1发送成功) ',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='消息' AUTO_INCREMENT=1 ;
+
+-- ---------
+-- 预定义数据
+-- ---------
+
+-- 
 
 
 
