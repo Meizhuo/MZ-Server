@@ -37,8 +37,9 @@ CREATE TABLE `mz_user` (
 DROP TABLE IF EXISTS `mz_user_person`;
 CREATE TABLE `mz_user_person` (
   `uid` int(11) NOT NULL COMMENT 'uid用户id',
-  `sex` varchar(2) DEFAULT NULL COMMENT '性别(男或女)',
-  `work_place` varchar(128) DEFAULT NULL COMMENT '工作地点'
+  `sex` varchar(2) DEFAULT '男' COMMENT '性别(男或女)',
+  `work_place` varchar(128) DEFAULT NULL COMMENT '工作地点',
+   UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='个人用户表';
 
 
@@ -46,8 +47,9 @@ CREATE TABLE `mz_user_person` (
 DROP TABLE IF EXISTS `mz_user_employer`;
 CREATE TABLE  `mz_user_employer` (
   `uid` int(11) NOT NULL COMMENT '用户id',
-  `phone` varchar(32) DEFAULT NULL COMMENT '联系电话',
-  `address` varchar(128) DEFAULT NULL COMMENT '用人单位地址'
+  `contact_phone` varchar(32) DEFAULT NULL COMMENT '联系电话',
+  `address` varchar(128) DEFAULT NULL COMMENT '用人单位地址',
+   UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用人单位';
 
 -- 管理员表
@@ -56,7 +58,8 @@ CREATE TABLE `mz_user_admin` (
   `uid` int(11) NOT NULL COMMENT '用户id',
   `per_categorys_post` text  COMMENT '有权限起草/编辑的栏目 ',
   `per_categorys_check` text COMMENT '有权限管理的群组',
-  `per_institution_check` text  COMMENT '有权限审核培训机构'
+  `per_institution_check` text  COMMENT '有权限审核培训机构',
+   UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
 -- 培训机构用户表
@@ -71,7 +74,8 @@ CREATE TABLE `mz_user_institution` (
   `validity_date` int(11) DEFAULT NULL COMMENT '有效期 ',
   `training_scope` text COMMENT '培训范围',
   `description` text COMMENT '描述',
-  `teacher_resource` text COMMENT '师资力量'
+  `teacher_resource` text COMMENT '师资力量',
+   UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训机构用户表';
 
 
