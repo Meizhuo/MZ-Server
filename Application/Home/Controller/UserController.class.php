@@ -23,7 +23,7 @@ class UserController extends BaseController {
        $User = D('User');
        $result = $User->regPerson();
        if($result['status']){
-           $this->ajaxReturn(mz_json_success());
+           $this->ajaxReturn(mz_json_success('register successfully'));
        }else{
             $this->ajaxReturn($result['msg']);
        }
