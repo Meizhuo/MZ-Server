@@ -29,7 +29,7 @@ CREATE TABLE `mz_user` (
   `level` int(1) NOT NULL DEFAULT '1' COMMENT '权限等级(1个人用户 2 用人单位 4 培训机构8管理员16超级管理员 )',
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '审核状态(-1审核不通过 0 未审核1审核通过)',
   PRIMARY KEY (`uid`),
-  UNIQUE KEY `nickname` (`nickname`,`phone`,`email`)
+  UNIQUE KEY `phone` (`phone`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=1 ;
 
 
@@ -39,7 +39,7 @@ CREATE TABLE `mz_user_person` (
   `uid` int(11) NOT NULL COMMENT 'uid用户id',
   `sex` varchar(2) DEFAULT '男' COMMENT '性别(男或女)',
   `work_place` varchar(128) DEFAULT NULL COMMENT '工作地点',
-   UNIQUE KEY `uid` (`uid`)
+   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='个人用户表';
 
 
@@ -49,7 +49,7 @@ CREATE TABLE  `mz_user_employer` (
   `uid` int(11) NOT NULL COMMENT '用户id',
   `contact_phone` varchar(32) DEFAULT NULL COMMENT '联系电话',
   `address` varchar(128) DEFAULT NULL COMMENT '用人单位地址',
-   UNIQUE KEY `uid` (`uid`)
+   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用人单位';
 
 -- 管理员表
@@ -59,7 +59,7 @@ CREATE TABLE `mz_user_admin` (
   `per_categorys_post` text  COMMENT '有权限起草/编辑的栏目 (json)',
   `per_categorys_check` text COMMENT '有权限管理的群组(json)',
   `per_institution_check` text  COMMENT '有权限审核培训机构(0无权限1有权限)',
-   UNIQUE KEY `uid` (`uid`)
+   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
 -- 培训机构用户表
@@ -75,7 +75,7 @@ CREATE TABLE `mz_user_institution` (
   `training_scope` text COMMENT '培训范围',
   `description` text COMMENT '描述',
   `teacher_resource` text COMMENT '师资力量',
-   UNIQUE KEY `uid` (`uid`)
+   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训机构用户表';
 
 
