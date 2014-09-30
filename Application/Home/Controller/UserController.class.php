@@ -91,15 +91,5 @@ class UserController extends BaseController {
        session('uid',null);
        $this->ajaxReturn(mz_json_success('logout successfully'));
     }
-    
-    public function test(){
-        if(session('?uid')){
-            $this->ajaxReturn(session('uid'));
-        }
-        else{
-            $this->ajaxReturn('nothing');
-        }
-    }
-      
 }
 
