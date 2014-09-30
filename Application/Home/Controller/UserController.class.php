@@ -1,13 +1,8 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
+use Common\Controller\BaseController;
 
-class UserController extends Controller {
-    
-    public function index(){
-        $user  = D('User');
-        $user->lol();
-    }
+class UserController extends BaseController {
     
     public function addUser(){
         $User = D('User');
@@ -17,21 +12,93 @@ class UserController extends Controller {
             $this->ajaxReturn(mz_json_error($User->getError()));
         }
     }
-    
-    public function addAdmin(){
-        
+    /**
+     * POST 注册
+     */
+    public function register(){
+       if(!IS_POST){
+           $this->ajaxReturn(mz_json_error_request());
+       } 
+       
+       $User = D('User');
+       $result = $User->regPerson();
+       if($result['status']){
+           $this->ajaxReturn(mz_json_success());
+       }else{
+            $this->ajaxReturn($result['msg']);
+       }
+    }
+
+    /**
+     * 获得用户信息
+     */ 
+    public function info(){
+        $uid = session('uid');
+        if(!$uid){
+            $this->ajaxReturn(mz_json_error('login please'));
+        }
+        //?
+        $res = D('User')->getUserInfo($uid);
+        $this->ajaxReturn($res['msg']);
     }
     
-    public function update($uid){
+    public function update(){
+        if(!IS_POST){
+            $this->ajaxReturn(mz_json_error_request());
+            return;
+        }
+        if(!session('uid')){
+            $this->ajaxReturn(mz_json_error("login please!"));
+            return;
+        }
+        $uid = session('uid');
+        $data['uid'] = session('uid');
+        $res = D('User')->updateUserInfo(array_merge($data,I('post.')));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success('update info success'));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
         
     }
-    
+    /**
+     * POST 登录
+     */
     public function login(){
-        
+        if(!IS_POST){
+            $this->ajaxReturn(mz_json_error_request());
+            return;
+        }
+        $account = I('post.account');
+        $psw = md5(I('post.psw'));
+        $User = D('User');
+        if(strstr($account,'@')){
+            $res = $User->login('email',$account,$psw);
+        }else{
+            $res = $User->login('phone',$account,$psw);
+        }
+        if($res['status']){
+            session('uid',$res['msg']['uid']);
+            $this->ajaxReturn(mz_json_success('login success'));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
+    /**
+     * GET 登出
+     */
+    public function logout(){
+       session('uid',null);
+       $this->ajaxReturn(mz_json_success('logout successfully'));
     }
     
-    public function logout(){
-        
+    public function test(){
+        if(session('?uid')){
+            $this->ajaxReturn(session('uid'));
+        }
+        else{
+            $this->ajaxReturn('nothing');
+        }
     }
       
 }

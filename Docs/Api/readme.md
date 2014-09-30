@@ -12,7 +12,7 @@ BaseURL = http://61.29.161.61:88/mz/index.php
 
 ```json
 {
-	"code":200,
+	"code":20000,
 	"response"：{
 		"foo":"bar",
 		...
@@ -25,7 +25,7 @@ BaseURL = http://61.29.161.61:88/mz/index.php
 
 ```json 
 {
-	"coode":200,
+	"coode":20000,
 	"response":[
 		{
 			"titile":"title1"
@@ -49,6 +49,28 @@ BaseURL = http://61.29.161.61:88/mz/index.php
 	"msg":"请求方法错误"
 }
 ```
+
+
+API文档示例
+===
+## 注册
+`POST /home/user/register`
+
+字段	|描述 |  是否必须 
+------------ | -------------| -------------
+nickname | 用户昵称  	| Y
+ |   | Y
+
+ **Response**
+ ```json
+{
+	"code":20000,
+	"response"："operate success"
+}
+```
+
+
+
 
 
 ## API列表

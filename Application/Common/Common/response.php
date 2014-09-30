@@ -6,15 +6,22 @@
  * @return multitype:number string
  */
 function mz_json_error($msg='operate error',$error_code=40000){
-    return array('error_code'=> 500,'msg'=>$msg);
+    return array('error_code'=> $error_code,'msg'=>$msg);
 }
 
 /**
  *  封装处理成功的json格式
- * @param unknown $data  array
+ * @param unknown $data string array
  * @param number $code  默认20000
  * @return multitype:number unknown
  */
-function mz_json_success($data,$code =20000){
+function mz_json_success($data='operate success',$code =20000){
     return array('code'=> 200,'response'=>$data);
+}
+/**
+ * 常用的请求方法错误
+ * @return Ambigous <multitype:number, multitype:number string >
+ */
+function mz_json_error_request(){
+    return mz_json_error('请求方法错误',40001);
 }

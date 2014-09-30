@@ -1,12 +1,9 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
+use Common\Controller\BaseController;
 
-class AppController extends Controller {
+class AppController extends BaseController {
 
-    public function index() {
-        
-    }
     /**
      * GET 获取当前版本信息
      */
