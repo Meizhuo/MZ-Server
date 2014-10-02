@@ -1,7 +1,6 @@
 <?php
 namespace Common\Model;
 
-use Org\Util\String;
 /**
  * 补贴项目模型
  * @author Jayin
@@ -92,6 +91,9 @@ class SubsidyModel extends BaseModel {
         if(!empty($title)){
             $map['title'] = array('like','%'.$title.'%');
         }
+            // 保证为正数
+        $limit = $limit > 0 ? $limit : 10;
+        $page = $page > 0 ? $page : 1;
         $res['msg']  = $this->where($map)->limit(($page-1)*$limt,$limt)->select();
         if(empty($res['msg'])){
             $res['msg'] = array();

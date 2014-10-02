@@ -91,9 +91,9 @@ class SubsidyController extends BaseController {
      * @param number $limt
      */
     public function search($certificate_type = '', $kind = '', $level = '', $series = '', 
-            $title = '', $page = 1, $limt = 10) {
+            $title = '', $page = 1, $limit = 10) {
         $res = D('Subsidy')->search($certificate_type, $kind, $level, $series, 
-                $title, $page, $limt);
+                $title, $page, $limit);
         if ($res['status']) {
             $this->ajaxReturn(mz_json_success($res['msg']));
         } else {
