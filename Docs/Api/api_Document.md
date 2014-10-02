@@ -1,65 +1,14 @@
-用户Admin
+文档模块Document
 ===
-`/home/admin/*`
+`/home/document/*`
 
 
+## 发布文档 
+`POST /home/document/post` 
 
-##  创建管理员
-`POST /home/admin/create` 
-
-字段	|描述 |  是否必须 
+字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-nickname | 用户昵称  	| Y
-email|  邮箱  	| Y
-psw  | 密码 8-16位数字or字母 	| Y
-
-
-**Response**  
-
-```json
-{
-	"code":20000,
-	"response"："create success"
-}
-```
-
-## 登录   
-`POST /home/admin/login` 
-
-字段	|描述 |  是否必须 
------------- | -------------| -------------
-email|  邮箱  	| Y
-psw  | 密码 8-16位数字or字母 	| Y
-
-
-**Response**  
-
-```json
-{
-	"code":20000,
-	"response"："login success"
-}
-```
-
-## 登出   
-`POST /home/admin/logout` 
-
-**Response**  
-
-```json
-{
-	"code":20000,
-	"response"："logout success"
-}
-```
-
-
-## 发布文档	
-`POST /home/admin/post` 
-
-字段	|描述 |  是否必须 
------------- | -------------| -------------
-title | 标题  	| Y
+title | 标题      | Y
 content | 内容   |Y
 category_id |  所属分类(栏目)   |Y
 upload_ids |  附件id组(json数组),默认[]   |N
@@ -74,16 +23,16 @@ order_num| 序号(优先级别,默认为1) | N
 
 ```json
 {
-	"code":20000,
-	"response"："post successfully"
+    "code":20000,
+    "response"："post successfully"
 }
 ```
 
 
 ## 编辑/更新文档  
-`POST /home/admin/update` 
+`POST /home/document/update` 
 
-字段	|描述 |  是否必须 
+字段  |描述 |  是否必须 
 ------------ | -------------| -------------
 title | 标题      | N
 content | 内容   |N
@@ -106,45 +55,64 @@ order_num| 序号(优先级别,默认为1) | N
 ```
 
 
-## 审核文档  
-`POST /home/admin/checkDocument` 
-
-字段	|描述 |  是否必须 
+## 文档详情
+`GET /home/document/info` 
+字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-doc_id|需要审核的文档id|Y
-op|operation的简称(0为通过 1为不通过审核，默认1)| N
+doc_id | 标题      | N
+
 
 **Response**  
 
 ```json
 {
     "code":20000,
-    "response"："operate successfully"
+    "response"："update successfully"
 }
 ```
 
 
-## 审核培训机构 
-`POST /home/admin/checkInstitution` 
 
-字段	|描述 |  是否必须 
+## 文档列表(页码，分类)
+`GET /home/document/search` 
+
+字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-ins_id| 需要审核的机构id  	| Y
-op|operation的简称(0为通过 1为不通过审核，默认1)| N
+page| 页码,默认1|N
+limit| 条目,默认10| N
+title | 类似的标题      | N
+content | 类似的内容   |N
+category_ids|目录| N
+
+
+
+
+## 获得文档分类
+`GET /home/document/category`
 
 **Response**  
 
 ```json
 {
     "code":20000,
-    "response"："operate successfully"
+    "response"："[
+        {
+            "category_id":123// 分类id
+            "name":"最新通知"// 种类名称
+            "description":"hello world" // 描述 
+
+        }
+        ......
+
+    ]
 }
 ```
-
 
 
 ## 上传附件
 `POST /home/admin/upload` 
+
+NOTE:先发布了文章再允许添加附件
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
@@ -158,4 +126,5 @@ file| 需要上传的文件   | Y
     "response"："upload successfully"
 }
 ```
+
 
