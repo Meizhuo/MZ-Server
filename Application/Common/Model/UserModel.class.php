@@ -156,25 +156,34 @@ class UserModel extends BaseModel {
         }
         return $res;
     }
+
     /**
      * 更新用户信息
-     * @param unknown $uid
+     * 
+     * @param unknown $uid            
      * @return Ambigous <number, multitype:number string , string>
      */
-    public function updateUserInfo($data){
-        $res =$this->_getResult();
-        print_r($data);
-        if($this->create($data)){
-            $this->save();
-            $person = D('UserPerson');
-            if($person->create($data)){
-                $person->save();
-                $res['status']  = 1;
-            }else{
-                $res['msg'] = $this->getError();    
+    public function updateUserInfo($data) {
+        $res = $this->_getResult();
+        if ($this->create($data)) {
+            // 除了uid还有更新其他项
+            if (count($this->data()) > 1) {
+                $this->save();
+                $person = D('UserPerson');
+                if ($person->create($data)) {
+                    if (count($person->data()) > 1) {
+                        $person->save();
+                    }
+                } else {
+                    $res['msg'] = $this->getError();
+                }
             }
-        }else{
+        } else {
             $res['msg'] = $this->getError();
+        }
+        // $res['msg']为'' 说明操作成功
+        if (! $res['msg']) {
+            $res['status'] = 1;
         }
         return $res;
     }
