@@ -73,7 +73,6 @@ title  |  资格名称(通常只用到这个) | N
 kind   |  项目类别|N
 level  |  等级 |N
 series   | 系列|N
-title   | 资格名称|N
 limit  | 返回条目 默认10|N
 page   | 页码  默认1| N
 

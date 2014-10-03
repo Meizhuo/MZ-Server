@@ -4,14 +4,6 @@ use Common\Controller\BaseController;
 
 class UserController extends BaseController {
     
-    public function addUser(){
-        $User = D('User');
-        if($User->add()){
-            $this->ajaxReturn(mz_json_success());
-        }else{
-            $this->ajaxReturn(mz_json_error($User->getError()));
-        }
-    }
     /**
      * POST 注册
      */

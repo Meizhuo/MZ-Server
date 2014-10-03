@@ -91,7 +91,7 @@ class SubsidyModel extends BaseModel {
         if(!empty($title)){
             $map['title'] = array('like','%'.$title.'%');
         }
-            // 保证为正数
+        // 保证为正数
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
         $res['msg']  = $this->where($map)->limit(($page-1)*$limt,$limt)->select();
