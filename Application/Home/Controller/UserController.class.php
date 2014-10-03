@@ -25,7 +25,7 @@ class UserController extends BaseController {
        if($result['status']){
            $this->ajaxReturn(mz_json_success('register successfully'));
        }else{
-            $this->ajaxReturn($result['msg']);
+            $this->ajaxReturn(mz_json_error($result['msg']));
        }
     }
 

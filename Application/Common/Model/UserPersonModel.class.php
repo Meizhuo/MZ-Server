@@ -31,7 +31,11 @@ class UserPersonModel extends BaseModel {
          }
          return false;
     }
-    
+    /**
+     * 添加一个用户
+     * @param unknown $data
+     * @return Ambigous <multitype:number string , string>
+     */
     public function addPerson($data){
         $res = $this->_getResult();
         if($this->create($data)){

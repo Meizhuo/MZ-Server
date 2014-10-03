@@ -89,16 +89,9 @@ class UserModel extends BaseModel {
            	    'uid' => $uid
            );
            //创建user_person资料
-           $user_person = D('UserPerson');
-           if($user_person->create(array_merge($_data,I('post.')))){
-               if($user_person->add()){
-                    $res['status'] =1;
-               }else{
-                   $res['msg'] = '无法插入 ,系统错误';
-               }
-           }else{
-               return $res['msg'] = $user_person->getError();
-           }
+           $res_person = D('UserPerson')->addPerson(array_merge($_data,I('post.')));
+           $res['status'] = $res_person['status'];
+           $res['msg']    = $res_person['msg'];
         }else{
             $res['msg'] = '无法插入 ,系统错误';
         }
