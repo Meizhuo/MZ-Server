@@ -58,27 +58,27 @@ class SubsidyController extends BaseController {
      */
     public function getCertificateTypes() {
         $res = D('Subsidy')->getSigleFieldType('certificate_type');
-        $this->ajaxReturn($res['msg']);
+        $this->ajaxReturn(mz_json_success($res['msg']));
     }
     
     public function getKinds(){
         $res = D('Subsidy')->getSigleFieldType('kind');
-        $this->ajaxReturn($res['msg']);
+        $this->ajaxReturn(mz_json_success($res['msg']));
     }
     
     public function getLevels(){
         $res = D('Subsidy')->getSigleFieldType('level');
-        $this->ajaxReturn($res['msg']);
+        $this->ajaxReturn(mz_json_success($res['msg']));
     }
     
     public function getSeries(){
         $res = D('Subsidy')->getSigleFieldType('series');
-        $this->ajaxReturn($res['msg']);
+        $this->ajaxReturn(mz_json_success($res['msg']));
     }
     
     public function getTitles(){
         $res = D('Subsidy')->getSigleFieldType('title');
-        $this->ajaxReturn($res['msg']);
+        $this->ajaxReturn(mz_json_success($res['msg']));
     }
     /**
      * 模糊搜索
