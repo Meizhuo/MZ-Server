@@ -20,14 +20,19 @@ class UserModel extends BaseModel {
     const LEVEL_EMPLOYER = 2;
 
     /**
-     * 管理员
-     */
-    const LEVEL_ADMIN = 4;
-
-    /**
      * 培训机构用户
      */
-    const LEVEL_INSTITUTION = 8;
+    const LEVEL_INSTITUTION = 4;
+
+    /**
+     * 管理员
+     */
+    const  LEVEL_ADMIN= 8;
+    
+    /**
+     * 超级管理员
+     */
+    const LEVEL_SUPER_ADMIN = 16;
 
     /**
      * 审核不通过
@@ -69,9 +74,9 @@ class UserModel extends BaseModel {
         array('level','1',self::MODEL_INSERT),
         array('status','1',self::MODEL_INSERT)
     );
-
+    
     /**
-     * 注册一个用户
+     * 注册一个普通个人用户
      * @return array() status:1为正常 0为失败 msg:失败信息
      */
     public function regPerson(){
@@ -80,8 +85,12 @@ class UserModel extends BaseModel {
             $res['msg'] = $this->getError();
             return $res;
         }
-        $this->data['level']='1';
-        $this->data['status']='1';
+        if(empty($this->data['email']) && empty($this->data['email'])){
+            $res['msg'] = 'Reigister operation requires `phone` or email';
+            return $res;
+        }
+        $this->data['level']=UserModel::LEVEL_PERSON;
+        $this->data['status']=UserModel::STATUS_PASS;
         $this->data['psw'] = md5($this->data['psw']);
         $uid = $this->add();
         if($uid){
@@ -90,10 +99,9 @@ class UserModel extends BaseModel {
            );
            //创建user_person资料
            $res_person = D('UserPerson')->addPerson(array_merge($_data,I('post.')));
-           $res['status'] = $res_person['status'];
-           $res['msg']    = $res_person['msg'];
+           $res = array_merge($res,$res_person);
         }else{
-            $res['msg'] = '无法插入 ,系统错误';
+            $res['msg'] = 'System Error: Not able to insert.';
         }
         return $res;
     }
@@ -105,9 +113,38 @@ class UserModel extends BaseModel {
     public function regAdmin(){
         
     }
-    
-    public function regInstitution(){
-        
+
+    /**
+     * 注册一个机构用户
+     * 
+     * @return string Ambigous multitype:number string >
+     */
+    public function regInstitution() {
+        $res = $this->_getResult();
+        if (! $this->create()) {
+            $res['msg'] = $this->getError();
+            return $res;
+        }
+        if(empty($this->data['email']) && empty($this->data['email'])){
+            $res['msg'] = 'Reigister operation requires `phone` or email';
+            return $res;
+        }
+        $this->data['level'] = UserModel::LEVEL_INSTITUTION;
+        $this->data['status'] = UserModel::STATUS_PASS;
+        $this->data['psw'] = md5($this->data['psw']);
+        $uid = $this->add();
+        if ($uid) {
+            $_data = array(
+                    'uid' => $uid
+            );
+            // 创建user_institution资料
+            $user_institution = D('UserInstitution')->addInstitution(
+                    array_merge($_data, I('post.')));
+            $res = array_merge($res, $user_institution);
+        } else {
+            $res['msg'] = 'System Error: Not able to insert.';
+        }
+        return $res;
     }
    
     /**
@@ -149,6 +186,24 @@ class UserModel extends BaseModel {
         }
         return $res;
     }
+    /**
+     * 根据id获得机构信息
+     * @param unknown $uid
+     * @return Ambigous <string, multitype:, multitype:number string >
+     */
+    public function getInsInfo($uid){
+        $res = $this->_getResult();
+        $user_ins = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        //         $user_ins = $this->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        if($user_ins){
+            $_result = M('UserInstitution')->where("uid='%s'",$uid)->select();
+            $res['status'] = 1;
+            $res['msg'] = array_merge($user_ins[0],$_result[0]);
+        }else{
+            $res['msg'] = 'No session info,login please';
+        }
+        return $res;
+    }
 
     /**
      * 更新用户信息
@@ -159,10 +214,11 @@ class UserModel extends BaseModel {
     public function updateUserInfo($data) {
         $res = $this->_getResult();
         if ($this->create($data)) {
-            // 除了uid还有更新其他项
+            // 除了uid还有更新其他项,那么更新，不然会报SQL错误
             if (count($this->data()) > 1) {
                 $this->save();
                 $person = D('UserPerson');
+                //TODO 重构一下 应该写到UserPerson中
                 if ($person->create($data)) {
                     if (count($person->data()) > 1) {
                         $person->save();
@@ -172,6 +228,28 @@ class UserModel extends BaseModel {
                 }
             }
         } else {
+            $res['msg'] = $this->getError();
+        }
+        // $res['msg']为'' 说明操作成功
+        if (! $res['msg']) {
+            $res['status'] = 1;
+        }
+        return $res;
+    }
+    /**
+     * 更新机构信息
+     * @param unknown $data
+     * @return Ambigous <number, multitype:number string >
+     */
+    public function updateInsInfo($data){
+        $res = $this->_getResult();  
+        if($this->create($data)){
+            if(count($this->data) > 1){
+                $this->save();
+                $res_ins = D('UserInstitution')->updateInfo($data);
+                $res = array_merge($res,$res_ins);
+            }
+        }else{
             $res['msg'] = $this->getError();
         }
         // $res['msg']为'' 说明操作成功
