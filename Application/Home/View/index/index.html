@@ -252,13 +252,7 @@ label {
 <script type="text/javascript">
 (function($) {
     var local_test = true;
-    var base_url = '';
-    if (local_test) {
-        base_url = 'http://localhost/mz/index.php';
-    } else {
-        base_url = 'http://61.29.161.61:88/mz/index.php';
-    }
-
+  
     function getKeyText(number) {
         return $('#key' + number).val();
     }
@@ -290,7 +284,7 @@ label {
         $('#mz-result').text('');
         $.ajax({
             type: req_method,
-            url: base_url + abs_url,
+            url: 'index.php' + abs_url,
             data: send_data,
             dataType: 'text',
             success: function(text) {
