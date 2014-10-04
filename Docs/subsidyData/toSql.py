@@ -7,7 +7,7 @@ sql_file = 'subsidy.sql'
 def get_data(file_name):
     res = {}
     with open(file_name, mode='r') as f:
-        res['certificate_type'] = f.readline()
+        res['certificate_type'] = f.readline().strip();
         res['kind'] = f.readline().strip();
         res['level'] = f.readline().strip();
         res['money'] = f.readline().strip();
