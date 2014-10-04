@@ -8,10 +8,10 @@ def get_data(file_name):
     res = {}
     with open(file_name, mode='r') as f:
         res['certificate_type'] = f.readline()
-        res['kind'] = f.readline()
-        res['level'] = f.readline()
-        res['money'] = f.readline()
-        res['title'] = f.readline()
+        res['kind'] = f.readline().strip();
+        res['level'] = f.readline().strip();
+        res['money'] = f.readline().strip();
+        res['title'] = f.readline().strip();
     return res
 
 def deal_with(file_name):
