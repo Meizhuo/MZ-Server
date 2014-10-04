@@ -278,9 +278,7 @@ label {
             alert(相对url不能为空);
             return;
         }
-        console.log(base_url + abs_url);
-        console.log(req_method);
-        console.log(send_data);
+
         $('#mz-result').text('');
         $.ajax({
             type: req_method,
@@ -288,7 +286,6 @@ label {
             data: send_data,
             dataType: 'text',
             success: function(text) {
-                console.log("success");
                 console.log(text);
               
                 $('#mz-result').val(text);
