@@ -1,8 +1,320 @@
 <html>
+
 <head>
-    <title>MZ</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API测试</title>
+
 </head>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Public/js/jquery.format.js"></script>
+<style type="text/css">
+.box {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+textarea {
+    width: 100%;
+    height: 80%;
+    margin-bottom: 20px;
+}
+label {
+    margin: 10px;
+    margin-top: 20px;
+}
+.mz-radio {
+    margin-left: 0px;
+}
+.row {
+    margin-top: 20px;
+}
+.mz-button {
+    margin-top: 10px
+}
+</style>
+
 <body>
-    <h1>H1,你好<h2>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">相对URL</button>
+                            </span>
+                            <input id="mz-absurl" type="text" class="form-control" value="/home/subsidy/getTitles">
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <label>
+                        <strong>请求方式
+                            <strong>
+                    </label>
+
+                    <input type="radio" name="RequestMethod" class="mz-radio" checked="true" value="POST">POST</input>
+                    <input type="radio" name="RequestMethod" class="mz-radio" value="GET">GET</input>
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key1"  >
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value1"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key2" >
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key3">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value3">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key4">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value4">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key5">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value5">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key6">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value6">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key7">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value7">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key8">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Key</button>
+                                </span>
+                                <input type="text" class="form-control" id="key9">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Value</button>
+                                </span>
+                                <input type="text" class="form-control" id="value9">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn-send" class="btn btn-sm btn-primary mz-button">发送请求</button>
+                     <button id="btn-format" class="btn btn-sm btn-primary mz-button">格式化结果</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box"></div>
+                <textarea id="mz-result" placeholder="结果"></textarea>
+            </div>
+        </div>
 </body>
+<script type="text/javascript">
+(function($) {
+    var local_test = true;
+    var base_url = '';
+    if (local_test) {
+        base_url = 'http://localhost/mz/index.php';
+    } else {
+        base_url = 'http://61.29.161.61:88/mz/index.php';
+    }
+
+    function getKeyText(number) {
+        return $('#key' + number).val();
+    }
+
+    function getValueText(number) {
+        return $('#value' + number).val();
+    }
+
+
+
+    $('#btn-send').on('click', function() {
+        var send_data = {};
+        for (var i = 1; i < 10; i++) {
+            if (getKeyText(i) !== '') {
+                send_data[getKeyText(i)] = getValueText(i);
+            }
+        }
+
+        // console.log(send_data);
+        var req_method = $('input[name="RequestMethod"]:checked').val();
+        var abs_url = $('#mz-absurl').val();
+        if (abs_url === '') {
+            alert(相对url不能为空);
+            return;
+        }
+        console.log(base_url + abs_url);
+        console.log(req_method);
+        console.log(send_data);
+        $('#mz-result').text('');
+        $.ajax({
+            type: req_method,
+            url: base_url + abs_url,
+            data: send_data,
+            dataType: 'text',
+            success: function(text) {
+                console.log("success");
+                console.log(text);
+              
+                $('#mz-result').val(text);
+              
+            }
+        }).fail(
+            function(data){
+                console.log("faild");
+                console.log("data");
+                $('#mz-result').text('');
+                $('#mz-result').text("咦,这是后台错误耶！Status Code "+data.status);
+            }
+        );
+    });
+
+    $('#btn-format').on('click',function(){
+          $('#mz-result').format({method: 'json'});
+    });
+
+})(jQuery);
+</script>
+
 </html>
