@@ -2,8 +2,6 @@
 ===
 `/home/admin/*`
 
-
-
 ##  创建管理员
 `POST /home/admin/create` 
 
@@ -55,7 +53,7 @@ psw  | 密码 8-16位数字or字母 	| Y
 
 
 ## 发布文档	
-`POST /home/admin/post` 
+`POST /home/admin/postDocument` 
 
 字段	|描述 |  是否必须 
 ------------ | -------------| -------------
@@ -81,7 +79,7 @@ order_num| 序号(优先级别,默认为1) | N
 
 
 ## 编辑/更新文档  
-`POST /home/admin/update` 
+`POST /home/admin/updateDocument` 
 
 字段	|描述 |  是否必须 
 ------------ | -------------| -------------
@@ -119,7 +117,7 @@ op|operation的简称(0为通过 1为不通过审核，默认1)| N
 ```json
 {
     "code":20000,
-    "response"："operate successfully"
+    "response"："check document successfully"
 }
 ```
 
@@ -137,7 +135,7 @@ op|operation的简称(0为通过 1为不通过审核，默认1)| N
 ```json
 {
     "code":20000,
-    "response"："operate successfully"
+    "response"："check institution successfully"
 }
 ```
 
@@ -155,7 +153,13 @@ file| 需要上传的文件   | Y
 ```json
 {
     "code":20000,
-    "response"："upload successfully"
+    "response"：{
+        //附件的信息
+        "id":"foo",
+        "name":"foo",
+        "ext":"foo",
+        "create_time":"foo"
+    }
 }
 ```
 
