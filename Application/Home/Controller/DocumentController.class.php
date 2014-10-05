@@ -1,6 +1,8 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Common\Model\UserAdminModel;
+use Common\Model\DocumentModel;
 
 /**
  * 文档
@@ -13,7 +15,6 @@ class DocumentController extends BaseController {
      * 发布一文档
      */
     public function post() {
-    	//TODO 检查权限
         if(!IS_POST){
             $this->ajaxReturn(mz_json_error_request());
             return;
@@ -23,6 +24,18 @@ class DocumentController extends BaseController {
     	    return;
     	}
     	$uid = session('uid');
+    	
+    	if(!I('post.category_id')){
+    	    $this->ajaxReturn(mz_json_error("require params `category_id`"));
+    	    return;
+    	}
+    	//检验权限
+    	$Admin = new UserAdminModel();
+    	if(! $Admin->createAdminById($uid)->hasPerPost(I('post.category_id'))){
+    	    $this->ajaxReturn(mz_json_error("You have not permission!"));
+    	    return;
+    	}
+    	
     	$res = D('Document')->addDocument($uid);
     	if($res['status']){
     	    $this->ajaxReturn(mz_json_success("post successfully"));
@@ -35,7 +48,6 @@ class DocumentController extends BaseController {
      * 更新文档
      */
     public function update() {
-    	//TODO 检查权限
     	if(!IS_POST){
     	    $this->ajaxReturn(mz_json_error_request());
     	    return;
@@ -48,6 +60,14 @@ class DocumentController extends BaseController {
 	        $this->ajaxReturn(mz_json_error("require params `doc_id`"));
 	        return;
 	    }
+	    //查询获得category_id
+	    $category_id = (new DocumentModel())->createDocumentById(I('post.doc_id'))->data()['category_id'];
+	    $Admin = new UserAdminModel();
+	    //检验权限
+    	if(! $Admin->createAdminById(session('uid'))->hasPerPost($category_id)){
+    	    $this->ajaxReturn(mz_json_error("You have not permission!"));
+    	    return;
+    	}
 	    $res = D('Document')->updateDocument(I('post.doc_id'),I('post.'));
 	    if($res['status']) {
 	        $this->ajaxReturn(mz_json_success("update successfully"));

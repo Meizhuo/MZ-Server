@@ -31,6 +31,18 @@ class DocumentModel extends BaseModel {
             array('order_num','1',self::MODEL_INSERT)
     );
     /**
+     * 根据文档id创建一文档
+     * @param unknown $doc_id
+     * @return \Common\Model\DocumentModel
+     */
+    public function createDocumentById($doc_id){
+        $res_docs = M('Document')->where("id=%d",$doc_id)->select();
+        if($res_docs){
+            $this->data($res_docs[0]);
+        }
+        return $this;
+    }
+    /**
      * 添加一个文档
      * @param unknown $uid 发布人id
      * @return Ambigous <string, multitype:number string >
