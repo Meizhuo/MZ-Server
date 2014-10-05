@@ -114,15 +114,16 @@ CREATE TABLE  `mz_document` (
   `level` int(2) NOT NULL COMMENT '文章等级(1 只有个人用户可见 2 只有用人单位可见  4只有培训机构可见8 只有管理员可见 16只有超级管理员可见 31全部可见,默认31',
   `description` text COMMENT '描述(可空',
   `order_num` int(1) NOT NULL DEFAULT '1' COMMENT '序号(优先级别,默认为1',
+  `content` text NOT NULL COMMENT '新闻内容',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档' AUTO_INCREMENT=1 ;
 
--- 文档详情
-DROP TABLE IF EXISTS `mz_document_detail`;
-CREATE TABLE  `mz_document_detail` (
-  `id` int(11) NOT NULL COMMENT '新闻id',
-  `content` text NOT NULL COMMENT '新闻内容'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档详情';
+---- 文档详情 (已分离到mz_document)
+--DROP TABLE IF EXISTS `mz_document_detail`;
+--CREATE TABLE  `mz_document_detail` (
+--  `id` int(11) NOT NULL COMMENT '新闻id',
+--  `content` text NOT NULL COMMENT '新闻内容'
+--) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档详情';
 
 
 -- 文档附件
