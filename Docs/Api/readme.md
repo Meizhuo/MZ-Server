@@ -76,6 +76,9 @@ nickname | 用户昵称  	| Y
 ## API列表
 
 * [应用信息](api_AppInfo.md)
->更新信息
-
-* [用户](api_User.md)
+* [用户User](api_User.md)
+* [用户Admin](api_Admin.md)
+* [课程](api_Course.md)
+* [文档](api_Document.md)
+* [机构](api_Institution.md)
+* [补贴项目](api_Subsidy.md)
