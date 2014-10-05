@@ -70,6 +70,7 @@ subsidy_id | 补贴项目id | Y
 ------------ | -------------| -------------
 ~|没有任何参数就返回查询全部|~
 title  |  资格名称(通常只用到这个) | N
+certificate_type | 证书类别 | N
 kind   |  项目类别|N
 level  |  等级 |N
 series   | 系列|N
