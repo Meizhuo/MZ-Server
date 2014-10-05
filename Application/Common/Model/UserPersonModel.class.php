@@ -49,6 +49,25 @@ class UserPersonModel extends BaseModel {
         }
         return $res;   
     }
+    
+ /**
+     * 更新个人用户信息
+     * 
+     * @param unknown $data            
+     * @return Ambigous <string, multitype:number string >
+     */
+    public function updateInfo($data) {
+        $res = $this->_getResult();
+        if ($this->create($data)) {
+            if (count($this->data) > 1) {
+                $this->save();
+                $res['status'] = 1;
+            }
+        } else {
+            $res['msg'] = $this->getError();
+        }
+        return $res;
+    }
    
 }
 

@@ -260,16 +260,9 @@ class UserModel extends BaseModel {
             // 除了uid还有更新其他项,那么更新，不然会报SQL错误
             if (count($this->data()) > 1) {
                 $this->save();
-                $person = D('UserPerson');
-                //TODO 重构一下 应该写到UserPerson中
-                if ($person->create($data)) {
-                    if (count($person->data()) > 1) {
-                        $person->save();
-                    }
-                } else {
-                    $res['msg'] = $this->getError();
-                }
             }
+            $res_person = D('UserPerson')->updateInfo($data);
+            $res = array_merge($res,$res_person);
         } else {
             $res['msg'] = $this->getError();
         }
@@ -289,9 +282,9 @@ class UserModel extends BaseModel {
         if($this->create($data)){
             if(count($this->data) > 1){
                 $this->save();
-                $res_ins = D('UserInstitution')->updateInfo($data);
-                $res = array_merge($res,$res_ins);
             }
+            $res_ins = D('UserInstitution')->updateInfo($data);
+            $res = array_merge($res,$res_ins);
         }else{
             $res['msg'] = $this->getError();
         }
