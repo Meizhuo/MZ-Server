@@ -50,7 +50,7 @@ class UserPersonModel extends BaseModel {
         return $res;   
     }
     
- /**
+    /**
      * 更新个人用户信息
      * 
      * @param unknown $data            

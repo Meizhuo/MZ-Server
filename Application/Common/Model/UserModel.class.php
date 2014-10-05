@@ -9,44 +9,27 @@ use Common\Model\BaseModel;
  */
 class UserModel extends BaseModel {
 
-    /**
-     * 个人用户
-     */
+    /** 个人用户 */
     const LEVEL_PERSON = 1;
 
-    /**
-     * 用人单位
-     */
+    /**  用人单位*/
     const LEVEL_EMPLOYER = 2;
-
-    /**
-     * 培训机构用户
-     */
+    /** 培训机构用户 */
     const LEVEL_INSTITUTION = 4;
 
-    /**
-     * 管理员
-     */
+    /**  管理员 */
     const  LEVEL_ADMIN= 8;
     
-    /**
-     * 超级管理员
-     */
+    /**  超级管理员  */
     const LEVEL_SUPER_ADMIN = 16;
 
-    /**
-     * 审核不通过
-     */
+    /**  审核不通过 */
     const STATUS_UNPASS = - 1;
 
-    /**
-     * 未审核
-     */
+    /** 未审核 */
     const STATUS_NOT_VERTIFY = 0;
 
-    /**
-     * 审核通过
-     */
+    /**  审核通过 */
     const STATUS_PASS = 1;
 
     protected $_validate = array(
@@ -85,7 +68,7 @@ class UserModel extends BaseModel {
             $res['msg'] = $this->getError();
             return $res;
         }
-        if(empty($this->data['email']) && empty($this->data['email'])){
+        if(empty($this->data['phone']) && empty($this->data['email'])){
             $res['msg'] = 'Reigister operation requires `phone` or email';
             return $res;
         }
@@ -114,7 +97,7 @@ class UserModel extends BaseModel {
             $res['msg'] = $this->getError();
             return $res;
         }
-        if(empty($this->data['email']) && empty($this->data['email'])){
+        if(empty($this->data['phone']) && empty($this->data['email'])){
             $res['msg'] = 'Reigister operation requires `phone` or email';
             return $res;
         }
@@ -150,7 +133,7 @@ class UserModel extends BaseModel {
             $res['msg'] = $this->getError();
             return $res;
         }
-        if(empty($this->data['email']) && empty($this->data['email'])){
+        if(empty($this->data['phone']) && empty($this->data['email'])){
             $res['msg'] = 'Reigister operation requires `phone` or email';
             return $res;
         }
