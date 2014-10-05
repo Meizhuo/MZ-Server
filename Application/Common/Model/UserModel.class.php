@@ -105,9 +105,34 @@ class UserModel extends BaseModel {
         }
         return $res;
     }
-    
+    /**
+     * 注册用人单位用户
+     */
     public function regEmployer(){
-        
+        $res = $this->_getResult();
+        if(!$this->create()){
+            $res['msg'] = $this->getError();
+            return $res;
+        }
+        if(empty($this->data['email']) && empty($this->data['email'])){
+            $res['msg'] = 'Reigister operation requires `phone` or email';
+            return $res;
+        }
+        $this->data['level']=UserModel::LEVEL_EMPLOYER;
+        $this->data['status']=UserModel::STATUS_PASS;
+        $this->data['psw'] = md5($this->data['psw']);
+        $uid = $this->add();
+        if($uid){
+            $_data = array(
+                    'uid' => $uid
+            );
+            //创建user_person资料
+            $res_person = D('UserEmployer')->addPerson(array_merge($_data,I('post.')));
+            $res = array_merge($res,$res_person);
+        }else{
+            $res['msg'] = 'System Error: Not able to insert.';
+        }
+        return $res;
     }
     
     public function regAdmin(){
@@ -204,6 +229,24 @@ class UserModel extends BaseModel {
         }
         return $res;
     }
+    
+    /**
+     * 根据id获得用人单位信息
+     * @param unknown $uid
+     * @return Ambigous <string, multitype:, multitype:number string >
+     */
+    public function getEmployerInfo($uid){
+        $res = $this->_getResult();
+        $user_employers = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        if($user_employers){
+            $_result = M('UserEmployer')->where("uid='%s'",$uid)->select();
+            $res['status'] = 1;
+            $res['msg'] = array_merge($user_employers[0],$_result[0]);
+        }else{
+            $res['msg'] = 'No session info,login please';
+        }
+        return $res;
+    }
 
     /**
      * 更新用户信息
@@ -249,6 +292,28 @@ class UserModel extends BaseModel {
                 $res_ins = D('UserInstitution')->updateInfo($data);
                 $res = array_merge($res,$res_ins);
             }
+        }else{
+            $res['msg'] = $this->getError();
+        }
+        // $res['msg']为'' 说明操作成功
+        if (! $res['msg']) {
+            $res['status'] = 1;
+        }
+        return $res;
+    }
+    /**
+     * 更新用人单位信息
+     * @param unknown $data
+     * @return number
+     */
+    public function updateEmployerInfo($data){
+        $res = $this->_getResult();  
+        if($this->create($data)){
+            if(count($this->data) > 1){
+                $this->save();
+            }
+            $res_employer = D('UserEmployer')->updateInfo($data);
+            $res = array_merge($res,$res_employer);
         }else{
             $res['msg'] = $this->getError();
         }
