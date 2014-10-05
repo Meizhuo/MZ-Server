@@ -11,7 +11,6 @@
 title | 标题      | Y
 content | 内容   |Y
 category_id |  所属分类(栏目)   |Y
-upload_ids |  附件id组(json数组),默认[]   |N
 display| 可见性( 0 不可见1可见,默认1可见) | N
 status| 审核状态(-1审核不通过 0未审核 1审核通过) | N
 from| 新闻来源  | N
@@ -67,7 +66,9 @@ doc_id | 标题      | N
 ```json
 {
     "code":20000,
-    "response"："update successfully"
+    "response"：{
+       "title" :"foo"..
+    }
 }
 ```
 
@@ -88,7 +89,7 @@ category_ids|目录| N
 
 
 ## 获得文档分类
-`GET /home/document/category`
+`GET /home/document/getCategory`
 
 **Response**  
 
