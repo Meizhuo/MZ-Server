@@ -91,7 +91,7 @@ psw| 密码  | Y
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-nickname | 用户昵称     | Y
+nickname | 用户单位名称     | Y
 contact_phone | 联系电话 | N
 address  |用人单位地址 | N
 
