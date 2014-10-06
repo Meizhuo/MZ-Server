@@ -35,7 +35,7 @@ class SubsidyController extends BaseController {
         if($res['status']){
             $this->ajaxReturn(mz_json_success('update successfully'));
         }else{
-            $this->ajaxReturn(mz_json_error($res));
+            $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
     /**

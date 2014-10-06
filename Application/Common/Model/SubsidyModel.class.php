@@ -30,19 +30,22 @@ class SubsidyModel extends BaseModel {
         }
         return $res;
     }
+
     /**
      * 更新补贴项目
+     * 
      * @return Ambigous <multitype:number string , string>
      */
-    public function update(){
+    public function update() {
         $res = $this->_getResult();
-        if($this->create()){
-            if($this->save()){
+        if ($this->create()) {
+            // 只有id，但是没有更新项，直接忽略
+            if (count($this->data) === 1 || $this->save() >= 0) {
                 $res['status'] = 1;
-            }else{
-                $res['msg'] =  'System error: Not able to update';
+            } else {
+                $res['msg'] = 'System error: Not able to update';
             }
-        }else{
+        } else {
             $res['msg'] = $this->getError();
         }
         return $res;
