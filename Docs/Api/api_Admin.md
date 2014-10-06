@@ -104,6 +104,12 @@ order_num| 序号(优先级别,默认为1) | N
 ```
 
 
+
+**分离到其他接口 /home/*/vertify**
+================
+
+
+
 ## 审核文档  
 `POST /home/admin/checkDocument` 
 

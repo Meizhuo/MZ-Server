@@ -67,25 +67,62 @@ doc_id | 标题      | N
 {
     "code":20000,
     "response"：{
-       "title" :"foo"..
+        "id":"1",
+        "uid":"1",
+        "title":"Title!!",
+        "category_id":"2",
+        "display":"1",
+        "status":"1",
+        "views":"0",
+        "create_time":"1412512673",
+        "update_time":"1412567712",
+        "from":null,
+        "level":"31",
+        "description":null,
+        "order_num":"1",
+        "content":"&lt;h1&gt;content&lt;\/h1&gt;...."
     }
 }
 ```
 
 
 
-## 文档列表(页码，分类)
+## 文档列表(查询)
 `GET /home/document/search` 
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-page| 页码,默认1|N
-limit| 条目,默认10| N
+category_id|栏目id (获取指定栏目下的)| N 
 title | 类似的标题      | N
 content | 类似的内容   |N
-category_ids|目录| N
+page| 页码,默认1|N
+limit| 条目,默认10| N
 
+**Response**  
 
+```json
+{
+    "code": 200,
+    "response": [
+        {
+            "id": "2",
+            "uid": "1",
+            "title": "title22",
+            "category_id": "2",
+            "display": "1",
+            "status": "0",
+            "views": "0",
+            "create_time": "1412534968",
+            "update_time": "0",
+            "from": null,
+            "level": "31",
+            "description": null,
+            "order_num": "1",
+            "content": "这是！content"
+        }
+    ]
+}
+```
 
 
 ## 获得文档分类
@@ -110,7 +147,7 @@ category_ids|目录| N
 ```
 
 
-## 上传附件
+## 上传附件 (未完善)
 `POST /home/admin/upload` 
 
 NOTE:先发布了文章再允许添加附件

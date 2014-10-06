@@ -3,7 +3,7 @@ namespace Common\Model;
 use Common\Model\BaseModel;
 
 /**
- *
+ * 文档模型
  * @author Jayin
  *        
  */
@@ -110,11 +110,42 @@ class DocumentModel extends BaseModel {
     	$data = array();
     	$data['id'] = $doc_id ;
     	$data['status'] = $operate;
-    	return $this->updateDocument($data);
+    	return $this->updateDocument($doc_id,$data);
     }
     
     public function hasPermission(){
-    	
+    	//TODO 检查权限
+    }
+
+    /**
+     * 文档查询
+     * @param unknown $category_id
+     * @param unknown $title
+     * @param unknown $content
+     * @param number $page
+     * @param number $limit
+     * @return unknown
+     */
+    public function search($category_id,$title,$content,$page=1,$limit=10){
+        $map = array();
+        if(!empty($category_id)){
+            $map['category_id'] = array('like','%'.$category_id.'%');
+        }
+        if(!empty($title)){
+            $map['title'] = array('like','%'.$title.'%');
+        }
+        if(!empty($content)){
+            $map['content'] = array('like','%'.$content.'%');
+        }
+        // 保证为正数
+        $limit = $limit > 0 ? $limit : 10;
+        $page = $page > 0 ? $page : 1;
+        $res['msg']  = $this->where($map)->limit(($page-1)*$limit,$limit)->select();
+        if(empty($res['msg'])){
+            $res['msg'] = array();
+        }
+        $res['status'] = 1;
+        return $res;
     }
     
 }
