@@ -19,6 +19,9 @@ type  |办学类型 | N
 approval_number |批准文号 | N
 validity_date |有效期(时间戳)  | N
 training_scope |培训范围 | N
+description |描述  | N
+teacher_resource |师资力量 | N
+
 
 
 
