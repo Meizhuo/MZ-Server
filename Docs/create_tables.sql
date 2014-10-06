@@ -91,7 +91,6 @@ CREATE TABLE  `mz_course` (
   `teacher` varchar(32) DEFAULT NULL COMMENT '授课老师',
   `introduction` text COMMENT '课程介绍',
   `cost` int(11) DEFAULT NULL COMMENT '课程费用',
-  `end_time` int(11) DEFAULT NULL COMMENT '开课结束时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训课程' AUTO_INCREMENT=1 ;
 
