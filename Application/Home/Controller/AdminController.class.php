@@ -8,15 +8,11 @@ use Common\Controller\BaseController;
  *
  */
 class AdminController extends BaseController {
-    //post nickname email psw  
-//     per_categorys_post  有权限起草/编辑的栏目(json)  （可空
-//     per_categorys_check  有权限管理的群组(json) （可空
-//     per_institution_check 有权限审核培训机构(0无权 1有权) （可空
     
- 
     public function create(){
     	//TODO 保留
     }
+    
     public function login(){
         if(!IS_POST){
             $this->ajaxReturn(mz_json_error_request());
@@ -41,10 +37,10 @@ class AdminController extends BaseController {
         session('uid',null);
         $this->ajaxReturn(mz_json_success('logout successfully'));
     }
-    public function postDocument(){}
-    public function updateDocument(){}
-    public function checkDocument(){}
-    public function checkInstitution(){}
+
+    /**
+     * 上传附件
+     */
     public function upload(){}
 }
 

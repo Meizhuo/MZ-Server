@@ -3,12 +3,14 @@ namespace Home\Controller;
 use Common\Controller\BaseController;
 
 /**
- *
+ *机构用户接口
  * @author Jayin
  *        
  */
 class InstitutionController extends BaseController {
-
+    /**
+     * POST 注册
+     */
     public function register() {
         if (! IS_POST) {
             $this->ajaxReturn(mz_json_error_request());
@@ -52,7 +54,9 @@ class InstitutionController extends BaseController {
         session('uid', null);
         $this->ajaxReturn(mz_json_success('logout successfully'));
     }
-    
+    /**
+     * POST 更新机构用户信息
+     */
     public function update() {
     	if(!IS_POST){
     	    $this->ajaxReturn(mz_json_error_request());

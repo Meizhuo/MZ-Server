@@ -125,7 +125,7 @@ class DocumentController extends BaseController {
         }
     }
     /**
-     * 模糊查询
+     * GET 模糊查询
      * @param string $category_id
      * @param string $title
      * @param string $content

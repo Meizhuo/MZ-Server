@@ -22,7 +22,7 @@ class UserController extends BaseController {
     }
 
     /**
-     * 获得用户信息
+     *GET 获得用户信息
      */ 
     public function info(){
         $uid = session('uid');
@@ -33,7 +33,9 @@ class UserController extends BaseController {
         $res = D('User')->getUserInfo($uid);
         $this->ajaxReturn($res['msg']);
     }
-    
+    /**
+     * POST 更新个人用户信息
+     */
     public function update(){
         if(!IS_POST){
             $this->ajaxReturn(mz_json_error_request());

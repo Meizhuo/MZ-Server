@@ -8,7 +8,9 @@ use Common\Controller\BaseController;
  *        
  */
 class EmployerController extends BaseController {
-
+    /**
+     * POST 注册
+     */
     public function register() {
         if (! IS_POST) {
             $this->ajaxReturn(mz_json_error_request());
@@ -75,7 +77,7 @@ class EmployerController extends BaseController {
     }
 
     /**
-     * 获取当前用人单位信息
+     * GET 获取当前用人单位信息
      */
     public function info() {
         if (! session('uid')) {

@@ -9,7 +9,7 @@ use Common\Controller\BaseController;
  */
 class SubsidyController extends BaseController {
     /**
-     * 发布
+     * POST 发布
      */
     public function post(){
         //TODO 检查是否有权限
@@ -24,7 +24,7 @@ class SubsidyController extends BaseController {
        }
     }
     /**
-     * 更新
+     *POST 更新
      */
     public function update(){
         //TODO 检查是否有权限
@@ -39,7 +39,7 @@ class SubsidyController extends BaseController {
         }
     }
     /**
-     * 删除
+     * POST 删除
      */
     public function remove(){
         //TODO 检查是否有权限
@@ -54,34 +54,35 @@ class SubsidyController extends BaseController {
         }
     }
     /**
+     * GET 证书类别
      * @return [{"certificate_type":"xxx"}.....,{"certificate_type":"xxx"}]
      */
     public function getCertificateTypes() {
         $res = D('Subsidy')->getSigleFieldType('certificate_type');
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
-    
+    /** GET 类别*/
     public function getKinds(){
         $res = D('Subsidy')->getSigleFieldType('kind');
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
-    
+    /** GET 等级*/
     public function getLevels(){
         $res = D('Subsidy')->getSigleFieldType('level');
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
-    
+    /** GET 系列*/
     public function getSeries(){
         $res = D('Subsidy')->getSigleFieldType('series');
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
-    
+    /** GET 资格名称*/
     public function getTitles(){
         $res = D('Subsidy')->getSigleFieldType('title');
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
     /**
-     * 模糊搜索
+     * GET 模糊搜索
      * @param string $certificate_type
      * @param string $kind
      * @param string $level
