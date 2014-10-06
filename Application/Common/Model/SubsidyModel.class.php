@@ -73,7 +73,7 @@ class SubsidyModel extends BaseModel {
      * @param number $limt
      * @return multitype:number string
      */
-    public function search($certificate_type ,$kind,$level,$series,$title,$page=1,$limt=10){
+    public function search($certificate_type ,$kind,$level,$series,$title,$page=1,$limit=10){
         $res = $this->_getResult();
         $map = array();
         if(!empty($certificate_type)){
@@ -94,7 +94,7 @@ class SubsidyModel extends BaseModel {
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
-        $res['msg']  = $this->where($map)->limit(($page-1)*$limt,$limt)->select();
+        $res['msg']  = $this->where($map)->limit(($page-1)*$limit,$limit)->select();
         if(empty($res['msg'])){
             $res['msg'] = array();
         }
