@@ -4,8 +4,6 @@
 --
 
 INSERT INTO `mz_user` (`uid`, `nickname`, `phone`, `email`, `psw`, `reg_time`, `level`, `status`) VALUES
-
-INSERT INTO `mz_user` (`uid`, `nickname`, `phone`, `email`, `psw`, `reg_time`, `level`, `status`) VALUES
 (94, '竭诚培训公司1', NULL, 'user1@jiecheng.com', '25f9e794323b453885f5181f1b624d0b', 1412586535, 4, 1),
 (95, '竭诚培训公司2', NULL, 'user2@jiecheng.com', '25f9e794323b453885f5181f1b624d0b', 1412586535, 4, 1),
 (96, '竭诚培训公司3', NULL, 'user3@jiecheng.com', '25f9e794323b453885f5181f1b624d0b', 1412586535, 4, 1),
