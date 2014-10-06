@@ -3,8 +3,7 @@
 `/home/course/*`
 
 **注意检查权限**
-
-
+**只有机构用户可以发布**
 
 
 ## 发布课程(未完成)
@@ -38,7 +37,8 @@ end_time |开课结束时间 时间戳 可空 | N
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-institution_id | 所属的培训机构id | N  
+course_id | 课程id | Y
+institution_id | 所属的培训机构id (一般不能改)| N  
 subsidy_id |对应的补贴项目id  | N    
 name |课程名称 (可空  | N
 start_time |开课时间 时间戳 可空 | N
@@ -46,7 +46,7 @@ address |开课地址  可空 | N
 teacher |授课老师 可空 | N
 introduction |课程介绍 可空 | N
 cost |课程费用  可空 | N
-end_time |开课结束时间 时间戳 可空 | N
+
 
  **Response**  
 
@@ -58,7 +58,7 @@ end_time |开课结束时间 时间戳 可空 | N
 ```
 
 ## 删除课程(未完成)
-`POST /home/course/delete`
+`GET /home/course/delete`
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
@@ -78,9 +78,21 @@ course_id |课程id| Y
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
+institution_id | 所属的培训机构id| N
+subsidy_id | 对应的补贴项目id  | N    
 name |课程名称 (可空 | N 
 page | 页码 默认1 | N
 limit| 返回数目 默认10|  N
+
+ 
+ **Tips**
+ * 指定institution_id，可以获取一培训机构旗下的课程
+ * 指定subsidy_id ，可以获取与补贴项目相关联的课程
+
+
+**TODO**
+根据cost(课程费用）范围查询
+
  
 **无筛选参数都没就代表选择所有**
 
@@ -105,7 +117,6 @@ limit| 返回数目 默认10|  N
             "address":"foo",
             "teacher":"foo",
             "cost":"foo",
-            "end_time":"foo",
         }
         ..{
             ...
