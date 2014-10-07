@@ -5,6 +5,8 @@
 **注意检查权限**
 **只有机构用户可以发布**
 
+**发布、更新、删除操作均需要登录**
+
 
 ## 发布课程(未完成)
 `POST /home/course/post`
@@ -12,7 +14,7 @@
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-institution_id | 所属的培训机构id | Y  
+institution_id | 所属的培训机构id(一般不用发送，登录后自动填上) | N  
 subsidy_id |对应的补贴项目id  | N    
 name |课程名称 (可空  | N
 start_time |开课时间 时间戳 可空 | N
@@ -20,9 +22,9 @@ address |开课地址  可空 | N
 teacher |授课老师 可空 | N
 introduction |课程介绍 可空 | N
 cost |课程费用  可空 | N
-end_time |开课结束时间 时间戳 可空 | N
 
-理论上可以基本上可以为空，但逻辑上不该这样
+
+理论上可以基本上可以为空，但逻辑上不该为空，即用户必须填
  **Response**  
 
 ```json  
@@ -38,7 +40,6 @@ end_time |开课结束时间 时间戳 可空 | N
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
 course_id | 课程id | Y
-institution_id | 所属的培训机构id (一般不能改)| N  
 subsidy_id |对应的补贴项目id  | N    
 name |课程名称 (可空  | N
 start_time |开课时间 时间戳 可空 | N
@@ -46,6 +47,7 @@ address |开课地址  可空 | N
 teacher |授课老师 可空 | N
 introduction |课程介绍 可空 | N
 cost |课程费用  可空 | N
+
 
 
  **Response**  
@@ -58,7 +60,7 @@ cost |课程费用  可空 | N
 ```
 
 ## 删除课程(未完成)
-`GET /home/course/delete`
+`POST /home/course/delete`
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------

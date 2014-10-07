@@ -59,6 +59,22 @@ class UserModel extends BaseModel {
     );
     
     /**
+     * 根据id创建一个机构用户
+     * @param unknown $uid
+     * @return \Common\Model\UserModel
+     */
+    public function createInstution($uid){
+        $user_person = $this->field(array('psw'),true)->where("uid=%d",$uid)->select();
+        $user_person_info = M('UserInstitution')->where("uid=%d",$uid)->select();
+//         print_r($user_person);
+//         print_r($user_person_info);
+        if($user_person && $user_person_info){
+            $this->data(array_merge($user_person[0],$user_person_info[0]));
+        }
+        return $this;
+    }
+    
+    /**
      * 注册一个普通个人用户
      * @return array() status:1为正常 0为失败 msg:失败信息
      */

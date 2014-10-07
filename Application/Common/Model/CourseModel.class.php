@@ -7,22 +7,20 @@ use Common\Model\BaseModel;
  *
  */
 class CourseModel extends BaseModel{
-//     institution_id | 所属的培训机构id (一般不能改)| N
-//     subsidy_id |对应的补贴项目id  | N
-//     name |课程名称 (可空  | N
-//     start_time |开课时间 时间戳 可空 | N
-//     address |开课地址  可空 | N
-//     teacher |授课老师 可空 | N
-//     introduction |课程介绍 可空 | N
-//     cost |课程费用  可空 | N
+
+
     protected $_validate = array(
     	array('start_time','number','开课时间 应该为时间戳timestamp'),
         array('cost','number','课程费用应为数字')
     );
-
-    public function post() {
+    /**
+     * 发布课程
+     * @param unknown $data
+     * @return Ambigous <string, multitype:number string >
+     */
+    public function post($data) {
         $res = $this->_getResult();
-        if ($this->create()) {
+        if ($this->create($data)) {
             if ($this->add()) {
                 $res['status'] = 1;
             } else {
@@ -33,11 +31,15 @@ class CourseModel extends BaseModel{
         }
         return $res;
     }
-
+    /**
+     * 更新
+     * @param unknown $data
+     * @return unknown
+     */
     public function update($data) {
         $res = $this->_getResult();
         if ($this->create($data)) {
-            if (count($this->data) > 1 || $this->save() >= 0) {
+            if (count($this->data) === 1 || $this->save() >= 0) {
                 $res['status'] = 1;
             } else {
                 $res['msg'] = 'System Error: Not able to update';
@@ -47,21 +49,34 @@ class CourseModel extends BaseModel{
         }
         return $res;
     }
-    
-    public function remove($course_id){
+    /**
+     * 删除  (根据机构id)
+     * @param unknown $institution_id
+     * @param unknown $course_id
+     * @return string
+     */
+    public function remove($institution_id,$course_id){
         $res = $this->_getResult();
-        if(empty($course_id)){
-            $res['msg']  = 'require `course id`';
+        if($this->emptyParams($institution_id,$course_id)){
+            $res['msg']  = 'Missing parames';
             return $res;
         }
-        if($this->where("id=%d",$course_id)->delete()>=0){
+        if($this->where("id=%d and institution_id=%d",$course_id,$institution_id)->delete()){
             $res['status'] =1;
         }else{
             $res['msg']  = 'System Error: Not able to delete';
         }     
         return $res;
     }
-
+    /**
+     * 查询
+     * @param unknown $institution_id
+     * @param unknown $subsidy_id
+     * @param unknown $name
+     * @param number $page
+     * @param number $limit
+     * @return unknown
+     */
     public function search($institution_id,$subsidy_id,$name,$page=1,$limit=10){
         $res = $this->_getResult();
         $map = array();
@@ -72,7 +87,7 @@ class CourseModel extends BaseModel{
             $map['subsidy_id'] = array('eq',$subsidy_id);
         }
         if(!empty($name)){
-            $map['name'] = array('likc','%'.$name.'%');
+            $map['name'] = array('like','%'.$name.'%');
         }
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;

@@ -23,5 +23,5 @@ function mz_json_success($data='operate successfully',$code =20000){
  * @return Ambigous <multitype:number, multitype:number string >
  */
 function mz_json_error_request(){
-    return mz_json_error('请求方法错误',40001);
+    return mz_json_error('Request method error',40001);
 }
