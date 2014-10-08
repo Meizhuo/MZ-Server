@@ -11,7 +11,8 @@ AppInfo
     "id": "1",
     "version_name": "1.0.0",
     "version_code": "1",
-    "description": "first version"
+    "description": "first version",
+    "url":"http://61.1.1.1/mz/apk/a.apk"
 }
 ```
 
@@ -24,6 +25,7 @@ AppInfo
 version_name | 版本代号  	| Y
 version_code | 版本号  	    | Y
 description  | 版本描述  	| Y
+url          | 下载链接     | Y
 
 **Response** 
 
