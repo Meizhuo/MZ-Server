@@ -162,6 +162,27 @@ CREATE TABLE `mz_message` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='消息' AUTO_INCREMENT=1 ;
 
+--
+-- 应用信息
+-- 表的结构 `mz_appinfo`
+--
+
+CREATE TABLE IF NOT EXISTS `mz_appinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+  `version_name` varchar(32) NOT NULL DEFAULT '1.0.0' COMMENT '版本代号',
+  `version_code` int(10) NOT NULL DEFAULT '1' COMMENT '版本号',
+  `description` text COMMENT '版本描述',
+  `url` varchar(4096) COMMENT '链接',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `mz_appinfo`
+--
+
+INSERT INTO `mz_appinfo` (`id`, `version_name`, `version_code`, `description`,`url`) VALUES
+(1, '1.0.0', 1, 'first version','http://61.29.161.61:88/mz/apk/MZ-Android.apk');
+
 -- ---------
 -- 预定义数据
 -- ---------
