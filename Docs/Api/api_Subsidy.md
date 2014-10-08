@@ -2,6 +2,10 @@
 ===
 `/home/subsidy/*`
 
+**NOTE**
+权限:需要是管理员
+
+
 ## 添加项目
 `POST /home/subsidy/post` 
 
