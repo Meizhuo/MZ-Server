@@ -166,8 +166,8 @@ CREATE TABLE `mz_message` (
 -- 应用信息
 -- 表的结构 `mz_appinfo`
 --
-
-CREATE TABLE IF NOT EXISTS `mz_appinfo` (
+DROP TABLE IF EXISTS  `mz_appinfo`;
+CREATE TABLE `mz_appinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
   `version_name` varchar(32) NOT NULL DEFAULT '1.0.0' COMMENT '版本代号',
   `version_code` int(10) NOT NULL DEFAULT '1' COMMENT '版本号',
