@@ -5,7 +5,7 @@ use Common\Model\UserAdminModel;
 use Common\Model\DocumentModel;
 
 /**
- * 文档
+ * 文档接口
  * 
  * @author Jayin
  *        
@@ -145,8 +145,37 @@ class DocumentController extends BaseController {
     	$res = M('DocumentCategory')->select();
     	$this->ajaxReturn(mz_json_success($res));
     }
-
-    public function upload() {}
+    /**
+     * 上传附件
+     */
+    public function upload() {
+        $this->reqPost('doc_id');
+        $config = array(
+                'maxSize'    =>    3145728,// 设置附件上传大小 3M
+                'rootPath'   =>    './Uploads/', // 设置附件上传根目录
+                'savePath'   =>    '',// 设置附件上传（子）目录
+                'saveName'   =>    array('uniqid',''),//上传文件的保存名称
+                'exts'       =>    array('doc','docx','xls','jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
+                'subName'    =>    'files',//子目录保存 
+        );
+        $upload = new \Think\Upload($config);// 实例化上传类
+        // 上传文件
+        $info   =   $upload->upload();
+        if(!$info) { // 上传错误提示错误信息
+            $this->ajaxReturn(mz_json_error($upload->getError()));
+        }else{
+            // 上传成功 获取上传文件信息
+            //单文件
+            foreach($info as $file){
+                $res = D('DocumentFile')->post(I('doc_id'),$file);
+                if($res['status']){
+                    $this->ajaxReturn(mz_json_success("upload successfully"));
+                }else{
+                    $this->ajaxReturn(mz_json_error($res['msg']));
+                }
+            }
+        }
+    }
 }
 
  

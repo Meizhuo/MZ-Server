@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>upload file test</title>
+</head>
+<body>
+	<form action="{:U('Home/Document/upload')}" enctype="multipart/form-data"
+		method="post">
+		
+		<input type="text" name="doc_id"  placeholder="doc_id" /> 
+		<input type="file" name="photo" />
+		<input type="submit" value="提交">
+	</form>
+</body>
+</html>

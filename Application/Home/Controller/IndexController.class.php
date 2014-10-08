@@ -8,6 +8,10 @@ class IndexController extends BaseController {
         $this->display();
     }
     
+    public function upload(){
+        $this->display();
+    }
+    
     public function test(){
 //         print_r(D('User')->createPersonById($uid)->data());
        $this->reqPost(array("name",'id'));
