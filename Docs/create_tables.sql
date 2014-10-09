@@ -174,6 +174,7 @@ CREATE TABLE `mz_appinfo` (
   `version_code` int(10) NOT NULL DEFAULT '1' COMMENT '版本号',
   `description` text COMMENT '版本描述',
   `url` varchar(4096) COMMENT '链接',
+  `need_update` int(1) COMMENT '是否强制更新(0否 1是)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -181,8 +182,8 @@ CREATE TABLE `mz_appinfo` (
 -- 转存表中的数据 `mz_appinfo`
 --
 
-INSERT INTO `mz_appinfo` (`id`, `version_name`, `version_code`, `description`,`url`) VALUES
-(1, '1.0.0', 1, 'first version','http://61.29.161.61:88/mz/apk/MZ-Android.apk');
+INSERT INTO `mz_appinfo` (`id`, `version_name`, `version_code`, `description`,`url`,`need_update`) VALUES
+(1, '1.0.0', 1, 'first version','http://61.29.161.61:88/mz/apk/MZ-Android.apk',0);
 
 -- ---------
 -- 预定义数据

@@ -12,7 +12,8 @@ AppInfo
     "version_name": "1.0.0",
     "version_code": "1",
     "description": "first version",
-    "url":"http://61.1.1.1/mz/apk/a.apk"
+    "url":"http://61.1.1.1/mz/apk/a.apk",
+    "need_update" :"0" //是否强制更新(0否 1是)
 }
 ```
 
@@ -26,6 +27,7 @@ version_name | 版本代号  	| Y
 version_code | 版本号  	    | Y
 description  | 版本描述  	| Y
 url          | 下载链接     | Y
+need_update  | 是否强制更新 | Y
 
 **Response** 
 
