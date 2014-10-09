@@ -1,8 +1,9 @@
 <?php
 namespace Common\Model;
 
+use Think\Upload;
 /**
- * 附件模型
+ * 文档附件模型
  * @author Jayin
  *
  */
@@ -35,6 +36,9 @@ class DocumentFileModel extends BaseModel {
         if ($this->create($data)) {
             if ($this->add()) {
                 $res['status'] = 1;
+                //返回附件插入后的信息
+                $upload_file = $this->where("save_path='%s' AND save_name='%s'",$file_info['savepath'],$file_info['savename'])->select();
+                $res['msg'] = $upload_file[0];
             } else {
                 $res['msg'] = 'System Error: Not able to insert.';
             }

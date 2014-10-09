@@ -141,7 +141,8 @@ class DocumentController extends BaseController {
         $upload = new \Think\Upload($config);// 实例化上传类
         // 上传文件
         $info   =   $upload->upload();
-        if(!$info) { // 上传错误提示错误信息
+        if(!$info) { 
+            // 上传错误提示错误信息
             $this->ajaxReturn(mz_json_error($upload->getError()));
         }else{
             // 上传成功 获取上传文件信息
@@ -149,7 +150,7 @@ class DocumentController extends BaseController {
             foreach($info as $file){
                 $res = D('DocumentFile')->post(I('doc_id'),$file);
                 if($res['status']){
-                    $this->ajaxReturn(mz_json_success("upload successfully"));
+                    $this->ajaxReturn(mz_json_success($res['msg']));
                 }else{
                     $this->ajaxReturn(mz_json_error($res['msg']));
                 }
