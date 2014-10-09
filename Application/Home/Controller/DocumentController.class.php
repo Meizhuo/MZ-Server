@@ -140,23 +140,25 @@ class DocumentController extends BaseController {
     	    $this->ajaxReturn(mz_json_error($res['msg']));
     	}
     }
-
+    /**
+     * GET 获得文档的栏目信息
+     */
     public function getCategory() {
     	$res = M('DocumentCategory')->select();
     	$this->ajaxReturn(mz_json_success($res));
     }
     /**
-     * 上传附件
+     * POST 上传附件
      */
     public function upload() {
         $this->reqPost('doc_id');
         $config = array(
-                'maxSize'    =>    3145728,// 设置附件上传大小 3M
-                'rootPath'   =>    './Uploads/', // 设置附件上传根目录
-                'savePath'   =>    '',// 设置附件上传（子）目录
-                'saveName'   =>    array('uniqid',''),//上传文件的保存名称
-                'exts'       =>    array('doc','docx','xls','jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
-                'subName'    =>    'files',//子目录保存 
+            'maxSize'    =>  3145728,// 设置附件上传大小 3M
+            'rootPath'   =>  './Uploads/', // 设置附件上传根目录
+            'savePath'   =>  '',// 设置附件上传（子）目录
+            'saveName'   =>  array('uniqid',''),//上传文件的保存名称
+            'exts'       =>  array('doc','docx','xls','jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
+            'subName'    =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
         );
         $upload = new \Think\Upload($config);// 实例化上传类
         // 上传文件
