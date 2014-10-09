@@ -1,7 +1,6 @@
 <?php
 namespace Common\Model;
 
-use Think\Upload;
 /**
  * 文档附件模型
  * @author Jayin
