@@ -12,9 +12,8 @@ class InstitutionController extends BaseController {
      * POST 注册
      */
     public function register() {
-        if (! IS_POST) {
-            $this->ajaxReturn(mz_json_error_request());
-        }
+        $this->reqPost();
+        
         $res = D('User')->regInstitution();
         if ($res['status']) {
             $this->ajaxReturn(mz_json_success('register successfully'));
@@ -27,10 +26,8 @@ class InstitutionController extends BaseController {
      * POST 登录
      */
     public function login() {
-        if (! IS_POST) {
-            $this->ajaxReturn(mz_json_error_request());
-            return;
-        }
+        $this->reqPost();
+        
         $account = I('post.account');
         $psw = md5(I('post.psw'));
         $User = D('User');
@@ -58,13 +55,8 @@ class InstitutionController extends BaseController {
      * POST 更新机构用户信息
      */
     public function update() {
-    	if(!IS_POST){
-    	    $this->ajaxReturn(mz_json_error_request());
-    	    return;
-    	}
-    	if(!session('uid')){
-    	    $this->ajaxReturn(mz_json_error('login please'));
-    	}
+    	$this->reqPost()->reqLogin();
+
     	$uid = session('uid');
     	$data['uid'] = session('uid');
     	$res = D('User')->updateInsInfo(array_merge($data,I('post.')));
@@ -75,12 +67,11 @@ class InstitutionController extends BaseController {
     	}
     }
     /**
-     * 获取当前机构用户信息
+     *GET  获取当前机构用户信息
      */
     public function info() {
-    	if(!session('uid')){
-    	    $this->ajaxReturn(mz_json_error("login please"));
-    	}
+        $this->reqLogin();
+        
     	$data['uid'] = session('uid');
         $res = D('User')->getInsInfo(array_merge($data,I('post.')));
         if($res['status']){

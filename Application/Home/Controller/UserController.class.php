@@ -8,9 +8,7 @@ class UserController extends BaseController {
      * POST 注册
      */
     public function register(){
-       if(!IS_POST){
-           $this->ajaxReturn(mz_json_error_request());
-       } 
+       $this->reqPost();
        
        $User = D('User');
        $result = $User->regPerson();
@@ -37,10 +35,8 @@ class UserController extends BaseController {
      * POST 更新个人用户信息
      */
     public function update(){
-        if(!IS_POST){
-            $this->ajaxReturn(mz_json_error_request());
-            return;
-        }
+        $this->reqPost();
+        
         if(!session('uid')){
             $this->ajaxReturn(mz_json_error("login please!"));
             return;
@@ -59,10 +55,8 @@ class UserController extends BaseController {
      * POST 登录
      */
     public function login(){
-        if(!IS_POST){
-            $this->ajaxReturn(mz_json_error_request());
-            return;
-        }
+        $this->reqPost();
+        
         $account = I('post.account');
         $psw = md5(I('post.psw'));
         $User = D('User');

@@ -13,9 +13,8 @@ class SubsidyController extends BaseController {
      */
     public function post(){
         //TODO 检查是否有权限
-       if(!IS_POST){
-           $this->ajaxReturn(mz_json_error_request());
-       }
+       $this->reqPost();
+
        $res = D('Subsidy')->post();
        if($res['status']){
            $this->ajaxReturn(mz_json_success('post successfully'));
@@ -28,9 +27,8 @@ class SubsidyController extends BaseController {
      */
     public function update(){
         //TODO 检查是否有权限
-        if(!IS_POST){
-            $this->ajaxReturn(mz_json_error_request());
-        }
+        $this->reqPost();
+        
         $res = D('Subsidy')->update();
         if($res['status']){
             $this->ajaxReturn(mz_json_success('update successfully'));
@@ -43,9 +41,8 @@ class SubsidyController extends BaseController {
      */
     public function remove(){
         //TODO 检查是否有权限
-        if(!IS_POST){
-            $this->ajaxReturn(mz_json_error_request());
-        }
+        $this->reqPost();
+         
         if(I('post.id')){
             D('Subsidy')->remove(I('post.id'));
             $this->ajaxReturn(mz_json_success('remove successfuly'));

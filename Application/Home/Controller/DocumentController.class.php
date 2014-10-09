@@ -15,20 +15,9 @@ class DocumentController extends BaseController {
      *POST 发布一文档
      */
     public function post() {
-        if(!IS_POST){
-            $this->ajaxReturn(mz_json_error_request());
-            return;
-        }
-    	if(!session('uid')){
-    	    $this->ajaxReturn(mz_json_error("login please"));
-    	    return;
-    	}
+        $this->reqPost(array('category_id'))->reqLogin();
+
     	$uid = session('uid');
-    	
-    	if(!I('post.category_id')){
-    	    $this->ajaxReturn(mz_json_error("require params `category_id`"));
-    	    return;
-    	}
     	//检验权限
     	$Admin = new UserAdminModel();
     	if(! $Admin->createAdminById($uid)->hasPerPost(I('post.category_id'))){
@@ -48,18 +37,8 @@ class DocumentController extends BaseController {
      *POST 更新文档
      */
     public function update() {
-    	if(!IS_POST){
-    	    $this->ajaxReturn(mz_json_error_request());
-    	    return;
-    	}
-	    if(!session('uid')){
-	        $this->ajaxReturn(mz_json_error("login please"));
-	        return;
-	    }
-	    if(!I('post.doc_id')){
-	        $this->ajaxReturn(mz_json_error("require params `doc_id`"));
-	        return;
-	    }
+        $this->reqPost(array('doc_id'))->reqLogin();
+
 	    //查询获得category_id
 	    $category_id = (new DocumentModel())->createDocumentById(I('post.doc_id'))->data()['category_id'];
 	    $Admin = new UserAdminModel();

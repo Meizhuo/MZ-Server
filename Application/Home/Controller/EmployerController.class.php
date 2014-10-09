@@ -12,9 +12,8 @@ class EmployerController extends BaseController {
      * POST 注册
      */
     public function register() {
-        if (! IS_POST) {
-            $this->ajaxReturn(mz_json_error_request());
-        }
+        $this->reqPost();
+        
         $res = D('User')->regEmployer();
         if ($res['status']) {
             $this->ajaxReturn(mz_json_success('register successfully'));
@@ -27,10 +26,8 @@ class EmployerController extends BaseController {
      * POST 登录
      */
     public function login() {
-        if (! IS_POST) {
-            $this->ajaxReturn(mz_json_error_request());
-            return;
-        }
+        $this->reqPost();
+        
         $account = I('post.account');
         $psw = md5(I('post.psw'));
         $User = D('User');
@@ -59,13 +56,8 @@ class EmployerController extends BaseController {
      * 更新用人单位信息
      */
     public function update() {
-        if (! IS_POST) {
-            $this->ajaxReturn(mz_json_error_request());
-            return;
-        }
-        if (! session('uid')) {
-            $this->ajaxReturn(mz_json_error('login please'));
-        }
+        $this->reqPost()->reqLogin();
+        
         $uid = session('uid');
         $data['uid'] = session('uid');
         $res = D('User')->updateEmployerInfo(array_merge($data, I('post.')));
@@ -80,9 +72,8 @@ class EmployerController extends BaseController {
      * GET 获取当前用人单位信息
      */
     public function info() {
-        if (! session('uid')) {
-            $this->ajaxReturn(mz_json_error("login please"));
-        }
+        $this->reqLogin();
+        
         $data['uid'] = session('uid');
         $res = D('User')->getEmployerInfo(array_merge($data, I('post.')));
         if ($res['status']) {
