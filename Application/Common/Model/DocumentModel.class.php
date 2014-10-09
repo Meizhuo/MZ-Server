@@ -85,21 +85,26 @@ class DocumentModel extends BaseModel {
 
     /**
      * 获取文档详情
-     * @param unknown $doc_id 文档的id
+     * 
+     * @param unknown $doc_id
+     *            文档的id
      * @return multitype:number string
      */
     public function getDocumentInfo($doc_id) {
-        //TODO 返回附件信息
+        // TODO MZ: 返回附件信息
         $res = $this->_getResult();
-        $res_docs = M('Document')->where("id=%d",$doc_id)->select();
-        if($res_docs){
-            $res['status'] =1;
+        $res_docs = M('Document')->where("id=%d", $doc_id)->select();
+        
+        if ($res_docs) {
+            $res['status'] = 1;
             $res['msg'] = $res_docs[0];
-        }else{
+            //浏览量统计
+            $viewed_data['views'] = $res_docs[0]['views'] + 1;
+            M('Document')->where("id=%d", $doc_id)->save($viewed_data);
+        } else {
             $res['msg'] = "Can't not find this document!";
         }
         return $res;
-    	
     }
     /**
     * 审核一文档

@@ -60,7 +60,6 @@ class DocumentController extends BaseController {
      * @param number $doc_id 文档id
      */
     public function info($doc_id=0) {
-        //TODO 在这里进行统计浏览量View
     	if($doc_id === 0){
     	    $this->ajaxReturn(mz_json_error("require params `doc_id`"));
     	    return;
