@@ -218,13 +218,12 @@ class UserModel extends BaseModel {
     public function getInsInfo($uid){
         $res = $this->_getResult();
         $user_ins = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
-        //         $user_ins = $this->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
         if($user_ins){
             $_result = M('UserInstitution')->where("uid='%s'",$uid)->select();
             $res['status'] = 1;
             $res['msg'] = array_merge($user_ins[0],$_result[0]);
         }else{
-            $res['msg'] = 'No session info,login please';
+            $res['msg'] = 'user info not found';
         }
         return $res;
     }

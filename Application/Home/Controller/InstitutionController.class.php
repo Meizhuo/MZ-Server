@@ -66,20 +66,17 @@ class InstitutionController extends BaseController {
     	    $this->ajaxReturn(mz_json_error($res['msg']));
     	}
     }
+
     /**
-     *GET  获取当前机构用户信息
+     * GET 获取当前机构用户信息
      */
-    public function info() {
-        $this->reqLogin();
-        
-    	$data['uid'] = session('uid');
-        $res = D('User')->getInsInfo(array_merge($data,I('post.')));
-        if($res['status']){
+    public function info($institution_id = 0) {
+        $res = D('User')->getInsInfo($institution_id);
+        if ($res['status']) {
             $this->ajaxReturn(mz_json_success($res['msg']));
-        }else {
+        } else {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
-        
     }
 
     /**
