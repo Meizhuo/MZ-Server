@@ -16,7 +16,7 @@ function mz_json_error($msg='operate error',$error_code=40000){
  * @return multitype:number unknown
  */
 function mz_json_success($data='operate successfully',$code =20000){
-    return array('code'=> 200,'response'=>$data);
+    return array('code'=> 20000,'response'=>$data);
 }
 /**
  * 常用的请求方法错误
