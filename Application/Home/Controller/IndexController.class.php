@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Common\Model\DocumentFileModel;
 
 class IndexController extends BaseController {
 
@@ -13,8 +14,8 @@ class IndexController extends BaseController {
     }
     
     public function test(){
-//         print_r(D('User')->createPersonById($uid)->data());
-       $this->reqPost(array("name",'id'));
-       $this->ajaxReturn("ok");
+        $D = new DocumentFileModel();
+        
+        $D->remove(5);
     }
 }
