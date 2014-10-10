@@ -129,6 +129,7 @@ class DocumentController extends BaseController {
      * POST 上传附件
      */
     public function upload() {
+        //TODO 检查权限
         $this->reqPost('doc_id');
         $config = array(
             'maxSize'    =>  3145728,// 设置附件上传大小 3M
@@ -155,6 +156,31 @@ class DocumentController extends BaseController {
                     $this->ajaxReturn(mz_json_error($res['msg']));
                 }
             }
+        }
+    }
+    /**
+     * 获得文档的附件信息
+     * @param unknown $doc_id 文档的id
+     */
+    public function getDocFile($doc_id){
+        $res = D('DocumentFile')->getDocFiles($doc_id);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success($res['msg']));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
+    /**
+     * POST 删除附件
+     */
+    public function deleteFile(){
+        //TODO 检查权限
+        $this->reqPost(array('file_id'));
+        $res = D('DocumentFile')->remove(I('post.file_id'));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success('delete successfully'));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
 }

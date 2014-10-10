@@ -82,4 +82,6 @@ nickname | 用户昵称  	| Y
 * [用户机构Institution](api_Institution.md)
 * [课程](api_Course.md)
 * [文档](api_Document.md)
+* [文档附件](api_DocumentFile.md)
 * [补贴项目](api_Subsidy.md)
+

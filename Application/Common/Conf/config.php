@@ -8,5 +8,7 @@ return array(
         'DB_PORT' => '3306', // 端口
         'DB_PREFIX' => 'mz_', // 数据库表前缀
         'SHOW_PAGE_TRACE' => true, // 显示页面Trace信息
-        'LOAD_EXT_FILE' => 'functions'//自定义加载函数文件
+        'LOAD_EXT_FILE' => 'functions',//自定义加载函数文件
+         ///////自定义参数
+         'UPLOAD_PATH' =>'./Uploads/' //上传路径
 );

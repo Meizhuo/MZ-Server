@@ -147,8 +147,8 @@ limit| 条目,默认10| N
 ```
 
 
-## 上传附件 (未完善)
-`POST /home/admin/upload` 
+## 上传附件 
+`POST /home/document/upload` 
 
 NOTE:先发布了文章再允许添加附件
 
@@ -164,5 +164,58 @@ file| 需要上传的文件   | Y
     "response"："upload successfully"
 }
 ```
+
+## 获得文档文档的附件
+`GET /home/document/getDocFile` 
+
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+doc_id | 文档的id   | Y
+
+**Response**  
+
+```json
+{
+    "code": 200,
+    "response": [
+        {
+            "id": "8",
+            "doc_id": "1",
+            "raw_name": "11.doc",
+            "save_name": "54378ff6e9ba4.doc",
+            "save_path": "2014-10-10/",
+            "ext": "doc",
+            "mime": "application/msword",
+            "size": "25600",
+            "md5": "283ec47cb110888a841614d7952ae6f5",
+            "create_time": "1412927478"
+        }
+        ....
+    ]
+}
+```
+
+## 删除附件 
+`POST /home/document/deleteFile` 
+
+NOTE:先发布了文章再允许添加附件
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+file_id| 文档id   | Y
+
+**Response**  
+
+```json
+{
+    "code":20000,
+    "response"："delete successfully"
+}
+```
+
+
+
+
 
 
