@@ -75,18 +75,8 @@ class DocumentController extends BaseController {
      * POST 审核文章
      */
     public function vertify(){
-        if(!IS_POST){
-    	    $this->ajaxReturn(mz_json_error_request());
-    	    return;
-    	}
-    	if(!session('uid')){
-    	    $this->ajaxReturn(mz_json_error("login please"));
-    	    return;
-    	}
-    	if(!I('post.doc_id')){
-    	    $this->ajaxReturn(mz_json_error("require params `doc_id`"));
-    	    return;
-    	}
+        $this->reqPost(array('doc_id'))->reqLogin();
+
         //查询获得category_id
         $category_id = (new DocumentModel())->createDocumentById(I('post.doc_id'))->data()['category_id'];
         $Admin = new UserAdminModel();
@@ -159,7 +149,7 @@ class DocumentController extends BaseController {
         }
     }
     /**
-     * 获得文档的附件信息
+     * GET 获得文档的附件信息
      * @param unknown $doc_id 文档的id
      */
     public function getDocFile($doc_id){
