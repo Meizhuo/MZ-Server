@@ -73,6 +73,10 @@ psw| 密码  | Y
 ## 获取机构信息
 `GET /home/institution/info`
 
+字段	|描述 |  是否必须 
+------------ | -------------| -------------
+institution_id | 机构的id 	| Y
+
 **Response**  
 
 ```json  
