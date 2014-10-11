@@ -153,8 +153,8 @@ op| 密码  | Y
 status | 审核状态(-1审核不通过 0 未审核1审核通过(默认全部获取)| N
 name |机构名称  | N
 type  |办学类型 | N
-limit | 返回条目 默认10   	| Y
-page| 页码 默认1  | Y
+limit | 返回条目 默认10   	| N
+page| 页码 默认1  | N
 
 
  **Response**  
