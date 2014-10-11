@@ -1,0 +1,68 @@
+/* CSS Document */
+#cat_fh{
+	text-align: center;
+	margin-bottom: 20px;
+	color: #252932;
+	width: 100%;
+}
+
+#cat_wr{
+	border-top: 2px solid #ededed;
+	border-bottom: 2px solid #ededed;
+	border-left:4px solid #31bfe3;
+	border-right:4px solid #31bfe3;
+
+	width: 800px;
+	margin: 0 auto;
+	/*	background-color: #a3cfd9;
+ */
+ 			border-radius: 5px;
+
+
+}
+#cat_top{
+	width: 30px;
+	padding: 10px;
+	width: 100%;
+}
+#form1 input{
+	border:2px solid #ededed;
+	border-radius: 5px;
+	height: 20px;
+	width: 300px;
+}
+#fb_button{
+}
+/*-------------------------全局设置--------------------------------------------*/
+input{
+	font-family: 微软雅黑;
+}
+.submit{
+	background-color: #44c4e7;
+	color: #ffffff;
+	border-radius: 3px;
+	width: 60px;
+	height: 30px;
+	font-size: 17px;
+	margin: 10px;
+}
+/*.submit:hover{
+	background-color: #ffffff;
+}
+*/
+.reset{
+	background-color: #fe905f;
+	color: #ffffff;
+	border-radius: 3px;
+	width: 60px;
+	height: 30px;
+	font-size: 17px;
+	margin: 10px;
+
+}
+/*.reset:hover{
+	background-color: #ffffff;
+}*/
+textarea{
+	font-family: 微软雅黑;
+}

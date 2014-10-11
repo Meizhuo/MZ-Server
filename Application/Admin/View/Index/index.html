@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<title>管理员登录</title>
+
+<link href="/mz/Public/css/index.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+	<div id="ind_container">
+		<div id="ind_center">
+			<div id="ind_head">
+
+				<div id="logo">
+					<img src="/mz/Public/images/zw_gr.png" height="120px" width="150px">
+				</div>
+
+			</div>
+
+			<div id="ind_ht">
+				<p>
+				<h1>东莞市职业训练指导中心</h1>
+				</p>
+				<p>
+				<h1>Dongguan Occupation Training Center</h1>
+				</p>
+				<p>
+				<h1>管理员登录</h1>
+				</p>
+			</div>
+
+			<div id="line"></div>
+
+			<div id="ind_login">
+				<div class="maxdiv">
+					<div class="centerdiv">
+						<div class="u">
+							<span>用户名：</span> <input id="account" type="text" value=""
+								class="text" />
+						</div>
+						<br />
+						<div class="u">
+							<span> &nbsp; &nbsp;密码：</span> <input id="psw" type="password"
+								value="" class="text" />
+						</div>
+						<br />
+						<div class="u_a">
+							<input id="btn-submit" type="button" value="登 录" /> <input
+								type="button" value="忘记密码" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+</body>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    $('#btn-submit').on('click', function() {
+        // var account = $('#account').text();
+        // var psw = $('#psw').text();
+        var account = "superadmin@mz.com";
+        var psw = "superadmin";
+        $.post("/mz/index.php/admin/index/login", {
+            "account": account,
+            "psw": psw
+        }, function(json) {
+            console.log(json);
+            if (json.code === 20000) {
+                location = json.response;
+            } else {
+                alert(json.msg);
+            }
+        });
+    });
+})(jQuery);
+</script>
+</html>

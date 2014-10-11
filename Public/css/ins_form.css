@@ -1,0 +1,14 @@
+/* CSS Document */
+table{
+width:800px;border:0;line-height: 30px; margin:10px auto 0;text-align:center;border-collapse:collapse;border-spacing:0;}
+table th{background:#4dadc1;font-weight:normal;line-height:30px;font-size:14px;color:#FFF;}
+table tr:nth-child(odd){background:#cccccc;} /*-------------------------ge hang-------------------*/
+table td:nth-child(even){color:#238594;}
+table tr:hover{background:#73B1E0;color:#FFF;}
+table td,table th{border:1px solid #EEE;}
+
+#ins_fh{
+	text-align: center;
+	margin-bottom: 20px;
+	color: #252932;
+}

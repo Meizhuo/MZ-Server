@@ -1,0 +1,83 @@
+/* CSS Document */
+#ind_center{
+	width: 100%;
+	height: 300px;
+	margin: 0px;
+	position: fixed;
+	top: 50%;
+	margin-top: -150px;
+	background-color: #ffffff;
+	filter:alpha(opacity=50); /*IE滤镜，透明度50%*/
+    -moz-opacity:0.5; /*Firefox私有，透明度50%*/
+    opacity:0.5;/*其他，透明度50%*/
+}
+body{
+	font-family: 微软雅黑,黑体,fantasy;
+	background-image: url(../images/383787.jpg);
+	background-size:cover;
+    filter : progid:DXImageTransform.Microsoft.AlphaImageLoader ( sizingMethod='scale' , src='../images/383787.jpg') 
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: 0px;
+}
+#ind_head{
+	width: 800px;
+	margin: 0 auto;
+
+}
+#logo{
+	float: left;
+    margin-left: 80px;
+}
+#ind_ht{
+	position: relative;
+	font-size: 9px;
+	line-height: 10px;
+	text-align: center;
+	top: 10%;
+	width: 350px;
+	float: left;
+}
+#line{
+	width: 800px;
+	border-top: 1px solid #167368;
+	margin: 0 auto;
+	position: relative;
+	top: 130px;
+}
+#ind_login{
+	width: 200px;
+	margin: 0 auto;
+	position: relative;
+	top: 80px;
+}
+input{
+	border-radius: 5px;
+    border:1px solid #000000;
+    margin-top: 8px;
+}
+.user_p{
+	float: left;
+	width: 70px;
+	height: 30px;
+	line-height: 1px;
+}
+.u{
+	height: 50px;
+	margin: 15px;
+}
+.u_a{
+	position: relative;
+	top: -45px;
+	left: 15px;
+}
+.user_p p{
+	float: right;
+}
+
+ .maxdiv{width:300px;height:180px;font:100 12px/20px;position: relative;left: -50px;}       
+  .centerdiv{text-align:center;margin-top:10px;}       
+   .text{width:180px;height:22px}   

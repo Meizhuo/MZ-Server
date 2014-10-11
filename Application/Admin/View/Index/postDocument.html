@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理界面</title>
+
+<link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+<link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+</head>
+<body>
+	<div id="logo">
+		<img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+	</div>
+
+	<div id="parent_a">
+		<div id="PARENT">
+			<ul id="nav">
+				<li><a href="fabuwendang.html" onclick="DoMenu('ChildMenu1')">发布文档</a>
+
+				</li>
+				<li><a href="shenheziliao.html" onClick="DoMenu('ChildMenu2')">审核培训机构</a>
+
+				</li>
+				<li><a href="shenhewendang.html" onClick="DoMenu('ChildMenu3')">审核文档</a>
+
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+
+
+	<div id="topbar">
+		<span>user，您好！</span>
+
+	</div>
+
+
+	<!--下面只是说明与程序代码无关-->
+	<div id="include"
+		style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
+		<div id="cat_fh">
+			<h1>发布文档</h1>
+		</div>
+
+		<div id="cat_wr">
+
+			<div id="cat_top">
+				<form id="form1" name="form1" method="post" action="">
+					<label style="padding: 5px;">栏目： <select name="select"
+						style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+							<option>基本职能</option>
+							<option>法律法规及政策</option>
+							<option>相关新闻</option>
+							<option>通知信息</option>
+							<option>政策法规</option>
+							<option>办事指南</option>
+							<option>全国统考</option>
+					</select>
+					</label> <label style="margin-left: 30px;">标题： <input type="text"
+						name="textfield" />
+					</label> <br /> <label> 图片附件： <input type="text" name="textfield" />
+						<input type="submit" class="submit"
+						style="width: 50px; height: 30px;" value="浏览"> <input
+						type="submit" class="submit" style="width: 50px; height: 30px;"
+						value="上传">
+
+					</label>
+			</div>
+
+			<label> <textarea name="textarea"
+					style="width: 93%; height: 300px; % border-radius: 3px; border: 2px solid #ededed; margin-left: 10px; margin-right: 10px; padding: 10px;"></textarea>
+			</label> <br> <label id="fb_button"> <input type="submit"
+				class="submit" value="发布"> <input type="reset" class="reset"
+				value="取消">
+			</label>
+			</form>
+
+
+		</div>
+
+	</div>
+
+</body>
+</html>

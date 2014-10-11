@@ -77,7 +77,7 @@ class IndexController extends BaseController {
         $this->display();
     }
     
-    public function postDocument($categoryId = 1){
+    public function postDocument(){
         $this->reqAdmin();
         $this->display();
     }
