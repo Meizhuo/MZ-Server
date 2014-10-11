@@ -124,14 +124,15 @@ class DocumentModel extends BaseModel {
 
     /**
      * 文档查询
-     * @param unknown $category_id
-     * @param unknown $title
-     * @param unknown $content
+     * @param string $category_id
+     * @param string $title
+     * @param string $content
+     * @param string $status
      * @param number $page
      * @param number $limit
-     * @return unknown
+     * @return Ambigous <\Think\mixed, boolean, string, NULL, mixed, multitype:, unknown, object>
      */
-    public function search($category_id,$title,$content,$page=1,$limit=10){
+    public function search($category_id='',$title='',$content='',$status='',$page=1,$limit=10){
         $map = array();
         if(!empty($category_id)){
             $map['category_id'] = array('like','%'.$category_id.'%');
@@ -141,6 +142,9 @@ class DocumentModel extends BaseModel {
         }
         if(!empty($content)){
             $map['content'] = array('like','%'.$content.'%');
+        }
+        if(!empty($status)){
+            $map['status'] = array('eq',$status);
         }
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;

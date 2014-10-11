@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>管理界面</title>
+
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+
+</head>
+
+<body>
+    <div id="logo">
+        <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+    </div>
+
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="#" onclick="DoMenu('ChildMenu1')">发布文档</a>
+
+                </li>
+                <li><a href="#" onClick="DoMenu('ChildMenu2')">审核培训机构</a>
+
+                </li>
+                <li><a href="#" onClick="DoMenu('ChildMenu3')">审核文档</a>
+
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <div id="topbar">
+        <span>您好,{$admin['nickname']}</span>
+
+
+
+    </div>
+
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style="width:80%; height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
+        <div id="ins_fh">
+            <h1>培训机构注册资料审核</h1>
+        </div>
+        <div id="ins_form">
+            <table>
+                <tr>
+                    <th>培训机构</th>
+                    <th>办学类型</th>
+                    <th>地址</th>
+                    <th>联系人</th>
+                    <th>审核</th>
+                </tr>
+                <foreach name="institutions" item="ins">
+	                <tr>
+	                    <td>{$ins['name']}</td>
+	                    <td>{$ins['type']}</td>
+	                    <td>{$ins['address']}</td>
+	                    <td>{$ins['manager']}</td>
+	                    <td><a href="#">审核通过</a>
+	                    </td>
+	                </tr>
+                </foreach>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>

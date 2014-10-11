@@ -12,7 +12,7 @@ class UserAdminModel extends BaseModel {
     /**
      * 创建Admin
      * @param unknown $uid
-     * @return \Common\Model\AdminModel
+     * @return \Common\Model\AdminModel 当找不到该用户是返回 NULL
      */
     public function createAdminById($uid){
         $map['uid'] = $uid;
@@ -20,6 +20,8 @@ class UserAdminModel extends BaseModel {
         $user_admin_info = M('UserAdmin')->where($map)->select();
         if($user_admin && $user_admin_info){
             $this->data = array_merge($user_admin[0],$user_admin_info[0]);
+        }else{
+            return null;
         }
         return $this;
     }

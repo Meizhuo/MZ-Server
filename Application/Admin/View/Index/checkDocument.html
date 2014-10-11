@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理界面</title>
+
+
+<script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+<link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+</head>
+<body>
+	<div id="logo">
+		<img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+	</div>
+
+	<div id="parent_a">
+		<div id="PARENT">
+			<ul id="nav">
+				<li><a href="fabuwendang.html" onclick="DoMenu('ChildMenu1')">发布文档</a>
+
+				</li>
+				<li><a href="shenheziliao.html" onClick="DoMenu('ChildMenu2')">审核培训机构</a>
+
+				</li>
+				<li><a href="shenhewendang.html" onClick="DoMenu('ChildMenu3')">审核文档</a>
+
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+
+
+	<div id="topbar">
+		<span>您好,{$admin['nickname']}</span>
+
+
+
+	</div>
+
+	<!--下面只是说明与程序代码无关-->
+	<div id="include"
+		style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
+		<div class="ht">
+			<h1>审核文档</h1>
+		</div>
+		<foreach name="documents" item="doc">
+			<div class="passage_t">
+				<span class="shenhe">【审核不通过】</span> <span class="passage_title">{$doc['title']}</span>
+				<span id="title_bar"><a href="#"> 查看 </a>|<a href="#"> 编辑
+				</a>|<a href=""> 审核</a></span>
+			</div>
+        </foreach>
+
+	</div>
+</body>
+</html>

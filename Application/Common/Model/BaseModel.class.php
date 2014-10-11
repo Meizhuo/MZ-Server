@@ -9,7 +9,7 @@ use Think\Model;
  *        
  */
 class BaseModel extends Model {
-
+    
     protected $_res = array(
             'status' => 0,
             'msg' => ''

@@ -8,8 +8,7 @@ use Think\Controller;
  *
  */
 class BaseController extends Controller {
-   
-    /**
+	/**
      * 对应控制器下没有方法就会执行该方法
      */
     protected function _empty(){
@@ -46,10 +45,20 @@ class BaseController extends Controller {
      * @return \Common\Controller\BaseController
      */
     protected function reqLogin(){
-        if(!session('uid')){
+        if(!isLogin){
            $this->ajaxReturn(mz_json_error('login please'));
         }
         return $this;
+    }
+    /**
+     * 是否已经登录
+     * @return boolean
+     */
+    public function isLogin(){
+        if(session('uid')){
+            return true;
+        }
+        return false;
     }
 }
 
