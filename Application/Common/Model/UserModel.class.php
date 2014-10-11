@@ -200,13 +200,13 @@ class UserModel extends BaseModel {
      */
     public function getUserInfo($uid){
         $res = $this->_getResult();
-        $users = $this->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
-        if($users){
+        $user_person= $this->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        if($user_person){
             $_result = M('UserPerson')->field('sex,work_place')->where("uid='%s'",$uid)->select();
             $res['status'] = 1;
-            $res['msg'] = array_merge($users[0],$_result[0]);
+            $res['msg'] = array_merge($user_person[0],$_result[0]);
         }else{
-            $res['msg'] = 'No session info,login please';
+              $res['msg'] = 'user info not found';
         }
         return $res;
     }
