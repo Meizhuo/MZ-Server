@@ -146,7 +146,6 @@ class DocumentModel extends BaseModel {
         if($status === 0 || !empty($status)){
             $map['status'] = array('eq',$status);
         }
-        print_r($status);
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
