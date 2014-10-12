@@ -37,7 +37,7 @@
                         </li>
                         <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/2">法律法规及政策</a>
                         </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocumentn/categoryId/3">相关新闻</a>
+                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/3">相关新闻</a>
                         </li>
                         <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/4">通知信息</a>
                         </li>
@@ -70,7 +70,7 @@
             <div class="passage_t">
                 <span class="shenhe">【审核不通过】</span>
                 <span class="passage_title">{$doc['title']}</span>
-                <span id="title_bar"><a href="/mz/index.php/admin/index/viewDocument/doc_id/{$doc['id']}"> 查看 </a>|<a href="#"> 编辑
+                <span id="title_bar"><a href="/mz/index.php/admin/index/viewDocument/doc_id/{$doc['id']}"> 查看 </a>|<a href="/mz/index.php/admin/index/postDocument/doc_id/{$doc['id']}"> 编辑
             </a>|<a name="vertify" href="javascript:void(0);" data-id="{$doc['id']}"> 通过审核</a>
                 </span>
             </div>
@@ -81,7 +81,6 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
-    console.log($('[name=vertify]'));
     $('[name=vertify]').on('click', function() {
         var btn = $(this);
         var doc_id = btn.data('id');

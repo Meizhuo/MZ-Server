@@ -77,8 +77,16 @@ class IndexController extends BaseController {
         $this->display();
     }
 
-    public function postDocument() {
+    public function postDocument($doc_id = 0) {
         $this->reqAdmin();
+        if($doc_id || $doc_id !== 0) {
+            $res = D('Document')->getDocumentInfo($doc_id);
+            if($res['status']){
+                $doc = $res['msg'];
+                $this->assign('document',$doc);
+//                 print_r($doc);
+            }
+        }
         $this->display();
     }
 

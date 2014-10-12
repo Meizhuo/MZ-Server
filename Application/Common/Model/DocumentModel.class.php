@@ -51,6 +51,8 @@ class DocumentModel extends BaseModel {
         $res = $this->_getResult();
     	if($this->create()){
     	    $this->data['uid'] = $uid;
+    	    //内容已经由前端过滤
+    	    $this->data['content'] = I('post.content','','');
     	    if($this->add()){
     	        $res['status'] = 1;
     	    }else{
@@ -74,6 +76,8 @@ class DocumentModel extends BaseModel {
     	if($this->create($data)){
     	    if(count($this->data) >1){
     	        $this->data['update_time'] = NOW_TIME;
+    	        //更新的时候也不过滤
+    	        $this->data['content'] = I('post.content','','');
     	        $this->save();
     	        $res['status'] = 1;
     	    }
@@ -93,7 +97,7 @@ class DocumentModel extends BaseModel {
     public function getDocumentInfo($doc_id) {
         // TODO MZ: 返回附件信息
         $res = $this->_getResult();
-        $res_docs = M('Document')->where("id=%d", $doc_id)->select();
+        $res_docs = M('Document')->where("id='%s'", $doc_id)->select();
         
         if ($res_docs) {
             $res['status'] = 1;

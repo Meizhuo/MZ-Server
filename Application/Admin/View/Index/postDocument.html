@@ -78,7 +78,7 @@
                         </select>
                     </label>
                     <label style="margin-left: 30px;">标题：
-                        <input id="text-title" type="text" name="textfield" />
+                        <input id="text-title" type="text" name="textfield" value="{$document['title']}" />
                     </label>
                     <br />
                     <form action="{:U('Home/Document/upload')}" enctype="multipart/form-data" method="post">
@@ -118,6 +118,10 @@
 <script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
 
 <script type="text/javascript">
+var initContent = '{$document["content"]}';
+
+
+
 //实例化编辑器
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 var ue = UE.getEditor('editor', {
@@ -129,8 +133,12 @@ var ue = UE.getEditor('editor', {
     enableAutoSave: false,
     saveInterval: 2000000000, //妈蛋，百度UEditor的bug！无法关闭，只能暴力延长时间！
     enableContextMenu: false, //打开右键菜单功能
-    initialContent: '请输入文字', //初始化编辑器的内容
-    initialFrameWidth:800,
+    initialContent: '', //初始化编辑器的内容
+    initialFrameWidth: 800,
+});
+
+ue.ready(function() {
+    ue.setContent(initContent);
 });
 </script>
 <!-- UEditor END-->
@@ -141,8 +149,52 @@ var ue = UE.getEditor('editor', {
         var category_id = $('#select-category').val();
         var title = $('#text-title').val();
         var content = UE.getEditor('editor').getContent();
-        console.log(content);
+        var doc_id = '{$document["id"]}';
 
+        var entity = {
+            'title': title,
+            'content': content,
+            'category_id': category_id,
+
+        };
+        if (title === '' || content === '') {
+            alert('标题/内容均不能为空');
+            return;
+        }
+        if (doc_id === '') {
+            //add
+            $.post('/mz/index.php/home/document/post', {
+                'title': title,
+                'content': content,
+                'category_id': category_id,
+            }, function(json) {
+                if (json.code) {
+                    alert('发布成功')
+                    setTimeout(function() {
+                        location = "/mz/index.php/admin/index/postDocument";
+                    }, 1000);
+                } else {
+                    alert(json.msg);
+                }
+            });
+        } else {
+            //update
+              $.post('/mz/index.php/home/document/update', {
+                'title': title,
+                'content': content,
+                'category_id': category_id,
+                'doc_id':doc_id
+            }, function(json) {
+                if (json.code) {
+                    alert('发布成功')
+                    setTimeout(function() {
+                        location = "/mz/index.php/admin/index/postDocument";
+                    }, 1000);
+                } else {
+                    alert(json.msg);
+                }
+            });
+        }
 
     });
 })(jQuery);
