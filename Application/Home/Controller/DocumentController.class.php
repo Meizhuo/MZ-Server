@@ -97,11 +97,12 @@ class DocumentController extends BaseController {
      * @param string $category_id
      * @param string $title
      * @param string $content
+     * @param string $status
      * @param number $page
      * @param number $limit
      */
-    public function search($category_id='',$title='',$content='',$page=1,$limit=10) {
-    	$res = D('Document')->search($category_id,$title,$content,$page,$limit);
+    public function search($category_id='',$title='',$content='',$status='',$page=1,$limit=10) {
+    	$res = D('Document')->search($category_id,$title,$content,$status,$page,$limit);
     	if($res['status']){
     	    $this->ajaxReturn(mz_json_success($res['msg']));
     	}else{

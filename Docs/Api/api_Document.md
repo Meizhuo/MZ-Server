@@ -147,6 +147,24 @@ limit| 条目,默认10| N
 ```
 
 
+## 审核文档  
+`POST /home/document/vertify` 
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+doc_id|需要审核的文档id|Y
+op|operation的简称(0为通过 1为不通过审核，默认1)| N
+
+**Response**  
+
+```json
+{
+    "code":20000,
+    "response"："vertify successfully"
+}
+```
+
+
 ## 上传附件 
 `POST /home/document/upload` 
 

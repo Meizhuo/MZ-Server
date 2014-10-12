@@ -70,8 +70,8 @@ class IndexController extends BaseController {
     public function checkDocument($categoryId = 1) {
         // TODO MZ:: 注意文档状态
         $this->reqAdmin();
-        $res = D('Document')->search($category_id = $categoryId, 
-                $status = DocumentModel::VERIFY_WAITING);
+        $res = D('Document')->search($categoryId,null,null,DocumentModel::VERIFY_WAITING);
+        print_r(DocumentModel::VERIFY_WAITING);
         $documents = $res['msg'];
         $this->assign('documents',$documents);
         $this->display();
