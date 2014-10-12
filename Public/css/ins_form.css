@@ -12,3 +12,39 @@ table td,table th{border:1px solid #EEE;}
 	margin-bottom: 20px;
 	color: #252932;
 }
+
+.tab_inp{
+    text-align: center;
+}
+.submit{
+	background-color: #44c4e7;
+	color: #ffffff;
+	border-radius: 3px;
+	width: 60px;
+	height: 30px;
+	font-size: 17px;
+	margin: 10px;
+}
+.reset{
+	background-color: #fe905f;
+	color: #ffffff;
+	border-radius: 3px;
+	width: 60px;
+	height: 30px;
+	font-size: 17px;
+	margin: 10px;
+
+}
+.syxy{
+	text-align: center;
+	margin-top: 30px;
+   
+}
+.syxy a{
+    padding: 8px;
+	text-decoration: none;
+	background-color: #73B1E0;
+	color: #fff;
+	border-radius: 5px;
+
+}
