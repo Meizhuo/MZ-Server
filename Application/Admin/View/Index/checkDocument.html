@@ -86,10 +86,7 @@
 (function($) {
     console.log($('[name=vertify]'));
     $('[name=vertify]').on('click', function() {
-        // console.log($(this).data('id'));
         var btn = $(this);
-        // btn.text('审核已通过!');
-        // console.log(this.data);
         var doc_id = btn.data('id');
 
         $.post('/mz/index.php/home/document/vertify', {

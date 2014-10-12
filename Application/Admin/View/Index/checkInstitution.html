@@ -73,7 +73,7 @@
                     <th>办学类型</th>
                     <th>地址</th>
                     <th>联系人</th>
-                    <th>审核</th>
+                    <th>操作</th>
                 </tr>
                 <foreach name="institutions" item="ins">
                     <tr>
@@ -81,7 +81,9 @@
                         <td>{$ins['type']}</td>
                         <td>{$ins['address']}</td>
                         <td>{$ins['manager']}</td>
-                        <td><a href="#">审核通过</a>
+                        <td>
+                            <span><a href="javascript:void(0);">查看</a> | <a name="vertify-pass" href="javascript:void(0);" data-id="{$ins['uid']}">通过审核</a>
+                            </span>
                         </td>
                     </tr>
                 </foreach>
@@ -90,5 +92,33 @@
 
     </div>
 </body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    console.log($('[name=vertify]'));
+    $('[name=vertify-pass]').on('click', function() {
+        var btn = $(this);
+        var institution_id = btn.data('id');
+        console.log(institution_id);
+        $.post('/mz/index.php/home/institution/vertify', {
+                'institution_id': institution_id
+            },
+
+            function(json) {
+                console.log(json);
+                if (json.code) {
+                    btn.text('审核已通过!');
+                    setTimeout(function() {
+                        btn.parent().parent().parent().fadeOut();
+                    }, 1000);
+                } else {
+                    alert('请求失败');
+                }
+            });
+
+
+    });
+})(jQuery);
+</script>
 
 </html>
