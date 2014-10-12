@@ -282,7 +282,7 @@ label {
         $('#mz-result').text('');
         $.ajax({
             type: req_method,
-            url: 'index.php' + abs_url,
+            url: '/mz/index.php' + abs_url,
             data: send_data,
             dataType: 'text',
             success: function(text) {
