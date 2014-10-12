@@ -122,24 +122,24 @@ training_scope |培训范围 | N
 ```json  
 {
 	"code":20000,
-	"response"："update success"
+	"response"："update successfully"
 }
 ```
 
 ## 通过审核检验(审核xxx)
-`POST /home/institution/check`
+`POST /home/institution/vertify`
 
 字段	|描述 |  是否必须 
 ------------ | -------------| -------------
-ins_id | 账户(手机号码)  	| Y
-op| 密码  | Y
+institution_id | 机构id 	| Y
+op|  operation的简称(0为通过 1为不通过审核，默认1) | N
 
  **Response**  
 
 ```json  
 {
 	"code":20000,
-	"response"："operate success"
+	"response"："vertify successfully"
 }
 ```
 

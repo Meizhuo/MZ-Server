@@ -1,6 +1,9 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Common\Model\UserAdminModel;
+use Common\Model\UserInstitutionModel;
+use Common\Model\UserModel;
 
 /**
  *机构用户接口
@@ -75,6 +78,27 @@ class InstitutionController extends BaseController {
         if ($res['status']) {
             $this->ajaxReturn(mz_json_success($res['msg']));
         } else {
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
+    
+    /**
+     * POST 审核机构
+     */
+    public function vertify(){
+        $this->reqPost(array('institution_id'))->reqLogin();
+    
+        //查询获得category_id
+        $Admin = new UserAdminModel();
+        //检验权限
+        if(! $Admin->createAdminById(session('uid'))->hasPerCheckInstitution()){
+            $this->ajaxReturn(mz_json_error("You have not permission!"));
+            return;
+        }
+        $res = D('UserInstitution')->verify(I('post.institution_id'),I('post.op',UserModel::STATUS_PASS));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success('vertify successfully'));
+        }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
