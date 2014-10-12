@@ -70,43 +70,85 @@
             <div id="cat_top">
                 <form id="form1" name="form1" method="post" action="">
                     <label style="padding: 5px;">栏目：
-                        <select name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
-                            <option>基本职能</option>
-                            <option>法律法规及政策</option>
-                            <option>相关新闻</option>
-                            <option>通知信息</option>
-                            <option>政策法规</option>
-                            <option>办事指南</option>
-                            <option>全国统考</option>
+                        <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                            <option value="1">基本职能</option>
+                            <option value="2">法律法规及政策</option>
+                            <option value="3">相关新闻</option>
+                            <option value="4">通知信息</option>
+                            <option value="5">政策法规</option>
+                            <option value="6">办事指南</option>
+                            <option value="7">全国统考</option>
                         </select>
                     </label>
                     <label style="margin-left: 30px;">标题：
-                        <input type="text" name="textfield" />
+                        <input id="text-title" type="text" name="textfield" />
                     </label>
                     <br />
-                    <label>图片附件：
-                        <input type="text" name="textfield" />
-                        <input type="submit" class="submit" style="width: 50px; height: 30px;" value="浏览">
-                        <input type="submit" class="submit" style="width: 50px; height: 30px;" value="上传">
+                    <form action="{:U('Home/Document/upload')}" enctype="multipart/form-data" method="post">
+                        <label>图片附件：
+                            <input style=" height: 20px;" type="file" name="image">
+                            <input id="btn-submit-image" type="submit" class="submit" style="width: 50px; height: 30px;" value="上传">
 
-                    </label>
+                        </label>
+                    </form>
+                    <form action="{:U('Home/Document/upload')}" enctype="multipart/form-data" method="post">
+                        <label>文档附件：
+                            <input style=" height: 20px;" type="file" name="image">
+                            <input id="btn-submit-file" type="submit" class="submit" style="width: 50px; height: 30px;" value="上传">
+
+                        </label>
+                    </form>
             </div>
 
             <label>
-                <textarea name="textarea" style="width: 93%; height: 300px; % border-radius: 3px; border: 2px solid #ededed; margin-left: 10px; margin-right: 10px; padding: 10px;"></textarea>
+                <div>
+                    <h2>内容</h2>
+                    <script id="editor" type="text/plain" style="width: 1024px; height: 500px;"></script>
+                </div>
             </label>
             <br>
             <label id="fb_button">
-                <input type="submit" class="submit" value="发布">
-                <input type="reset" class="reset" value="取消">
+                <input id="btn-submit" type="submit" class="submit" value="发布">
             </label>
             </form>
-
-
         </div>
-
     </div>
-
 </body>
+<!-- UEditor START-->
+<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.all.min.js">
+</script>
+<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<script type="text/javascript">
+//实例化编辑器
+//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+var ue = UE.getEditor('editor', {
+    toolbars: [
+        ['fullscreen', 'undo', 'redo', 'bold']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    enableAutoSave: false,
+    saveInterval: 2000000000, //妈蛋，百度UEditor的bug！无法关闭，只能暴力延长时间！
+    enableContextMenu: false, //打开右键菜单功能
+    initialContent: '请输入文字', //初始化编辑器的内容
+    initialFrameWidth:800,
+});
+</script>
+<!-- UEditor END-->
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    $('#btn-submit').on('click', function() {
+        var category_id = $('#select-category').val();
+        var title = $('#text-title').val();
+        var content = UE.getEditor('editor').getContent();
+        console.log(content);
+
+
+    });
+})(jQuery);
+</script>
 
 </html>

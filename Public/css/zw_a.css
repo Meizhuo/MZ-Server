@@ -197,3 +197,28 @@ margin-top:10px;
 text-align:center;
 }
 
+  /* ------------------------新闻内容----------------------------- */ 
+  .xwxx span{
+    margin-right: 20px;
+    color: #666;
+  }
+  .xwxx{
+    margin-top: 5px;
+  }
+  .xwbt{
+    text-align: center;
+    border-bottom: 3px solid #ededed;
+    padding-bottom: 10px;
+    margin-top: 10px;
+  }
+  .xwnr{
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 30px;
+  }
+  .xwnr p{
+    margin-bottom: 15px;
+  }
+  .xwtp{
+    text-align: center;
+  }
