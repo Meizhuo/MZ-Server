@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>管理界面</title>
+
+
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div id="logo">
+        <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+
+    </div>
+
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="{:U('admin/institution/updateInfo')}" onclick="DoMenu('ChildMenu1')">登记信息</a>
+
+                </li>
+                <li><a href="{:U('admin/institution/postCourse')}" onClick="DoMenu('ChildMenu2')">发布课程</a>
+
+                </li>
+                <li><a href="{:U('admin/institution/courseList')}" onClick="DoMenu('ChildMenu3')">课程列表</a>
+
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <div id="topbar">
+        <span>欢迎 {$institution['name']}</span>
+
+
+
+    </div>
+
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style="width:80%; height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
+        <span>
+            <h1>欢迎使用培训机构管理系统！</h1>
+        </span>
+        <br>
+
+        <span>使用教程：</span>
+        <br>
+        <span>东莞市职业训练指导中心手机APP及维护平台”的总体建设目标是通过手机APP为全市城乡劳动者提供有关职业培训及职业技术鉴定的各种政策信息及相关服务，构建一个集信息发布、业务管理、咨询、培训和技能鉴定于一体的综合服务平台。</span>
+    </div>
+</body>
+
+</html>

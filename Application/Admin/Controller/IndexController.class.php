@@ -10,11 +10,12 @@ class IndexController extends BaseController {
     private $admin = null;
 
     /**
-     * 需要获得用户信息
+     * 需要获得管理员用户信息
      *
      * @return \Admin\Controller\IndexController
      */
     protected function reqAdmin() {
+        $this->reqLogin();
         $this->admin = (new UserAdminModel())->createAdminById(session('uid'));
         if (! $this->admin) {
             $this->redirect('admin/index/index');
@@ -24,7 +25,7 @@ class IndexController extends BaseController {
     }
 
     public function index() {
-        if ($this->isLogin()) {
+        if ($this->isLogin() && $this->reqAdmin()) {
             $this->redirect('admin/index/manage');
         }
         $this->display();
@@ -84,7 +85,6 @@ class IndexController extends BaseController {
             if($res['status']){
                 $doc = $res['msg'];
                 $this->assign('document',$doc);
-//                 print_r($doc);
             }
         }
         $this->display();
