@@ -45,7 +45,7 @@ class BaseController extends Controller {
      * @return \Common\Controller\BaseController
      */
     protected function reqLogin(){
-        if(!isLogin){
+        if(!$this->isLogin()){
            $this->ajaxReturn(mz_json_error('login please'));
         }
         return $this;
