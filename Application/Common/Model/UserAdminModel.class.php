@@ -17,7 +17,7 @@ class UserAdminModel extends BaseModel {
     public function createAdminById($uid){
         $map['uid'] = $uid;
         $user_admin = M('User')->where($map)->select();
-        $user_admin_info = M('UserAdmin')->where($map)->select();
+        $user_admin_info = $this->where($map)->select();
         if($user_admin && $user_admin_info){
             $this->data = array_merge($user_admin[0],$user_admin_info[0]);
         }else{
