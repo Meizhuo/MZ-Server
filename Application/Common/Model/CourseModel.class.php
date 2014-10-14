@@ -68,32 +68,37 @@ class CourseModel extends BaseModel{
         }     
         return $res;
     }
+
     /**
      * 查询
-     * @param unknown $institution_id
-     * @param unknown $subsidy_id
-     * @param unknown $name
-     * @param number $page
-     * @param number $limit
+     * 
+     * @param unknown $institution_id            
+     * @param unknown $subsidy_id            
+     * @param unknown $name            
+     * @param number $page            
+     * @param number $limit            
      * @return unknown
      */
-    public function search($institution_id,$subsidy_id,$name,$page=1,$limit=10){
+    public function search($institution_id = '', $subsidy_id = '', $name = '', $page = 1, 
+            $limit = 10) {
         $res = $this->_getResult();
         $map = array();
-        if(!empty($institution_id)){
-            $map['institution_id'] = array('eq',$institution_id);
+        if (! empty($institution_id)) {
+            $map['institution_id'] = array('eq', $institution_id);
         }
-        if(!empty($subsidy_id)){
+        if (! empty($subsidy_id)) {
             $map['subsidy_id'] = array('eq',$subsidy_id);
         }
-        if(!empty($name)){
-            $map['name'] = array('like','%'.$name.'%');
+        if (! empty($name)) {
+            $map['name'] = array('like','%' . $name . '%');
         }
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
-        $res['msg']  = $this->where($map)->limit(($page-1)*$limit,$limit)->select();
-        if(empty($res['msg'])){
+        $res['msg'] = $this->where($map)
+            ->limit(($page - 1) * $limit, $limit)
+            ->select();
+        if (empty($res['msg'])) {
             $res['msg'] = array();
         }
         $res['status'] = 1;

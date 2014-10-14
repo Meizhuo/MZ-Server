@@ -25,7 +25,8 @@ class InstitutionController extends BaseController {
         if (! $this->institution) {
             $this->redirect('admin/institution/index');
         }
-        $this->assign('institution', $this->institution->getData());
+        $this->institution = $this->institution->getData();
+        $this->assign('institution', $this->institution);
         return $this;
     }
 
@@ -68,13 +69,15 @@ class InstitutionController extends BaseController {
         $this->display();
     }
 
-    public function postCourse() {
+    public function postCourse($institution_id = 0) {
         $this->reqInstituion();
         $this->display();
     }
     
     public function courseList() {
         $this->reqInstituion();
+        $res  = D('Course')->search($this->institution['uid']);
+        $this->assign('courses',$res['msg']);
         $this->display();
     }
 }

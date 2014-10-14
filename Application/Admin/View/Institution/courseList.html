@@ -49,48 +49,14 @@
         <div class="ht">
             <h1>课程列表</h1>
         </div>
-        <div class="passage_t">
-            <span class="shenhe"></span>
-            <span class="passage_title">夜课+两天拓展培训518元专业版</span>
-            <span id="title_bar"><a href="#"> 编辑 </a>|<a href="#"> 删除 </a>
-            </span>
-        </div>
-
-        <div class="passage_t">
-            <span class="shenhe"></span>
-            <span class="passage_title">FPGA基础班，中级班，高级班</span>
-            <span id="title_bar"><a href="#"> 编辑 </a>|<a href="#"> 删除 </a>
-            </span>
-        </div>
-
-        <div class="passage_t">
-            <span class="shenhe"></span>
-            <span class="passage_title">PMP精品班</span>
-            <span id="title_bar"><a href="#"> 编辑 </a>|<a href="#"> 删除 </a>
-            </span>
-        </div>
-
-        <div class="passage_t">
-            <span class="shenhe"></span>
-            <span class="passage_title">社会保险基本知识</span>
-            <span id="title_bar"><a href="#"> 编辑 </a>|<a href="#"> 删除 </a>
-            </span>
-        </div>
-
-        <div class="passage_t">
-            <span class="shenhe"></span>
-            <span class="passage_title">怎样才能成为公司一名优秀的员工</span>
-            <span id="title_bar"><a href="#"> 编辑 </a>|<a href="#"> 删除 </a>
-            </span>
-        </div>
-
-        <div class="passage_t">
-            <span class="shenhe"></span>
-            <span class="passage_title">6S管理基本知识</span>
-            <span id="title_bar"><a href="#"> 编辑 </a>|<a href="#"> 删除 </a>
-            </span>
-        </div>
-
+        <foreach name="courses" item="course">
+	        <div class="passage_t">
+	            <span class="shenhe"></span>
+	            <span class="passage_title">{$course['name']}</span>
+	            <span id="title_bar"><a href="#"> 编辑 </a>|<a href="#"> 删除 </a>
+	            </span>
+	        </div>
+        </foreach>
     </div>
 </body>
 

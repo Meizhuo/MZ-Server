@@ -55,7 +55,7 @@
                 <div class="nr">
                     <div class="nr_a">
                         <span>课程名称:</span>
-                        <input type="text" style="width:300px;" name="textfield" />
+                        <input id="text-name" type="text" style="width:300px;" name="textfield" />
                     </div>
                     <div class="nr_a">
                         <span>开课时间:</span>
@@ -63,31 +63,50 @@
                     </div>
                     <div class="nr_a">
                         <span>开课地址:</span>
-                        <input type="text" style="width:400px" name="textfield" />
+                        <input id="text-address" type="text" style="width:400px" name="textfield" />
                     </div>
                     <div class="nr_a">
                         <span>授课老师:</span>
-                        <input type="text" name="textfield" />
+                        <input id="text-teacher" type="text" name="textfield" />
                     </div>
                     <div class="nr_a">
                         <span>课程费用:</span>
-                        <input type="text" name="textfield" />
+                        <input id="text-cost" type="text" name="textfield" />
                     </div>
                     <div class="nr_a">
                         <div class="nr_b">
 
                             <span>课程介绍:</span>
                         </div>
-                        <textarea name="textarea" style="width:95%;height:300px;border-radius:5px;margin-left:5px;border:2px solid #ededed;margin-right:10px;padding:10px;"></textarea>
+                        <textarea id="text-introduction" name="textarea" style="width:95%;height:300px;border-radius:5px;margin-left:5px;border:2px solid #ededed;margin-right:10px;padding:10px;"></textarea>
                     </div>
                 </div>
                 <div class="sub">
-                    <input type="submit" class="submit" value="发布">
+                    <input id="btn-submit" class="submit" value="发布">
                 </div>
             </div>
         </div>
     </div>
 
 </body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+
+    $('#btn-submit').on('click', function() {
+        var name = $('#text-name').val();
+        var address = $('#text-address').val();
+        var teacher = $('#text-teacher').val();
+        var cost = $('#text-cost').val();
+        var introduction = $('#text-introduction').val();
+
+        console.log(name);
+        console.log(address);
+        console.log(teacher);
+        console.log(cost);
+        console.log(introduction);
+    });
+})(jQuery);
+</script>
 
 </html>

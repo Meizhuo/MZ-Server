@@ -20,7 +20,8 @@ class IndexController extends BaseController {
         if (! $this->admin) {
             $this->redirect('admin/index/index');
         }
-        $this->assign('admin', $this->admin->getData());
+        $this->admin = $this->admin->getData();
+        $this->assign('admin', $this->admin);
         return $this;
     }
 
