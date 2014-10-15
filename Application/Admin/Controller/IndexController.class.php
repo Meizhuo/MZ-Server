@@ -60,22 +60,25 @@ class IndexController extends BaseController {
         $this->display();
     }
 
-    public function checkInstitution() {
+    public function checkInstitution($page = 1) {
         $this->reqAdmin();
         // TODO MZ::改为watting
-        $res = D('UserInstitution')->search(UserModel::STATUS_PASS);
+        $res = D('UserInstitution')->search(UserModel::STATUS_PASS,null,null,$page);
         $institutions = $res['msg'];
         $this->assign('institutions', $institutions);
+        $this->assign('page',$page);
         $this->display();
     }
 
-    public function checkDocument($categoryId = 1) {
+    public function checkDocument($categoryId = 1,$page = 1) {
         // TODO MZ:: 注意文档状态
         $this->reqAdmin();
         $res = D('Document')->search($categoryId, null, null, 
-                DocumentModel::VERIFY_WAITING);
+                DocumentModel::VERIFY_WAITING,$page);
         $documents = $res['msg'];
         $this->assign('documents', $documents);
+        $this->assign('categoryId',$categoryId);
+        $this->assign('page',$page);
         $this->display();
     }
 

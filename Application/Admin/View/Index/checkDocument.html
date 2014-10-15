@@ -8,6 +8,7 @@
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
+     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -66,11 +67,11 @@
         <div id="ins_form">
             <table>
                 <tr>
-                    <th>标题</th>
+                    <th style="width:450px;padding: 4px">标题</th>
                     <th>发布时间</th>
                     <th>发布人</th>
                     <th>审核人</th>
-                    <th>操作</th>
+                    <th style="width:150px">操作</th>
                 </tr>
 
                 <foreach name="documents" item="doc">
@@ -80,7 +81,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <span id="title_bar"><a href="/mz/index.php/admin/index/viewDocument/doc_id/{$doc['id']}"> 查看 </a>|<a href="/mz/index.php/admin/index/postDocument/doc_id/{$doc['id']}"> 编辑
+                            <span id="title_bar" ><a href="/mz/index.php/admin/index/viewDocument/doc_id/{$doc['id']}"> 查看 </a>|<a href="/mz/index.php/admin/index/postDocument/doc_id/{$doc['id']}"> 编辑
             </a>|<a name="vertify" href="javascript:void(0);" data-id="{$doc['id']}"> 通过审核</a>
                             </span>
                             </a>
@@ -90,8 +91,8 @@
 
             </table>
             <div class="syxy">
-                <a class="submit" href="#">上一页</a>
-                <a class="submit" href="#">下一页</a>
+                <button id="btn-pre" class="submit" >上一页</button>
+                <button id="btn-next" class="submit">下一页</button>
 
             </div>
         </div>
@@ -112,6 +113,20 @@
                 console.log(data.msg);
             }
         });
+    });
+
+    var cur_page = "{$page}";
+    var cur_category ="{$categoryId}";
+    var url = "{:U('admin/index/checkDocument','','')}" + "/categoryId/"+cur_category+'/page/';
+
+    //前一页
+    $('#btn-pre').on('click',function(){
+        location = url+(parseInt(cur_page)-1);
+    });
+
+     //后一页
+    $('#btn-next').on('click',function(){
+        location =url+(parseInt(cur_page)+1);
     });
 
 })(jQuery);
