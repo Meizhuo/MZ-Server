@@ -92,8 +92,8 @@ class IndexController extends BaseController {
     }
 
     public function viewDocument($doc_id = 0) {
-        // TODO 处理没有找到该文章的情况
-        // TODO 处理禁止显示的情况
+        // TODO MZ:: 处理没有找到该文章的情况
+        // TODO MZ:: 处理禁止显示的情况
         $res = D('Document')->getDocumentInfo($doc_id);
         $document = $res['msg'];
         $this->assign('document', $document);
