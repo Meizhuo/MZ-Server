@@ -1,0 +1,21 @@
+/* CSS Document */
+table{
+width:100%;border:0;line-height: 30px; margin:10px auto 0; color: #333; border-collapse:collapse;border-spacing:0;}
+table th{background:#66cc00;font-weight:normal;line-height:30px;font-size:14px;color:#FFF;}
+table tr:nth-child(even){background:#f1f1f1;} /*-------------------------ge hang-------------------*/
+table td:nth-child(even){padding-left: 10px; padding-right: 10px;color:#479500;}
+table td:nth-child(odd){padding-right: 10px; }
+
+table td,table th{border:1px solid #EEE;}
+
+#ins_fh{
+	text-align: center;
+	margin-bottom: 20px;
+	color: #252932;
+}
+
+.inp{
+	border: 1px solid #ccc;
+	border-radius: 5px;
+
+}

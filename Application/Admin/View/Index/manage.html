@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>管理界面</title>
 
-
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
-
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -34,7 +34,7 @@
                         </li>
                         <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/2">法律法规及政策</a>
                         </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocumentn/categoryId/3">相关新闻</a>
+                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/3">相关新闻</a>
                         </li>
                         <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/4">通知信息</a>
                         </li>
@@ -55,6 +55,7 @@
 
     <div id="topbar">
         <span>欢迎 {$admin['nickname']}</span>
+        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
     </div>
 
     <!--下面只是说明与程序代码无关-->
@@ -68,5 +69,22 @@
         <span>东莞市职业训练指导中心手机APP及维护平台”的总体建设目标是通过手机APP为全市城乡劳动者提供有关职业培训及职业技术鉴定的各种政策信息及相关服务，构建一个集信息发布、业务管理、咨询、培训和技能鉴定于一体的综合服务平台。</span>
     </div>
 </body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+	//退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/admin/';
+            }else{
+            	console.log(data.msg);
+            }
+        });
+    });
+
+})(jQuery);
+</script>
 
 </html>

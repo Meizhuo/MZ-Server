@@ -7,22 +7,18 @@
 }
 
 #cat_wr{
-	border-top: 2px solid #ededed;
-	border-bottom: 2px solid #ededed;
-	border-left:4px solid #31bfe3;
-	border-right:4px solid #31bfe3;
 
-	width: 800px;
+
+	width: 100%;
 	margin: 0 auto;
 	/*	background-color: #a3cfd9;
  */
  			border-radius: 5px;
 
-padding: 10px;
+
 }
 #cat_top{
-	padding: 10px;
-	width: 98%;
+	width: 100%;
 }
 #form1 input{
 	border:2px solid #ededed;
@@ -37,13 +33,12 @@ input{
 	font-family: 微软雅黑;
 }
 .submit{
-	background-color: #44c4e7;
+	background-color: #6c0;
 	color: #ffffff;
 	border-radius: 3px;
-	width: 60px;
-	height: 30px;
-	font-size: 17px;
-	margin: 10px;
+	width: 50px;
+	height: 25px;
+	margin-right: 10px;
 }
 /*.submit:hover{
 	background-color: #ffffff;
@@ -65,3 +60,4 @@ input{
 textarea{
 	font-family: 微软雅黑;
 }
+

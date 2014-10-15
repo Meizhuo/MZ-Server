@@ -15,7 +15,6 @@ class IndexController extends BaseController {
      * @return \Admin\Controller\IndexController
      */
     protected function reqAdmin() {
-        $this->reqLogin();
         $this->admin = (new UserAdminModel())->createAdminById(session('uid'));
         if (! $this->admin) {
             $this->redirect('admin/index/index');

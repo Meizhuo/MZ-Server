@@ -7,6 +7,7 @@
 
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
 
@@ -34,7 +35,7 @@
                         </li>
                         <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/2">法律法规及政策</a>
                         </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocumentn/categoryId/3">相关新闻</a>
+                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/3">相关新闻</a>
                         </li>
                         <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/4">通知信息</a>
                         </li>
@@ -53,63 +54,85 @@
 
     <div id="topbar">
         <span>欢迎 {$admin['nickname']}</span>
+        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
     </div>
 
 
     <!--下面只是说明与程序代码无关-->
     <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
-        <div id="cat_fh">
+        <div class="ht">
             <h1>发布文档</h1>
         </div>
 
         <div id="cat_wr">
 
             <div id="cat_top">
-                <form id="form1" name="form1" method="post" action="">
-                    <label style="padding: 5px;">栏目：
-                        <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
-                            <option value="1">基本职能</option>
-                            <option value="2">法律法规及政策</option>
-                            <option value="3">相关新闻</option>
-                            <option value="4">通知信息</option>
-                            <option value="5">政策法规</option>
-                            <option value="6">办事指南</option>
-                            <option value="7">全国统考</option>
-                        </select>
-                    </label>
-                    <label style="margin-left: 30px;">标题：
-                        <input id="text-title" type="text" name="textfield" value="{$document['title']}" />
-                    </label>
-                    <br />
-                    <form action="{:U('Home/Document/upload')}" enctype="multipart/form-data" method="post">
-                        <label>图片附件：
-                            <input style=" height: 20px;" type="file" name="image">
-                            <input id="btn-submit-image" type="submit" class="submit" style="width: 50px; height: 30px;" value="上传">
+                <table width="100%" border="0">
+                    <tr>
+                        <td width="50">
+                            <div align="right">标题</div>
+                        </td>
+                        <td width="400">
+                            <input id="text-title" class="inp" name="textarea3" type="text" style="height:100%;width:100%;" value="{$document['title']}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">栏目</div>
+                        </td>
+                        <td>
+                            <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                                <option value="1">基本职能</option>
+                                <option value="2">法律法规及政策</option>
+                                <option value="3">相关新闻</option>
+                                <option value="4">通知信息</option>
+                                <option value="5">政策法规</option>
+                                <option value="6">办事指南</option>
+                                <option value="7">全国统考</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">图片附件</div>
+                        </td>
+                        <td>
+                            <input style="width:150px;" type="file" name="image">
+                            <input name="submit" type="submit" class="submit" id="btn-submit-image" value="上传">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">文档附件</div>
+                        </td>
+                        <td>
+                            <input style="width:150px;" type="file" name="image2">
+                            <input name="submit2" type="submit" class="submit" id="submit" value="上传">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">内容</div>
+                        </td>
+                        <td height="400">
 
-                        </label>
-                    </form>
-                    <form action="{:U('Home/Document/upload')}" enctype="multipart/form-data" method="post">
-                        <label>文档附件：
-                            <input style=" height: 20px;" type="file" name="image">
-                            <input id="btn-submit-file" type="submit" class="submit" style="width: 50px; height: 30px;" value="上传">
-
-                        </label>
-                    </form>
+                            <script id="editor" type="text/plain" style="height:100%;width:900px;margin:10px;"></script>
+                            <!-- <textarea class="inp" name="textarea32" style="height:100%;width:100%;"></textarea> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right"></div>
+                        </td>
+                        <td>
+                            <input id="btn-submit" name="submit3" type="submit" class="submit" id="btn-submit" value="发布">
+                        </td>
+                    </tr>
+                </table>
             </div>
-
-            <label>
-                <div>
-                    <h2>内容</h2>
-                    <script id="editor" type="text/plain" style="width: 1024px; height: 500px;"></script>
-                </div>
-            </label>
-            <br>
-            <label id="fb_button">
-                <input id="btn-submit" type="submit" class="submit" value="发布">
-            </label>
-            </form>
         </div>
-    </div>
+
+
 </body>
 <!-- UEditor START-->
 <script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.config.js"></script>
@@ -145,6 +168,7 @@ ue.ready(function() {
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+    //发布
     $('#btn-submit').on('click', function() {
         var category_id = $('#select-category').val();
         var title = $('#text-title').val();
@@ -179,11 +203,11 @@ ue.ready(function() {
             });
         } else {
             //update
-              $.post('/mz/index.php/home/document/update', {
+            $.post('/mz/index.php/home/document/update', {
                 'title': title,
                 'content': content,
                 'category_id': category_id,
-                'doc_id':doc_id
+                'doc_id': doc_id
             }, function(json) {
                 if (json.code) {
                     alert('发布成功')
@@ -197,6 +221,19 @@ ue.ready(function() {
         }
 
     });
+
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/admin/';
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
+
 })(jQuery);
 </script>
 
