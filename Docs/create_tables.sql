@@ -114,8 +114,10 @@ CREATE TABLE  `mz_document` (
   `description` text COMMENT '描述(可空',
   `order_num` int(1) NOT NULL DEFAULT '1' COMMENT '序号(优先级别,默认为1',
   `content` text NOT NULL COMMENT '新闻内容',
+  `vertify_uid` int(11) DEFAULT NULL COMMENT '审核人id',
+  `vertify_time` int(11) DEFAULT NULL COMMENT '审核时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='文档' AUTO_INCREMENT=1 ;
 
 ---- 文档详情 (已分离到mz_document)
 --DROP TABLE IF EXISTS `mz_document_detail`;
