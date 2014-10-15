@@ -15,12 +15,10 @@
 
 <body>
     <div id="logo">
-        <a href="{:U('admin/institution/index')}">
-            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
-        </a>
+        <a href="{:U('admin/institution/index')}"><img src="/mz/Public/images/zw_w.png" width="80px" height="55px"></a>
     </div>
 
-    <div id="parent_a">
+   <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
                 <li><a href="{:U('admin/institution/updateInfo')}" onclick="DoMenu('ChildMenu1')">登记信息</a>
@@ -40,33 +38,12 @@
 
 
 
-    <div id="topbar">
+     <div id="topbar">
         <span>欢迎 {$institution['nickname']}</span>
         <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
     </div>
 
     <!--下面只是说明与程序代码无关-->
-    <div id="include" style="width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
-        <div class="ht">
-            <h1>课程列表</h1>
-        </div>
-
-        <table width="100%">
-            <tr>
-                <th>课程名称</th>
-                <th>操作</th>
-            </tr>
-
-            <foreach name="courses" item="course">
-                <tr>
-                    <td>{$course['name']}</td>
-                    <td><a href="#"> 编辑 </a>|<a href="#"> 删除 </a> 
-                </tr>
-            </foreach>
-        </table>
-
-
-    </div>
 
 </body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>

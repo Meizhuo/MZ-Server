@@ -3,18 +3,21 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>管理界面</title>
+    <title>机构用户管理</title>
 
 
-    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
-    <link href="css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
     <div id="logo">
-        <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
-
+        <a href="{:U('admin/institution/index')}">
+            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+        </a>
     </div>
 
     <div id="parent_a">
@@ -38,65 +41,108 @@
 
 
     <div id="topbar">
-        <span>欢迎 {$institution['name']}</span>
-
-
-
+        <span>欢迎 {$institution['nickname']}</span>
+        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
     </div>
 
     <!--下面只是说明与程序代码无关-->
     <div id="include" style=" width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
-        <div class="bt">
+        <div class="ht">
             <h1>登记信息</h1>
         </div>
         <div id="cat_wr">
-            <div class="fbk">
-
-                <div class="nr">
-                    <div class="nr_a">
-                        <span>机构名称:</span>
-                        <input type="text" style="width:400px;" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>机构地址:</span>
-                        <input type="text" style="width:400px;" name="textfield" />
-                    </div>
-
-                    <div class="nr_a">
-                        <span>办学类型:</span>
-                        <input type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>批准文号:</span>
-                        <input type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>培训范围:</span>
-                        <input type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>机构负责人:</span>
-                        <input type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>有效期:</span>
-                        <input type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <div class="nr_b">
-
-                            <span>描 述:</span>
-                        </div>
-                        <textarea name="textarea" style="width:95%;height:300px;border-radius:5px;margin-left:5px;border:2px solid #ededed;margin-right:10px;padding:10px;"></textarea>
-                    </div>
-                </div>
-                <div class="sub">
-                    <input type="submit" class="submit" value="登记">
-                </div>
-            </div>
+            <table width="100%" border="0">
+                <tr>
+                    <td width="50">
+                        <div align="right">机构名称</div>
+                    </td>
+                    <td width="400">
+                        <input class="inp" name="textarea3" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">机构地址</div>
+                    </td>
+                    <td>
+                        <input class="inp" name="textarea32" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">办学类型</div>
+                    </td>
+                    <td>
+                        <input class="inp" name="textarea33" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">批准文号</div>
+                    </td>
+                    <td>
+                        <input class="inp" name="textarea34" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">培训范围</div>
+                    </td>
+                    <td>
+                        <input class="inp" name="textarea35" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">机构负责人</div>
+                    </td>
+                    <td>
+                        <input name="textarea22" type="text" class="inp" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">有效期</div>
+                    </td>
+                    <td>
+                        <input name="textarea2" type="text" class="inp" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">描述</div>
+                    </td>
+                    <td>
+                        <textarea class="inp" name="textarea" style="height:100%;width:100%;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input name="submit3" type="submit" class="submit" id="btn-submit" value="发布">
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
 </body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/ins/';
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
+
+})(jQuery);
+</script>
 
 </html>

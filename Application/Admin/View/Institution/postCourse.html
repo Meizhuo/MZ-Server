@@ -3,18 +3,21 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>管理界面</title>
+    <title>机构用户管理</title>
 
 
-    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
-    <link href="css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
     <div id="logo">
-        <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
-
+        <a href="{:U('admin/institution/index')}">
+            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+        </a>
     </div>
 
     <div id="parent_a">
@@ -38,53 +41,72 @@
 
 
     <div id="topbar">
-        <span>欢迎 {$institution['name']}</span>
-
-
-
+        <span>欢迎 {$institution['nickname']}</span>
+        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
     </div>
 
     <!--下面只是说明与程序代码无关-->
     <div id="include" style=" width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
-        <div class="bt">
+        <div class="ht">
             <h1>发布课程</h1>
         </div>
         <div id="cat_wr">
-            <div class="fbk">
-
-                <div class="nr">
-                    <div class="nr_a">
-                        <span>课程名称:</span>
-                        <input id="text-name" type="text" style="width:300px;" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>开课时间:</span>
-                        <input type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>开课地址:</span>
-                        <input id="text-address" type="text" style="width:400px" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>授课老师:</span>
-                        <input id="text-teacher" type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <span>课程费用:</span>
-                        <input id="text-cost" type="text" name="textfield" />
-                    </div>
-                    <div class="nr_a">
-                        <div class="nr_b">
-
-                            <span>课程介绍:</span>
-                        </div>
-                        <textarea id="text-introduction" name="textarea" style="width:95%;height:300px;border-radius:5px;margin-left:5px;border:2px solid #ededed;margin-right:10px;padding:10px;"></textarea>
-                    </div>
-                </div>
-                <div class="sub">
-                    <input id="btn-submit" class="submit" value="发布">
-                </div>
-            </div>
+            <table width="100%" border="0">
+                <tr>
+                    <td width="50">
+                        <div align="right">课程名称</div>
+                    </td>
+                    <td width="400">
+                        <input id="text-name" class="inp" name="textarea3" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">开课时间</div>
+                    </td>
+                    <td>
+                        <input class="inp" name="textarea32" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">开课地址</div>
+                    </td>
+                    <td>
+                        <input  id="text-address" class="inp" name="textarea33" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">授课老师</div>
+                    </td>
+                    <td>
+                        <input id="text-teacher" class="inp" name="textarea34" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">课程费用</div>
+                    </td>
+                    <td>
+                        <input id="text-cost" class="inp" name="textarea35" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="right">课程介绍</div>
+                    </td>
+                    <td>
+                        <textarea id="text-introduction" class="inp" name="textarea" style="height:100%;width:100%;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input name="submit3" type="submit" class="submit" id="btn-submit" value="发布">
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -92,7 +114,18 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
-
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/ins/';
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
+    //发布课程
     $('#btn-submit').on('click', function() {
         var name = $('#text-name').val();
         var address = $('#text-address').val();

@@ -60,7 +60,7 @@ class InstitutionController extends BaseController {
     }
 
     public function manage() {
-        $this->reqLogin()->reqInstituion();
+        $this->reqInstituion();
         $this->display();
     }
 
