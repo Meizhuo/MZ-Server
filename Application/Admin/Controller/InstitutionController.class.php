@@ -66,18 +66,24 @@ class InstitutionController extends BaseController {
 
     public function updateInfo() {
         $this->reqInstituion();
+        $this->assign('uid',session('uid'));
         $this->display();
     }
 
     public function postCourse($institution_id = 0) {
         $this->reqInstituion();
+        if(is_numeric(I('get.institution_id')) && (int)(I('get.institution_id')) > 0){
+             $res = D('Course')->info(I('get.institution_id'));
+             $this->assign('course',$res['msg']);
+        }
         $this->display();
     }
     
-    public function courseList() {
+    public function courseList($page=1) {
         $this->reqInstituion();
-        $res  = D('Course')->search($this->institution['uid']);
+        $res  = D('Course')->search($this->institution['uid'],null,null,$page);
         $this->assign('courses',$res['msg']);
+        $this->assign('page',$page);
         $this->display();
     }
 }

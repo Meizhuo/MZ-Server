@@ -68,6 +68,21 @@ class CourseModel extends BaseModel{
         }     
         return $res;
     }
+    /**
+     * 根据课程id获得课程信息
+     * @param unknown $course_id
+     * @return Ambigous <number, string, multitype:number string >
+     */
+    public function info($course_id){
+        $res = $this->_getResult();
+        $res['msg'] = $this->where("id='%s'",$course_id)->select()[0];
+        if($res['msg']){
+            $res['status'] =1;
+        }else{
+            $res['msg'] = "找不到该课程";
+        }
+        return $res;
+    }
 
     /**
      * 查询

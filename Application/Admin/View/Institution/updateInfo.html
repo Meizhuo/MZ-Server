@@ -6,7 +6,7 @@
     <title>机构用户管理</title>
 
 
-    <script type="text/javascript" src="js/sidebar.js"></script>
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
@@ -51,13 +51,13 @@
             <h1>登记信息</h1>
         </div>
         <div id="cat_wr">
-            <table width="100%" border="0">
+            <table style="width:100%; border:0">
                 <tr>
                     <td width="50">
                         <div align="right">机构名称</div>
                     </td>
                     <td width="400">
-                        <input class="inp" name="textarea3" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-name" class="inp" type="text" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
                 <tr>
@@ -65,7 +65,7 @@
                         <div align="right">机构地址</div>
                     </td>
                     <td>
-                        <input class="inp" name="textarea32" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-address" class="inp" type="text" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
                 <tr>
@@ -73,7 +73,7 @@
                         <div align="right">办学类型</div>
                     </td>
                     <td>
-                        <input class="inp" name="textarea33" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-type" class="inp" type="text" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
                 <tr>
@@ -81,7 +81,7 @@
                         <div align="right">批准文号</div>
                     </td>
                     <td>
-                        <input class="inp" name="textarea34" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-approval_number" class="inp" type="text" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
                 <tr>
@@ -89,7 +89,7 @@
                         <div align="right">培训范围</div>
                     </td>
                     <td>
-                        <input class="inp" name="textarea35" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-training_scope" class="inp" type="text" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
                 <tr>
@@ -97,7 +97,7 @@
                         <div align="right">机构负责人</div>
                     </td>
                     <td>
-                        <input name="textarea22" type="text" class="inp" style="height:100%;width:100%;" value="">
+                        <input id="text-manager" type="text" class="inp" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
                 <tr>
@@ -105,7 +105,7 @@
                         <div align="right">有效期</div>
                     </td>
                     <td>
-                        <input name="textarea2" type="text" class="inp" style="height:100%;width:100%;" value="">
+                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
                 <tr>
@@ -113,13 +113,13 @@
                         <div align="right">描述</div>
                     </td>
                     <td>
-                        <textarea class="inp" name="textarea" style="height:100%;width:100%;"></textarea>
+                        <textarea id="text-description" class="inp" style="height:100%;width:100%;"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <input name="submit3" type="submit" class="submit" id="btn-submit" value="发布">
+                        <input id="btn-submit" class="submit" value="发布" type="submit">
                     </td>
                 </tr>
             </table>
@@ -141,6 +141,52 @@
             }
         });
     });
+
+
+    function insert(src, key, val) {
+            if (val !== '') {
+                src[key] = val;
+            }
+        }
+        //更新用户信息
+    $('#btn-submit').on('click', function() {
+        console.log("click");
+        var uid = "{$uid}";
+        var name = $('#text-name').val();
+        var address = $('#text-address').val();
+        var type = $('#text-type').val();
+        var approval_number = $('#text-approval_number').val();
+        var training_scope = $('#text-training_scope').val();
+        var manager = $('#text-manager').val();
+        var validity_date = $('#text-validity_date').val();
+        var description = $('#text-description').val();
+
+        var post_data = {};
+        insert(post_data, 'uid', uid);
+        insert(post_data, 'name', name);
+        insert(post_data, 'address', address);
+        insert(post_data, 'type', type);
+        insert(post_data, 'approval_number', approval_number);
+        insert(post_data, 'training_scope', training_scope);
+        insert(post_data, 'manager', manager);
+        insert(post_data, 'validity_date', validity_date);
+        insert(post_data, 'description', description);
+
+        $.post("{:U('home/institution/update')}", post_data, function(json) {
+            if (json.code) {
+                alert('更新成功！');
+                setTimeout(function(){
+                    location = "{:U('admin/institution/manage')}";
+                }, 1000);
+            } else {
+                alert(json.msg);
+            }
+        }).fail(function(err) {
+            console.log(err);
+        });
+    });
+
+
 
 })(jQuery);
 </script>

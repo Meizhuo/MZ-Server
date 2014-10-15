@@ -55,12 +55,10 @@ class UserInstitutionModel extends BaseModel {
     public function updateInfo($data){
         $res = $this->_getResult();
         if($this->create($data)){
-            print_r($this->data);
             // 除了uid还有更新其他项,那么更新，不然会报SQL错误
             if(count($this->data)>1){
                 $this->save();
                 $res['status'] = 1; 
-                print_r("save..");
             }
         }else{
             $res['msg'] = $this->getError();

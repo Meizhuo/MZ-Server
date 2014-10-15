@@ -52,17 +52,27 @@
         <table width="100%">
             <tr>
                 <th>课程名称</th>
+                <th>课程简介</th>
+                <th>授课老师</th>
+                <th>费用</th>
                 <th>操作</th>
             </tr>
 
             <foreach name="courses" item="course">
                 <tr>
                     <td>{$course['name']}</td>
-                    <td><a href="#"> 编辑 </a>|<a href="#"> 删除 </a> 
+                    <td>{$course['introduction']}</td>
+                    <td>{$course['teacher']}</td>
+                    <td>{$course['cost']}</td>
+                    <td><a href="/mz/index.php/admin/institution/postCourse/institution_id/{$course['id']}"> 编辑 </a>|<a href="#"> 删除 </a> 
                 </tr>
             </foreach>
         </table>
+        <div class="syxy">
+            <button id="btn-pre" class="submit">上一页</button>
+            <button id="btn-next" class="submit">下一页</button>
 
+        </div>
 
     </div>
 
@@ -80,6 +90,20 @@
                 console.log(data.msg);
             }
         });
+    });
+
+    //翻页
+    var cur_page = "{$page}";
+    var url = "{:U('admin/institution/courseList','','')}" + '/page/';
+
+    //前一页
+    $('#btn-pre').on('click', function() {
+        location = url + (parseInt(cur_page) - 1);
+    });
+
+    //后一页
+    $('#btn-next').on('click', function() {
+        location = url + (parseInt(cur_page) + 1);
     });
 
 })(jQuery);

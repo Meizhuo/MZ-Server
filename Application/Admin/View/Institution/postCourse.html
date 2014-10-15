@@ -57,15 +57,7 @@
                         <div align="right">课程名称</div>
                     </td>
                     <td width="400">
-                        <input id="text-name" class="inp" name="textarea3" type="text" style="height:100%;width:100%;" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div align="right">开课时间</div>
-                    </td>
-                    <td>
-                        <input class="inp" name="textarea32" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-name" class="inp" name="textarea3" type="text" style="height:100%;width:100%;" value="{$course['name']}">
                     </td>
                 </tr>
                 <tr>
@@ -73,7 +65,7 @@
                         <div align="right">开课地址</div>
                     </td>
                     <td>
-                        <input  id="text-address" class="inp" name="textarea33" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-address" class="inp" type="text" style="height:100%;width:100%;" value="{$course['address']}">
                     </td>
                 </tr>
                 <tr>
@@ -81,7 +73,7 @@
                         <div align="right">授课老师</div>
                     </td>
                     <td>
-                        <input id="text-teacher" class="inp" name="textarea34" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-teacher" class="inp" type="text" style="height:100%;width:100%;" value="{$course['teacher']}">
                     </td>
                 </tr>
                 <tr>
@@ -89,7 +81,7 @@
                         <div align="right">课程费用</div>
                     </td>
                     <td>
-                        <input id="text-cost" class="inp" name="textarea35" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-cost" class="inp" type="text" style="height:100%;width:100%;" value="{$course['cost']}">
                     </td>
                 </tr>
                 <tr>
@@ -97,13 +89,13 @@
                         <div align="right">课程介绍</div>
                     </td>
                     <td>
-                        <textarea id="text-introduction" class="inp" name="textarea" style="height:100%;width:100%;"></textarea>
+                        <textarea id="text-introduction" class="inp" style="height:100%;width:100%;">{$course['introduction']}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <input name="submit3" type="submit" class="submit" id="btn-submit" value="发布">
+                        <input id="btn-submit" type="submit" class="submit" value="发布">
                     </td>
                 </tr>
             </table>
@@ -125,19 +117,68 @@
             }
         });
     });
-    //发布课程
+    //s
+
+    //发布&更新课程
     $('#btn-submit').on('click', function() {
+        var course_id = "{$course['id']}"; //课程id
         var name = $('#text-name').val();
         var address = $('#text-address').val();
         var teacher = $('#text-teacher').val();
         var cost = $('#text-cost').val();
         var introduction = $('#text-introduction').val();
 
-        console.log(name);
-        console.log(address);
-        console.log(teacher);
-        console.log(cost);
-        console.log(introduction);
+        if (name === '') {
+            alert("课程名称不能为空");
+            return;
+        }
+        if (address === '') {
+            alert("地址为空");
+            return;
+        }
+        if (cost === '') {
+            alert("课程费用不能为空");
+            return;
+        }
+        if (introduction === '') {
+            alert("课程简不能为空");
+            return;
+        }
+
+        var post_data = {
+            name: name,
+            address: address,
+            teacher: teacher,
+            cost: cost,
+            introduction: introduction,
+        };
+        if (course_id === '') {
+            //发布
+            $.post("{:U('home/course/post')}", post_data, function(json) {
+                if (json.code) {
+                    alert('发布课程成功！');
+                    setTimeout(function() {
+                        location = "{:U('admin/institution/manage')}";
+                    }, 1000);
+                } else {
+                    alert(json.msg);
+                }
+            });
+        }else{
+             //更新
+            post_data['course_id'] = course_id;
+            $.post("{:U('home/course/update')}", post_data, function(json) {
+                if (json.code) {
+                    alert('更新课程成功！');
+                    setTimeout(function() {
+                        location = "{:U('admin/institution/manage')}";
+                    }, 1000);
+                } else {
+                    alert(json.msg);
+                }
+            });
+        }
+
     });
 })(jQuery);
 </script>

@@ -15,7 +15,8 @@ class CourseController extends BaseController {
      */
     protected function reqPermission(){
         $person = D('User')->createInstution(session('uid'))->getData();
-        if($person['level'] != UserModel::LEVEL_INSTITUTION || $person['status'] != UserModel::STATUS_PASS){
+        //注意这里是字符与数字的比较 用==
+        if(!($person['level'] == UserModel::LEVEL_INSTITUTION && $person['status'] == UserModel::STATUS_PASS)){
             $this->ajaxReturn(mz_json_error('Permission Refused:   你不是机构用户  or 机构未通过审核'));
         }
         return $this;
