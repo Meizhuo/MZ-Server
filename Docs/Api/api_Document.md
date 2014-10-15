@@ -17,6 +17,9 @@ from| 新闻来源  | N
 level| 文章等级(1 只有个人用户可见 2 只有用人单位可见  4只有培训机构可见8 只有管理员可见 16只有超级管理员可见 31全部可见,默认31) | N
 description| 简单描述 | N
 order_num| 序号(优先级别,默认为1) | N
+vertify_uid  |审核人id | N
+vertify_time |审核时间 | N
+
 
 **Response**  
 
@@ -43,6 +46,8 @@ from| 新闻来源  | N
 level| 文章等级(1 只有个人用户可见 2 只有用人单位可见  4只有培训机构可见8 只有管理员可见 16只有超级管理员可见 31全部可见,默认31) | N
 description| 简单描述 | N
 order_num| 序号(优先级别,默认为1) | N
+vertify_uid  |审核人id | N
+vertify_time |审核时间 | N
 
 **Response**  
 
