@@ -2,88 +2,79 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-    <title>管理员登录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>机构用户管理</title>
 
-    <link href="/mz/Public/css/index.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="js/sidebar.js"></script>
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
+    <div id="logo">
+        <img src="images/zw_w.png" width="80px" height="55px">
 
-    <div id="ind_container">
-        <div id="ind_center">
-            <div id="ind_head">
+    </div>
 
-                <div id="logo">
-                    <img src="/mz/Public/images/zw_gr.png" height="120px" width="150px">
-                </div>
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="dengjixinxi.html" onclick="DoMenu('ChildMenu1')">登记信息</a>
 
-            </div>
+                </li>
+                <li><a href="fabukecheng.html" onClick="DoMenu('ChildMenu2')">发布课程</a>
 
-            <div id="ind_ht">
-                <p>
-                    <h1>东莞市职业训练指导中心</h1>
-                </p>
-                <p>
-                    <h1>Dongguan Occupation Training Center</h1>
-                </p>
-                <p>
-                    <h1>机构用户登录</h1>
-                </p>
-            </div>
+                </li>
+                <li><a href="kechengliebiao.html" onClick="DoMenu('ChildMenu3')">课程列表</a>
 
-            <div id="line"></div>
+                </li>
 
-            <div id="ind_login">
-                <div class="maxdiv">
-                    <div class="centerdiv">
-                        <div class="u">
-                            <span>用户名：</span>
-                            <input id="account" type="text" value="" class="text" />
-                        </div>
-                        <br />
-                        <div class="u">
-                            <span>&nbsp; &nbsp;密码：</span>
-                            <input id="psw" type="password" value="" class="text" />
-                        </div>
-                        <br />
-                        <div class="u_a">
-                            <input id="btn-submit" type="button" value="登 录" />
-                            <input type="button" value="忘记密码" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            </ul>
         </div>
+
+    </div>
+
+
+
+    <div id="topbar">
+        <span>user，您好！</span>
+        <input type="submit" value="退出登录"></input>
 
 
 
     </div>
 
-</body>
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style="width:80%; height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
+        <span>
+            <h1>欢迎使用培训机构管理系统！</h1>
+        </span>
+        <br>
 
+        <span>使用教程：</span>
+        <br>
+        <span>东莞市职业训练指导中心手机APP及维护平台”的总体建设目标是通过手机APP为全市城乡劳动者提供有关职业培训及职业技术鉴定的各种政策信息及相关服务，构建一个集信息发布、业务管理、咨询、培训和技能鉴定于一体的综合服务平台。</span>
+    </div>
+
+</body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
-    $('#btn-submit').on('click', function() {
-        // var account = $('#account').text();
-        // var psw = $('#psw').text();
-        var account = "user1@jiecheng.com";
-        var psw = "123456789";
-        $.post("/mz/index.php/admin/institution/login", {
-            "account": account,
-            "psw": psw
-        }, function(json) {
-            console.log(json);
-            if (json.code === 20000) {
-                location = json.response;
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/admin/';
             } else {
-                alert(json.msg);
+                console.log(data.msg);
             }
         });
     });
+
 })(jQuery);
 </script>
 

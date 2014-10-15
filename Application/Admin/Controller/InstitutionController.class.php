@@ -19,10 +19,10 @@ class InstitutionController extends BaseController {
      * @return \Admin\Controller\InstitutionController
      */
     protected function reqInstituion() {
-        $this->reqLogin();
         $this->institution = (new UserInstitutionModel())->createInsById(
                 session('uid'));
         if (! $this->institution) {
+            $this->logout();
             $this->redirect('admin/institution/index');
         }
         $this->institution = $this->institution->getData();
@@ -31,7 +31,7 @@ class InstitutionController extends BaseController {
     }
 
     public function index() {
-        if ($this->isLogin() && $this->reqInstituion()) {
+        if($this->isLogin() && $this->reqInstituion()){
             $this->redirect('admin/institution/manage');
         }
         $this->display();

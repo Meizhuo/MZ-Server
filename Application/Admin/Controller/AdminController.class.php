@@ -9,10 +9,6 @@ class AdminController extends Controller {
        
    }
    
-   public function logout(){
-       
-   }
-   
    public function add(){
        
    }

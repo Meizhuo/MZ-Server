@@ -76,7 +76,7 @@ class UserController extends BaseController {
      * GET 登出
      */
     public function logout(){
-       session('uid',null);
+       session(null);
        $this->ajaxReturn(mz_json_success('logout successfully'));
     }
 }

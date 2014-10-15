@@ -60,5 +60,16 @@ class BaseController extends Controller {
         }
         return false;
     }
+    /**
+     * 用户登出，清除相关session
+     * 
+     * @param string $msg ajax 返回的信息
+     */
+    public function logout($msg = ''){
+        session(null); // 清空当前的session
+        if(!empty($msg)){
+            $this->ajaxReturn(mz_json_success($msg));
+        }
+    }
 }
 

@@ -34,7 +34,7 @@ class AdminController extends BaseController {
         }
     }
     public function logout(){
-        session('uid',null);
+        session(null);
         $this->ajaxReturn(mz_json_success('logout successfully'));
     }
 
