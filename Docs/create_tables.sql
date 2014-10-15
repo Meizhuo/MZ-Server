@@ -119,13 +119,6 @@ CREATE TABLE  `mz_document` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='文档' AUTO_INCREMENT=1 ;
 
----- 文档详情 (已分离到mz_document)
---DROP TABLE IF EXISTS `mz_document_detail`;
---CREATE TABLE  `mz_document_detail` (
---  `id` int(11) NOT NULL COMMENT '新闻id',
---  `content` text NOT NULL COMMENT '新闻内容'
---) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档详情';
-
 
 -- 文档附件
 DROP TABLE IF EXISTS `mz_document_file`;

@@ -1209,6 +1209,4 @@ INSERT INTO `mz_subsidy_standary` (`id`, `certificate_type`, `kind`, `level`, `m
 (1205, 'B(国家职业资格证书、计算机信息高新技术证书、专项职业能力证书)', 'B6', 'B6-3(技师、高级技师)', 3500, '', '推土铲运机驾驶员'),
 (1206, 'B(国家职业资格证书、计算机信息高新技术证书、专项职业能力证书)', 'B6', 'B6-3(技师、高级技师)', 3500, '', '挖掘机驾驶员');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
