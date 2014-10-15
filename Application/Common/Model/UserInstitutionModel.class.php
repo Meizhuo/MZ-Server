@@ -91,10 +91,10 @@ class UserInstitutionModel extends BaseModel {
      * @param unknown $name
      * @param unknown $type
      * @param number $page
-     * @param number $limt
+     * @param number $limit
      * @return unknown
      */
-    public function search($status='', $name='', $type='', $page = 1, $limt = 10) {
+    public function search($status='', $name='', $type='', $page = 1, $limit = 10) {
         $res = $this->_getResult();
         $map = array();
         $map['level'] = UserModel::LEVEL_INSTITUTION;
@@ -112,7 +112,7 @@ class UserInstitutionModel extends BaseModel {
         $page = $page > 0 ? $page : 1;
         $users_ins = M('User')->join('mz_user_institution ON mz_user.uid = mz_user_institution.uid')->where($map)
             ->field( 'mz_user_institution.uid,nickname,phone,email,reg_time,level,status,name,address,type,description,manager')
-            ->limit(($page - 1) * $limt, $limt)
+            ->limit(($page - 1) * $limit, $limit)
             ->select();
         if(!$users_ins){
             $res['msg'] = array();
