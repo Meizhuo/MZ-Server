@@ -1,12 +1,11 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
-use Common\Model\DocumentFileModel;
 
 class IndexController extends BaseController {
 
     public function index() {
-        $this->display();
+        $this->redirect('admin/institution/index');
     }
     
     public function upload(){
@@ -14,8 +13,6 @@ class IndexController extends BaseController {
     }
     
     public function test(){
-        $D = new DocumentFileModel();
-        
-        print_r($D->linkToDoc(3,array(10,11)));
+        $this->display();
     }
 }
