@@ -27,7 +27,8 @@ class DocumentController extends BaseController {
     	
     	$res = D('Document')->addDocument($uid);
     	if($res['status']){
-    	    $this->ajaxReturn(mz_json_success("post successfully"));
+    	    //返回文档的id
+    	    $this->ajaxReturn(mz_json_success($res['msg']));
     	}else{
     	    $this->ajaxReturn(mz_json_error($res['msg']));
     	}
@@ -121,7 +122,7 @@ class DocumentController extends BaseController {
      */
     public function upload() {
         //TODO 检查权限
-        $this->reqPost('doc_id');
+        // $this->reqPost('doc_id');
         $config = array(
             'maxSize'    =>  3145728,// 设置附件上传大小 3M
             'rootPath'   =>  './Uploads/', // 设置附件上传根目录
@@ -140,13 +141,35 @@ class DocumentController extends BaseController {
             // 上传成功 获取上传文件信息
             //单文件
             foreach($info as $file){
-                $res = D('DocumentFile')->post(I('doc_id'),$file);
+                //默认为0
+                $res = D('DocumentFile')->post(I('doc_id',0),$file);
                 if($res['status']){
                     $this->ajaxReturn(mz_json_success($res['msg']));
                 }else{
                     $this->ajaxReturn(mz_json_error($res['msg']));
                 }
             }
+        }
+    }
+    /**
+     * 批量链接附件
+     * @param unknown $doc_id
+     * @param array $file_ids
+     */
+    public function updateDocFiles(){
+        $this->reqPost(array('doc_id','file_ids'));
+        if(empty(I('post.file_ids'))){
+            $this->ajaxReturn(mz_json_success("It's empty!"));
+        }
+        $arr_file_ids = array()  ;
+        foreach (I('post.file_ids') as $v){
+            $arr_file_ids[] = $v;
+        }
+        $res = D('DocumentFile')->linkToDoc(I('doc_id'),$arr_file_ids);
+        if ($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
     /**

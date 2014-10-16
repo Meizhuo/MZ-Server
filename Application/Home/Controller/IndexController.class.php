@@ -16,6 +16,6 @@ class IndexController extends BaseController {
     public function test(){
         $D = new DocumentFileModel();
         
-        $D->remove(5);
+        print_r($D->linkToDoc(3,array(10,11)));
     }
 }

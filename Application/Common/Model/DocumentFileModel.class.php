@@ -52,7 +52,54 @@ class DocumentFileModel extends BaseModel {
         }
         return $res;
     }
+    /**
+     * 更新一文档
+     * @param unknown $data 包含id
+     * @return Ambigous <number, string, multitype:number string >
+     */
+    private function update($data){
+        $res = $this->_getResult();
+        if($this->create($data)){
+           if(count($this->data)>1){
+               $this->save();
+           }
+           $res['status'] = 1;
+        }else{
+            $res['msg'] = $this->getError();
+        }
+        return $res;
+    }
 
+    /**
+     * 批量链接到一个文档
+     * @param unknown $doc_id 文档id
+     * @param array $file_ids
+     * @return Ambigous <number, multitype:number string >
+     */
+    public function linkToDoc($doc_id,array $file_ids){
+        $res = $this->_getResult();
+        if(!empty($file_ids)){
+            $length = 0;
+            $this->startTrans();
+            foreach ($file_ids as $id){
+                $data = array('id'=>$id,'doc_id'=>$doc_id);
+                if($this->save($data)){
+                    $length +=1;
+                }
+            }
+            if($length === count($file_ids)){
+                $this->commit();
+                $res['status'] = 1 ;
+            }else{
+                $this->rollback();
+                $res['msg'] = 'System Error: Batch update error';
+            }
+        }else{
+            //无更新也算成功操作
+            $res['status'] = 1 ;
+        }
+        return $res;
+    }
     /**
      *  获得文档文档的附件
      * @param unknown $doc_id 文档id
@@ -83,7 +130,7 @@ class DocumentFileModel extends BaseModel {
         $_result = $this->where("id=%d", $file_id)->select();
         if ($_result) {
             $file =C('UPLOAD_PATH').$_result[0]['save_path'] . $_result[0]['save_name'];
-            print_r($file);
+            // print_r($file);
             if (file_exists($file)) {
                 unlink($file);
                 if ($this->where("id=%d", $file_id)->delete()) {

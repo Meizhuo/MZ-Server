@@ -15,7 +15,7 @@
 
 <body>
     <div id="logo">
-       <a href="{:U('admin/index/index')}">
+        <a href="{:U('admin/index/index')}">
             <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
         </a>
     </div>
@@ -96,20 +96,20 @@
                     </tr>
                     <tr>
                         <td>
-                            <div align="right">图片附件</div>
-                        </td>
-                        <td>
-                            <input style="width:150px;" type="file" name="image">
-                            <input name="submit" type="submit" class="submit" id="btn-submit-image" value="上传">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <div align="right">文档附件</div>
                         </td>
                         <td>
-                            <input style="width:150px;" type="file" name="image2">
-                            <input name="submit2" type="submit" class="submit" id="submit" value="上传">
+                            <div id="drag-and-drop-zone" class="uploader">
+                                <input style="width:150px;" type="file" name="image2">
+                                <span>
+                                    <strong id="progress"></strong>
+                                </span>
+                                <br>
+                                <div id="fileList">
+
+                                </div>
+
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -119,7 +119,6 @@
                         <td height="400">
 
                             <script id="editor" type="text/plain" style="height:100%;width:900px;margin:10px;"></script>
-                            <!-- <textarea class="inp" name="textarea32" style="height:100%;width:100%;"></textarea> -->
                         </td>
                     </tr>
                     <tr>
@@ -138,9 +137,11 @@
 </body>
 <!-- UEditor START-->
 <script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.all.min.js">
+<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.all.js">
 </script>
 <script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- UEditor end-->
+
 
 <script type="text/javascript">
 var initContent = '{$document["content"]}';
@@ -156,7 +157,7 @@ var ue = UE.getEditor('editor', {
     autoHeightEnabled: true,
     autoFloatEnabled: true,
     enableAutoSave: false,
-    saveInterval: 2000000000, //妈蛋，百度UEditor的bug！无法关闭，只能暴力延长时间！
+    saveInterval: 2000000000,
     enableContextMenu: false, //打开右键菜单功能
     initialContent: '', //初始化编辑器的内容
     initialFrameWidth: 800,
@@ -168,14 +169,38 @@ ue.ready(function() {
 </script>
 <!-- UEditor END-->
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="/mz/Public/js/dmuploader.js"></script>
 <script type="text/javascript">
 (function($) {
+    var doc_id = "{$document['id']}";
+    var file_ids = {}; //附件
+
+    //更新文档附件
+    function updateDocFiles() {
+
+        $.post("{:U('home/document/updateDocFiles','','')}", {
+            doc_id: doc_id,
+            file_ids: file_ids,
+        }, function(json) {
+            if (json.code) {
+                alert('发布成功');
+                setTimeout(function() {
+                    location = "{:U('admin/index/postDocument')}";
+                }, 1000);
+
+            } else {
+                alert(json.response);
+            }
+        });
+    }
+
     //发布
     $('#btn-submit').on('click', function() {
         var category_id = $('#select-category').val();
         var title = $('#text-title').val();
         var content = UE.getEditor('editor').getContent();
-        var doc_id = '{$document["id"]}';
+        // doc_id = '{$document["id"]}';
+        // file_ids = {}; //附件
 
         var entity = {
             'title': title,
@@ -187,7 +212,8 @@ ue.ready(function() {
             alert('标题/内容均不能为空');
             return;
         }
-        if (doc_id === '') {
+
+        if (doc_id === undefined || doc_id === '') {
             //add
             $.post('/mz/index.php/home/document/post', {
                 'title': title,
@@ -195,17 +221,16 @@ ue.ready(function() {
                 'category_id': category_id,
             }, function(json) {
                 if (json.code) {
-                    alert('发布成功')
-                    setTimeout(function() {
-                        location = "/mz/index.php/admin/index/postDocument";
-                    }, 1000);
+
+                    doc_id = json.response;
+                    updateDocFiles();
                 } else {
                     alert(json.msg);
                 }
             });
         } else {
             //update
-            $.post('/mz/index.php/home/document/update', {
+            $.post("{:U('home/document/update','','')}", {
                 'title': title,
                 'content': content,
                 'category_id': category_id,
@@ -227,7 +252,6 @@ ue.ready(function() {
     //退出
     $('#btn-logout').on('click', function() {
         $.get('/mz/index.php/home/user/logout', function(data) {
-            // console.log(data);
             if (data.code) {
                 location = '/mz/admin/';
             } else {
@@ -235,6 +259,95 @@ ue.ready(function() {
             }
         });
     });
+
+    //删除一条上传的条目
+    $('#fileList').on('click', '[name=btn-delete]', function() {
+        var $ele = $(this);
+        var file_id = $ele.data('id');
+        $.post("{:U('home/document/deleteFile','','')}", {
+            file_id: file_id,
+        }, function(json) {
+            //fuck here
+            if (json.code) {
+                $ele.parent().html('');
+                delete file_ids[file_id];
+            } else {
+                // json
+                alert('删除失败');
+            }
+        });
+    });
+
+    function add_log(message) {
+        console.log(message);
+    }
+
+    function add_file(file_name, file_id) {
+        var template = '<div><span>{file_name}  已上传</span><a href="javascript:void(0);" style="margin-left: 10px;" name="btn-delete" data-id="{file_id}">删除</a><br></div>';
+
+        if (file_name && file_id) {
+            $('#fileList').prepend(template.replace('{file_name}', file_name).replace('{file_id}', file_id));
+        }
+
+    }
+
+    //上传
+    // Upload Plugin itself
+    $('#drag-and-drop-zone').dmUploader({
+        url: "{:U('home/document/upload')}",
+        dataType: 'json',
+        // allowedTypes: '*',
+        /*extFilter: 'jpg;png;gif',*/
+        onInit: function() {
+            add_log('Penguin initialized :)');
+        },
+        onBeforeUpload: function(id) {
+            add_log('Starting the upload of #' + id);
+
+        },
+
+        onComplete: function() {
+            add_log('All pending tranfers finished');
+        },
+        onUploadProgress: function(id, percent) {
+            var percentStr = percent + '%';
+            $('#progress').text('上传进度: ' + percentStr);
+
+
+
+        },
+        //上传文件成功
+        onUploadSuccess: function(id, data) {
+            add_log('Upload of file #' + id + ' completed');
+
+            // add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
+            if (data.code) {
+                add_file(add_file(data.response.raw_name, data.response.id));
+                file_ids[data.response.id] = data.response.id;
+            } else {
+                alert(data.response);
+            }
+        },
+        onUploadError: function(id, message) {
+            add_log('Failed to Upload file #' + id + ': ' + message);
+
+        },
+        onFileTypeError: function(file) {
+            add_log('File \'' + file.name + '\' cannot be added: must be an image');
+
+        },
+        onFileSizeError: function(file) {
+            add_log('File \'' + file.name + '\' cannot be added: size excess limit');
+        },
+        onFileExtError: function(file) {
+            // $.danidemo.addLog('#demo-debug', 'error', 'File \'' + file.name + '\' has a Not Allowed Extension');
+        },
+        onFallbackMode: function(message) {
+            alert('Browser not supported(do something else here!): ' + message);
+        }
+    });
+
+
 
 })(jQuery);
 </script>

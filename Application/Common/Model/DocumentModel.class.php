@@ -45,7 +45,7 @@ class DocumentModel extends BaseModel {
     /**
      * 添加一个文档
      * @param unknown $uid 发布人id
-     * @return Ambigous <string, multitype:number string >
+     * @return Ambigous <string, multitype:number string > 成功插入时返回文档id
      */
     public function addDocument($uid){
         $res = $this->_getResult();
@@ -53,8 +53,10 @@ class DocumentModel extends BaseModel {
     	    $this->data['uid'] = $uid;
     	    //内容已经由前端过滤
     	    $this->data['content'] = I('post.content','','');
-    	    if($this->add()){
+    	    $uid = $this->add();
+    	    if($uid){
     	        $res['status'] = 1;
+    	        $res['msg'] = $uid;
     	    }else{
     	        $res['msg'] = 'System Error: Not able to insert';
     	    }
