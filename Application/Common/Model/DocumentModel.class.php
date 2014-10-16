@@ -97,13 +97,12 @@ class DocumentModel extends BaseModel {
      * @return multitype:number string
      */
     public function getDocumentInfo($doc_id) {
-        // TODO MZ: 返回附件信息
         $res = $this->_getResult();
         $res_docs = M('Document')->where("id='%s'", $doc_id)->select();
-        
+        $res_doc_files = D('DocumentFile')->getDocFiles($doc_id)['msg'];
         if ($res_docs) {
             $res['status'] = 1;
-            $res['msg'] = $res_docs[0];
+            $res['msg'] = array_merge($res_docs[0],array('files'=>$res_doc_files));
             //浏览量统计
             $viewed_data['views'] = $res_docs[0]['views'] + 1;
             M('Document')->where("id=%d", $doc_id)->save($viewed_data);
@@ -139,6 +138,7 @@ class DocumentModel extends BaseModel {
      * @return Ambigous <\Think\mixed, boolean, string, NULL, mixed, multitype:, unknown, object>
      */
     public function search($category_id='',$title='',$content='',$status='',$page=1,$limit=10){
+        //这里不用返回文档的附件信息了
         $map = array();
         if(!empty($category_id)){
             $map['category_id'] = array('like','%'.$category_id.'%');

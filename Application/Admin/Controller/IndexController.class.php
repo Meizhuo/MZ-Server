@@ -93,6 +93,11 @@ class IndexController extends BaseController {
             if($res['status']){
                 $doc = $res['msg'];
                 $this->assign('document',$doc);
+                foreach ($doc['files'] as $file){
+                    $file_ids[$file['id']] =  $file['id'];
+                }
+                $this->assign('file_ids',json_encode($file_ids));
+                
             }
         }
         $this->display();

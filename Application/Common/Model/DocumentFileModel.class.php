@@ -83,7 +83,8 @@ class DocumentFileModel extends BaseModel {
             $this->startTrans();
             foreach ($file_ids as $id){
                 $data = array('id'=>$id,'doc_id'=>$doc_id);
-                if($this->save($data)){
+                //若果本来就有,但是再一次更新，应算更新成功
+                if($this->save($data)>=0){
                     $length +=1;
                 }
             }
@@ -130,7 +131,6 @@ class DocumentFileModel extends BaseModel {
         $_result = $this->where("id=%d", $file_id)->select();
         if ($_result) {
             $file =C('UPLOAD_PATH').$_result[0]['save_path'] . $_result[0]['save_name'];
-            // print_r($file);
             if (file_exists($file)) {
                 unlink($file);
                 if ($this->where("id=%d", $file_id)->delete()) {

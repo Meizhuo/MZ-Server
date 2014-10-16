@@ -85,7 +85,22 @@ doc_id | 标题      | N
         "level":"31",
         "description":null,
         "order_num":"1",
-        "content":"&lt;h1&gt;content&lt;\/h1&gt;...."
+        "content":"&lt;h1&gt;content&lt;\/h1&gt;....",
+        "files":[
+            {
+                "id":"53",
+                "doc_id":"166",
+                "raw_name":"11.doc",
+                "save_name":"543ffe738edb5.doc",
+                "save_path":"2014-10-17\/",
+                "ext":"doc",
+                "mime":"application\/msword",
+                "size":"25600",
+                "md5":"283ec47cb110888a841614d7952ae6f5",
+                "create_time":"1413480051"
+            },
+            ....
+        ]
     }
 }
 ```

@@ -102,11 +102,15 @@
                             <div id="drag-and-drop-zone" class="uploader">
                                 <input style="width:150px;" type="file" name="image2">
                                 <span>
-                                    <strong id="progress"></strong>
+                                     <strong style="color:red;">*</strong>
+                                    <strong >仅支持doc,docx,jpg,png,gif ,单文件最大为3M</strong>
+                                    <!-- <strong id="progress"></strong> -->
                                 </span>
                                 <br>
                                 <div id="fileList">
-
+                                    <foreach name="document.files" item="file">
+                                        <div><span>{$file['raw_name']}  已上传</span><a href="javascript:void(0);" style="margin-left: 10px;" name="btn-delete" data-id="{$file['id']}">删除</a><br></div>
+                                    </foreach>
                                 </div>
 
                             </div>
@@ -173,23 +177,31 @@ ue.ready(function() {
 <script type="text/javascript">
 (function($) {
     var doc_id = "{$document['id']}";
-    var file_ids = {}; //附件
+    var file_ids = {$file_ids} || {}; //附件 init..
+
 
     //更新文档附件
     function updateDocFiles() {
-
+        console.log('updateDocFiles');
+        console.log({
+            doc_id: doc_id,
+            file_ids: file_ids,
+        });
         $.post("{:U('home/document/updateDocFiles','','')}", {
             doc_id: doc_id,
             file_ids: file_ids,
         }, function(json) {
+            console.log("upload file result::");
+            console.log(json);
             if (json.code) {
-                alert('发布成功');
+                alert('操作成功');
                 setTimeout(function() {
                     location = "{:U('admin/index/postDocument')}";
-                }, 1000);
+                }, 500);
 
             } else {
-                alert(json.response);
+                console.log(json);
+                alert(json.msg);
             }
         });
     }
@@ -199,8 +211,6 @@ ue.ready(function() {
         var category_id = $('#select-category').val();
         var title = $('#text-title').val();
         var content = UE.getEditor('editor').getContent();
-        // doc_id = '{$document["id"]}';
-        // file_ids = {}; //附件
 
         var entity = {
             'title': title,
@@ -237,10 +247,8 @@ ue.ready(function() {
                 'doc_id': doc_id
             }, function(json) {
                 if (json.code) {
-                    alert('发布成功')
-                    setTimeout(function() {
-                        location = "/mz/index.php/admin/index/postDocument";
-                    }, 1000);
+                    updateDocFiles();
+                
                 } else {
                     alert(json.msg);
                 }
@@ -271,6 +279,7 @@ ue.ready(function() {
             if (json.code) {
                 $ele.parent().html('');
                 delete file_ids[file_id];
+                location = location;
             } else {
                 // json
                 alert('删除失败');
@@ -311,18 +320,18 @@ ue.ready(function() {
         },
         onUploadProgress: function(id, percent) {
             var percentStr = percent + '%';
-            $('#progress').text('上传进度: ' + percentStr);
+            // $('#progress').text('上传进度: ' + percentStr);
         },
         //上传文件成功
         onUploadSuccess: function(id, data) {
             add_log('Upload of file #' + id + ' completed');
 
-            // add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
+            add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
             if (data.code) {
                 add_file(add_file(data.response.raw_name, data.response.id));
                 file_ids[data.response.id] = data.response.id;
             } else {
-                alert(data.response);
+                alert(data.msg);
             }
         },
         onUploadError: function(id, message) {
@@ -345,9 +354,9 @@ ue.ready(function() {
     });
 
 
-    function init(){
+    function init() {
         // 栏目
-        $('#select-category').val({$document['category_id']});
+        $('#select-category').val(parseInt("{$document['category_id']}"));
     }
 
     init();

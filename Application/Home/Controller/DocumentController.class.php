@@ -158,6 +158,7 @@ class DocumentController extends BaseController {
      */
     public function updateDocFiles(){
         $this->reqPost(array('doc_id','file_ids'));
+      
         if(empty(I('post.file_ids'))){
             $this->ajaxReturn(mz_json_success("It's empty!"));
         }
