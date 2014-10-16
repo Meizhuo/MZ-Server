@@ -312,9 +312,6 @@ ue.ready(function() {
         onUploadProgress: function(id, percent) {
             var percentStr = percent + '%';
             $('#progress').text('上传进度: ' + percentStr);
-
-
-
         },
         //上传文件成功
         onUploadSuccess: function(id, data) {
@@ -348,7 +345,12 @@ ue.ready(function() {
     });
 
 
+    function init(){
+        // 栏目
+        $('#select-category').val({$document['category_id']});
+    }
 
+    init();
 })(jQuery);
 </script>
 

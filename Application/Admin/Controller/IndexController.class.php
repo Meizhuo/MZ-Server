@@ -4,7 +4,11 @@ use Common\Controller\BaseController;
 use Common\Model\UserAdminModel;
 use Common\Model\UserModel;
 use Common\Model\DocumentModel;
-
+/**
+ * 管理员页面控制
+ * @author Jayin
+ *
+ */
 class IndexController extends BaseController {
 
     private $admin = null;
