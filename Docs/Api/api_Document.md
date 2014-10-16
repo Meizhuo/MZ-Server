@@ -184,7 +184,19 @@ file| 需要上传的文件   | Y
 ```json
 {
     "code":20000,
-    "response"："upload successfully"
+    //上传附件信息
+    "response"：{
+        "id":"20",
+        "doc_id":"0",
+        "raw_name":"abc_menu_dropdown_panel_holo_dark.9.png",
+        "save_name":"543f7186c4cf5.png",
+        "save_path":"2014-10-16/",
+        "ext":"png",
+        "mime":"image/png",
+        "size":"1226",
+        "md5":"f25634dba4131278cd28b24ee991ceaa",
+        "create_time":"1413443974"
+    }
 }
 ```
 
