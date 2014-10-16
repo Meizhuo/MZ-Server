@@ -9,12 +9,13 @@
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
     <div id="logo">
-         <a href="{:U('admin/index/index')}">
+        <a href="{:U('admin/index/index')}">
             <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
         </a>
     </div>
@@ -101,10 +102,9 @@
                 </tr>
 
             </table>
-
-            <div class="tab_inp">
-                <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="width: 100px;"></input>
-                <input id="btn-unpass" data-id="{$ins['uid']}" class="reset" type="reset" value="审核不通过" style="width: 100px;"></input>
+            <div class="tab_inp" style="text-align:center;margin-top: 20px">
+                <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="height:40px;width: 100px;"></input>
+                <input id="btn-unpass" data-id="{$ins['uid']}" class="reset" type="reset" value="审核不通过" style="height:40px;;width: 100px;"></input>
             </div>
         </div>
     </div>
@@ -121,10 +121,10 @@
             function(json) {
                 console.log(json);
                 if (json.code) {
-                    alert('操作成功,确认后跳转。。');
-                    setTimeout(function(){
-                    	 location.href = '/mz/index.php/admin/index/checkInstitution';
-                    }, 1500);
+                    alert('操作成功');
+                    setTimeout(function() {
+                        location.href = '/mz/index.php/admin/index/checkInstitution';
+                    }, 1000);
                 } else {
                     alert('请求失败');
                 }
