@@ -56,7 +56,7 @@
                 <th>授课老师</th>
                 <th>费用</th>
                 <th>操作</th>
-            </tr>
+            </tr>]
 
             <foreach name="courses" item="course">
                 <tr>
@@ -64,7 +64,8 @@
                     <td>{$course['introduction']}</td>
                     <td>{$course['teacher']}</td>
                     <td>{$course['cost']}</td>
-                    <td><a href="/mz/index.php/admin/institution/postCourse/institution_id/{$course['id']}"> 编辑 </a>|<a href="#"> 删除 </a> 
+                    <td><a href="/mz/index.php/admin/institution/postCourse/institution_id/{$course['id']}"> 编辑 </a>
+                        |<a name="btn-delete" href="javascript:void(0);" data-id="{$course['id']}"> 删除 </a> 
                 </tr>
             </foreach>
         </table>
@@ -106,6 +107,24 @@
         location = url + (parseInt(cur_page) + 1);
     });
 
+    //删除课程
+    $('[name=btn-delete]').on('click',function(){
+        var $ele = $(this);
+        var course_id = $ele.data('id');
+        console.log(course_id);
+
+        $.post("{:U('home/course/delete')}",{
+            course_id : course_id,
+        },function(json){
+            console.log(json);
+                if(json.code){
+                    alert('删除成功');
+                    $ele.parent().parent().fadeOut();
+                }else{
+                    alert('删除失败');
+                }
+        });
+    });
 })(jQuery);
 </script>
 
