@@ -141,10 +141,11 @@ CREATE TABLE `mz_document_file` (
 DROP TABLE IF EXISTS `mz_document_category`;
 CREATE TABLE `mz_document_category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '分类id',
-  `name` varchar(32) NOT NULL COMMENT '种类名称',
+  `category` varchar(32) NOT NULL DEFAULT '' COMMENT '种类名称',
+  `name` varchar(32) NOT NULL COMMENT '子种类名称',
   `description` text COMMENT '描述',
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档种类/栏目' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='文档种类/栏目' AUTO_INCREMENT=1 ;
 
 -- 消息
 DROP TABLE IF EXISTS `mz_message`;
@@ -189,14 +190,14 @@ INSERT INTO `mz_appinfo` (`id`, `version_name`, `version_code`, `description`,`u
 -- 基本栏目
 --
 
-INSERT INTO `mz_document_category` (`category_id`, `name`, `description`) VALUES
-(1, '基本职能', '职业培训-基本职能'),
-(2, '法律法规及政策', '职业培训-法律法规及政策'),
-(3, '相关新闻', '职业培训-相关新闻'),
-(4, '通知信息', '职业培训-通知信息'),
-(5, '政策法规', '职业技术鉴定-政策法规'),
-(6, '办事指南', '职业技术鉴定-办事指南'),
-(7, '全国统考', '职业技术鉴定-全国统考');
+INSERT INTO `mz_document_category` (`category_id`, `name`, `description`, `category`) VALUES
+(1, '基本职能', '职业培训-基本职能', '职业培训'),
+(2, '法律法规及政策', '职业培训-法律法规及政策', '职业培训'),
+(3, '相关新闻', '职业培训-相关新闻', '职业培训'),
+(4, '通知信息', '职业培训-通知信息', '职业培训'),
+(5, '政策法规', '职业技术鉴定-政策法规', '职业技术鉴定'),
+(6, '办事指南', '职业技术鉴定-办事指南', '职业技术鉴定'),
+(7, '全国统考', '职业技术鉴定-全国统考', '职业技术鉴定');
 
 
 --
