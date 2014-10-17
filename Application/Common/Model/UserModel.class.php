@@ -66,8 +66,6 @@ class UserModel extends BaseModel {
     public function createInstution($uid){
         $user_person = $this->field(array('psw'),true)->where("uid=%d",$uid)->select();
         $user_person_info = M('UserInstitution')->where("uid=%d",$uid)->select();
-//         print_r($user_person);
-//         print_r($user_person_info);
         if($user_person && $user_person_info){
             $this->data(array_merge($user_person[0],$user_person_info[0]));
         }
@@ -154,7 +152,7 @@ class UserModel extends BaseModel {
             return $res;
         }
         $this->data['level'] = UserModel::LEVEL_INSTITUTION;
-        $this->data['status'] = UserModel::STATUS_PASS;
+        $this->data['status'] = UserModel::STATUS_NOT_VERTIFY;
         $this->data['psw'] = md5($this->data['psw']);
         $uid = $this->add();
         if ($uid) {
