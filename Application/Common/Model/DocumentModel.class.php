@@ -51,6 +51,8 @@ class DocumentModel extends BaseModel {
         $res = $this->_getResult();
     	if($this->create()){
     	    $this->data['uid'] = $uid;
+    	    //文档发布时，默认是等待审核的 
+    	    $this->data['status'] = DocumentModel::VERIFY_WAITING;
     	    //内容已经由前端过滤
     	    $this->data['content'] = I('post.content','','');
     	    $uid = $this->add();
