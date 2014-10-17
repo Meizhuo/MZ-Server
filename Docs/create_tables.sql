@@ -75,7 +75,10 @@ CREATE TABLE `mz_user_institution` (
   `training_scope` text COMMENT '培训范围',
   `description` text COMMENT '描述',
   `teacher_resource` text COMMENT '师资力量',
-   PRIMARY KEY (`uid`)
+  `contact_member` varchar(64) DEFAULT NULL COMMENT '联系人',
+  `contact_phone` varchar(64) DEFAULT NULL COMMENT '联系电话',
+  `contact_email` varchar(64) DEFAULT NULL COMMENT '联系邮箱',
+  PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训机构用户表';
 
 

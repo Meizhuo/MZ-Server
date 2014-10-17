@@ -21,6 +21,9 @@ validity_date |有效期(时间戳)  | N
 training_scope |培训范围 | N
 description |描述  | N
 teacher_resource |师资力量 | N
+contact_member  | 联系人 | N
+contact_phone  | 联系电话 | N
+contact_email  | 联系邮箱 | N
 
 
 
@@ -98,7 +101,10 @@ institution_id | 机构的id 	| Y
 	   "validity_date":"foo",
 	   "training_scope":"foo",
 	   "description":"foo",
-	   "teacher_resource":"foo"
+	   "teacher_resource":"foo",
+	   "contact_member" :"foo",
+	   "contact_phone" :"foo",
+	   "contact_email" :"foo",
 	}
 }
 ```
@@ -116,6 +122,9 @@ type  |办学类型 | N
 approval_number |批准文号 | N
 validity_date |有效期(时间戳)  | N
 training_scope |培训范围 | N
+contact_member  | 联系人 | N
+contact_phone  | 联系电话 | N
+contact_email  | 联系邮箱 | N
 
  **Response**  
 
@@ -173,7 +182,10 @@ page| 页码 默认1  | N
 		   "name":null,
 		   "address":null,
 		   "type":null,
-		   "description":null
+		   "description":null,
+	   	   "contact_member" :"foo",
+		   "contact_phone" :"foo",
+		   "contact_email" :"foo",
 		},
         .....
         { ...}
