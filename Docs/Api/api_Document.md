@@ -138,7 +138,7 @@ limit| 条目,默认10| N
             "level": "31",
             "description": null,
             "order_num": "1",
-            "content": "这是！content"
+            "content": "这是！content",
         }
     ]
 }
@@ -156,7 +156,8 @@ limit| 条目,默认10| N
     "response"："[
         {
             "category_id":123// 分类id
-            "name":"最新通知"// 种类名称
+            "category":"职业培训" //种类名称
+            "name":"最新通知"// 子种类名称
             "description":"hello world" // 描述 
 
         }
@@ -210,7 +211,8 @@ file| 需要上传的文件   | Y
         "mime":"image/png",
         "size":"1226",
         "md5":"f25634dba4131278cd28b24ee991ceaa",
-        "create_time":"1413443974"
+        "create_time":"1413443974",
+        "ins_id" : "0" 
     }
 }
 ```
@@ -239,7 +241,8 @@ doc_id | 文档的id   | Y
             "mime": "application/msword",
             "size": "25600",
             "md5": "283ec47cb110888a841614d7952ae6f5",
-            "create_time": "1412927478"
+            "create_time": "1412927478",
+            "ins_id":0;
         }
         ....
     ]
