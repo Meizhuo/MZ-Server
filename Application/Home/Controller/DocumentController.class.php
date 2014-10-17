@@ -131,6 +131,17 @@ class DocumentController extends BaseController {
             'exts'       =>  array('doc','docx','xls','jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
             'subName'    =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
         );
+        //创建新目录的同时创建index.html
+        $a = date('Y-m-d');
+        if(!file_exists($a)){
+            mkdir($a);
+            $filename  = $a.DIRECTORY_SEPARATOR."index.html";
+            $fp=fopen($filename , "w+"); //打开文件指针，创建文件
+            if ( !is_writable($filename) ){
+                die("文件:" .$filename. "不可写，请检查！");
+            }
+            fclose($fp);
+        }
         $upload = new \Think\Upload($config);// 实例化上传类
         // 上传文件
         $info   =   $upload->upload();
