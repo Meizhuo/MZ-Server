@@ -104,7 +104,21 @@ class DocumentModel extends BaseModel {
         $res_doc_files = D('DocumentFile')->getDocFiles($doc_id)['msg'];
         if ($res_docs) {
             $res['status'] = 1;
-            $res['msg'] = array_merge($res_docs[0],array('files'=>$res_doc_files));
+            $images = array();
+            $files = array();
+            
+            if(!empty($res_doc_files)){
+                foreach ($res_doc_files as $file){
+                    //不区分大小写判断
+                    if(stristr($file['mime'],'image')){
+                        $images[] = $file;
+                    }else{
+                        $files[] = $file;
+                    }
+                }
+            }
+          
+            $res['msg'] = array_merge($res_docs[0],array('files'=>$files),array('images' => $images));
             //浏览量统计
             $viewed_data['views'] = $res_docs[0]['views'] + 1;
             M('Document')->where("id=%d", $doc_id)->save($viewed_data);

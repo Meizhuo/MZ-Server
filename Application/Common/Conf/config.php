@@ -10,5 +10,6 @@ return array(
         'SHOW_PAGE_TRACE' => true, // 显示页面Trace信息
         'LOAD_EXT_FILE' => 'functions',//自定义加载函数文件
          ///////自定义参数
-         'UPLOAD_PATH' =>'./Uploads/' //上传路径
+         'UPLOAD_PATH' =>'./Uploads/', //上传路径
+          'UPLOAD_PATH_ABS' =>'/mz/Uploads/' //上传相对项目路径
 );

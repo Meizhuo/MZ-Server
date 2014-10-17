@@ -18,6 +18,9 @@ class IndexController extends BaseController {
     
     public function mytest(){
 //         print_r(json_encode(D('Document')->getDocumentInfo(166)));
-        print_r(D('DocumentFile')->linkToDoc(2,array(67,68)));
+//         print_r(D('DocumentFile')->linkToDoc(2,array(67,68)));
+//             print_r(D('DocumentCategory')->getCategoryById(1));
+        
+        print_r(D('Document')->getDocumentInfo(166));
     }
 }

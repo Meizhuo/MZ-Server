@@ -106,9 +106,28 @@ class IndexController extends BaseController {
     public function viewDocument($doc_id = 0) {
         // TODO MZ:: 处理没有找到该文章的情况
         // TODO MZ:: 处理禁止显示的情况
+        //document
         $res = D('Document')->getDocumentInfo($doc_id);
         $document = $res['msg'];
+        //category
+        $res = D('DocumentCategory')->getCategoryById($document['category_id']);
+        $category = $res['msg'];
+        //doc files
+        $res = D('DocumentFile')->getDocFiles($document['id'],'application');
+        $files = $res['msg'];
+        for($i=0;$i<count($files);$i++){
+            $files[$i]['url'] = mz_get_docfile_path($files[$i]['save_path'], $files[$i]['save_name']);
+        }
+        //image
+        $res = D('DocumentFile')->getDocFiles($document['id'],'image');
+        $images = $res['msg'];
+        for($i=0;$i<count($images);$i++){
+            $images[$i]['url'] = mz_get_docfile_path($images[$i]['save_path'], $images[$i]['save_name']);
+        }
         $this->assign('document', $document);
+        $this->assign('category', $category);
+        $this->assign('files', $files);
+        $this->assign('images', $images);
         $this->display();
     }
 

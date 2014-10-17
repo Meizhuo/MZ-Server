@@ -16,24 +16,48 @@
         <h1>{$document['title']}</h1>
     </div>
     <div class="xwxx">
-        <span>2014-10-10</span>
+        <span id="text-time">2014-10-10</span>&nbsp;
+        <span>栏目: {$category['category']}-{$category['name']}</span>
     </div>
     <div class="xwnr">
 
         {$document['content']}
         <br/>
         <div class="xwtp">
-            <img src="/mz/Public/images/1.jpg">
+            <foreach name="images" item="image">
+                <img src="{$image['url']}">
+            </foreach>
+
         </div>
         <br/>
-        <div class="fj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>附件下载：</span>
-            <span><a href="#">课程资料标题</a>
-            </span>
+        <div class="fj">
+            <notempty name="files">
+                <span>附件:</span>
+                <foreach name="files" item="file">
+                    <br>
+                    <span><a href="{$file['url']}">{$file['raw_name']}</a>
+                </foreach>
+            </notempty>
+
         </div>
     </div>
 
 
 </body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    function timeFormat() {
+            var millisec = parseInt("{$document['create_time']}") * 1000;
+            var date = new Date();
+            date.setTime(millisec);
+            var format_string = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            $('#text-time').text(format_string)
+        }
+        //格式化时间
+    timeFormat();
+})(jQuery);
+</script>
+
 
 </html>
