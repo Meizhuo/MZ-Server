@@ -119,12 +119,13 @@ CREATE TABLE  `mz_document` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='文档' AUTO_INCREMENT=1 ;
 
-
+-- doc_id 默认为0
 -- 文档附件
 DROP TABLE IF EXISTS `mz_document_file`;
 CREATE TABLE `mz_document_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '附件id',
-  `doc_id` int(11) NOT NULL COMMENT '对应的文档id',
+  `doc_id` int(11) NOT NULL DEFAULT '0' COMMENT '对应的文档id',
+  `ins_id` int(11) NOT NULL DEFAULT '0' COMMENT '对应的机构用户id',
   `raw_name` varchar(256) NOT NULL COMMENT '原始文件名',
   `save_name` varchar(256) NOT NULL COMMENT '保存的文件名',
   `save_path` varchar(512) NOT NULL COMMENT '文件保存路径',
@@ -134,7 +135,7 @@ CREATE TABLE `mz_document_file` (
   `md5` varchar(64) DEFAULT NULL COMMENT '文件md5',
   `create_time` int(11) NOT NULL COMMENT '上传时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文档附件' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='文档附件' AUTO_INCREMENT=1 ;
 
 
 -- 文档种类/栏目
