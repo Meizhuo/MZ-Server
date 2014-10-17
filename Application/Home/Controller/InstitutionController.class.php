@@ -2,7 +2,6 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserAdminModel;
-use Common\Model\UserInstitutionModel;
 use Common\Model\UserModel;
 
 /**
@@ -105,9 +104,11 @@ class InstitutionController extends BaseController {
 
     /**
      * 获取机构列表
-     * 
-     * @param unknown $page            
-     * @param unknown $limit            
+     * @param string $status
+     * @param string $name
+     * @param string $type
+     * @param number $page
+     * @param number $limit
      */
     public function search($status='',$name='',$type='',$page=1, $limit=10) {
         $res = D('UserInstitution')->search($status, $name, $type, $page, $limit);

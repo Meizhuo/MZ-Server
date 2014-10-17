@@ -84,12 +84,12 @@ class UserInstitutionModel extends BaseModel {
     }
     
     /**
-     * 模糊查询
-     * @param unknown $status
-     * @param unknown $name
-     * @param unknown $type
-     * @param number $page
-     * @param number $limit
+     * 模糊查询 
+     * @param unknown $status 机构状态
+     * @param unknown $name 机构名称
+     * @param unknown $type 机构类别 
+     * @param number $page 页码 默认1
+     * @param number $limit 返回数 默认10
      * @return unknown
      */
     public function search($status='', $name='', $type='', $page = 1, $limit = 10) {
@@ -109,7 +109,7 @@ class UserInstitutionModel extends BaseModel {
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
         $users_ins = M('User')->join('mz_user_institution ON mz_user.uid = mz_user_institution.uid')->where($map)
-            ->field( 'mz_user_institution.uid,nickname,phone,email,reg_time,level,status,name,address,type,description,manager')
+            ->field( 'mz_user_institution.uid,nickname,phone,email,reg_time,level,status,name,address,type,description,manager,contact_member,contact_phone,contact_email')
             ->limit(($page - 1) * $limit, $limit)
             ->select();
         if(!$users_ins){
