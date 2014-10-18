@@ -61,7 +61,7 @@ class InstitutionController extends BaseController {
 
     	$uid = session('uid');
     	$data['uid'] = session('uid');
-    	$res = D('User')->updateInsInfo(array_merge($data,I('post.')));
+        $res = D('UserInstitution')->updateInfo(array_merge($data,I('post.')));
     	if($res['status']){
     	    $this->ajaxReturn(mz_json_success('update info success'));
     	}else{

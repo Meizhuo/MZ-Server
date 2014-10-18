@@ -55,6 +55,8 @@ class UserInstitutionModel extends BaseModel {
     public function updateInfo($data){
         $res = $this->_getResult();
         if($this->create($data)){
+            //机构描述采用html格式
+            $this->data['description'] = I('post.description','','');
             // 除了uid还有更新其他项,那么更新，不然会报SQL错误
             if(count($this->data)>1){
                 $this->save();

@@ -53,7 +53,7 @@
         <div id="cat_wr">
             <table style="width:100%; border:0">
                 <tr>
-                    <td width="50">
+                    <td width="80">
                         <div align="right">机构名称</div>
                     </td>
                     <td width="400">
@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">机构负责人</div>
+                        <div align="right">负责人</div>
                     </td>
                     <td>
                         <input id="text-manager" type="text" class="inp" style="height:100%;width:100%;" value="">
@@ -117,6 +117,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <div align="right">描述</div>
+                    </td>
+
+                    <td height="400">
+                         <script id="editor" type="text/plain" style="height:100%;width:900px;margin:10px;"></script>
+                    </td>
+                </tr>
+                <tr>
                     <td></td>
                     <td>
                         <input id="btn-submit" class="submit" value="发布" type="submit">
@@ -127,6 +136,36 @@
     </div>
 
 </body>
+<!-- UEditor START-->
+<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/ueditor.all.js">
+</script>
+<script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- UEditor end-->
+
+<script type="text/javascript">
+var initContent = '';
+
+//实例化编辑器
+//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+var ue = UE.getEditor('editor', {
+    toolbars: [
+        ['fullscreen', 'undo', 'redo', 'bold']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    enableAutoSave: false,
+    saveInterval: 2000000000,
+    enableContextMenu: false, //打开右键菜单功能
+    initialContent: '', //初始化编辑器的内容
+    initialFrameWidth: 800,
+});
+
+ue.ready(function() {
+    ue.setContent(initContent);
+});
+</script>
+
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
@@ -159,7 +198,8 @@
         var training_scope = $('#text-training_scope').val();
         var manager = $('#text-manager').val();
         var validity_date = $('#text-validity_date').val();
-        var description = $('#text-description').val();
+        // var description = $('#text-description').val();
+        var description =  UE.getEditor('editor').getContent();
 
         var post_data = {};
         insert(post_data, 'uid', uid);

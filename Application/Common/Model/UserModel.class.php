@@ -14,7 +14,8 @@ class UserModel extends BaseModel {
 
     /**  用人单位*/
     const LEVEL_EMPLOYER = 2;
-    /** 培训机构用户 */
+
+    /** 培训机构用户 */
     const LEVEL_INSTITUTION = 4;
 
     /**  管理员 */
