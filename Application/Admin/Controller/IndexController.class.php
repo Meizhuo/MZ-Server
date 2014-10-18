@@ -163,7 +163,9 @@ class IndexController extends BaseController {
         $this->assign('ins',$ins);
         $this->display();
     }
-    
+    /**
+     * 广告管理
+     */
     public function advertisements(){
         $this->reqAdmin();
         

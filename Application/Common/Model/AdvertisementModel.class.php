@@ -34,7 +34,14 @@ class AdvertisementModel extends BaseModel {
                     self::MODEL_INSERT
             )
     );
-
+    /**
+     * 发布一条广告
+     * @param unknown $description
+     * @param unknown $url
+     * @param unknown $pic_url
+     * @param unknown $display
+     * @return Ambigous <string, multitype:number string >
+     */
     public function post($description, $url, $pic_url, 
             $display = self::STATUS_UNDISPLAY) {
         $res = $this->_getResult();
@@ -54,7 +61,11 @@ class AdvertisementModel extends BaseModel {
         }
         return $res;
     }
-    // most is 5
+    /**
+     * 获得当前的广告，最多5个
+     * @param number $limit
+     * @return Ambigous <multitype:, number, multitype:number string >
+     */
     public function getCurrent($limit = 5) {
         $res = $this->_getResult();
         $res['msg'] = $this->where("display='%s'", self::STATUS_DISPLAY)
@@ -68,7 +79,11 @@ class AdvertisementModel extends BaseModel {
         }
         return $res;
     }
-
+    /**
+     * 显示一个广告
+     * @param unknown $ad_id
+     * @return Ambigous <number, string>
+     */
     public function displayAd($ad_id) {
         $res = $this->_getResult();
         $data['id'] = $ad_id;
@@ -80,7 +95,11 @@ class AdvertisementModel extends BaseModel {
         }
         return $res;
     }
-
+    /**
+     * 不显示一广告
+     * @param unknown $ad_id
+     * @return Ambigous <number, string, multitype:number string >
+     */
     public function unDisplayAd($ad_id) {
         $res = $this->_getResult();
         $data['id'] = $ad_id;
@@ -92,7 +111,11 @@ class AdvertisementModel extends BaseModel {
         }
         return $res;
     }
-
+    /**
+     * 删除一广告
+     * @param unknown $ad_id
+     * @return Ambigous <number, multitype:number string >
+     */
     public function deleteAd($ad_id) {
         $res = $this->_getResult();
         if($this->where("id='%s'", $ad_id)->delete() >=0){
@@ -100,7 +123,11 @@ class AdvertisementModel extends BaseModel {
         }
         return $res;
     }
-    
+    /**
+     * 查找
+     * @param unknown $display
+     * @return multitype:number string
+     */
     public function search($display=self::STATUS_UNDISPLAY){
         $res = $this->_getResult();
         $map['display'] = $display;
@@ -111,7 +138,11 @@ class AdvertisementModel extends BaseModel {
         $res['status'] =1;
         return $res;
     }
-
+    /**
+     * 根据文档创建广告
+     * @param unknown $doc_id
+     * @return Ambigous <string, multitype:number string >
+     */
     public function createByDoc($doc_id) {
         $data = array();
         $res = $this->_getResult();
