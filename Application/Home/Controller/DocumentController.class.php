@@ -132,7 +132,7 @@ class DocumentController extends BaseController {
             'subName'    =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
         );
         //创建新目录的同时创建index.html
-        $a = date('Y-m-d');
+        $a = C('UPLOAD_PATH').date('Y-m-d');
         if(!file_exists($a)){
             mkdir($a);
             $filename  = $a.DIRECTORY_SEPARATOR."index.html";
