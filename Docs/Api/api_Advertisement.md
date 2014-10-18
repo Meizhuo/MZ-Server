@@ -111,3 +111,22 @@ ad_id | 广告id  | Y
     "response"："operate successfully";
 }
 ```
+
+
+## 根据文档创建广告
+`POST /home/ad/createByDoc` 
+
+**NOTE:文档必须要有图片**
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+doc_id| 文档id   | Y
+
+**Response**  
+
+```json
+{
+    "code":20000,
+    "response"："operate successfully"
+}
+```

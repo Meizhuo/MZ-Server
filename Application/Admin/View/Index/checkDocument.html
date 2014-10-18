@@ -203,7 +203,19 @@
     });
 
     //添加至广告
-    $('#btn-addAd').on('click', function() {});
+    $('[name=btn-addAd]').on('click', function() {
+        var $ele = $(this);
+        var doc_id = $ele.data('id');
+        $.post("{:U('home/ad/createByDoc','','')}",{
+            doc_id:doc_id,
+        },function(json){
+            if(json.code){
+                alert('添加广告成功');
+            }else{
+                alert(json.msg);
+            }
+        })
+    });
 
 })(jQuery);
 </script>

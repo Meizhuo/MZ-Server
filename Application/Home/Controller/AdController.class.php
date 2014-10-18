@@ -63,5 +63,17 @@ class AdController extends BaseController {
         $this->ajaxReturn(mz_json_error($res['msg']));
     }
     
+    public function createByDoc(){
+        $this->reqPost(array('doc_id'))->reqAdmin();
+        
+        $res = (new AdvertisementModel())->createByDoc(I('post.doc_id'));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+        
+    }
+    
 }
 

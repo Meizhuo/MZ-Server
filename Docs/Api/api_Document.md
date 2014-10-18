@@ -267,8 +267,7 @@ file_id| 文档id   | Y
 }
 ```
 
-查看文档的网页版
-===
+## 查看文档的网页版
 `GET /admin/index/viewDocument`
 
 字段  |描述 |  是否必须 
@@ -278,6 +277,3 @@ doc_id| 文档id   | Y
 **Response**  
 
 html 网页
-
-
-
