@@ -174,7 +174,7 @@ class DocumentController extends BaseController {
             $this->ajaxReturn(mz_json_success("It's empty!"));
         }
         $arr_file_ids = array()  ;
-        foreach (I('post.file_ids') as $v){
+        foreach (I('post.file_ids')as $v){
             $arr_file_ids[] = $v;
         }
         $res = D('DocumentFile')->linkToDoc(I('doc_id'),$arr_file_ids);

@@ -162,6 +162,49 @@
         location = url_tpl.replace('{cur_category}', $('#select-category').val()).replace('{cur_page}', page_next).replace('{checked}', checked);
     });
 
+    //审核通过
+    $('[name=vertify-pass]').on('click', function() {
+        var $ele = $(this);
+        var doc_id = $ele.data('id');
+        var op = 1;
+        $.post("{:U('/home/document/vertify')}", {
+            doc_id: doc_id,
+            op: op
+        }, function(json) {
+            console.log(json);
+            if (json.code) {
+                alert("操作成功");
+                $ele.parent().parent().parent().fadeOut();
+            } else {
+                alert('操作失败');
+                console.log(json.msg);
+            }
+        });
+    });
+
+    //审核不通过
+    $('[name=vertify-unpass]').on('click', function() {
+        var $ele = $(this);
+        var doc_id = $ele.data('id');
+        var op = -1;
+        $.post("{:U('/home/document/vertify')}", {
+            doc_id: doc_id,
+            op: op
+        }, function(json) {
+            console.log(json);
+            if (json.code) {
+                alert("操作成功");
+                $ele.parent().parent().parent().fadeOut();
+            } else {
+                alert('操作失败');
+                console.log(json.msg);
+            }
+        });
+    });
+
+    //添加至广告
+    $('#btn-addAd').on('click', function() {});
+
 })(jQuery);
 </script>
 

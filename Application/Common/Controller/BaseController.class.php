@@ -32,7 +32,8 @@ class BaseController extends Controller {
         }
         if ($require_data) {
             foreach ($require_data as $key) {
-                if (! I('post.' . $key)) {
+                $_k = I('post.' . $key);
+                if (!isset($_k)) {
                     $this->ajaxReturn(mz_json_error("require params: " . $key));
                 }
             }

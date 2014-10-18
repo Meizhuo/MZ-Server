@@ -82,6 +82,8 @@ class DocumentModel extends BaseModel {
     	        $this->data['update_time'] = NOW_TIME;
     	        //更新的时候也不过滤
     	        $this->data['content'] = I('post.content','','');
+    	        //更新后应该变为待审核
+    	        $this->data['status'] = self::VERIFY_WAITING;
     	        $this->save();
     	        $res['status'] = 1;
     	    }
@@ -133,10 +135,16 @@ class DocumentModel extends BaseModel {
     * @param number $operate 1为通过审核 0为审核不通过 默认为1
     */
     public function verify($doc_id,$operate=self::VERiFY_PASS){
+        $res = $this->_getResult();
     	$data = array();
     	$data['id'] = $doc_id ;
     	$data['status'] = $operate;
-    	return $this->updateDocument($doc_id,$data);
+    	if($this->save($data)>=0){
+    	    $res['status'] = 1;
+    	}else{
+    	    $res['msg'] = 'System Error: not able to update';
+    	}
+    	return $res;
     }
     
     public function hasPermission(){

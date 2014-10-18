@@ -185,6 +185,7 @@ ue.ready(function() {
         console.log('updateDocFiles');
         console.log({
             doc_id: doc_id,
+            // file_ids: JSON.stringify(file_ids),
             file_ids: file_ids,
         });
         $.post("{:U('home/document/updateDocFiles','','')}", {
