@@ -63,20 +63,34 @@ class IndexController extends BaseController {
         
         $this->display();
     }
-
-    public function checkInstitution($page = 1) {
+    /**
+     * 审核机构页面
+     * @param number $checked -1审核未通过 0待审核 1已审核
+     * @param number $page 页码
+     */
+    public function checkInstitution($checked = 0,$page = 1) {
         $this->reqAdmin();
-        // TODO MZ::改为watting
-        $res = D('UserInstitution')->search(UserModel::STATUS_PASS,null,null,$page);
+        //默认为等待审核
+        if($checked !== 0 && $checked !== 1 && $checked !== -1){
+            $checked = 0;
+        }
+        $res = D('UserInstitution')->search($checked,null,null,$page);
         $institutions = $res['msg'];
         $this->assign('institutions', $institutions);
         $this->assign('page',$page);
         $this->display();
     }
-
-    public function checkDocument($categoryId = 1,$page = 1) {
+    /**
+     * 审核文档页面
+     * @param number $checked -1审核未通过 0待审核 1已审核
+     * @param number $categoryId 文档目录id
+     * @param number $page 页码
+     */
+    public function checkDocument($checked=0,$categoryId = 1,$page = 1) {
         // TODO MZ:: 注意文档状态
         $this->reqAdmin();
+        print_r($checked);
+        print_r($categoryId);
         $res = D('Document')->search($categoryId, null, null, 
                 DocumentModel::VERIFY_WAITING,$page);
         $documents = $res['msg'];
@@ -136,6 +150,10 @@ class IndexController extends BaseController {
         $res = D('User')->getInsInfo($institutionId);
         $ins = $res['msg'];
         $this->assign('ins',$ins);
+        $this->display();
+    }
+    
+    public function advertisements(){
         $this->display();
     }
 }
