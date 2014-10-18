@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
-     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" /> 
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -24,37 +24,32 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="/mz/index.php/admin/index/postDocument" onclick="DoMenu('ChildMenu1')">发布信息</a>
-                </li>
-                <li><a href="#Menu=ChildMenu2" onClick="DoMenu('ChildMenu2')">审核资料</a>
-                    <ul id="ChildMenu2" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkInstitution">培训机构</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">审核信息</a>
-                    <ul id="ChildMenu3" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/1">基本职能</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/2">法律法规及政策</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/3">相关新闻</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/4">通知信息</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/5">政策法规</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/6">办事指南</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/7">全国统考</a>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="{:U('admin/index/postDocument')}" onclick="DoMenu('ChildMenu1')">发布文档</a>
+                    <li><a href="{:U('admin/index/advertisements')}" onclick="DoMenu('ChildMenu2')">广告设置</a>
+                    </li>
+                    <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">机构管理</a>
+                        <ul id="ChildMenu3" class="collapsed">
+                            <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#Menu=ChildMenu4" onClick="DoMenu('ChildMenu4')">文档信息管理</a>
+                        <ul id="ChildMenu4" class="collapsed">
+                            <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
             </ul>
         </div>
-
     </div>
-
 
 
     <div id="topbar">
@@ -64,76 +59,58 @@
 
     <!--下面只是说明与程序代码无关-->
     <div id="include" style="width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
-<div class="ht"><h1>已上架广告</h1></div>
-<div id="ins_form">
-<table width="800px;">
-  <tr>
-    <th>广告图片</th>
-    <th>广告描述</th>
-    <th>操作</th>
-  </tr>
-  <tr>
-    <td width="30%"><img src="images/ad.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 下架 </a>|<a href=""> 删除广告</a></td>
-  </tr>
-  <tr>
-    <td width="30%"><img src="images/1.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 下架 </a>|<a href=""> 删除广告</a></td>
-  <tr>
-    <td width="30%"><img src="images/ad1.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 下架 </a>|<a href=""> 删除广告</a></td>
-  <tr>
-    <td width="30%"><img src="images/ad2.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 下架 </a>|<a href=""> 删除广告</a></td>
-  <tr>
-    <td width="30%"><img src="images/ad1.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 下架 </a>|<a href=""> 删除广告</a></td>
-</table>
-</div>
+        <div class="ht">
+            <h1>已上架广告</h1>
+
+        </div>
+        <div style="margin-left: 4px;">
+            <span style="color:red;">*</span>
+            <span>最多前显示5条广告</span>
+        </div>
+        <div id="ins_form">
+            <table width="800px;">
+                <tr>
+                    <th>广告图片</th>
+                    <th>广告描述</th>
+                    <th>操作</th>
+                </tr>
+                <foreach name="ad_display" item="ad">
+                    <tr>
+                        <td style="width:40%;max-width: 45%">
+                            <img src="{$ad['pic_url']}" width="50%" height="30%">
+                        </td>
+                        <td>{$ad['description']}</td>
+                        <td><a name="btn-undisplay" href="javascript:void(0);" data-id="{$ad['id']}"> 下架 </a>|<a name="btn-delete" href="javascript:void(0);" data-id="{$ad['id']}"> 删除广告</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
 
 
 
-<div class="ht" style="margin-top:50px;"><h1>未上架广告</h1></div>
-<div id="ins_form">
-<table width="800px;">
-  <tr>
-    <th>广告图片</th>
-    <th>广告描述</th>
-    <th>操作</th>
-  </tr>
-  <tr>
-    <td width="30%"><img src="images/ad.jpg" width="50%" height="50%"></td>
-    <td>东莞市职业训练指导中心手机APP及维护平台</td>
-    <td><a href="#"> 上架 </a>|<a href=""> 删除广告</a></td>
-  </tr>
-  <tr>
-    <td width="30%"><img src="images/1.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 上架 </a>|<a href=""> 删除广告</a></td>
-  </tr>
-  <tr>
-    <td width="30%"><img src="images/ad.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 上架 </a>|<a href=""> 删除广告</a></td>
-  <tr>
-    <td width="30%"><img src="images/ad.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 上架 </a>|<a href=""> 删除广告</a></td>
-  <tr>
-    <td width="30%"><img src="images/ad.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 上架 </a>|<a href=""> 删除广告</a></td>
-  <tr>
-    <td width="30%"><img src="images/ad.jpg" width="50%" height="50%"></td>
-    <td>职业技术培训及职业技术鉴定的相关流程</td>
-    <td><a href="#"> 上架 </a>|<a href=""> 删除广告</a></td>
-</table>
-</div>
+        <div class="ht" style="margin-top:50px;">
+            <h1>未上架广告</h1>
+        </div>
+        <div id="ins_form">
+            <table width="800px;">
+                <tr>
+                    <th>广告图片</th>
+                    <th>广告描述</th>
+                    <th>操作</th>
+                </tr>
+                <foreach name="ad_undisplay" item="ad">
+                    <tr>
+                        <td style="width:40%;max-width: 45%">
+                            <img src="{$ad['pic_url']}" width="50%" height="30%">
+                        </td>
+                        <td>{$ad['description']}</td>
+                        <td><a name="btn-display" href="javascript:void(0);" data-id="{$ad['id']}"> 上架 </a>|<a name="btn-delete" href="javascript:void(0);" data-id="{$ad['id']}"> 删除广告</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
 
     </div>
 
@@ -152,19 +129,57 @@
             }
         });
     });
-    //翻页
-    var cur_page = "{$page}";
-    var cur_category ="{$categoryId}";
-    var url = "{:U('admin/index/checkDocument','','')}" + "/categoryId/"+cur_category+'/page/';
-
-    //前一页
-    $('#btn-pre').on('click',function(){
-        location = url+(parseInt(cur_page)-1);
+    //上架
+    $('[name=btn-undisplay').on('click', function() {
+        $ele = $(this);
+        var ad_id = $ele.data('id');
+        $.post("{:U('home/ad/undisplayAd')}", {
+            ad_id: ad_id,
+        }, function(json) {
+            if (json.code) {
+                alert('操作成功');
+                setTimeout(function() {
+                    location = location.href;
+                }, 500);
+            } else {
+                alert(json.msg);
+            }
+        });
     });
-
-     //后一页
-    $('#btn-next').on('click',function(){
-        location =url+(parseInt(cur_page)+1);
+    //下架
+    $('[name=btn-display').on('click', function() {
+        $ele = $(this);
+        var ad_id = $ele.data('id');
+        $.post("{:U('home/ad/diplayAd')}", {
+            ad_id: ad_id,
+        }, function(json) {
+            if (json.code) {
+                alert('操作成功');
+                setTimeout(function() {
+                    location = location.href;
+                }, 500);
+            } else {
+                alert(json.msg);
+            }
+        });
+    });
+    //删除
+    $('[name=btn-delete').on('click', function() {
+        $ele = $(this);
+        var ad_id = $ele.data('id');
+        $.post("{:U('home/ad/delete')}", {
+            ad_id: ad_id,
+        }, function(json) {
+            console.log(json);
+            if (json.code) {
+                alert('操作成功');
+                setTimeout(function() {
+                    location = location.href;
+                }, 500);
+            } else {
+                alert(json.msg);
+            }
+        });
     });
 
 })(jQuery);

@@ -94,7 +94,22 @@ class AdvertisementModel extends BaseModel {
     }
 
     public function deleteAd($ad_id) {
-        $this->where("id='%s'", $ad_id)->delete();
+        $res = $this->_getResult();
+        if($this->where("id='%s'", $ad_id)->delete() >=0){
+            $res['status'] = 1;   
+        }
+        return $res;
+    }
+    
+    public function search($display=self::STATUS_UNDISPLAY){
+        $res = $this->_getResult();
+        $map['display'] = $display;
+        $res['msg'] = $this->where($map)->select();
+        if(empty($res['msg'])){
+            $res['msg'] = array();
+        }
+        $res['status'] =1;
+        return $res;
     }
 
     public function createByDoc($doc_id) {
@@ -103,10 +118,11 @@ class AdvertisementModel extends BaseModel {
         $doc = (new DocumentModel())->getDocumentInfo($doc_id);
         $doc_img_files = (new DocumentFileModel())->getDocFiles($doc_id, 
                 'image');
+
         if ($doc) {
             // 至少有1图片附件
             if ($doc_img_files['status'] && count($doc_img_files['msg'])>0) {
-                $data['description'] = $doc['title'];
+                $data['description'] = $doc['msg']['title'];
                 $data['url'] = 'http://' . $_SERVER['HTTP_HOST'] .U('admin/index/viewDocument', 
                         array('doc_id' => $doc_id));
                 $data['pic_url'] = 'http://' . $_SERVER['HTTP_HOST'] .

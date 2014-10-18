@@ -3,6 +3,7 @@ namespace Admin\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserAdminModel;
 use Common\Model\DocumentModel;
+use Common\Model\AdvertisementModel;
 /**
  * 管理员页面控制
  * @author Jayin
@@ -164,6 +165,14 @@ class IndexController extends BaseController {
     }
     
     public function advertisements(){
+        $this->reqAdmin();
+        
+        $ad_model = new AdvertisementModel();
+        $ad_display = $ad_model->search(AdvertisementModel::STATUS_DISPLAY);
+        $ad_undisplay = $ad_model->search(AdvertisementModel::STATUS_UNDISPLAY);
+        
+        $this->assign('ad_display',$ad_display['msg']);
+        $this->assign('ad_undisplay',$ad_undisplay['msg']);
         $this->display();
     }
 }
