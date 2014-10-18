@@ -71,7 +71,7 @@ CREATE TABLE `mz_user_institution` (
   `manager` varchar(128) DEFAULT NULL COMMENT '机构负责人 ',
   `type` varchar(128) DEFAULT NULL COMMENT '办学类型',
   `approval_number` varchar(256) DEFAULT NULL COMMENT '批准文号',
-  `validity_date` varchar(32) DEFAULT NULL COMMENT '有效期',
+  `validity_date` int(11) DEFAULT NULL COMMENT '有效期 ',
   `training_scope` text COMMENT '培训范围',
   `description` text COMMENT '描述',
   `teacher_resource` text COMMENT '师资力量',

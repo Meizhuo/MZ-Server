@@ -120,7 +120,7 @@ address |机构地址 | N
 manager |机构负责人 | N
 type  |办学类型 | N
 approval_number |批准文号 | N
-validity_date |有效期(时间戳)  | N
+validity_date |有效期  | N
 training_scope |培训范围 | N
 contact_member  | 联系人 | N
 contact_phone  | 联系电话 | N
