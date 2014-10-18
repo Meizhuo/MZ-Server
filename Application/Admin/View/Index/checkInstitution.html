@@ -21,38 +21,32 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="/mz/index.php/admin/index/postDocument" onclick="DoMenu('ChildMenu1')">发布信息</a>
-                </li>
-                <li><a href="#Menu=ChildMenu2" onClick="DoMenu('ChildMenu2')">审核资料</a>
-                    <ul id="ChildMenu2" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkInstitution">培训机构</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">审核信息</a>
-                    <ul id="ChildMenu3" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/1">基本职能</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/2">法律法规及政策</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/3">相关新闻</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/4">通知信息</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/5">政策法规</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/6">办事指南</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/7">全国统考</a>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="{:U('admin/index/postDocument')}" onclick="DoMenu('ChildMenu1')">发布文档</a>
+                    <li><a href="{:U('admin/index/advertisements')}" onclick="DoMenu('ChildMenu2')">广告设置</a>
+                    </li>
+                    <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">机构管理</a>
+                        <ul id="ChildMenu3" class="collapsed">
+                            <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#Menu=ChildMenu4" onClick="DoMenu('ChildMenu4')">文档信息管理</a>
+                        <ul id="ChildMenu4" class="collapsed">
+                            <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
             </ul>
         </div>
-
     </div>
-
-
 
     <div id="topbar">
         <span>欢迎 {$admin['nickname']}</span>
@@ -71,6 +65,7 @@
                     <th>办学类型</th>
                     <th>地址</th>
                     <th>联系人</th>
+                    <th>审核状态</th>
                     <th>操作</th>
                 </tr>
                 <foreach name="institutions" item="ins">
@@ -80,14 +75,24 @@
                         <td>{$ins['address']}</td>
                         <td>{$ins['manager']}</td>
                         <td>
-                            <span><a href="/mz/index.php/admin/index/viewInstitution/institutionId/{$ins['uid']}">查看</a> | <a name="vertify-pass" href="javascript:void(0);" data-id="{$ins['uid']}">通过审核</a>
+                            <if condition="$ins['status'] eq 0 ">
+                                   未审核
+                                <elseif condition="$ins['status'] eq 1" />
+                                   已通过
+                                <else />
+                                   未通过
+                            </if>
+
+                        </td>
+                        <td>
+                            <span><a href="/mz/index.php/admin/index/viewInstitution/institutionId/{$ins['uid']}">查看</a>
                             </span>
                         </td>
                     </tr>
                 </foreach>
             </table>
-              <div class="syxy">
-                <button id="btn-pre" class="submit" >上一页</button>
+            <div class="syxy">
+                <button id="btn-pre" class="submit">上一页</button>
                 <button id="btn-next" class="submit">下一页</button>
             </div>
         </div>
@@ -109,37 +114,18 @@
             }
         });
     });
-    //审核通过
-    $('[name=vertify-pass]').on('click', function() {
-        var btn = $(this);
-        var institution_id = btn.data('id');
-        $.post('/mz/index.php/home/institution/vertify', {
-                'institution_id': institution_id
-            },
-
-            function(json) {
-                if (json.code) {
-                    btn.text('审核已通过!');
-                    setTimeout(function() {
-                        btn.parent().parent().parent().fadeOut();
-                    }, 1000);
-                } else {
-                    alert('请求失败');
-                }
-            });
-    });
     //分页
     var cur_page = "{$page}";
-    var url = "{:U('admin/index/checkInstitution','','')}" + '/page/';
+    var url = "{:U('admin/index/checkInstitution','','')}" +'/checked/'+parseInt("{$checked}") +'/page/';
 
     //前一页
-    $('#btn-pre').on('click',function(){
-        location = url+(parseInt(cur_page)-1);
+    $('#btn-pre').on('click', function() {
+        location = url + (parseInt(cur_page) - 1);
     });
 
-     //后一页
-    $('#btn-next').on('click',function(){
-        location =url+(parseInt(cur_page)+1);
+    //后一页
+    $('#btn-next').on('click', function() {
+        location = url + (parseInt(cur_page) + 1);
     });
 
 })(jQuery);

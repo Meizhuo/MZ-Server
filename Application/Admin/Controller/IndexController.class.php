@@ -2,7 +2,6 @@
 namespace Admin\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserAdminModel;
-use Common\Model\UserModel;
 use Common\Model\DocumentModel;
 /**
  * 管理员页面控制
@@ -70,13 +69,15 @@ class IndexController extends BaseController {
      */
     public function checkInstitution($checked = 0,$page = 1) {
         $this->reqAdmin();
+        
         //默认为等待审核
-        if($checked !== 0 && $checked !== 1 && $checked !== -1){
+        if($checked != 0 && $checked != 1 && $checked != -1){
             $checked = 0;
         }
         $res = D('UserInstitution')->search($checked,null,null,$page);
         $institutions = $res['msg'];
         $this->assign('institutions', $institutions);
+        $this->assign('checked',$checked);
         $this->assign('page',$page);
         $this->display();
     }
