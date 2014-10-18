@@ -67,7 +67,7 @@
         <div id="ins_form">
             <table>
                 <tr>
-                    <th style="width:450px;padding: 4px">标题</th>
+                    <th style="width:50%;padding: 4px">标题</th>
                     <th>发布时间</th>
                     <th>发布人</th>
                     <th>审核人</th>
@@ -76,7 +76,7 @@
 
                 <foreach name="documents" item="doc">
                     <tr>
-                        <td>{$doc['title']}</td>
+                        <td style="text-align:left;padding-left:15px;padding-right:15px;">{$doc['title']}</td>
                         <td>{$doc['create_time']}</td>
                         <td></td>
                         <td></td>

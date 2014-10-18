@@ -41,3 +41,6 @@ table td, table th {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+#cat_wr td span{
+    color: red;
+}
