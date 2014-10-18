@@ -9,7 +9,7 @@
     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
 
-   
+
 
 </head>
 
@@ -23,35 +23,31 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="/mz/index.php/admin/index/postDocument" onclick="DoMenu('ChildMenu1')">发布信息</a>
-                </li>
-                <li><a href="#Menu=ChildMenu2" onClick="DoMenu('ChildMenu2')">审核资料</a>
-                    <ul id="ChildMenu2" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkInstitution">培训机构</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">审核信息</a>
-                    <ul id="ChildMenu3" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/1">基本职能</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/2">法律法规及政策</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/3">相关新闻</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/4">通知信息</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/5">政策法规</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/6">办事指南</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/7">全国统考</a>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="{:U('admin/index/postDocument')}" onclick="DoMenu('ChildMenu1')">发布文档</a>
+                    <li><a href="{:U('admin/index/advertisements')}" onclick="DoMenu('ChildMenu2')">广告设置</a>
+                    </li>
+                    <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">机构管理</a>
+                        <ul id="ChildMenu3" class="collapsed">
+                            <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#Menu=ChildMenu4" onClick="DoMenu('ChildMenu4')">文档信息管理</a>
+                        <ul id="ChildMenu4" class="collapsed">
+                            <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
             </ul>
         </div>
-
     </div>
 
     <div id="topbar">
@@ -102,14 +98,17 @@
                             <div id="drag-and-drop-zone" class="uploader">
                                 <input style="width:150px;" type="file" name="image2">
                                 <span>
-                                     <strong style="color:red;">*</strong>
-                                    <strong >仅支持doc,docx,jpg,png,gif ,单文件最大为3M</strong>
+                                    <strong style="color:red;">*</strong>
+                                    <strong>仅支持doc,docx,jpg,png,gif ,单文件最大为3M</strong>
                                     <!-- <strong id="progress"></strong> -->
                                 </span>
                                 <br>
                                 <div id="fileList">
                                     <foreach name="document.files" item="file">
-                                        <div><span>{$file['raw_name']}  已上传</span><a href="javascript:void(0);" style="margin-left: 10px;" name="btn-delete" data-id="{$file['id']}">删除</a><br></div>
+                                        <div>
+                                            <span>{$file['raw_name']} 已上传</span><a href="javascript:void(0);" style="margin-left: 10px;" name="btn-delete" data-id="{$file['id']}">删除</a>
+                                            <br>
+                                        </div>
                                     </foreach>
                                 </div>
 
@@ -146,7 +145,7 @@
 <script type="text/javascript" charset="utf-8" src="/mz/Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
 <!-- UEditor end-->
 
- <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+<script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
 <script type="text/javascript">
 var initContent = '{$document["content"]}';
 
@@ -177,7 +176,9 @@ ue.ready(function() {
 <script type="text/javascript">
 (function($) {
     var doc_id = "{$document['id']}";
-    var file_ids = {$file_ids} || {}; //附件 init..
+    var file_ids = {
+        $file_ids
+    } || {}; //附件 init..
 
 
     //更新文档附件
@@ -249,7 +250,7 @@ ue.ready(function() {
             }, function(json) {
                 if (json.code) {
                     updateDocFiles();
-                
+
                 } else {
                     alert(json.msg);
                 }
