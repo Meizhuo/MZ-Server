@@ -176,7 +176,20 @@ CREATE TABLE `mz_appinfo` (
   `url` varchar(4096) COMMENT '链接',
   `need_update` int(1) COMMENT '是否强制更新(0否 1是)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- 广告
+-- 
+DROP TABLE IF EXISTS  `mz_advertisement`;
+CREATE TABLE `mz_advertisement` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '广告id',
+  `description` varchar(256) NOT NULL COMMENT '描述',
+  `url` varchar(512) NOT NULL COMMENT '广告链接',
+  `pic_url` varchar(512) NOT NULL COMMENT '图片链接',
+  `display` int(1) NOT NULL DEFAULT '0' COMMENT '是否显示(0 否1是)',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告' AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `mz_appinfo`
