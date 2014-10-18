@@ -23,4 +23,9 @@ class IndexController extends BaseController {
         
         print_r(D('Document')->getDocumentInfo(166));
     }
+    
+    public function change(){
+        $user_ins = D('UserInstitution')->select();
+        print_r($user_ins);
+    }
 }

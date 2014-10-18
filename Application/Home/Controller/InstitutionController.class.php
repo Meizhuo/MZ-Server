@@ -5,7 +5,7 @@ use Common\Model\UserAdminModel;
 use Common\Model\UserModel;
 
 /**
- *机构用户接口
+ * 机构用户接口
  * @author Jayin
  *        
  */

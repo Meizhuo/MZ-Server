@@ -50,7 +50,7 @@
                         <br />
                         <div class="u_a">
                             <input id="btn-submit" type="button" value="登 录" />
-                            <input id="btn-submit" type="button" value="注 册" />
+                            <input id="btn-signIn" type="button" value="注 册" />
 
                             <input type="button" value="忘记密码" />
                         </div>
@@ -69,6 +69,11 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+	//跳转到注册页面
+	$('#btn-signIn').on('click',function(){
+		location = "{:U('admin/institution/signIn')}";
+	});
+	//登录
     $('#btn-submit').on('click', function() {
         // var account = $('#account').text();
         // var psw = $('#psw').text();

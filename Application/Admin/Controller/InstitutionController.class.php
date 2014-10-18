@@ -36,6 +36,10 @@ class InstitutionController extends BaseController {
         }
         $this->display();
     }
+    
+    public function signIn(){
+        $this->display();
+    }
 
     /**
      * POST 登录

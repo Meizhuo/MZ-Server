@@ -3,145 +3,165 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>机构用户管理</title>
-
-
-    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <title>机构注册</title>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
-    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" /> 
-
-
-
-<script type="text/javascript" src="js/sidebar.js"></script>
-
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <div id="logo">
-        <a href="{:U('admin/institution/index')}">
-            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
-        </a>
-    </div>
 
-    <div id="parent_a">
-        <div id="PARENT">
-            <ul id="nav">
-                <li><a href="{:U('admin/institution/updateInfo')}" onClick="DoMenu('ChildMenu1')">登记信息</a>
-
-                </li>
-                <li><a href="{:U('admin/institution/postCourse')}" onClick="DoMenu('ChildMenu2')">发布课程</a>
-
-                </li>
-                <li><a href="{:U('admin/institution/courseList')}" onClick="DoMenu('ChildMenu3')">课程列表</a>
-
-                </li>
-
-            </ul>
-        </div>
-
-    </div>
-
-
-
-    <div id="topbar">
-        <span>欢迎 {$institution['nickname']}</span>
-        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
+    <div id="topbar" style="width: 92%">
+        <span>欢迎注册</span>
     </div>
 
     <!--下面只是说明与程序代码无关-->
-    <div id="include" style=" width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
+    <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
         <div class="ht">
             <h1>登记信息</h1>
         </div>
         <div id="cat_wr">
-            <table style="width:100%; border:0">
+            <table style="width: 100%; border: 0">
                 <tr>
                     <td width="15%">
-                        <div align="right"><span>*</span>用户昵称</div>                    </td>
-                    <td width=""><input name="text23" type="text" class="inp" id="text23" style="height:100%;width:60%;" value="">                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请输入用户昵称                   </td>
+                        <div align="right">
+                            <span>*</span>用户名
+                        </div>
+                    </td>
+                    <td width="">
+                        <input id="text-nickname" type="text" class="inp" style="height: 100%; width: 60%;" value="" placeholder=" 建议:用户名为机构名">
+                    </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <div align="right"><span>*</span>邮箱</div>                    </td>
-                    <td><input name="text2" type="text" class="inp" id="text2" style="height:100%;width:60%;" value="">
-					 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请输入您的邮箱地址
-					</td>
+                        <div align="right">
+                            <span>*</span>邮箱
+                        </div>
+                    </td>
+                    <td>
+                        <input id="text-email" type="text" class="inp" style="height: 100%; width: 60%;" value="" placeholder=" 请输入您的邮箱地址">
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right"><span>*</span>密码</div>                    </td>
-                    <td><input name="text22" type="text" class="inp" id="text22" style="height:100%;width:60%;" value="">                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-16位数字或者字母                   </td>
-                   </td>
+                        <div align="right">
+                            <span>*</span>密码
+                        </div>
+                    </td>
+                    <td>
+                        <input id="text-psw" type="password" class="inp" style="height: 100%; width: 60%;" value="" placeholder=" 8-16位数字或者字母">
+                    </td>
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right"><span>*</span>确认密码</div>                    </td>
-                    <td><input name="text24" type="text" class="inp" id="text24" style="height:100%;width:60%;" value="">                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请再次输入密码                  </td>
-              </td>
-                </tr>
-                <tr>
-				
-				<td>
-                        <div align="right">手机号码</div>                    </td>
-                    <td><input name="text25" type="text" class="inp" id="text25" style="height:100%;width:60%;" value=""></td>
-				
-                <tr>
+                        <div align="right">
+                            <span>*</span>确认密码
+                        </div>
+                    </td>
                     <td>
-                        <div align="right">机构名称</div>                    </td>
-                    <td><input name="text26" type="text" class="inp" id="text26" style="height:100%;width:60%;" value=""></td>
-                </tr>
+                        <input id="text-repsw" type="password" class="inp" style="height: 100%; width: 60%;" value="" placeholder=" 8-16位数字或者字母">
+                    </td>
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">机构地址</div>                    </td>
-                    <td><input name="text27" type="text" class="inp" id="text27" style="height:100%;width:60%;" value=""></td>
+                        <div align="right">
+                            <span>*</span>机构名称</div>
+                    </td>
+                    <td>
+                        <input id="text-name" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">机构负责人</div>                    </td>
-                    <td><input name="text28" type="text" class="inp" id="text28" style="height:100%;width:60%;" value=""></td>
+                        <div align="right">机构地址</div>
+                    </td>
+                    <td>
+                        <input id="text-address" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                    <td><div align="right">办学类型</div></td>
-                    <td><input name="text29" type="text" class="inp" id="text29" style="height:100%;width:60%;" value=""></td>
+                    <td>
+                        <div align="right">机构负责人</div>
+                    </td>
+                    <td>
+                        <input id="text-manager" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">批准文号</div></td>
-                  <td><input name="text210" type="text" class="inp" id="text210" style="height:100%;width:60%;" value=""></td>
+                    <td>
+                        <div align="right">办学类型</div>
+                    </td>
+                    <td>
+                        <input id="text-type" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">有效期</div></td>
-                  <td><input name="text211" type="text" class="inp" id="text211" style="height:100%;width:60%;" value=""></td>
+                    <td>
+                        <div align="right">批准文号</div>
+                    </td>
+                    <td>
+                        <input id="text-approval_number" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">培训范围</div></td>
-                  <td><input name="text212" type="text" class="inp" id="text212" style="height:100%;width:60%;" value=""></td>
+                    <td>
+                        <div align="right">有效期</div>
+                    </td>
+                    <td>
+                        <input id="text-validity_date" type="text" class="inp" style="height: 100%; width: 60%;" value="" placeholder=" 格式：年-月-日 如 2014-10-1">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">描述</div></td>
-                  <td><textarea name="text213" class="inp" id="text213" style="height:100%;width:60%;"></textarea></td>
+                    <td>
+                        <div align="right">培训范围</div>
+                    </td>
+                    <td>
+                        <input id="text-training_scope" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div align="right">师资力量</div>
+                    </td>
+                    <td>
+                        <input id="text-teacher_resource" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">师资力量</div></td>
-                  <td><input name="text214" type="text" class="inp" id="text214" style="height:100%;width:60%;" value=""></td>
+                    <td>
+                        <div align="right">
+                            <span>*</span>联系人</div>
+                    </td>
+                    <td>
+                        <input id="text-contact_member" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">联系人</div></td>
-                  <td><input name="text215" type="text" class="inp" id="text215" style="height:100%;width:60%;" value=""></td>
+                    <td>
+                        <div align="right">
+                            <span>*</span>联系电话</div>
+                    </td>
+                    <td>
+                        <input id="text-contact_phone" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">联系电话</div></td>
-                  <td><input name="text216" type="text" class="inp" id="text216" style="height:100%;width:60%;" value=""></td>
+                    <td>
+                        <div align="right">联系邮箱</div>
+                    </td>
+                    <td>
+                        <input id="text-contact_email" type="text" class="inp" style="height: 100%; width: 60%;" value="">
+                    </td>
                 </tr>
                 <tr>
-                  <td><div align="right">联系邮箱</div></td>
-                  <td><input name="text217" type="text" class="inp" id="text217" style="height:100%;width:60%;" value=""></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><input name="submit" type="submit" class="submit" id="btn-submit" value="注册"></td>
+                    <td></td>
+                    <td>
+                        <input id="btn-submit" type="submit" class="submit" value="注册">
+                    </td>
                 </tr>
             </table>
         </div>
@@ -151,18 +171,6 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
-    //退出
-    $('#btn-logout').on('click', function() {
-        $.get('/mz/index.php/home/user/logout', function(data) {
-            // console.log(data);
-            if (data.code) {
-                location = '/mz/ins/';
-            } else {
-                console.log(data.msg);
-            }
-        });
-    });
-
 
     function insert(src, key, val) {
             if (val !== '') {
@@ -171,33 +179,79 @@
         }
         //更新用户信息
     $('#btn-submit').on('click', function() {
-        console.log("click");
-        var uid = "{$uid}";
+        var nickname = $('#text-nickname').val();
+        var email = $('#text-email').val();
+        var psw = $('#text-psw').val();
+        var repsw = $('#text-repsw').val();
         var name = $('#text-name').val();
         var address = $('#text-address').val();
+        var manager = $('#text-manager').val();
         var type = $('#text-type').val();
         var approval_number = $('#text-approval_number').val();
-        var training_scope = $('#text-training_scope').val();
-        var manager = $('#text-manager').val();
         var validity_date = $('#text-validity_date').val();
-        var description = $('#text-description').val();
+        var training_scope = $('#text-training_scope').val();
+        var teacher_resource = $('#text-teacher_resource').val();
+        var contact_member = $('#text-contact_member').val();
+        var contact_phone = $('#text-contact_phone').val();
+        var contact_email = $('#text-contact_email').val();
+
+        if ('' === nickname) {
+            alert('用户名不能为空');
+            return;
+        }
+
+        if ('' === email) {
+            alert('邮箱不能为空');
+            return;
+        }
+
+        if ('' === psw) {
+            alert('密码不能为空');
+            return;
+        }
+
+        if ('' === name) {
+            alert('机构名称不能为空');
+            return;
+        }
+
+        if ('' === contact_member) {
+            alert('联系人不能为空');
+            return;
+        }
+
+        if ('' === contact_phone) {
+            alert('联系电话不能为空');
+            return;
+        }
+
+        if(psw !== repsw){
+            alert('输入密码不一致');
+            return;
+        }
 
         var post_data = {};
-        insert(post_data, 'uid', uid);
+        insert(post_data, 'nickname', nickname);
+        insert(post_data, 'email', email);
+        insert(post_data, 'psw', psw);
         insert(post_data, 'name', name);
         insert(post_data, 'address', address);
+        insert(post_data, 'manager', manager);
         insert(post_data, 'type', type);
         insert(post_data, 'approval_number', approval_number);
-        insert(post_data, 'training_scope', training_scope);
-        insert(post_data, 'manager', manager);
         insert(post_data, 'validity_date', validity_date);
-        insert(post_data, 'description', description);
+        insert(post_data, 'training_scope', training_scope);
+        insert(post_data, 'teacher_resource', teacher_resource);
+        insert(post_data, 'contact_member', contact_member);
+        insert(post_data, 'contact_phone', contact_phone);
+        insert(post_data, 'contact_email', contact_email);
 
-        $.post("{:U('home/institution/update')}", post_data, function(json) {
+
+        $.post("{:U('home/institution/register')}", post_data, function(json) {
             if (json.code) {
-                alert('更新成功！');
-                setTimeout(function(){
-                    location = "{:U('admin/institution/manage')}";
+                alert('注册成功！');
+                setTimeout(function() {
+                    location = "{:U('admin/institution/index')}";
                 }, 1000);
             } else {
                 alert(json.msg);

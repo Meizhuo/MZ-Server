@@ -9,9 +9,7 @@ use Common\Model\UserModel;
  */
 class UserInstitutionModel extends BaseModel {
 
-    protected $_validate = array(
-    	array('validity_date','number','有效期为时间戳timestamp')
-    );
+    protected $_validate = array();
     
     protected $_auto = array();
     
