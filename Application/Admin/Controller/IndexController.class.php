@@ -87,17 +87,26 @@ class IndexController extends BaseController {
      * @param number $categoryId 文档目录id
      * @param number $page 页码
      */
-    public function checkDocument($checked=0,$categoryId = 1,$page = 1) {
+    public function checkDocument($checked = 0, $categoryId = 1, $page = 1) {
         // TODO MZ:: 注意文档状态
         $this->reqAdmin();
+        // 默认为等待审核
+        if ($checked != 0 && $checked != 1 && $checked != - 1) {
+            $checked = 0;
+        }
+        $categoryId = (int)$categoryId;
+        if($categoryId <1 || $categoryId > 7 ){
+            $categoryId = 1;
+        }
         print_r($checked);
         print_r($categoryId);
         $res = D('Document')->search($categoryId, null, null, 
-                DocumentModel::VERIFY_WAITING,$page);
+                $checked, $page);
         $documents = $res['msg'];
         $this->assign('documents', $documents);
-        $this->assign('categoryId',$categoryId);
-        $this->assign('page',$page);
+        $this->assign('checked',$checked);
+        $this->assign('categoryId', $categoryId);
+        $this->assign('page', $page);
         $this->display();
     }
 

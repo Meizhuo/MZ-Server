@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
-     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -21,38 +21,32 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="/mz/index.php/admin/index/postDocument" onclick="DoMenu('ChildMenu1')">发布信息</a>
-                </li>
-                <li><a href="#Menu=ChildMenu2" onClick="DoMenu('ChildMenu2')">审核资料</a>
-                    <ul id="ChildMenu2" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkInstitution">培训机构</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">审核信息</a>
-                    <ul id="ChildMenu3" class="collapsed">
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/1">基本职能</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/2">法律法规及政策</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/3">相关新闻</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/4">通知信息</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/5">政策法规</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/6">办事指南</a>
-                        </li>
-                        <li><a href="/mz/index.php/admin/index/checkDocument/categoryId/7">全国统考</a>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="{:U('admin/index/postDocument')}" onclick="DoMenu('ChildMenu1')">发布文档</a>
+                    <li><a href="{:U('admin/index/advertisements')}" onclick="DoMenu('ChildMenu2')">广告设置</a>
+                    </li>
+                    <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">机构管理</a>
+                        <ul id="ChildMenu3" class="collapsed">
+                            <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#Menu=ChildMenu4" onClick="DoMenu('ChildMenu4')">文档信息管理</a>
+                        <ul id="ChildMenu4" class="collapsed">
+                            <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核列表</a>
+                            </li>
+                            <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核列表</a>
+                            </li>
+                        </ul>
+                    </li>
             </ul>
         </div>
-
     </div>
-
-
 
     <div id="topbar">
         <span>欢迎 {$admin['nickname']}</span>
@@ -64,14 +58,27 @@
         <div class="ht">
             <h1>审核文档</h1>
         </div>
+        <div style="margin: 10px;">
+            <h3>* 栏目选择</h3>
+            <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                <option value="1">职业培训-基本职能</option>
+                <option value="2">职业培训-法律法规及政策</option>
+                <option value="3">职业培训-相关新闻</option>
+                <option value="4">职业培训-通知信息</option>
+                <option value="5">职业技能鉴定-政策法规</option>
+                <option value="6">职业技能鉴定-办事指南</option>
+                <option value="7">职业技能鉴定-全国统考</option>
+            </select>
+        </div>
         <div id="ins_form">
             <table>
                 <tr>
-                    <th style="width:50%;padding: 4px">标题</th>
+                    <th style="width:40%;padding: 4px">标题</th>
                     <th>发布时间</th>
                     <th>发布人</th>
                     <th>审核人</th>
-                    <th style="width:150px">操作</th>
+                    <th>状态</th>
+                    <th>操作</th>
                 </tr>
 
                 <foreach name="documents" item="doc">
@@ -81,8 +88,22 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <span id="title_bar" ><a href="/mz/index.php/admin/index/viewDocument/doc_id/{$doc['id']}"> 查看 </a>|<a href="/mz/index.php/admin/index/postDocument/doc_id/{$doc['id']}"> 编辑
-            </a>|<a name="vertify" href="javascript:void(0);" data-id="{$doc['id']}"> 通过审核</a>
+                            <if condition="$doc['status'] eq 0 ">
+                                未审核
+                                <elseif condition="$doc['status'] eq 1" />已通过
+                                <else />未通过
+                            </if>
+                        </td>
+                        <td>
+                            <span><a href="/mz/index.php/admin/index/viewDocument/doc_id/{$doc['id']}"> 查看 </a>|<a href="/mz/index.php/admin/index/postDocument/doc_id/{$doc['id']}"> 编辑</a>
+                                <if condition="$doc['status'] eq 0 ">
+                                    |<a name="vertify-pass" href="javascript:void(0);" data-id="{$doc['id']}"> 通过审核</a>
+                                    |
+                                    <a name="vertify-unpass" href="javascript:void(0);" data-id="{$doc['id']}"> 驳回审核</a>
+                                    <elseif condition="$doc['status'] eq 1" />|
+                                    <a name="btn-addAd" href="javascript:void(0);" data-id="{$doc['id']}"> 添加至广告</a>
+                                    <else />
+                                </if>
                             </span>
                             </a>
                         </td>
@@ -91,7 +112,7 @@
 
             </table>
             <div class="syxy">
-                <button id="btn-pre" class="submit" >上一页</button>
+                <button id="btn-pre" class="submit">上一页</button>
                 <button id="btn-next" class="submit">下一页</button>
 
             </div>
@@ -103,6 +124,19 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+    //初始化
+    var checked = "{$checked}";
+    var cur_page = "{$page}";
+    var cur_category = "{$categoryId}";
+    var url_tpl = "{:U('admin/index/checkDocument','','')}/checked/{checked}/categoryId/{cur_category}/page/{cur_page}";
+    var url = "{:U('admin/index/checkDocument','','')}" + "/categoryId/" + cur_category + '/page/';
+
+    $('#select-category').on('change', function() {
+        location = url_tpl.replace('{cur_category}', $(this).val()).replace('{cur_page}', cur_page).replace('{checked}', checked);
+    });
+    //初始化栏目
+    $('#select-category').val(cur_category);
+
     //退出
     $('#btn-logout').on('click', function() {
         $.get('/mz/index.php/home/user/logout', function(data) {
@@ -115,18 +149,17 @@
         });
     });
     //翻页
-    var cur_page = "{$page}";
-    var cur_category ="{$categoryId}";
-    var url = "{:U('admin/index/checkDocument','','')}" + "/categoryId/"+cur_category+'/page/';
 
     //前一页
-    $('#btn-pre').on('click',function(){
-        location = url+(parseInt(cur_page)-1);
+    $('#btn-pre').on('click', function() {
+        var page_pre = parseInt(cur_page) - 1;
+        location = url_tpl.replace('{cur_category}', $('#select-category').val()).replace('{cur_page}', page_pre).replace('{checked}', checked);
     });
 
-     //后一页
-    $('#btn-next').on('click',function(){
-        location =url+(parseInt(cur_page)+1);
+    //后一页
+    $('#btn-next').on('click', function() {
+        var page_next = parseInt(cur_page) + 1;
+        location = url_tpl.replace('{cur_category}', $('#select-category').val()).replace('{cur_page}', page_next).replace('{checked}', checked);
     });
 
 })(jQuery);
