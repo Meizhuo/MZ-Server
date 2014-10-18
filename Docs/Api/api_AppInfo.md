@@ -8,12 +8,15 @@ AppInfo
 
 ```json
 {
-    "id": "1",
-    "version_name": "1.0.0",
-    "version_code": "1",
-    "description": "first version",
-    "url":"http://61.1.1.1/mz/apk/a.apk",
-    "need_update" :"0" //是否强制更新(0否 1是)
+    "code":20000,
+    "response":{
+         "id": "1",
+        "version_name": "1.0.0",
+        "version_code": "1",
+        "description": "first version",
+        "url":"http://61.1.1.1/mz/apk/a.apk",
+        "need_update" :"0" //是否强制更新(0否 1是)
+    }
 }
 ```
 
@@ -34,6 +37,6 @@ need_update  | 是否强制更新 | Y
 ```json
 {
     "code": 200,
-    "msg": "operate success"
+    "response": "operate success"
 }
 ```
