@@ -30,4 +30,13 @@ class IndexController extends BaseController {
 //             D('UserInstitution')->save($ins);
 //         }
     }
+    
+    public function sendEmailTest(){
+        $res = think_send_mail("273942569@qq.com", "Jayin Ton","欢迎使用东莞技能培训平台","欢迎使用东莞技能培训平台,祝你生活愉快！");
+        if(is_bool($res) && $res){
+            $this->ajaxReturn(mz_json_success('send email successfully.'));
+        }else{
+            $this->ajaxReturn(mz_json_error('send email faild.'));
+        }
+    }
 }
