@@ -176,9 +176,10 @@ ue.ready(function() {
 <script type="text/javascript">
 (function($) {
     var doc_id = "{$document['id']}";
-    var file_ids = {
-        $file_ids
-    } || {}; //附件 init..
+    var file_ids = {};
+    if ('{$file_ids}' !== '') {
+        file_ids = JSON.parse('{$file_ids}'); //附件 init..
+    }
 
 
     //更新文档附件
@@ -358,7 +359,11 @@ ue.ready(function() {
 
     function init() {
         // 栏目
-        $('#select-category').val(parseInt("{$document['category_id']}"));
+        if (parseInt("{$document['category_id']}")) {
+            $('#select-category').val(parseInt("{$document['category_id']}"));
+        } else {
+            $('#select-category').val(1);
+        }
     }
 
     init();
