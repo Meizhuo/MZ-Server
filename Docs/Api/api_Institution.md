@@ -76,9 +76,52 @@ psw| 密码  | Y
 ## 获取机构信息
 `GET /home/institution/info`
 
+**这是基础接口，客户端不能调用**
+**客户端使用`GET /home/institution/getInfo`***
+
 字段	|描述 |  是否必须 
 ------------ | -------------| -------------
 institution_id | 机构的id 	| Y
+status | 机构审核状态(-1审核不通过  0未审核 1审核通过  2包含全部，默认2) |N
+
+**Response**  
+
+```json  
+{
+	"code":200,
+	"response":{
+	   "nickname":"foo",
+	   "phone":"foo",
+	   "email":""foo"",
+	   "reg_time":"1412322430",
+	   "level":"4",
+	   "status":"1",
+	   "uid":"15",
+	   "name":"foo",
+	   "address":"foo",
+	   "manager":"foo",
+	   "type":"foo",
+	   "approval_number":"foo",
+	   "validity_date":"foo",
+	   "training_scope":"foo",
+	   "description":"foo",
+	   "teacher_resource":"foo",
+	   "contact_member" :"foo",
+	   "contact_phone" :"foo",
+	   "contact_email" :"foo",
+	}
+}
+```
+
+## 获取机构信息
+`GET /home/institution/getInfo`
+
+**这是基础接口，客户端不能调用**
+
+字段	|描述 |  是否必须 
+------------ | -------------| -------------
+institution_id | 机构的id 	| Y
+
 
 **Response**  
 

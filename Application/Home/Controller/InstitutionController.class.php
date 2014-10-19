@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserAdminModel;
 use Common\Model\UserModel;
-use Common\Model\UserInstitutionModel;
+
 
 /**
  * 机构用户接口
@@ -71,15 +71,29 @@ class InstitutionController extends BaseController {
     }
 
     /**
-     * GET 获取当前机构用户信息
+     * GET 获取机构用户信息
+     * 基础接口,不直接暴露给客户端
+     * @param number $institution_id 机构id         
+     * @param unknown $status  -1审核不通过  0未审核 1审核通过  2包含全部
      */
-    public function info($institution_id = 0) {
+    public function info($institution_id = 0, $status = 2) {
         $res = D('User')->getInsInfo($institution_id);
         if ($res['status']) {
-            $this->ajaxReturn(mz_json_success($res['msg']));
+            if ($res['msg']['status'] == $status || $status == 2) {
+                $this->ajaxReturn(mz_json_success($res['msg']));
+            } else {
+                $this->ajaxReturn(mz_json_success(null));
+            }
         } else {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
+    }
+    /**
+     * GET 获取机构用户信息
+     * @param number $institution_id
+     */
+    public function getInfo($institution_id = 0){
+        return $this->info($institution_id, UserModel::STATUS_PASS);
     }
     
     /**
