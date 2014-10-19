@@ -37,3 +37,10 @@ $this->reqPost(array('doc_id'))->reqLogin()
 当然,这只是一种开发中的约定
 
 
+* **邮件服务**
+使用PHPMailer,若直接clone PHPMailer是不行的，需要在`class.phpmailer.php`中首行加入
+```php
+require 'PHPMailerAutoload.php';
+```
+这样才能使用类SMTP
+
