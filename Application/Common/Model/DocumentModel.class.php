@@ -14,6 +14,10 @@ class DocumentModel extends BaseModel {
     const VERIFY_UNPASS = -1;
     /** 等待审核*/
     const VERIFY_WAITING = 0;
+    /** 可见*/
+    const VISIBILITY_DISPLAY = 1;
+    /** 不可见*/
+    const VISIBILITY_UNDISPLAY = 0;
     
     protected $_validate = array(
             //插入时必须有:
@@ -148,11 +152,12 @@ class DocumentModel extends BaseModel {
      * @param string $title
      * @param string $content
      * @param string $status
+     * @param string $display
      * @param number $page
      * @param number $limit
-     * @return Ambigous <\Think\mixed, boolean, string, NULL, mixed, multitype:, unknown, object>
+     * @return unknown
      */
-    public function search($category_id='',$title='',$content='',$status='',$page=1,$limit=10){
+    public function search($category_id='',$title='',$content='',$status='',$display=null,$page=1,$limit=10){
         //这里不用返回文档的附件信息了
         $map = array();
         if(!empty($category_id)){
@@ -166,6 +171,9 @@ class DocumentModel extends BaseModel {
         }
         if(!empty($status) || $status == 0 ){
             $map['status'] = array('eq',$status);
+        }
+        if(!is_null($display)){
+            $map['display'] = array('eq',$display);
         }
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;

@@ -126,6 +126,49 @@ op|operation的简称(0为通过 1为不通过审核，默认1)| N
 ## 文档列表(查询)
 `GET /home/document/search` 
 
+**基础接口**
+
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+category_id|栏目id (获取指定栏目下的)| N 
+title | 类似的标题      | N
+content | 类似的内容   |N
+page| 页码,默认1|N
+limit| 条目,默认10| N
+
+**Response**  
+
+```json
+{
+    "code": 200,
+    "response": [
+        {
+            "id": "2",
+            "uid": "1",
+            "title": "title22",
+            "category_id": "2",
+            "display": "1",
+            "status": "0",
+            "views": "0",
+            "create_time": "1412534968",
+            "update_time": "0",
+            "from": null,
+            "level": "31",
+            "description": null,
+            "order_num": "1",
+            "content": "这是！content",
+        }
+    ]
+}
+```
+
+## 文档列表(查询)
+`GET /home/document/lists` 
+
+**均为已审核,可见的文档**
+
+
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------
 category_id|栏目id (获取指定栏目下的)| N 

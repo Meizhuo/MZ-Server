@@ -93,23 +93,7 @@ class DocumentController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
-    /**
-     * GET 模糊查询
-     * @param string $category_id
-     * @param string $title
-     * @param string $content
-     * @param string $status
-     * @param number $page
-     * @param number $limit
-     */
-    public function search($category_id='',$title='',$content='',$status='',$page=1,$limit=10) {
-    	$res = D('Document')->search($category_id,$title,$content,$status,$page,$limit);
-    	if($res['status']){
-    	    $this->ajaxReturn(mz_json_success($res['msg']));
-    	}else{
-    	    $this->ajaxReturn(mz_json_error($res['msg']));
-    	}
-    }
+   
     /**
      * GET 获得文档的栏目信息
      */
@@ -208,6 +192,36 @@ class DocumentController extends BaseController {
         }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
+    }
+    
+    /**
+     * 模糊查询
+     * 基础接口，客户端不能调用
+     * @param string $category_id
+     * @param string $title
+     * @param string $content
+     * @param string $status
+     * @param number $page
+     * @param number $limit
+     */
+    private function search($category_id='',$title='',$content='',$status='',$display=null,$page=1,$limit=10) {
+        $res = D('Document')->search($category_id,$title,$content,$status,$display,$page,$limit);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success($res['msg']));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
+    /**
+     * 模糊查询
+     * @param string $category_id
+     * @param string $title
+     * @param string $content
+     * @param number $page
+     * @param number $limit
+     */
+    public function lists($category_id='',$title='',$content='',$page=1,$limit=10){
+        return $this->search($category_id,$title,$content,DocumentModel::VERiFY_PASS,DocumentModel::VISIBILITY_DISPLAY,$page,$limit);
     }
 }
 
