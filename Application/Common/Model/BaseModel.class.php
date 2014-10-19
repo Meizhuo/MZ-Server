@@ -43,7 +43,7 @@ class BaseModel extends Model {
      * @return multitype:
      */
     public function getData(){
-    	return $this->data;
+    	return $this->data();
     }
 }
 

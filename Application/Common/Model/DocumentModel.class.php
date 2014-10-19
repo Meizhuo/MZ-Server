@@ -81,6 +81,8 @@ class DocumentModel extends BaseModel {
     public function updateDocument($doc_id,$data) {
     	$res = $this->_getResult();
     	$data['id'] = $doc_id;
+    	$data['vertify_uid'] = 0;
+    	$data['vertify_time'] = 0;
     	if($this->create($data)){
     	    if(count($this->data) >1){
     	        $this->data['update_time'] = NOW_TIME;
@@ -134,6 +136,8 @@ class DocumentModel extends BaseModel {
     	$data = array();
     	$data['id'] = $doc_id ;
     	$data['status'] = $operate;
+    	$data['vertify_uid'] = session('uid');
+    	$data['vertify_time'] = NOW_TIME;
     	if($this->save($data)>=0){
     	    $res['status'] = 1;
     	}else{

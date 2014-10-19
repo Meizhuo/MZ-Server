@@ -39,7 +39,7 @@ class DocumentController extends BaseController {
      */
     public function update() {
         $this->reqPost(array('doc_id'))->reqLogin();
-
+        
 	    //查询获得category_id
 	    $category_id = (new DocumentModel())->createDocumentById(I('post.doc_id'))->data()['category_id'];
 	    $Admin = new UserAdminModel();

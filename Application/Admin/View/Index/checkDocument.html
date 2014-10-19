@@ -84,9 +84,9 @@
                 <foreach name="documents" item="doc">
                     <tr>
                         <td style="text-align:left;padding-left:15px;padding-right:15px;">{$doc['title']}</td>
-                        <td>{$doc['create_time']}</td>
-                        <td></td>
-                        <td></td>
+                        <td name="text-create_time">{$doc['create_time']}</td>
+                        <td>{$doc['author']['nickname']}</td>
+                        <td>{$doc['vertifyer']['nickname']}</td>
                         <td>
                             <if condition="$doc['status'] eq 0 ">
                                 未审核
@@ -206,16 +206,31 @@
     $('[name=btn-addAd]').on('click', function() {
         var $ele = $(this);
         var doc_id = $ele.data('id');
-        $.post("{:U('home/ad/createByDoc','','')}",{
-            doc_id:doc_id,
-        },function(json){
-            if(json.code){
+        $.post("{:U('home/ad/createByDoc','','')}", {
+            doc_id: doc_id,
+        }, function(json) {
+            if (json.code) {
                 alert('添加广告成功');
-            }else{
+            } else {
                 alert(json.msg);
             }
         })
     });
+
+
+    function timeFormat() {
+            $('[name=text-create_time]').each(function() {
+                // console.log($(this));
+                var millisec = parseInt($(this).text()) * 1000;
+                var date = new Date();
+                date.setTime(millisec);
+                var format_string = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+                $(this).text(format_string)
+            });
+
+        }
+        //格式化时间
+    timeFormat();
 
 })(jQuery);
 </script>

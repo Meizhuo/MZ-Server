@@ -19,13 +19,14 @@ class UserAdminModel extends BaseModel {
         $user_admin = M('User')->field('psw',true)->where($map)->select();
         $user_admin_info = $this->where($map)->select();
         if($user_admin && $user_admin_info){
-            $this->data = array_merge($user_admin[0],$user_admin_info[0]);
+            $this->data(array_merge($user_admin[0],$user_admin_info[0]));
         }else{
             return null;
         }
         return $this;
     }
     
+
     public function register(){
     
     }

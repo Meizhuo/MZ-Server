@@ -127,6 +127,7 @@ op|operation的简称(0为通过 1为不通过审核，默认1)| N
 `GET /home/document/search` 
 
 **基础接口**
+客户端使用`GET /home/document/lists` 
 
 
 字段  |描述 |  是否必须 
@@ -136,6 +137,8 @@ title | 类似的标题      | N
 content | 类似的内容   |N
 page| 页码,默认1|N
 limit| 条目,默认10| N
+status| 文档审核状态 -1审核不通过 0未审核 1审核通过|N
+display| 可见性 0不可见 1可见| N
 
 **Response**  
 

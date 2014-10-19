@@ -2,7 +2,6 @@
 namespace Admin\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserAdminModel;
-use Common\Model\DocumentModel;
 use Common\Model\AdvertisementModel;
 /**
  * 管理员页面控制
@@ -99,11 +98,28 @@ class IndexController extends BaseController {
         if($categoryId <1 || $categoryId > 7 ){
             $categoryId = 1;
         }
-        print_r($checked);
-        print_r($categoryId);
         $res = D('Document')->search($categoryId, null, null, 
                 $checked, $page);
         $documents = $res['msg'];
+        for($i=0;$i<count($documents);$i++){
+            $authors = D('UserAdmin')->createAdminById($documents[$i]['uid'])->getData();
+            $vertifyers =null;
+            if(!empty($documents[$i]['vertify_uid'])){
+                D('UserAdmin')->createAdminById($documents[$i]['vertify_uid'])->getData();
+            }
+            if($authors){
+                $documents[$i]['author'] = $authors;
+                
+            }else{
+                $documents[$i]['author'] = null;
+            }
+            if($vertifyers){
+                $documents[$i]['vertifyer'] = $vertifyers;
+            }else{
+                $documents[$i]['vertifyer'] = null;
+            }
+        }
+        
         $this->assign('documents', $documents);
         $this->assign('checked',$checked);
         $this->assign('categoryId', $categoryId);
