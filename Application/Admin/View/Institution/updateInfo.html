@@ -54,47 +54,25 @@
             <table style="width:100%; border:0">
                 <tr>
                     <td width="80">
-                        <div align="right">机构名称</div>
+                        <div class="mz-text-center">
+                            <span>*</span>机构名称</div>
                     </td>
                     <td width="400">
-                        <input id="text-name" class="inp" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-name" class="inp" type="text" style="height:100%;width:100%;" value="" placeholder="必填">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">机构地址</div>
+                        <div class="mz-text-center">机构地址</div>
                     </td>
                     <td>
                         <input id="text-address" class="inp" type="text" style="height:100%;width:100%;" value="">
                     </td>
                 </tr>
+
                 <tr>
                     <td>
-                        <div align="right">办学类型</div>
-                    </td>
-                    <td>
-                        <input id="text-type" class="inp" type="text" style="height:100%;width:100%;" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div align="right">批准文号</div>
-                    </td>
-                    <td>
-                        <input id="text-approval_number" class="inp" type="text" style="height:100%;width:100%;" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div align="right">培训范围</div>
-                    </td>
-                    <td>
-                        <input id="text-training_scope" class="inp" type="text" style="height:100%;width:100%;" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div align="right">负责人</div>
+                        <div class="mz-text-center">机构负责人</div>
                     </td>
                     <td>
                         <input id="text-manager" type="text" class="inp" style="height:100%;width:100%;" value="">
@@ -102,7 +80,77 @@
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">有效期</div>
+                        <div class="mz-text-center">办学类型</div>
+                    </td>
+                    <td>
+                        <input id="text-type" class="inp" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mz-text-center">批准文号</div>
+                    </td>
+                    <td>
+                        <input id="text-approval_number" class="inp" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mz-text-center">有效时间</div>
+                    </td>
+                    <td>
+                        <input id="text-validity_date" class="inp" type="text" style="height:100%;width:100%;" value="" placeholder=" 格式：年-月-日 如 2014-10-1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mz-text-center">培训范围</div>
+                    </td>
+                    <td>
+                        <input id="text-training_scope" class="inp" type="text" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mz-text-center">师资力量</div>
+                    </td>
+                    <td>
+                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="mz-text-center">有效期</div>
+                    </td>
+                    <td>
+                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="mz-text-center">
+                            <span>*</span>联系人</div>
+                    </td>
+                    <td>
+                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="" placeholder="必填">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="mz-text-center">
+                            <span>*</span>联系电话</div>
+                    </td>
+                    <td>
+                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="" placeholder="必填">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="mz-text-center">联系邮箱</div>
                     </td>
                     <td>
                         <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="">
@@ -110,19 +158,21 @@
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">描述</div>
+                        <div class="mz-text-center">描述</div>
                     </td>
-                    <td>
-                        <textarea id="text-description" class="inp" style="height:100%;width:100%;"></textarea>
+
+                    <td height="400">
+                        <script id="editor" type="text/plain" style="height:100%"></script>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">描述</div>
+                        <div class="mz-text-center"><span>*</span>附件</div>
                     </td>
 
-                    <td height="400">
-                         <script id="editor" type="text/plain" style="height:100%;width:900px;margin:10px;"></script>
+                    <td >
+                        <input id="text-validity_date" type="file" class="inp" value="" >
+                        <span>*最大文件大小为4MB,只能上传1文件,建议上传用zip</span>
                     </td>
                 </tr>
                 <tr>
@@ -158,7 +208,7 @@ var ue = UE.getEditor('editor', {
     saveInterval: 2000000000,
     enableContextMenu: false, //打开右键菜单功能
     initialContent: '', //初始化编辑器的内容
-    initialFrameWidth: 800,
+    initialFrameWidth: 910,
 });
 
 ue.ready(function() {
@@ -199,7 +249,7 @@ ue.ready(function() {
         var manager = $('#text-manager').val();
         var validity_date = $('#text-validity_date').val();
         // var description = $('#text-description').val();
-        var description =  UE.getEditor('editor').getContent();
+        var description = UE.getEditor('editor').getContent();
 
         var post_data = {};
         insert(post_data, 'uid', uid);
@@ -215,7 +265,7 @@ ue.ready(function() {
         $.post("{:U('home/institution/update')}", post_data, function(json) {
             if (json.code) {
                 alert('更新成功！');
-                setTimeout(function(){
+                setTimeout(function() {
                     location = "{:U('admin/institution/manage')}";
                 }, 1000);
             } else {

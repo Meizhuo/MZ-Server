@@ -40,6 +40,7 @@ table td, table th {
 .inp {
     border: 1px solid #ccc;
     border-radius: 5px;
+    padding-left: 3px;
 }
 #cat_wr td span{
     color: red;

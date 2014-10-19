@@ -288,3 +288,7 @@ td {
     padding-bottom: 4px;
     padding-top: 4px;
 }
+
+.mz-text-center{
+    text-align: center;
+}
