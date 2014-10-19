@@ -164,7 +164,7 @@ class DocumentModel extends BaseModel {
         if(!empty($content)){
             $map['content'] = array('like','%'.$content.'%');
         }
-        if($status == 0 || !empty($status)){
+        if(!empty($status) || $status == 0 ){
             $map['status'] = array('eq',$status);
         }
         // 保证为正数
