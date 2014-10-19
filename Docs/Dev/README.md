@@ -30,3 +30,10 @@ $this->reqPost(array('doc_id'))->reqLogin()
 ```
 
 
+* **Controller**
+约定：控制器中的方法为private 是不暴露给客户端
+只有public 方法的都暴露给客户端
+
+当然,这只是一种开发中的约定
+
+
