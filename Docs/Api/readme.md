@@ -84,4 +84,5 @@ nickname | 用户昵称  	| Y
 * [文档](api_Document.md)
 * [文档附件](api_DocumentFile.md)
 * [补贴项目](api_Subsidy.md)
+* [广告](api_Adertisement.md)
 
