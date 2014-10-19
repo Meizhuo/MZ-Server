@@ -96,7 +96,7 @@ class UserInstitutionModel extends BaseModel {
         $res = $this->_getResult();
         $map = array();
         $map['level'] = UserModel::LEVEL_INSTITUTION;
-        if ($status == 0 || ! empty($status)) {
+        if (! empty($status) || $status == 0 ) {
             $map['status'] = $status;
         }
         if (! empty($name)) {

@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserAdminModel;
 use Common\Model\UserModel;
+use Common\Model\UserInstitutionModel;
 
 /**
  * 机构用户接口
@@ -104,19 +105,31 @@ class InstitutionController extends BaseController {
 
     /**
      * 获取机构列表
+     * 这是基础接口，客户端不要调用
+     * @see list()
      * @param string $status
      * @param string $name
      * @param string $type
      * @param number $page
      * @param number $limit
      */
-    public function search($status='',$name='',$type='',$page=1, $limit=10) {
+    private function search($status='',$name='',$type='',$page=1, $limit=10) {
         $res = D('UserInstitution')->search($status, $name, $type, $page, $limit);
         if($res['status']){
            $this->ajaxReturn(mz_json_success($res['msg']));
         }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
+    }
+    /**
+     * 获得已通过审核的机构
+     * @param string $name
+     * @param string $type
+     * @param number $page
+     * @param number $limit
+     */
+    public function lists($name='',$type='',$page=1, $limit=10){
+        $this->search(UserModel::STATUS_PASS,$name,$type,$page,$limit);
     }
 }
 

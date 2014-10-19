@@ -157,9 +157,53 @@ op|  operation的简称(0为通过 1为不通过审核，默认1) | N
 ## 获取机构列表  (模糊查询)
 `GET /home/institution/search`
 
+**这是基础接口,客户端不要调用**
+而是调用基于基础接口之上的接口入`GET /home/institution/lists`
+
 字段	|描述 |  是否必须 
 ------------ | -------------| -------------
 status | 审核状态(-1审核不通过 0 未审核1审核通过(默认全部获取)| N
+name |机构名称  | N
+type  |办学类型 | N
+limit | 返回条目 默认10   	| N
+page| 页码 默认1  | N
+
+
+ **Response**  
+
+```json  
+{ 
+	"code":200,
+	"response":[
+		{ "uid":"14",
+		   "nickname":"\u7aed\u8bda\u57f9\u8bad\u516c\u53f8",
+		   "phone":null,
+		   "email":"qc@ruby.com",
+		   "reg_time":"1412322229",
+		   "level":"4",
+		   "status":"1",
+		   "name":null,
+		   "address":null,
+		   "type":null,
+		   "description":null,
+	   	   "contact_member" :"foo",
+		   "contact_phone" :"foo",
+		   "contact_email" :"foo",
+		},
+        .....
+        { ...}
+    ]
+}
+```
+
+## 获取机构列表  
+`GET /home/institution/lists`
+
+**这是暴露给客户端调用**
+ 
+
+字段	|描述 |  是否必须 
+------------ | -------------| -------------
 name |机构名称  | N
 type  |办学类型 | N
 limit | 返回条目 默认10   	| N
