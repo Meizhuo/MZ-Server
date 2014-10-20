@@ -70,7 +70,18 @@ class InstitutionController extends BaseController {
 
     public function updateInfo() {
         $this->reqInstituion();
-        $this->assign('uid',session('uid'));
+        
+        $res = D('User')->getInsInfo(session('uid'));
+        if ($res['status']) {
+            $institution = $res['msg'];
+            $this->assign('institution', $institution);
+            foreach ($institution['files'] as $file) {
+                $file_ids[$file['id']] = $file['id'];
+            }
+            $this->assign('file_ids', json_encode($file_ids));
+        }
+        
+        $this->assign('uid', session('uid'));
         $this->display();
     }
 

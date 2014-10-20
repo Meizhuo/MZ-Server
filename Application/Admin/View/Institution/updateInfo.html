@@ -178,8 +178,24 @@
                     </td>
 
                     <td>
-                        <input id="text-" type="file" class="inp" value="">
-                        <span>*最大文件大小为4MB,只能上传1文件,建议上传用zip压缩打包</span>
+                        <div id="drag-and-drop-zone" class="uploader">
+                            <input style="width:150px;" type="file" name="image2">
+                            <span>
+                                <strong style="color:red;">*</strong>
+                                <strong>文件最大为4MB,只能上传1文件,建议上传用zip压缩打包,支持zip,doc,docx,jpg,png,gif</strong>
+                                <!-- <strong id="progress"></strong> -->
+                            </span>
+                            <br>
+                            <div id="fileList">
+                                <foreach name="institution.files" item="file">
+                                    <div>
+                                        <span>{$file['raw_name']} 已上传</span><a href="javascript:void(0);" style="margin-left: 10px;" name="btn-delete" data-id="{$file['id']}">删除</a>
+                                        <br>
+                                    </div>
+                                </foreach>
+                            </div>
+
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -224,9 +240,43 @@ ue.ready(function() {
 </script>
 
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="/mz/Public/js/dmuploader.js"></script>
 <script type="text/javascript">
 (function($) {
     var uid = "{$uid}";
+    var ins_id = "{$uid}";
+    var file_ids = {};
+    if ('{$file_ids}' !== '' && '{$file_ids}' !=='null' ) {
+        file_ids = JSON.parse('{$file_ids}'); //附件 init..
+    }
+
+    //更新文档附件
+    function updateDocFiles() {
+        console.log('updateDocFilesByIns');
+        console.log({
+            ins_id: ins_id,
+            // file_ids: JSON.stringify(file_ids),
+            file_ids: file_ids,
+        });
+        $.post("{:U('home/document/updateDocFilesByIns','','')}", {
+            ins_id: ins_id,
+            file_ids: file_ids,
+        }, function(json) {
+            console.log("upload file result::");
+            console.log(json);
+            if (json.code) {
+                alert('操作成功');
+                setTimeout(function() {
+                    location = "{:U('admin/institution/manage')}";
+                }, 500);
+
+            } else {
+                console.log(json);
+                alert(json.msg);
+            }
+        });
+    }
+
 
     //退出
     $('#btn-logout').on('click', function() {
@@ -296,10 +346,11 @@ ue.ready(function() {
 
         $.post("{:U('home/institution/update')}", post_data, function(json) {
             if (json.code) {
-                alert('更新成功！');
-                setTimeout(function() {
-                    location = "{:U('admin/institution/manage')}";
-                }, 1000);
+                // alert('更新成功！');
+                updateDocFiles();
+                // setTimeout(function() {
+                //     location = "{:U('admin/institution/manage')}";
+                // }, 1000);
             } else {
                 alert(json.msg);
             }
@@ -308,6 +359,93 @@ ue.ready(function() {
         });
     });
 
+    //删除一条上传的条目
+    $('#fileList').on('click', '[name=btn-delete]', function() {
+        var $ele = $(this);
+        var file_id = $ele.data('id');
+        $.post("{:U('home/document/deleteFile','','')}", {
+            file_id: file_id,
+        }, function(json) {
+            //fuck here
+            if (json.code) {
+                $ele.parent().html('');
+                delete file_ids[file_id];
+                location = location;
+            } else {
+                // json
+                alert('删除失败');
+            }
+        });
+    });
+
+
+
+    function add_log(message) {
+        console.log(message);
+    }
+
+    function add_file(file_name, file_id) {
+        var template = '<div><span>{file_name}  已上传</span><a href="javascript:void(0);" style="margin-left: 10px;" name="btn-delete" data-id="{file_id}">删除</a><br></div>';
+
+        if (file_name && file_id) {
+            $('#fileList').prepend(template.replace('{file_name}', file_name).replace('{file_id}', file_id));
+        }
+
+    }
+
+
+    //上传
+    // Upload Plugin itself
+    $('#drag-and-drop-zone').dmUploader({
+        url: "{:U('home/document/upload')}",
+        dataType: 'json',
+        // allowedTypes: '*',
+        /*extFilter: 'jpg;png;gif',*/
+        onInit: function() {
+            add_log('Penguin initialized :)');
+        },
+        onBeforeUpload: function(id) {
+            add_log('Starting the upload of #' + id);
+
+        },
+
+        onComplete: function() {
+            add_log('All pending tranfers finished');
+        },
+        onUploadProgress: function(id, percent) {
+            var percentStr = percent + '%';
+            // $('#progress').text('上传进度: ' + percentStr);
+        },
+        //上传文件成功
+        onUploadSuccess: function(id, data) {
+            add_log('Upload of file #' + id + ' completed');
+
+            add_log('Server Response for file #' + id + ': ' + JSON.stringify(data));
+            if (data.code) {
+                add_file(add_file(data.response.raw_name, data.response.id));
+                file_ids[data.response.id] = data.response.id;
+            } else {
+                alert(data.msg);
+            }
+        },
+        onUploadError: function(id, message) {
+            add_log('Failed to Upload file #' + id + ': ' + message);
+
+        },
+        onFileTypeError: function(file) {
+            add_log('File \'' + file.name + '\' cannot be added: must be an image');
+
+        },
+        onFileSizeError: function(file) {
+            add_log('File \'' + file.name + '\' cannot be added: size excess limit');
+        },
+        onFileExtError: function(file) {
+            // $.danidemo.addLog('#demo-debug', 'error', 'File \'' + file.name + '\' has a Not Allowed Extension');
+        },
+        onFallbackMode: function(message) {
+            alert('Browser not supported(do something else here!): ' + message);
+        }
+    });
 
 
 })(jQuery);

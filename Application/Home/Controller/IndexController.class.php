@@ -49,4 +49,23 @@ class IndexController extends BaseController {
             $this->ajaxReturn(mz_json_error('send email faild.'));
         }
     }
+    
+    public function rperson(){
+        $this->reqPerson();
+        echo "111";
+    }
+    
+    public function radmin(){
+        $this->reqAdmin();
+        echo "23333";
+    }
+    public function rins(){
+        $this->reqInstitution();
+        echo "!!";
+    }
+    
+    public function tt(){
+        $res = D('User')->getInsInfo(94);
+        $this->ajaxReturn($res);
+    }
 }

@@ -82,11 +82,10 @@ class BaseController extends Controller {
     private function reqUser($level,$msg){
         $this->reqLogin();
         $res= M('User')->where("uid='%s'",session('uid'))->limit(1)->select();
-        if($res && $res[0]['level'] == $level){
-            print_r($res);
+        if($res && ((int)$res[0]['level']) === $level){
             return $this;
         }
-        $this->ajaxReturn(mz_json_error($msg));
+        $this->ajaxReturn(mz_json_error($res[0]));
     }
     /**
      * 需要机构用户登录

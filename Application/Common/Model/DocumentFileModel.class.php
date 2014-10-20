@@ -53,6 +53,38 @@ class DocumentFileModel extends BaseModel {
         return $res;
     }
     /**
+     * 机构用户附件
+     * @param unknown $ins_id
+     * @param unknown $file_info
+     * @return Ambigous <string, multitype:number string >
+     */
+    public function postByIns($ins_id,$file_info){
+        $res = $this->_getResult();
+        $data['ins_id'] = $ins_id;
+        $data['raw_name'] = $file_info['name'];
+        $data['save_name'] = $file_info['savename'];
+        $data['save_path'] = $file_info['savepath'];
+        $data['ext'] = $file_info['ext'];
+        $data['mime'] = $file_info['type'];
+        $data['size'] = $file_info['size'];
+        $data['md5'] = $file_info['md5'];
+        
+        if ($this->create($data)) {
+            if ($this->add()) {
+                $res['status'] = 1;
+                // 返回附件插入后的信息
+                $upload_file = $this->where("save_path='%s' AND save_name='%s'",
+                        $file_info['savepath'], $file_info['savename'])->select();
+                $res['msg'] = $upload_file[0];
+            } else {
+                $res['msg'] = 'System Error: Not able to insert.';
+            }
+        } else {
+            $res['msg'] = $this->getError();
+        }
+        return $res;
+    }
+    /**
      * 更新一文档
      * @param unknown $data 包含id
      * @return Ambigous <number, string, multitype:number string >
@@ -101,6 +133,43 @@ class DocumentFileModel extends BaseModel {
         }
         return $res;
     }
+
+    /**
+     * 批量链接到一个文档
+     * 
+     * @param unknown $doc_id
+     *            文档id
+     * @param array $file_ids            
+     * @return Ambigous <number, multitype:number string >
+     */
+    public function linkToDocByIns($ins_id, array $file_ids) {
+        $res = $this->_getResult();
+        if (! empty($file_ids)) {
+            $length = 0;
+            $this->startTrans();
+            foreach ($file_ids as $id) {
+                $data = array(
+                        'id' => $id,
+                        'ins_id' => $ins_id
+                );
+                // 若果本来就有,但是再一次更新，应算更新成功
+                if ($this->save($data) >= 0) {
+                    $length += 1;
+                }
+            }
+            if ($length === count($file_ids)) {
+                $this->commit();
+                $res['status'] = 1;
+            } else {
+                $this->rollback();
+                $res['msg'] = 'System Error: Batch update error';
+            }
+        } else {
+            // 无更新也算成功操作
+            $res['status'] = 1;
+        }
+        return $res;
+    }
     /**
      *  获得文档文档的附件
      * @param unknown $doc_id 文档id
@@ -110,6 +179,26 @@ class DocumentFileModel extends BaseModel {
     public function getDocFiles($doc_id, $mime = null) {
         $res = $this->_getResult();
         $map['doc_id'] = array('eq',$doc_id);
+        if (! empty($mime)) {
+            $map['mime'] = array('like','%' . $mime . '%');
+        }
+        $res['msg'] = $this->where($map)->select();
+        if (empty($res['msg'])) {
+            $res['msg'] = array();
+        }
+        $res['status'] = 1;
+        return $res;
+    }
+    
+    /**
+     *  获得文档文档的附件
+     * @param unknown $doc_id 文档id
+     * @param string $mime 文档类型
+     * @return multitype:number string
+     */
+    public function getDocFilesByIns($ins_id, $mime = null) {
+        $res = $this->_getResult();
+        $map['ins_id'] = array('eq',$ins_id);
         if (! empty($mime)) {
             $map['mime'] = array('like','%' . $mime . '%');
         }

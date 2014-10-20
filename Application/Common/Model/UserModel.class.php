@@ -217,10 +217,16 @@ class UserModel extends BaseModel {
     public function getInsInfo($uid){
         $res = $this->_getResult();
         $user_ins = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        $user_ins_files = D('DocumentFile')->getDocFilesByIns($uid)['msg'];
         if($user_ins){
             $_result = M('UserInstitution')->where("uid='%s'",$uid)->select();
             $res['status'] = 1;
             $res['msg'] = array_merge($user_ins[0],$_result[0]);
+            if($user_ins_files){
+                $res['msg'] = array_merge($res['msg'],array('files'=>$user_ins_files));
+            }else{
+                $res['msg'] = array_merge($res['msg'],array('files'=>array()));
+            }
         }else{
             $res['msg'] = 'user info not found';
         }

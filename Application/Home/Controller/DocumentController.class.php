@@ -105,7 +105,6 @@ class DocumentController extends BaseController {
      * POST 上传附件
      */
     public function upload() {
-        $this->reqAdmin();
         $config = array(
             'maxSize'    =>  3145728,// 设置附件上传大小 3M
             'rootPath'   =>  './Uploads/', // 设置附件上传根目录
@@ -161,6 +160,29 @@ class DocumentController extends BaseController {
             $arr_file_ids[] = $v;
         }
         $res = D('DocumentFile')->linkToDoc(I('doc_id'),$arr_file_ids);
+        if ($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
+    
+    /**
+     * 机构批量链接附件
+     * @param unknown $doc_id
+     * @param array $file_ids
+     */
+    public function updateDocFilesByIns(){
+        $this->reqPost(array('ins_id','file_ids'));
+    
+        if(empty(I('post.file_ids'))){
+            $this->ajaxReturn(mz_json_success("It's empty!"));
+        }
+        $arr_file_ids = array()  ;
+        foreach (I('post.file_ids')as $v){
+            $arr_file_ids[] = $v;
+        }
+        $res = D('DocumentFile')->linkToDocByIns(I('ins_id'),$arr_file_ids);
         if ($res['status']){
             $this->ajaxReturn(mz_json_success());
         }else{
