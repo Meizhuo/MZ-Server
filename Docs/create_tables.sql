@@ -89,7 +89,7 @@ CREATE TABLE `mz_course` (
   `institution_id` int(11) NOT NULL COMMENT '所属的培训机构',
   `subsidy_id` int(11) DEFAULT NULL COMMENT '对应的补贴项目',
   `name` varchar(64) DEFAULT NULL COMMENT '课程名称',
-  `start_time` int(11) DEFAULT NULL COMMENT '开课时间',
+  `start_time` varchar(32) DEFAULT NULL COMMENT '开课时间(格式为Y-m-d)',
   `address` varchar(256) DEFAULT NULL COMMENT '开课地址',
   `teacher` varchar(32) DEFAULT NULL COMMENT '授课老师',
   `introduction` text COMMENT '课程介绍',

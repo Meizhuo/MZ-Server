@@ -30,6 +30,16 @@ class IndexController extends BaseController {
 //             D('UserInstitution')->save($ins);
 //         }
     }
+        
+    // issue#56 课程:start_time不为时间戳而是格式为‘Y-m-d’的字符串
+    public function changeCourse() {
+//         $courses = D('Course')->select();
+//         foreach ($courses as $c) {
+//             $c['start_time'] = date('Y-m-d', $c['start_time']);
+//             echo $c['start_time'] . "<br>";
+//             D('Course')->save($c);
+//         }
+    }
     
     public function sendEmailTest(){
         $res = think_send_mail("273942569@qq.com", "Jayin Ton","欢迎使用东莞技能培训平台","欢迎使用东莞技能培训平台,祝你生活愉快！");
