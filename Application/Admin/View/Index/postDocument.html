@@ -177,10 +177,9 @@ ue.ready(function() {
 (function($) {
     var doc_id = "{$document['id']}";
     var file_ids = {};
-    if ('{$file_ids}' !== '') {
+    if ('{$file_ids}' !== '' && '{$file_ids}' !=='null' ) {
         file_ids = JSON.parse('{$file_ids}'); //附件 init..
     }
-
 
     //更新文档附件
     function updateDocFiles() {
