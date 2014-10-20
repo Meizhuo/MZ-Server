@@ -99,7 +99,7 @@ class IndexController extends BaseController {
             $categoryId = 1;
         }
         $res = D('Document')->search($categoryId, null, null, 
-                $checked, $page);
+                $checked,null, $page);
         $documents = $res['msg'];
         for($i=0;$i<count($documents);$i++){
             $authors = D('UserAdmin')->createAdminById($documents[$i]['uid'])->getData();
