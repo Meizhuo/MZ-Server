@@ -46,7 +46,7 @@
     </div>
 
     <!--下面只是说明与程序代码无关-->
-    <div id="include" style=" width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
+    <div id="include" style=" width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; padding-bottom: 60px">
         <div class="ht">
             <h1>发布课程</h1>
         </div>
@@ -54,16 +54,16 @@
             <table width="100%" border="0">
 
                 <tr>
-                    <td width="100">
-                        <div align="right">课程名称</div>
+                    <td style="width: 20%">
+                        <div class="mz-text-center"><span>*</span>课程名称</div>
                     </td>
-                    <td width="400">
+                    <td style="width: 80%">
                         <input id="text-name" class="inp" type="text" style="height:100%;width:100%;" value="{$course['name']}">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">开课地址</div>
+                        <div class="mz-text-center"><span>*</span>开课地址</div>
                     </td>
                     <td>
                         <input id="text-address" class="inp" type="text" style="height:100%;width:100%;" value="{$course['address']}">
@@ -71,7 +71,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">授课老师</div>
+                        <div class="mz-text-center"><span>*</span>授课老师</div>
                     </td>
                     <td>
                         <input id="text-teacher" class="inp" type="text" style="height:100%;width:100%;" value="{$course['teacher']}">
@@ -79,19 +79,28 @@
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">课程费用</div>
+                        <div class="mz-text-center"><span>*</span>课程费用</div>
                     </td>
                     <td>
                         <input id="text-cost" class="inp" type="text" style="height:100%;width:100%;" value="{$course['cost']}">
                     </td>
                 </tr>
-                <tr>
+                  <tr>
                     <td>
-                        <div align="right">补贴项目</div>
+                        <div class="mz-text-center"><span>*</span>课程费用</div>
                     </td>
                     <td>
-                        &nbsp;&nbsp;证书类别：
-                        <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                        <input id="text-cost" class="inp" type="text" style="height:100%;width:100%;" value="{$course['cost']}">
+                    </td>
+                </tr>
+ <tr>
+                    <td>
+                        <div class="mz-text-center"><span>*</span>补贴项目</div>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="checkbox" value="radio">  是<br>
+                        证书类别
+                        <select id="select-category" name="select" style=" border: 2px solid #ededed; border-radius: 3px;">
                             <option value="1">职业培训-基本职能</option>
                             <option value="2">职业培训-法律法规及政策</option>
                             <option value="3">职业培训-相关新闻</option>
@@ -100,8 +109,9 @@
                             <option value="6">职业技能鉴定-办事指南</option>
                             <option value="7">职业技能鉴定-全国统考</option>
                         </select>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项目类别：
-                        <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                        <br>
+                        项目类别
+                        <select id="select-category" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
                             <option value="1">职业培训-基本职能</option>
                             <option value="2">职业培训-法律法规及政策</option>
                             <option value="3">职业培训-相关新闻</option>
@@ -110,8 +120,9 @@
                             <option value="6">职业技能鉴定-办事指南</option>
                             <option value="7">职业技能鉴定-全国统考</option>
                         </select>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等级：
-                        <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                        <br>
+                        &nbsp;等&nbsp;&nbsp;&nbsp;&nbsp;级&nbsp;
+                        <select id="select-category" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
                             <option value="1">职业培训-基本职能</option>
                             <option value="2">职业培训-法律法规及政策</option>
                             <option value="3">职业培训-相关新闻</option>
@@ -120,22 +131,40 @@
                             <option value="6">职业技能鉴定-办事指南</option>
                             <option value="7">职业技能鉴定-全国统考</option>
                         </select>
+                        <br>
+                         &nbsp;工&nbsp;&nbsp;&nbsp;&nbsp;种&nbsp;
+                        <select id="select-category" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
+                            <option value="1">职业培训-基本职能</option>
+                            <option value="2">职业培训-法律法规及政策</option>
+                            <option value="3">职业培训-相关新闻</option>
+                            <option value="4">职业培训-通知信息</option>
+                            <option value="5">职业技能鉴定-政策法规</option>
+                            <option value="6">职业技能鉴定-办事指南</option>
+                            <option value="7">职业技能鉴定-全国统考</option>
+                        </select>
+                        <br>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div align="right">课程介绍</div>
+                        <div class="mz-text-center"><span>*</span>课程介绍</div>
                     </td>
+                    <td height="400">
+                        <script id="editor" type="text/plain" style="height:100%;width:100%"></script>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td class="mz-text-center"><span>*</span>是否上线</td>
                     <td>
-                        <td height="400">
-                            <script id="editor" type="text/plain" style="height:100%;width:100%;"></script>
-                        </td>
+                         <input type="radio" name="radio" checked="checked">  是
+                         <input type="radio" name="radio" value="radio">  否
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td class="mz-text-center"><span>*为必填</span></td>
                     <td>
-                        <input id="btn-submit" type="submit" class="submit" value="发布">
+                        <input id="btn-submit" type="submit" class="submit" value="发 布">
                     </td>
                 </tr>
 
@@ -167,7 +196,7 @@ var ue = UE.getEditor('editor', {
     saveInterval: 2000000000,
     enableContextMenu: false, //打开右键菜单功能
     initialContent: '', //初始化编辑器的内容
-    initialFrameWidth: 590,
+    initialFrameWidth: 920,
 });
 
 ue.ready(function() {

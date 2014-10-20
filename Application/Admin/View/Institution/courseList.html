@@ -48,24 +48,34 @@
         <div class="ht">
             <h1>课程列表</h1>
         </div>
-
+         <div style="margin: 10px;">
+            <h3>* 开课状态</h3>
+            <select id="select-category" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
+                <option value="1">已上线</option>
+                <option value="2">未上线</option>
+            </select>
+        </div>
         <table width="100%">
             <tr>
                 <th>课程名称</th>
-                <th>课程简介</th>
+                <th>开课时间</th>
                 <th>授课老师</th>
                 <th>费用</th>
+                <th>状态</th>
                 <th>操作</th>
             </tr>
 
             <foreach name="courses" item="course">
                 <tr>
                     <td>{$course['name']}</td>
-                    <td>{$course['introduction']}</td>
+                    <td>{$course['start_time']}</td>
                     <td>{$course['teacher']}</td>
                     <td>{$course['cost']}</td>
+                    <td>{$course['display']}</td>
                     <td><a href="/mz/index.php/admin/institution/postCourse/institution_id/{$course['id']}"> 编辑 </a>
                         |<a name="btn-delete" href="javascript:void(0);" data-id="{$course['id']}"> 删除 </a> 
+                        |<a name="btn-display" href="javascript:void(0);" data-id="{$course['id']}"> 上线 </a> 
+                        |<a name="btn-display" href="javascript:void(0);" data-id="{$course['id']}"> 下线 </a> 
                 </tr>
             </foreach>
         </table>
