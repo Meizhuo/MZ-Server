@@ -116,7 +116,7 @@ class CourseModel extends BaseModel{
      * @param number $limit            
      * @return unknown
      */
-    public function search($institution_id = '', $subsidy_id = '', $name = '', $page = 1, 
+    public function search($institution_id = null, $subsidy_id = null, $name = null,$display=null, $page = 1, 
             $limit = 10) {
         $res = $this->_getResult();
         $map = array();
@@ -128,6 +128,9 @@ class CourseModel extends BaseModel{
         }
         if (! empty($name)) {
             $map['name'] = array('like','%' . $name . '%');
+        }
+        if (! empty($display)) {
+            $map['display'] = array('eq',$display);
         }
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;

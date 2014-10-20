@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserModel;
+use Common\Model\CourseModel;
 
 /**
  * 课程接口
@@ -90,20 +91,45 @@ class CourseController extends BaseController {
         }
     }
     /**
-     * GET 查询
+     * 查询
+     * 基础接口
      * @param string $institution_id 机构id 
      * @param string $subsidy_id  补贴项目id
      * @param string $name 课程名称
      * @param number $page 页码 默认1
      * @param number $limit 返回数 默认10
      */
-    public function search($institution_id='',$subsidy_id='',$name='',$page=1,$limit=10){
-    	$res = D('Course')->search($institution_id,$subsidy_id,$name,$page,$limit);
+    
+    /**
+     * 查询
+     * 基础接口，请调用 lists()
+     * @param unknown $institution_id 机构id
+     * @param unknown $subsidy_id 补贴项目id
+     * @param unknown $name 课程名称
+     * @param unknown $diplay 是否上线的课程
+     * @param unknown $page 页码 默认1
+     * @param unknown $limit 返回数 默认10
+     */
+    private function search($institution_id='',$subsidy_id='',$name='',$display='',$page=1,$limit=10){
+    	$res = D('Course')->search($institution_id,$subsidy_id,$name,$display,$page,$limit);
     	if($res['status']){
     	    $this->ajaxReturn(mz_json_success($res['msg']));
     	}else{
     	    $this->ajaxReturn(mz_json_error($res['msg']));
     	}
+    }
+    /**
+     * 获得课程列表
+     * 返回均上线的课程
+     * @param unknown $institution_id 机构id
+     * @param unknown $subsidy_id 补贴项目id
+     * @param unknown $name 课程名称
+     * @param unknown $page 页码 默认1
+     * @param unknown $limit 返回数 默认10
+     */
+    public function lists($institution_id='',$subsidy_id='',$name='',$page=1,$limit=10){
+        //默认是上线的课程
+        return $this->search($institution_id='',$subsidy_id='',$name='',CourseModel::VISIBILITY_DISPLAY,$page=1,$limit=10);
     }
 }
 
