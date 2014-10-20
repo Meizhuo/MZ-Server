@@ -9,7 +9,9 @@ use Common\Model\UserModel;
  */
 class UserInstitutionModel extends BaseModel {
 
-    protected $_validate = array();
+    protected $_validate = array(
+    	 array('contact_email','email','邮箱格式错误'),
+    );
     
     protected $_auto = array();
     

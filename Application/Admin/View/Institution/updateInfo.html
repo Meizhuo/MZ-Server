@@ -55,10 +55,25 @@
                 <tr>
                     <td width="80">
                         <div class="mz-text-center">
+                            审核状态</div>
+                    </td>
+                    <td width="400">
+                        <p style="height:100%;width:100%;padding-left: 4px;">
+                            <if condition="$institution['status'] eq 0">待审核
+                                <elseif condition="$institution['status'] eq 1" />审核已通过
+                                <else />审核不通过
+                            </if>
+
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="80">
+                        <div class="mz-text-center">
                             <span>*</span>机构名称</div>
                     </td>
                     <td width="400">
-                        <input id="text-name" class="inp" type="text" style="height:100%;width:100%;" value="" placeholder="必填">
+                        <input id="text-name" class="inp" type="text" style="height:100%;width:100%;" value="{$institution['name']}" placeholder="必填">
                     </td>
                 </tr>
                 <tr>
@@ -66,7 +81,7 @@
                         <div class="mz-text-center">机构地址</div>
                     </td>
                     <td>
-                        <input id="text-address" class="inp" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-address" class="inp" type="text" style="height:100%;width:100%;" value="{$institution['address']}">
                     </td>
                 </tr>
 
@@ -75,7 +90,7 @@
                         <div class="mz-text-center">机构负责人</div>
                     </td>
                     <td>
-                        <input id="text-manager" type="text" class="inp" style="height:100%;width:100%;" value="">
+                        <input id="text-manager" type="text" class="inp" style="height:100%;width:100%;" value="{$institution['manager']}">
                     </td>
                 </tr>
                 <tr>
@@ -83,7 +98,7 @@
                         <div class="mz-text-center">办学类型</div>
                     </td>
                     <td>
-                        <input id="text-type" class="inp" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-type" class="inp" type="text" style="height:100%;width:100%;" value="{$institution['type']}">
                     </td>
                 </tr>
                 <tr>
@@ -91,7 +106,7 @@
                         <div class="mz-text-center">批准文号</div>
                     </td>
                     <td>
-                        <input id="text-approval_number" class="inp" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-approval_number" class="inp" type="text" style="height:100%;width:100%;" value="{$institution['approval_number']}">
                     </td>
                 </tr>
                 <tr>
@@ -99,7 +114,7 @@
                         <div class="mz-text-center">有效时间</div>
                     </td>
                     <td>
-                        <input id="text-validity_date" class="inp" type="text" style="height:100%;width:100%;" value="" placeholder=" 格式：年-月-日 如 2014-10-1">
+                        <input id="text-validity_date" class="inp" type="text" style="height:100%;width:100%;" value="{$institution['validity_date']}" placeholder=" 格式：年-月-日 如 2014-10-1">
                     </td>
                 </tr>
                 <tr>
@@ -107,7 +122,7 @@
                         <div class="mz-text-center">培训范围</div>
                     </td>
                     <td>
-                        <input id="text-training_scope" class="inp" type="text" style="height:100%;width:100%;" value="">
+                        <input id="text-training_scope" class="inp" type="text" style="height:100%;width:100%;" value="{$institution['training_scope']}">
                     </td>
                 </tr>
                 <tr>
@@ -115,16 +130,7 @@
                         <div class="mz-text-center">师资力量</div>
                     </td>
                     <td>
-                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="mz-text-center">有效期</div>
-                    </td>
-                    <td>
-                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="">
+                        <input id="text-teacher_resource" type="text" class="inp" style="height:100%;width:100%;" value="{$institution['teacher_resource']}">
                     </td>
                 </tr>
 
@@ -134,7 +140,7 @@
                             <span>*</span>联系人</div>
                     </td>
                     <td>
-                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="" placeholder="必填">
+                        <input id="text-contact_member" type="text" class="inp" style="height:100%;width:100%;" value="{$institution['contact_member']}" placeholder="必填">
                     </td>
                 </tr>
 
@@ -144,7 +150,7 @@
                             <span>*</span>联系电话</div>
                     </td>
                     <td>
-                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="" placeholder="必填">
+                        <input id="text-contact_phone" type="text" class="inp" style="height:100%;width:100%;" value="{$institution['contact_phone']}" placeholder="必填">
                     </td>
                 </tr>
 
@@ -153,7 +159,7 @@
                         <div class="mz-text-center">联系邮箱</div>
                     </td>
                     <td>
-                        <input id="text-validity_date" type="text" class="inp" style="height:100%;width:100%;" value="">
+                        <input id="text-contact_email" type="text" class="inp" style="height:100%;width:100%;" value="{$institution['contact_email']}">
                     </td>
                 </tr>
                 <tr>
@@ -167,12 +173,13 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="mz-text-center"><span>*</span>附件</div>
+                        <div class="mz-text-center">
+                            <span>*</span>附件</div>
                     </td>
 
-                    <td >
-                        <input id="text-validity_date" type="file" class="inp" value="" >
-                        <span>*最大文件大小为4MB,只能上传1文件,建议上传用zip</span>
+                    <td>
+                        <input id="text-" type="file" class="inp" value="">
+                        <span>*最大文件大小为4MB,只能上传1文件,建议上传用zip压缩打包</span>
                     </td>
                 </tr>
                 <tr>
@@ -194,7 +201,7 @@
 <!-- UEditor end-->
 
 <script type="text/javascript">
-var initContent = '';
+var initContent = '{$institution["description"]}';
 
 //实例化编辑器
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
@@ -207,7 +214,7 @@ var ue = UE.getEditor('editor', {
     enableAutoSave: false,
     saveInterval: 2000000000,
     enableContextMenu: false, //打开右键菜单功能
-    initialContent: '', //初始化编辑器的内容
+    initialContent: initContent, //初始化编辑器的内容
     initialFrameWidth: 910,
 });
 
@@ -219,6 +226,8 @@ ue.ready(function() {
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+    var uid = "{$uid}";
+
     //退出
     $('#btn-logout').on('click', function() {
         $.get('/mz/index.php/home/user/logout', function(data) {
@@ -233,33 +242,56 @@ ue.ready(function() {
 
 
     function insert(src, key, val) {
-            if (val !== '') {
-                src[key] = val;
-            }
+        if (val !== '') {
+            src[key] = val;
         }
-        //更新用户信息
+    }
+
+    //更新用户信息
     $('#btn-submit').on('click', function() {
         console.log("click");
-        var uid = "{$uid}";
+
         var name = $('#text-name').val();
         var address = $('#text-address').val();
+        var manager = $('#text-manager').val();
         var type = $('#text-type').val();
         var approval_number = $('#text-approval_number').val();
-        var training_scope = $('#text-training_scope').val();
-        var manager = $('#text-manager').val();
         var validity_date = $('#text-validity_date').val();
-        // var description = $('#text-description').val();
+        var training_scope = $('#text-training_scope').val();
+        var teacher_resource = $('#text-teacher_resource').val();
+        var contact_member = $('#text-contact_member').val();
+        var contact_phone = $('#text-contact_phone').val();
+        var contact_email = $('#text-contact_email').val();
         var description = UE.getEditor('editor').getContent();
+
+
+        if (name === '') {
+            alert('机构名称不能为空');
+            return;
+        }
+
+        if (contact_member === '') {
+            alert('联系人不能为空');
+            return;
+        }
+        if (contact_phone === '') {
+            alert('联系电话不能为空');
+            return;
+        }
 
         var post_data = {};
         insert(post_data, 'uid', uid);
         insert(post_data, 'name', name);
         insert(post_data, 'address', address);
+        insert(post_data, 'manager', manager);
         insert(post_data, 'type', type);
         insert(post_data, 'approval_number', approval_number);
-        insert(post_data, 'training_scope', training_scope);
-        insert(post_data, 'manager', manager);
         insert(post_data, 'validity_date', validity_date);
+        insert(post_data, 'training_scope', training_scope);
+        insert(post_data, 'teacher_resource', teacher_resource);
+        insert(post_data, 'contact_member', contact_member);
+        insert(post_data, 'contact_phone', contact_phone);
+        insert(post_data, 'contact_email', contact_email);
         insert(post_data, 'description', description);
 
         $.post("{:U('home/institution/update')}", post_data, function(json) {

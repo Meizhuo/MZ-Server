@@ -158,6 +158,7 @@ institution_id | 机构的id 	| Y
 
 字段	|描述 |  是否必须 
 ------------ | -------------| -------------
+uid | 机构id | N
 name |机构名称  | N
 address |机构地址 | N
 manager |机构负责人 | N
@@ -165,6 +166,8 @@ type  |办学类型 | N
 approval_number |批准文号 | N
 validity_date |有效期  | N
 training_scope |培训范围 | N
+description | 描述 （可空 | N
+teacher_resource | 师资力量（可空 | N
 contact_member  | 联系人 | N
 contact_phone  | 联系电话 | N
 contact_email  | 联系邮箱 | N
