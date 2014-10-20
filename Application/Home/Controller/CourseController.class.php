@@ -64,6 +64,32 @@ class CourseController extends BaseController {
         }
     }
     /**
+     * POST 显示课程
+     */
+    public function displayCourse(){
+        $this->reqPost(array('course_id'))->reqLogin()->reqPermission();
+        
+        $res = D('Course')->displayCourse(I('post.course_id'));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else {
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
+    /**
+     * POST 显示课程
+     */
+    public function unDisplayCourse(){
+        $this->reqPost(array('course_id'))->reqLogin()->reqPermission();
+    
+        $res = D('Course')->unDisplayCourse(I('post.course_id'));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else {
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
+    /**
      * GET 查询
      * @param string $institution_id 机构id 
      * @param string $subsidy_id  补贴项目id

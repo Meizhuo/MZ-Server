@@ -7,10 +7,12 @@ use Common\Model\BaseModel;
  *
  */
 class CourseModel extends BaseModel{
-
+    /** 不可见(下线)*/
+    const VISIBILITY_UNDISPLAY = -1;
+    /** 可见(上线)*/
+    const VISIBILITY_DISPLAY = 1;
 
     protected $_validate = array(
-    	array('start_time','number','开课时间 应该为时间戳timestamp'),
         array('cost','number','课程费用应为数字')
     );
     /**
@@ -20,6 +22,8 @@ class CourseModel extends BaseModel{
      */
     public function post($data) {
         $res = $this->_getResult();
+        //任何课程已发布都是默认未上线
+        $data['display'] = self::VISIBILITY_UNDISPLAY;
         if ($this->create($data)) {
             if ($this->add()) {
                 $res['status'] = 1;
@@ -48,6 +52,24 @@ class CourseModel extends BaseModel{
             $res['msg'] = $this->getError();
         }
         return $res;
+    }
+    /**
+     * 显示(上线)课程
+     * @param unknown $course_id
+     */
+    public function displayCourse($course_id){
+        $data['id'] = $course_id;
+        $data['display'] = self::VISIBILITY_DISPLAY;
+        return $this->update($data);
+    }
+    /**
+     * 不显示(不上线)课程
+     * @param unknown $course_id
+     */
+    public function unDisplayCourse($course_id){
+        $data['id'] = $course_id;
+        $data['display'] = self::VISIBILITY_UNDISPLAY;
+        return $this->update($data);
     }
     /**
      * 删除  (根据机构id)
