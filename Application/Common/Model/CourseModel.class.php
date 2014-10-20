@@ -57,19 +57,30 @@ class CourseModel extends BaseModel{
      * 显示(上线)课程
      * @param unknown $course_id
      */
-    public function displayCourse($course_id){
-        $data['id'] = $course_id;
+    public function displayCourse($institution_id,$course_id){
+        $res = $this->_getResult();
         $data['display'] = self::VISIBILITY_DISPLAY;
-        return $this->update($data);
+        if($this->where("id='%s' AND institution_id='%s'",$course_id,$institution_id)->save($data)>=0){
+            $res['status'] = 1;
+        }else{
+            $res['msg'] = $this->getError();
+        }
+        return $res;
+        
     }
     /**
      * 不显示(不上线)课程
      * @param unknown $course_id
      */
-    public function unDisplayCourse($course_id){
-        $data['id'] = $course_id;
+    public function unDisplayCourse($institution_id,$course_id){
+        $res = $this->_getResult();
         $data['display'] = self::VISIBILITY_UNDISPLAY;
-        return $this->update($data);
+        if($this->where("id='%s' AND institution_id='%s'",$course_id,$institution_id)->save($data)>=0){
+            $res['status'] = 1;
+        }else{
+            $res['msg'] = $this->getError();
+        }
+        return $res;
     }
     /**
      * 删除  (根据机构id)

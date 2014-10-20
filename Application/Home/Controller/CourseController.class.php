@@ -18,7 +18,7 @@ class CourseController extends BaseController {
         $person = D('User')->createInstution(session('uid'))->getData();
         //注意这里是字符与数字的比较 用==
         if(!($person['level'] == UserModel::LEVEL_INSTITUTION && $person['status'] == UserModel::STATUS_PASS)){
-            $this->ajaxReturn(mz_json_error('Permission Refused:   你不是机构用户  or 机构未通过审核'));
+            $this->ajaxReturn(mz_json_error('操作失败 :机构未通过审核'));
         }
         return $this;
     }
@@ -70,7 +70,7 @@ class CourseController extends BaseController {
     public function displayCourse(){
         $this->reqPost(array('course_id'))->reqLogin()->reqPermission();
         
-        $res = D('Course')->displayCourse(I('post.course_id'));
+        $res = D('Course')->displayCourse(session('uid'),I('post.course_id'));
         if($res['status']){
             $this->ajaxReturn(mz_json_success());
         }else {
@@ -78,28 +78,18 @@ class CourseController extends BaseController {
         }
     }
     /**
-     * POST 显示课程
+     * POST 不显示课程
      */
     public function unDisplayCourse(){
         $this->reqPost(array('course_id'))->reqLogin()->reqPermission();
     
-        $res = D('Course')->unDisplayCourse(I('post.course_id'));
+        $res = D('Course')->unDisplayCourse(session('uid'),I('post.course_id'));
         if($res['status']){
             $this->ajaxReturn(mz_json_success());
         }else {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
-    /**
-     * 查询
-     * 基础接口
-     * @param string $institution_id 机构id 
-     * @param string $subsidy_id  补贴项目id
-     * @param string $name 课程名称
-     * @param number $page 页码 默认1
-     * @param number $limit 返回数 默认10
-     */
-    
     /**
      * 查询
      * 基础接口，请调用 lists()
