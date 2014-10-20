@@ -1,6 +1,7 @@
 <?php
 namespace Common\Controller;
 use Think\Controller;
+use Common\Model\UserModel;
 
 /**
  * base controller
@@ -47,7 +48,7 @@ class BaseController extends Controller {
      */
     protected function reqLogin(){
         if(!$this->isLogin()){
-           $this->ajaxReturn(mz_json_error('login please'));
+           $this->ajaxReturn(mz_json_error('Login please'));
         }
         return $this;
     }
@@ -71,6 +72,39 @@ class BaseController extends Controller {
         if(!empty($msg)){
             $this->ajaxReturn(mz_json_success($msg));
         }
+    }
+    /**
+     * 需要某用户角色
+     * @param unknown $level
+     * @param unknown $msg
+     * @return \Common\Controller\BaseController
+     */
+    private function reqUser($level,$msg){
+        $this->reqLogin();
+        $res= M('User')->where("uid='%s'",session('uid'))->limit(1)->select();
+        if($res && $res[0]['level'] == $level){
+            print_r($res);
+            return $this;
+        }
+        $this->ajaxReturn(mz_json_error($msg));
+    }
+    /**
+     * 需要机构用户登录
+     */
+    protected function reqInstitution(){
+    	return $this->reqUser(UserModel::LEVEL_INSTITUTION,'需要机构用户权限');
+    }
+    /**
+     * 需要个人用户登录
+     */
+    protected function reqPerson(){
+        return $this->reqUser(UserModel::LEVEL_PERSON,'需要个人用户权限');
+    }
+    /**
+     * 需要管理员登录
+     */
+    protected function reqAdmin(){
+        return $this->reqUser(UserModel::LEVEL_PERSON,'需要管理员权限');
     }
 }
 
