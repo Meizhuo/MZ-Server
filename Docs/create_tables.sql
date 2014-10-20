@@ -84,7 +84,7 @@ CREATE TABLE `mz_user_institution` (
 
 -- 培训课程表
 DROP TABLE IF EXISTS `mz_course`;
-CREATE TABLE  `mz_course` (
+CREATE TABLE `mz_course` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '课程id',
   `institution_id` int(11) NOT NULL COMMENT '所属的培训机构',
   `subsidy_id` int(11) DEFAULT NULL COMMENT '对应的补贴项目',
@@ -94,8 +94,9 @@ CREATE TABLE  `mz_course` (
   `teacher` varchar(32) DEFAULT NULL COMMENT '授课老师',
   `introduction` text COMMENT '课程介绍',
   `cost` int(11) DEFAULT NULL COMMENT '课程费用',
+  `display` int(1) DEFAULT '-1' COMMENT '是否显示课程(-1不显示,1显示)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训课程' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='培训课程' AUTO_INCREMENT=1 ;
 
 
 
