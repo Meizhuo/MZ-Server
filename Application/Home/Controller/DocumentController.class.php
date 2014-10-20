@@ -105,8 +105,7 @@ class DocumentController extends BaseController {
      * POST 上传附件
      */
     public function upload() {
-        //TODO 检查权限
-        // $this->reqPost('doc_id');
+        $this->reqAdmin();
         $config = array(
             'maxSize'    =>  3145728,// 设置附件上传大小 3M
             'rootPath'   =>  './Uploads/', // 设置附件上传根目录

@@ -104,7 +104,7 @@ class BaseController extends Controller {
      * 需要管理员登录
      */
     protected function reqAdmin(){
-        return $this->reqUser(UserModel::LEVEL_PERSON,'需要管理员权限');
+        return $this->reqUser(UserModel::LEVEL_ADMIN,'需要管理员权限');
     }
 }
 
