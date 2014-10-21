@@ -89,9 +89,23 @@ class InstitutionController extends BaseController {
     public function postCourse($institution_id = 0) {
         $this->reqInstituion();
         if(is_numeric(I('get.institution_id')) && (int)(I('get.institution_id')) > 0){
-             $res = D('Course')->info(I('get.institution_id'));
-             $this->assign('course', $res['msg']);
+             $res_course = D('Course')->info(I('get.institution_id'));
+             $this->assign('course', $res_course['msg']);
+             // print !!!!!!!!!
+             print_r($res_course['msg']);
+             //当前的补贴项目
+             $res_subsidy = D('Subsidy')->getById( $res_course['msg']['subsidy_id']);
+             if($res_subsidy['status']){
+                 $this->assign('subsidy',$res_subsidy['msg']);
+             }
         }
+        //补贴项目item
+        $certificateTypes = D('Subsidy')->getSigleFieldType('certificate_type');
+        $kinds = D('Subsidy')->getSigleFieldType('kind');
+       
+        $this->assign('certificateTypes',$certificateTypes['msg']);
+        $this->assign('kinds',$kinds['msg']);
+       
         $this->display();
     }
 

@@ -25,6 +25,10 @@ class CourseModel extends BaseModel{
         //任何课程已发布都是默认未上线
         $data['display'] = self::VISIBILITY_UNDISPLAY;
         if ($this->create($data)) {
+            //前端已处理转义
+            if(!is_null($this->data['introduction'])){
+                $this->data['introduction'] = I('post.introduction','','');
+            }
             if ($this->add()) {
                 $res['status'] = 1;
             } else {
@@ -43,6 +47,10 @@ class CourseModel extends BaseModel{
     public function update($data) {
         $res = $this->_getResult();
         if ($this->create($data)) {
+            //前端已处理转义
+            if(!is_null($this->data['introduction'])){
+                $this->data['introduction'] = I('post.introduction','','');
+            }
             if (count($this->data) === 1 || $this->save() >= 0) {
                 $res['status'] = 1;
             } else {

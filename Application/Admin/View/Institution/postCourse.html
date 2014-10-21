@@ -55,7 +55,8 @@
 
                 <tr>
                     <td style="width: 20%">
-                        <div class="mz-text-center"><span>*</span>课程名称</div>
+                        <div class="mz-text-center">
+                            <span>*</span>课程名称</div>
                     </td>
                     <td style="width: 80%">
                         <input id="text-name" class="inp" type="text" style="height:100%;width:100%;" value="{$course['name']}">
@@ -63,7 +64,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="mz-text-center"><span>*</span>开课地址</div>
+                        <div class="mz-text-center">
+                            <span>*</span>开课地址</div>
                     </td>
                     <td>
                         <input id="text-address" class="inp" type="text" style="height:100%;width:100%;" value="{$course['address']}">
@@ -71,7 +73,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="mz-text-center"><span>*</span>授课老师</div>
+                        <div class="mz-text-center">
+                            <span>*</span>授课老师</div>
                     </td>
                     <td>
                         <input id="text-teacher" class="inp" type="text" style="height:100%;width:100%;" value="{$course['teacher']}">
@@ -79,98 +82,99 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="mz-text-center"><span>*</span>课程费用</div>
+                        <div class="mz-text-center">
+                            <span>*</span>课程费用</div>
                     </td>
                     <td>
                         <input id="text-cost" class="inp" type="text" style="height:100%;width:100%;" value="{$course['cost']}">
-                    </td>
-                </tr>
-                  <tr>
-                    <td>
-                        <div class="mz-text-center"><span>*</span>课程费用</div>
-                    </td>
-                    <td>
-                        <input id="text-cost" class="inp" type="text" style="height:100%;width:100%;" value="{$course['cost']}">
-                    </td>
-                </tr>
- <tr>
-                    <td>
-                        <div class="mz-text-center"><span>*</span>补贴项目</div>
-                    </td>
-                    <td>
-                        <input type="checkbox" name="checkbox" value="radio">  是<br>
-                        证书类别
-                        <select id="select-category" name="select" style=" border: 2px solid #ededed; border-radius: 3px;">
-                            <option value="1">职业培训-基本职能</option>
-                            <option value="2">职业培训-法律法规及政策</option>
-                            <option value="3">职业培训-相关新闻</option>
-                            <option value="4">职业培训-通知信息</option>
-                            <option value="5">职业技能鉴定-政策法规</option>
-                            <option value="6">职业技能鉴定-办事指南</option>
-                            <option value="7">职业技能鉴定-全国统考</option>
-                        </select>
-                        <br>
-                        项目类别
-                        <select id="select-category" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
-                            <option value="1">职业培训-基本职能</option>
-                            <option value="2">职业培训-法律法规及政策</option>
-                            <option value="3">职业培训-相关新闻</option>
-                            <option value="4">职业培训-通知信息</option>
-                            <option value="5">职业技能鉴定-政策法规</option>
-                            <option value="6">职业技能鉴定-办事指南</option>
-                            <option value="7">职业技能鉴定-全国统考</option>
-                        </select>
-                        <br>
-                        &nbsp;等&nbsp;&nbsp;&nbsp;&nbsp;级&nbsp;
-                        <select id="select-category" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
-                            <option value="1">职业培训-基本职能</option>
-                            <option value="2">职业培训-法律法规及政策</option>
-                            <option value="3">职业培训-相关新闻</option>
-                            <option value="4">职业培训-通知信息</option>
-                            <option value="5">职业技能鉴定-政策法规</option>
-                            <option value="6">职业技能鉴定-办事指南</option>
-                            <option value="7">职业技能鉴定-全国统考</option>
-                        </select>
-                        <br>
-                         &nbsp;工&nbsp;&nbsp;&nbsp;&nbsp;种&nbsp;
-                        <select id="select-category" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
-                            <option value="1">职业培训-基本职能</option>
-                            <option value="2">职业培训-法律法规及政策</option>
-                            <option value="3">职业培训-相关新闻</option>
-                            <option value="4">职业培训-通知信息</option>
-                            <option value="5">职业技能鉴定-政策法规</option>
-                            <option value="6">职业技能鉴定-办事指南</option>
-                            <option value="7">职业技能鉴定-全国统考</option>
-                        </select>
-                        <br>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="mz-text-center"><span>*</span>课程介绍</div>
+                        <div class="mz-text-center">
+                            <span>*</span>开课时间</div>
+                    </td>
+                    <td>
+                        <input id="text-start_time" class="inp" type="text" style="height:100%;width:100%;" value="{$course['start_time']}" placeholder=" 格式：年-月-日 如 2014-10-1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mz-text-center">
+                            <span>*</span>补贴项目</div>
+                    </td>
+                    <td>
+                        <span style="color: black;font-size: 14px;" id="text-subsidy" data-id="{$course['subsidy_id']}">{$subsidy['kind']} {$subsidy['level']} {$subsidy['title']}</span>
+                        <input id="btn-select" type="submit" class="submit" value="选 择" style="margin-left: 10px;">
+                        <div style="margin-left:10px;">
+                            <div>
+                                证书类别
+                                <select id="select-certificate" name="select" style=" border: 2px solid #ededed; border-radius: 3px;">
+                                    <option value="0">请选择</option>
+                                    <foreach name="certificateTypes" item="c">
+                                        <option value="{$c['certificate_type']}">{$c['certificate_type']}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div>项目类别
+                                <select id="select-kind" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
+                                    <option value="0">请选择</option>
+                                    <foreach name="kinds" item="k">
+                                        <option value="{$k['kind']}">{$k['kind']}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div>&nbsp;等&nbsp;&nbsp;&nbsp;&nbsp;级&nbsp;
+                                <select id="select-level" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
+
+                                </select>
+                            </div>
+                            <div>&nbsp;工&nbsp;&nbsp;&nbsp;&nbsp;种&nbsp;
+                                <select id="select-title" name="select" style="border: 2px solid #ededed; border-radius: 3px;">
+
+                                </select>
+                            </div>
+                            <div>
+                                <input id="btn-select-comfirm" type="submit" class="submit" value="确 认" data-subsidy="">
+                            </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mz-text-center">
+                            <span>*</span>课程介绍</div>
                     </td>
                     <td height="400">
                         <script id="editor" type="text/plain" style="height:100%;width:100%"></script>
                     </td>
                 </tr>
-               
+
                 <tr>
-                    <td class="mz-text-center"><span>*</span>是否上线</td>
+                    <td class="mz-text-center">
+                        <span>*</span>是否上线</td>
                     <td>
-                         <input type="radio" name="radio" checked="checked">  是
-                         <input type="radio" name="radio" value="radio">  否
+                        <if condition="$course['display'] eq 1 ">
+                            <input type="radio" name="radio" checked="checked" value="1">是
+                            <input type="radio" name="radio" value="-1">否
+                            <else />
+                            <input type="radio" name="radio" value="1">是
+                            <input type="radio" name="radio" checked="checked" value="-1">否
+                        </if>
+
                     </td>
                 </tr>
                 <tr>
-                    <td class="mz-text-center"><span>*为必填</span></td>
+                    <td class="mz-text-center">
+                        <span>*为必填</span>
+                    </td>
                     <td>
                         <input id="btn-submit" type="submit" class="submit" value="发 布">
                     </td>
                 </tr>
 
             </table>
+            </div>
         </div>
-    </div>
 
 </body>
 
@@ -182,8 +186,6 @@
 <!-- UEditor end-->
 
 <script type="text/javascript">
-
-
 var initContent = '{$course["introduction"]}';
 
 //实例化编辑器
@@ -209,6 +211,9 @@ ue.ready(function() {
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+    var course_id = "{$course['id']}"; //课程id
+    var subsidy_id = "{$course['subsidy_id']}"
+
     //退出
     $('#btn-logout').on('click', function() {
         $.get('/mz/index.php/home/user/logout', function(data) {
@@ -224,12 +229,15 @@ ue.ready(function() {
 
     //发布&更新课程
     $('#btn-submit').on('click', function() {
-        var course_id = "{$course['id']}"; //课程id
         var name = $('#text-name').val();
         var address = $('#text-address').val();
         var teacher = $('#text-teacher').val();
         var cost = $('#text-cost').val();
-        var introduction = $('#text-introduction').val();
+        var start_time = $('#text-start_time').val();
+        var introduction = UE.getEditor('editor').getContent();
+        var display = $('input[name="radio"]:checked').val();
+        var subsidy_id = $('#text-subsidy').data('id');
+
 
         if (name === '') {
             alert("课程名称不能为空");
@@ -253,8 +261,14 @@ ue.ready(function() {
             address: address,
             teacher: teacher,
             cost: cost,
+            start_time: start_time,
             introduction: introduction,
+            display: display,
         };
+        if (subsidy_id !== '') {
+            post_data['subsidy_id'] = subsidy_id;
+        }
+
         if (course_id === '') {
             //发布
             $.post("{:U('home/course/post')}", post_data, function(json) {
@@ -271,7 +285,9 @@ ue.ready(function() {
             //更新
             post_data['course_id'] = course_id;
             $.post("{:U('home/course/update')}", post_data, function(json) {
+                console.log(json);
                 if (json.code) {
+
                     alert('更新课程成功！');
                     setTimeout(function() {
                         location = "{:U('admin/institution/manage')}";
@@ -281,8 +297,122 @@ ue.ready(function() {
                 }
             });
         }
+    });
+    //处理选择补贴项目的交互
+    $txt_subsidy = $('#text-subsidy');
+    $btn_select = $('#btn-select');
+    $btn_comfirm = $('#btn-select-comfirm');
+    $sel_certificate = $('#select-certificate');
+    $sel_kind = $('#select-kind');
+    $sel_level = $('#select-level');
+    $sel_title = $('#select-title');
+
+    function initSubsidy(n) {
+        switch (n) {
+            case 1:
+                $sel_certificate.parent().hide();
+            case 2:
+                $sel_kind.parent().hide();
+            case 3:
+                $sel_level.parent().hide();
+            case 4:
+                $sel_title.parent().hide();
+            case 5:
+                $btn_comfirm.parent().hide();
+        }
+
+    }
+
+    $sel_certificate.on('change', function() {
+        if ($sel_certificate.val() !== 0) {
+            $sel_kind.parent().fadeIn();
+            initSubsidy(3);
+        } else {
+
+        }
+    });
+
+    function load_option(url, selector, type_name, callback) {
+        $.get(url, {}, function(json) {
+            if (json.code) {
+                selector.html('');
+                var _html = '<option value="0">请选择</option>';
+                var _tpl = '<option value="{_name_}">{_name_}</option>';
+                for (num in json.response) {
+                    var _value = json.response[num][type_name];
+                    _html += _tpl.replace('{_name_}', _value).replace('{_name_}', _value);
+                }
+                selector.html(_html);
+                selector.parent().fadeIn();
+
+                callback();
+            } else {
+                alert('出错了...');
+            }
+        });
+    }
+
+    $sel_kind.on('change', function() {
+        if ($sel_kind.val() !== 0) {
+            var params = ['certificate_type=' + $sel_certificate.val(), 'kind=' + $sel_kind.val()].join('&');
+
+            var _url = "{:U('home/subsidy/getLevels','','')}" + '?' + params;
+            load_option(_url, $sel_level, 'level', function() {
+                initSubsidy(4);
+            });
+        } else {
+
+        }
+    });
+
+    $sel_level.on('change', function() {
+        if ($sel_level.val() !== 0) {
+            var params = ['certificate_type=' + $sel_certificate.val(), 'kind=' + $sel_kind.val(), 'level=' + $sel_level.val()].join('&');
+
+            var _url = "{:U('home/subsidy/getTitles','','')}" + '?' + params;
+            load_option(_url, $sel_title, 'title', function() {
+                initSubsidy(5);
+            });
+        } else {
+
+        }
+    });
+
+    $sel_title.on('change', function() {
+        if ($sel_title.val() !== 0) {
+            $btn_comfirm.parent().fadeIn();
+        }
+    });
+
+    $btn_comfirm.on('click', function() {
+        var certificate_type = $sel_certificate.val();
+        var kind = $sel_kind.val();
+        var level = $sel_level.val();
+        var title = $sel_title.val();
+
+        $.get("{:U('/home/subsidy/search')}", {
+            certificate_type: certificate_type,
+            kind: kind,
+            level: level,
+            title: title,
+        }, function(json) {
+            if (json.code) {
+                $txt_subsidy.text(kind + '-' + level + '-' + title);
+                $txt_subsidy.data('id', json.response[0].id);
+                initSubsidy(1);
+            } else {
+                alert(json.msg);
+            }
+        })
 
     });
+
+    $btn_select.on('click', function() {
+        $sel_certificate.parent().show();
+    });
+
+    initSubsidy(1);
+
 })(jQuery);
 </script>
 

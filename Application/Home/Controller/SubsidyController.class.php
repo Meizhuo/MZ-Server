@@ -64,18 +64,19 @@ class SubsidyController extends BaseController {
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
     /** GET 等级*/
-    public function getLevels(){
-        $res = D('Subsidy')->getSigleFieldType('level');
+    public function getLevels($certificate_type=null,$kind=null){
+        $res = D('Subsidy')->getSigleFieldType('level',$certificate_type,$kind);
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
     /** GET 系列*/
     public function getSeries(){
+        //TODO MZ:: 还没有数据
         $res = D('Subsidy')->getSigleFieldType('series');
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
     /** GET 资格名称*/
-    public function getTitles(){
-        $res = D('Subsidy')->getSigleFieldType('title');
+    public function getTitles($certificate_type=null,$kind=null,$level=null){
+        $res = D('Subsidy')->getSigleFieldType('title',$certificate_type,$kind,$level);
         $this->ajaxReturn(mz_json_success($res['msg']));
     }
     /**
@@ -88,8 +89,8 @@ class SubsidyController extends BaseController {
      * @param number $page
      * @param number $limt
      */
-    public function search($certificate_type = '', $kind = '', $level = '', $series = '', 
-            $title = '', $page = 1, $limit = 10) {
+    public function search($certificate_type = null, $kind = null, $level = null, $series = null, 
+            $title = null, $page = 1, $limit = 10) {
         $res = D('Subsidy')->search($certificate_type, $kind, $level, $series, 
                 $title, $page, $limit);
         if ($res['status']) {

@@ -17,7 +17,7 @@
 institution_id | 所属的培训机构id(一般不用发送，登录后自动填上) | N  
 subsidy_id |对应的补贴项目id  | N    
 name |课程名称 (可空  | N
-start_time |开课时间 时间戳 可空 | N
+start_time |开课时间 可空 | N
 address |开课地址  可空 | N
 teacher |授课老师 可空 | N
 introduction |课程介绍 可空 | N
@@ -43,7 +43,7 @@ display |是否显示(上线)课程(-1不显示,1显示)默认-1| N
 course_id | 课程id | Y
 subsidy_id |对应的补贴项目id  | N    
 name |课程名称 (可空  | N
-start_time |开课时间 时间戳 可空 | N
+start_time |开课时间 可空 | N
 address |开课地址  可空 | N
 teacher |授课老师 可空 | N
 introduction |课程介绍 可空 | N

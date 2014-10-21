@@ -66,6 +66,22 @@ class SubsidyModel extends BaseModel {
         return $res;
     }
     /**
+     * 根据id获得该补贴项信息
+     * @param unknown $id
+     * @return Ambigous <number, string, multitype:number string >
+     */
+    public function getById($id){
+        $res =$this->_getResult();
+        $res['msg'] = $this->where("id='%s'",$id)->limit(1)->select();
+        if($res['msg']){
+            $res['msg'] = $res['msg'][0];
+            $res['status'] =  1;
+        }else {
+            $res['msg'] = '找不到该补贴项';
+        }
+        return $res;
+    }
+    /**
      * 模糊搜索项目
      * @param unknown $certificate_type
      * @param unknown $kind
@@ -76,7 +92,7 @@ class SubsidyModel extends BaseModel {
      * @param number $limt
      * @return multitype:number string
      */
-    public function search($certificate_type ,$kind,$level,$series,$title,$page=1,$limit=10){
+    public function search($certificate_type = null ,$kind=null,$level=null,$series=null,$title=null,$page=1,$limit=10){
         $res = $this->_getResult();
         $map = array();
         if(!empty($certificate_type)){
@@ -111,9 +127,18 @@ class SubsidyModel extends BaseModel {
      * @return json String [{"fieldName":"xxx"}.....]
      * 
      */
-    public function getSigleFieldType($field){
+    public function getSigleFieldType($field,$certificate_type=null,$kind=null,$level=null){
         $res = $this->_getResult();
-        $res['msg'] = $this->field($field)->distinct(true)->select();
+        if(!is_null($certificate_type)){
+            $where['certificate_type'] = array('eq',$certificate_type);
+        }
+        if(!is_null($kind)){
+            $where['kind'] = array('eq',$kind);
+        }
+        if(!is_null($level)){
+            $where['level'] = array('eq',$level);
+        }
+        $res['msg'] = $this->field($field)->where($where)->distinct(true)->select();
         if(empty($res['msg'])){
             $res['msg'] = array();
         }
