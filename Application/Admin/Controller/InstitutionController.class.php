@@ -91,8 +91,6 @@ class InstitutionController extends BaseController {
         if(is_numeric(I('get.institution_id')) && (int)(I('get.institution_id')) > 0){
              $res_course = D('Course')->info(I('get.institution_id'));
              $this->assign('course', $res_course['msg']);
-             // print !!!!!!!!!
-             print_r($res_course['msg']);
              //当前的补贴项目
              $res_subsidy = D('Subsidy')->getById( $res_course['msg']['subsidy_id']);
              if($res_subsidy['status']){
@@ -112,7 +110,6 @@ class InstitutionController extends BaseController {
     public function courseList($display = CourseModel::VISIBILITY_DISPLAY, $page = 1) {
         $this->reqInstituion();
         $res = D('Course')->search($this->institution['uid'], null, null,I('get.display'), $page);
-        print_r(I('get.display'));
         $this->assign('courses', $res['msg']);
         $this->assign('page',$page);
         $this->assign('display',$display);
