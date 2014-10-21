@@ -17,8 +17,8 @@ class UserInstitutionModel extends BaseModel {
     
     public function createInsById($uid){
         $map['uid'] = $uid;
-        $user_ins = M('User')->field('psw',true)->where($map)->select();
-        $user_ins_info = $this->where($map)->select();
+        $user_ins = M('User')->field('psw',true)->where($map)->limit(1)->select();
+        $user_ins_info = $this->where($map)->limit(1)->select();
         if($user_ins && $user_ins_info){
             $this->data = array_merge($user_ins[0],$user_ins_info[0]);
         }else {

@@ -6,7 +6,7 @@
     <title>机构用户管理</title>
 
 
-    <script type="text/javascript" src="js/sidebar.js"></script>
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
@@ -18,7 +18,7 @@
         <a href="{:U('admin/institution/index')}"><img src="/mz/Public/images/zw_w.png" width="80px" height="55px"></a>
     </div>
 
-   <div id="parent_a">
+    <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
                 <li><a href="{:U('admin/institution/updateInfo')}" onclick="DoMenu('ChildMenu1')">登记信息</a>
@@ -38,13 +38,12 @@
 
 
 
-     <div id="topbar">
+    <div id="topbar">
         <span>欢迎 {$institution['nickname']}</span>
         <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
     </div>
 
     <!--下面只是说明与程序代码无关-->
-
 </body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
