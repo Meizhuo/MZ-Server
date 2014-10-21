@@ -30,14 +30,19 @@ class InstitutionController extends BaseController {
         $this->assign('institution', $this->institution);
         return $this;
     }
-
+    /**
+     * 登录页面
+     * @see \Common\Controller\BaseController::index()
+     */
     public function index() {
         if($this->isLogin() && $this->reqInstituion()){
             $this->redirect('admin/institution/manage');
         }
         $this->display();
     }
-    
+    /**
+     * 注册
+     */
     public function signIn(){
         $this->display();
     }
@@ -63,12 +68,16 @@ class InstitutionController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
-
+    /**
+     * 管理主页
+     */
     public function manage() {
         $this->reqInstituion();
         $this->display();
     }
-
+    /**
+     * 更新信息页
+     */
     public function updateInfo() {
         $this->reqInstituion();
         
@@ -85,7 +94,10 @@ class InstitutionController extends BaseController {
         $this->assign('uid', session('uid'));
         $this->display();
     }
-
+    /**
+     * 发布/编辑课程页
+     * @param number $institution_id 机构的id
+     */
     public function postCourse($institution_id = 0) {
         $this->reqInstituion();
         if(is_numeric(I('get.institution_id')) && (int)(I('get.institution_id')) > 0){
@@ -106,7 +118,11 @@ class InstitutionController extends BaseController {
        
         $this->display();
     }
-
+    /**
+     * 课程列表页
+     * @param unknown $display 是否已发布
+     * @param number $page 页码
+     */
     public function courseList($display = CourseModel::VISIBILITY_DISPLAY, $page = 1) {
         $this->reqInstituion();
         $res = D('Course')->search($this->institution['uid'], null, null,I('get.display'), $page);

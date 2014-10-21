@@ -27,7 +27,10 @@ class IndexController extends BaseController {
         $this->assign('admin', $this->admin);
         return $this;
     }
-
+    /**
+     * 登录页
+     * @see \Common\Controller\BaseController::index()
+     */
     public function index() {
         if ($this->isLogin() && $this->reqAdmin()) {
             $this->redirect('admin/index/manage');
@@ -56,7 +59,9 @@ class IndexController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
-
+    /**
+     * 管理员管理页
+     */
     public function manage() {
         $this->reqAdmin();
         
@@ -126,7 +131,10 @@ class IndexController extends BaseController {
         $this->assign('page', $page);
         $this->display();
     }
-
+    /**
+     * 发布/编辑 文档
+     * @param number $doc_id 文档id
+     */
     public function postDocument($doc_id = 0) {
         $this->reqAdmin();
         if($doc_id || $doc_id !== 0) {
@@ -143,7 +151,10 @@ class IndexController extends BaseController {
         }
         $this->display();
     }
-
+    /**
+     * 查看文档详情页
+     * @param number $doc_id 文档id
+     */
     public function viewDocument($doc_id = 0) {
         // TODO MZ:: 处理没有找到该文章的情况
         // TODO MZ:: 处理禁止显示的情况
@@ -171,7 +182,10 @@ class IndexController extends BaseController {
         $this->assign('images', $images);
         $this->display();
     }
-
+    /**
+     * 查看机构页
+     * @param number $institutionId 机构id
+     */
     public function viewInstitution($institutionId = 0) {
         $this->reqAdmin();
         $res = D('User')->getInsInfo($institutionId);
@@ -180,7 +194,7 @@ class IndexController extends BaseController {
         $this->display();
     }
     /**
-     * 广告管理
+     * 广告管理页
      */
     public function advertisements(){
         $this->reqAdmin();
