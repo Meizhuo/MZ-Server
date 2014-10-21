@@ -2,6 +2,7 @@
 namespace Admin\Controller;
 use Common\Controller\BaseController;
 use Common\Model\UserInstitutionModel;
+use Common\Model\CourseModel;
 
 /**
  * 机构用户管理
@@ -89,16 +90,18 @@ class InstitutionController extends BaseController {
         $this->reqInstituion();
         if(is_numeric(I('get.institution_id')) && (int)(I('get.institution_id')) > 0){
              $res = D('Course')->info(I('get.institution_id'));
-             $this->assign('course',$res['msg']);
+             $this->assign('course', $res['msg']);
         }
         $this->display();
     }
-    
-    public function courseList($page=1) {
+
+    public function courseList($display = CourseModel::VISIBILITY_DISPLAY, $page = 1) {
         $this->reqInstituion();
-        $res  = D('Course')->search($this->institution['uid'],null,null,$page);
-        $this->assign('courses',$res['msg']);
+        $res = D('Course')->search($this->institution['uid'], null, null,I('get.display'), $page);
+        print_r(I('get.display'));
+        $this->assign('courses', $res['msg']);
         $this->assign('page',$page);
+        $this->assign('display',$display);
         $this->display();
     }
 }

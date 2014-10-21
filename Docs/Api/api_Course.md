@@ -96,7 +96,7 @@ course_id |课程id| Y
 
 
 ## 不显示(下线)课程
-`POST /home/course/displayCourse`
+`POST /home/course/undisplayCourse`
 
 字段  |描述 |  是否必须 
 ------------ | -------------| -------------

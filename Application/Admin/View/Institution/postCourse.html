@@ -6,7 +6,7 @@
     <title>机构用户管理</title>
 
 
-    <script type="text/javascript" src="js/sidebar.js"></script>
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
@@ -182,7 +182,9 @@
 <!-- UEditor end-->
 
 <script type="text/javascript">
-var initContent = '';
+
+
+var initContent = '{$course["introduction"]}';
 
 //实例化编辑器
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
