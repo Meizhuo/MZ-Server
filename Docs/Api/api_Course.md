@@ -222,7 +222,7 @@ limit| 返回数目 默认10|  N
 }
 ```
 ## 查看课程简介
-`GET /admin/view/insIntro`
+`GET /admin/view/courseIntro`
 
 
 字段  |描述 |  是否必须 
