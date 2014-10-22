@@ -87,9 +87,9 @@ class IndexController extends BaseController {
         $documents = $res['msg'];
         for($i=0;$i<count($documents);$i++){
             $authors = D('UserAdmin')->createAdminById($documents[$i]['uid'])->getData();
-            $vertifyers =null;
+            $vertifyer =null;
             if(!empty($documents[$i]['vertify_uid'])){
-                D('UserAdmin')->createAdminById($documents[$i]['vertify_uid'])->getData();
+                $vertifyer = D('UserAdmin')->createAdminById($documents[$i]['vertify_uid'])->getData();
             }
             if($authors){
                 $documents[$i]['author'] = $authors;
@@ -97,8 +97,9 @@ class IndexController extends BaseController {
             }else{
                 $documents[$i]['author'] = null;
             }
-            if($vertifyers){
-                $documents[$i]['vertifyer'] = $vertifyers;
+           
+            if($vertifyer){
+                $documents[$i]['vertifyer'] = $vertifyer;
             }else{
                 $documents[$i]['vertifyer'] = null;
             }
