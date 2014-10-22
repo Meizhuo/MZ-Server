@@ -72,13 +72,13 @@
         // var psw = $('#psw').text();
         var account = "superadmin@mz.com";
         var psw = "superadmin";
-        $.post("/mz/index.php/admin/index/login", {
+        $.post("{:U('home/user/login','','')}", {
             "account": account,
             "psw": psw
         }, function(json) {
             console.log(json);
             if (json.code === 20000) {
-                location = json.response;
+                location = "{:U('admin/index/manage')}";
             } else {
                 alert(json.msg);
             }

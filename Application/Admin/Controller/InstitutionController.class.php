@@ -48,27 +48,6 @@ class InstitutionController extends BaseController {
     }
 
     /**
-     * POST 登录
-     */
-    public function login() {
-        $this->reqPost();
-        
-        $account = I('post.account');
-        $psw = md5(I('post.psw'));
-        $User = D('User');
-        if (strstr($account, '@')) {
-            $res = $User->login('email', $account, $psw);
-        } else {
-            $res = $User->login('phone', $account, $psw);
-        }
-        if ($res['status']) {
-            session('uid', $res['msg']['uid']);
-            $this->ajaxReturn(mz_json_success(U('admin/institution/manage')));
-        } else {
-            $this->ajaxReturn(mz_json_error($res['msg']));
-        }
-    }
-    /**
      * 管理主页
      */
     public function manage() {

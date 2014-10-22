@@ -79,13 +79,13 @@
         // var psw = $('#psw').text();
         var account = "user1@jiecheng.com";
         var psw = "123456789";
-        $.post("/mz/index.php/admin/institution/login", {
+        $.post("{:U('home/user/login')}", {
             "account": account,
             "psw": psw
         }, function(json) {
             console.log(json);
             if (json.code === 20000) {
-                location = json.response;
+                location = "{:U('admin/institution/manage')}";
             } else {
                 alert(json.msg);
             }
