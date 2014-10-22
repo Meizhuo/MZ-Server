@@ -6,3 +6,6 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 </IfModule>
+
+#在网站的根目录（apache配置文件中指定的Document的目录，这里就是www/目录下）建立自己想要的404.html
+ErrorDocument 404 /404.html
