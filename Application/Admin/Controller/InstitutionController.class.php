@@ -104,7 +104,8 @@ class InstitutionController extends BaseController {
      */
     public function courseList($display = CourseModel::VISIBILITY_DISPLAY, $page = 1) {
         $this->reqInstituion();
-        $res = D('Course')->search($this->institution['uid'], null, null,I('get.display'), $page);
+        $display = I('get.display',CourseModel::VISIBILITY_DISPLAY);
+        $res = D('Course')->search($this->institution['uid'], null, null,$display, $page);
         $this->assign('courses', $res['msg']);
         $this->assign('page',$page);
         $this->assign('display',$display);
