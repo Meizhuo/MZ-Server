@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>修改密码</title>
+
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body>
+    <div id="logo">
+        <a href="{:U('admin/institution/index')}">
+            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+        </a>
+    </div>
+
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="{:U('admin/institution/updateInfo')}" onclick="DoMenu('ChildMenu1')">返回首页</a>
+
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <div id="topbar">
+        <span>找回密码</span>
+
+    </div>
+
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style=" width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
+        <div class="ht">
+            <h1>密码管理 - 找回密码</h1>
+        </div>
+        <div id="cat_wr">
+            <table width="100%" border="0">
+                <tr>
+                    <td width="50">
+                        <div align="right">新密码</div>
+                    </td>
+                    <td width="400">
+                        <input id="text-psw" class="inp" type="password" style="height:100%;width:60%;" placeholder="长度8-16位,字符+数字">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50">
+                        <div align="right">再次输入</div>
+                    </td>
+                    <td width="400">
+                        <input id="text-repsw" class="inp" type="password" style="height:100%;width:60%;" placeholder="请确保一致">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input id="btn-comfirm" type="submit" class="submit" value="确认">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    $('#btn-comfirm').on('click', function() {
+        var psw = $('#text-psw').val();
+        var repsw = $('#text-repsw').val();
+        var e = "{$e}";
+        var code = "{$code}";
+        if (psw !== repsw || psw === '' || psw.length < 8 || psw.length > 16) {
+            alert('输入有无,请注意输入条件');
+            return;
+        }
+        $.post("{:U('admin/security/vertify','','')}", {
+            psw: psw,
+            e: e,
+            code: code,
+        }, function(json) {
+            if (json.code) {
+                alert(json.response);
+            } else {
+                alert(json.msg);
+            }
+            location = "{:U('admin/institution/index')}"
+        });
+    });
+})(jQuery);
+</script>
+
+</html>

@@ -192,6 +192,19 @@ CREATE TABLE `mz_advertisement` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告' AUTO_INCREMENT=1 ;
 
+
+--
+-- 用户修改密码
+--
+DROP TABLE IF EXISTS  `mz_user_forget`;
+CREATE TABLE `mz_user_forget` (
+  `email` varchar(32) DEFAULT NULL COMMENT '邮箱',
+  `create_time` int(11) NOT NULL COMMENT '创建时间',
+  `rand_str` varchar(32) NOT NULL COMMENT '8位随机字符串',
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户忘记密码信息';
+
+
 --
 -- 转存表中的数据 `mz_appinfo`
 --

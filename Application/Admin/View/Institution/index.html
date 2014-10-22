@@ -52,7 +52,7 @@
                             <input id="btn-submit" type="button" value="登 录" />
                             <input id="btn-signIn" type="button" value="注 册" />
 
-                            <input type="button" value="忘记密码" />
+                            <input id="btn-forget" type="button" value="忘记密码" />
                         </div>
                     </div>
                 </div>
@@ -91,6 +91,11 @@
             }
         });
     });
+	
+	//忘记密码
+	$('#btn-forget').on('click',function(){
+		location = "{:U('admin/security/forgetPsw')}";
+	});
 })(jQuery);
 </script>
 
