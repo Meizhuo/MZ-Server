@@ -152,6 +152,18 @@ institution_id | 机构的id 	| Y
 }
 ```
 
+## 查看机构简介
+`GET /admin/view/insIntro`
+
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+ins_id | 机构id| Y
+
+ **Response**  
+
+ html网页
+
 
 ## 更新机构信息
 `POST /home/institution/update`
