@@ -18,7 +18,7 @@ class CourseController extends BaseController {
         $person = D('User')->createInstution(session('uid'))->getData();
         //注意这里是字符与数字的比较 用==
         if(!($person['level'] == UserModel::LEVEL_INSTITUTION && $person['status'] == UserModel::STATUS_PASS)){
-            $this->ajaxReturn(mz_json_error('操作失败 :机构未通过审核'));
+            $this->ajaxReturn(mz_json_error('机构未通过审核'));
         }
         return $this;
     }
