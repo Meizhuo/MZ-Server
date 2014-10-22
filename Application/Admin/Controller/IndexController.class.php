@@ -167,9 +167,19 @@ class IndexController extends BaseController {
      */
     public function viewInstitution($institutionId = 0) {
         $this->reqAdmin();
-        $res = D('User')->getInsInfo($institutionId);
-        $ins = $res['msg'];
-        $this->assign('ins',$ins);
+        if($institutionId !== 0){
+            $res = D('User')->getInsInfo($institutionId);
+            $ins = $res['msg'];
+            $this->assign('ins',$ins);
+            //附件
+            $res = D('DocumentFile')->getDocFilesByIns($institutionId);
+            $files = $res['msg'];
+            
+            for($i=0;$i<count($files);$i++){
+                $files[$i]['url'] = mz_get_docfile_path($files[$i]['save_path'], $files[$i]['save_name']);
+            }
+            $this->assign('files',$files);
+        }
         $this->display();
     }
     /**

@@ -20,7 +20,7 @@
         </a>
     </div>
 
-   <div id="parent_a">
+    <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
                 <li><a href="{:U('admin/index/postDocument')}" onclick="DoMenu('ChildMenu1')">发布文档</a>
@@ -90,11 +90,27 @@
                     <th>培训范围</th>
                     <td>{$ins['training_scope']}</td>
                 </tr>
+
+                <tr>
+                    <th>附件</th>
+                    <td>
+                        <div id="fileList">
+                            <foreach name="files" item="file">
+                                <div>
+                                    <a href="{$file['url']}">{$file['raw_name']}</a>
+                                    <br>
+                                </div>
+                            </foreach>
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <th width="100px;">描述</th>
-                    <td width="500px;" style="text-align: center;">{$ins['description']}</td>
-                </tr>
+                    <td width="500px;" style="text-align: center;">
+                        <a href="/mz/index.php/admin/view/insIntro/ins_id/{$ins['uid']}">查看简介</a>
+                    </td>
 
+                </tr>
             </table>
             <div class="tab_inp" style="text-align:center;margin-top: 20px">
                 <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="height:40px;width: 100px;"></input>
