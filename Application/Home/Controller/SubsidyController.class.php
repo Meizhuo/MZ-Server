@@ -12,8 +12,7 @@ class SubsidyController extends BaseController {
      * POST 发布
      */
     public function post(){
-        //TODO 检查是否有权限
-       $this->reqPost();
+       $this->reqPost()->reqLogin()->reqAdmin();
 
        $res = D('Subsidy')->post();
        if($res['status']){
@@ -26,8 +25,7 @@ class SubsidyController extends BaseController {
      *POST 更新
      */
     public function update(){
-        //TODO 检查是否有权限
-        $this->reqPost();
+        $this->reqPost()->reqLogin()->reqAdmin();
         
         $res = D('Subsidy')->update();
         if($res['status']){
@@ -40,8 +38,7 @@ class SubsidyController extends BaseController {
      * POST 删除
      */
     public function remove(){
-        //TODO 检查是否有权限
-        $this->reqPost();
+        $this->reqPost()->reqLogin()->reqAdmin();
          
         if(I('post.id')){
             D('Subsidy')->remove(I('post.id'));
