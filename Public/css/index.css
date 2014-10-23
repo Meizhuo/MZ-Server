@@ -1,15 +1,12 @@
 /* CSS Document */
-#ind_center{
-	width: 100%;
-	height: 300px;
-	margin: 0px;
-	position: fixed;
-	top: 50%;
-	margin-top: -150px;
-	background-color: #ffffff;
-	filter:alpha(opacity=50); /*IE滤镜，透明度50%*/
-    -moz-opacity:0.5; /*Firefox私有，透明度50%*/
-    opacity:0.5;/*其他，透明度50%*/
+#ind_center {
+    width: 100%;
+    height: 350px;
+    margin: -150px 0px 0px;
+    position: fixed;
+    top: 50%;
+    background-color: #FFF;
+    opacity: 0.5;
 }
 body{
 	font-family: 微软雅黑,黑体,fantasy;
@@ -27,6 +24,16 @@ body{
 	width: 800px;
 	margin: 0 auto;
 
+}
+.footer{
+	width: 800px;
+	border-top: 1px solid #167368;
+	margin: 0 auto;
+	position: relative;
+	top: 100px;
+	text-align: center;
+    line-height: 8px;
+    font-size: 12px;
 }
 #logo{
 	float: left;
@@ -81,3 +88,5 @@ input{
  .maxdiv{width:300px;height:180px;font:100 12px/20px;position: relative;left: -50px;}       
   .centerdiv{text-align:center;margin-top:10px;}       
    .text{width:180px;height:22px}   
+
+   

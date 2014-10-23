@@ -57,6 +57,11 @@
                     </div>
                 </div>
             </div>
+            <div class="footer">
+                <p>Dongguan Occupation Training Center</p>
+                <p><a href="{:U('admin/index/index')}">管理员登录</a></p>
+            </div>
+
 
         </div>
     </div>
@@ -66,16 +71,16 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
-	//跳转到注册页面
-	$('#btn-signIn').on('click',function(){
-		location = "{:U('admin/institution/signIn')}";
-	});
-	//登录
+    //跳转到注册页面
+    $('#btn-signIn').on('click', function() {
+        location = "{:U('admin/institution/signIn')}";
+    });
+    //登录
     $('#btn-submit').on('click', function() {
         var account = $('#account').val();
         var psw = $('#psw').val();
 
-        if(account === '' || psw === ''){
+        if (account === '' || psw === '') {
             alert('请输入登录邮箱和密码');
             return;
         }
@@ -91,11 +96,11 @@
             }
         });
     });
-	
-	//忘记密码
-	$('#btn-forget').on('click',function(){
-		location = "{:U('admin/security/forgetPsw')}";
-	});
+
+    //忘记密码
+    $('#btn-forget').on('click', function() {
+        location = "{:U('admin/security/forgetPsw')}";
+    });
 })(jQuery);
 </script>
 
