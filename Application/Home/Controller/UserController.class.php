@@ -43,7 +43,7 @@ class UserController extends BaseController {
         }
         $uid = session('uid');
         $data['uid'] = session('uid');
-        $res = D('User')->updateUserInfo(array_merge($data,I('post.')));
+        $res = D('UserPerson')->updateInfo(array_merge($data,I('post.')));
         if($res['status']){
             $this->ajaxReturn(mz_json_success('update info success'));
         }else{
