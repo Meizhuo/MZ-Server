@@ -6,6 +6,7 @@
 * 数据库为mz
 * 表前缀mz
 
+* Home模块尽量都放置API 接口,其他模块都是处理混合View的接口
 
 Develope Tips
 ===
