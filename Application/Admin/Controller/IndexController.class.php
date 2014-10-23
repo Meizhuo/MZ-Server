@@ -136,11 +136,15 @@ class IndexController extends BaseController {
      * @param number $doc_id 文档id
      */
     public function viewDocument($doc_id = 0) {
-        // TODO MZ:: 处理没有找到该文章的情况
-        // TODO MZ:: 处理禁止显示的情况
         //document
         $res = D('Document')->getDocumentInfo($doc_id);
-        $document = $res['msg'];
+        //1.找不到该文章 or 禁止显示的均返回404
+        if($res['status'] && $res['msg']['display'] == 1){
+            $document = $res['msg'];
+        }else{
+            $this->display('404.html');
+            return;            
+        }
         //category
         $res = D('DocumentCategory')->getCategoryById($document['category_id']);
         $category = $res['msg'];
