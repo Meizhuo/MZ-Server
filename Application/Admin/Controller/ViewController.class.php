@@ -28,5 +28,13 @@ class ViewController extends BaseController {
         $this->assign('course',$res['msg']);
         $this->display();
     }
+    /**
+     * 下载页面
+     */
+    public function download(){
+        $res = M('Appinfo')->order('id desc')->limit(1)->select();
+        $this->assign('app',$res[0]);
+        $this->display();
+    }
 }
 
