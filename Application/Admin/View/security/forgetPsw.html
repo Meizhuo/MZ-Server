@@ -71,7 +71,7 @@
     $('#btn-comfirm').on('click',function(){
         var email = $('#text-email').val();
         console.log(email);
-        $.post("{:U('admin/security/createLink')}",{
+        $.post("{:U('home/security/createLink')}",{
             email : email
         },function(json){
             if(json.code){
