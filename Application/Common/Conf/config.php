@@ -12,6 +12,8 @@ return array(
          /////自定义参数
         'UPLOAD_PATH' => './Uploads/', // 上传路径
         'UPLOAD_PATH_ABS' => '/mz/Uploads/', // 上传相对项目路径
+//         'APP_URL' => 'http://61.29.161.61:88/mz/index.php', //product
+//         'APP_URL' => 'http://localhost/mz/index.php',//test
         //邮件配置
         'THINK_EMAIL' => array(
                 'SMTP_HOST'   => 'smtp.yeah.net', //SMTP服务器

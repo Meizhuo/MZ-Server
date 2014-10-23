@@ -39,12 +39,12 @@
                 <div class="maxdiv">
                     <div class="centerdiv">
                         <div class="u">
-                            <span>用户名：</span>
+                            <span>登录邮箱：</span>
                             <input id="account" type="text" value="" class="text" />
                         </div>
                         <br />
                         <div class="u">
-                            <span>&nbsp; &nbsp;密码：</span>
+                            <span>&nbsp; &nbsp;密&nbsp; 码&nbsp;：</span>
                             <input id="psw" type="password" value="" class="text" />
                         </div>
                         <br />
@@ -75,10 +75,13 @@
 	});
 	//登录
     $('#btn-submit').on('click', function() {
-        // var account = $('#account').text();
-        // var psw = $('#psw').text();
-        var account = "user1@jiecheng.com";
-        var psw = "123456789";
+        var account = $('#account').val();
+        var psw = $('#psw').val();
+
+        if(account === '' || psw === ''){
+            alert('请输入登录邮箱和密码');
+            return;
+        }
         $.post("{:U('home/user/login')}", {
             "account": account,
             "psw": psw
