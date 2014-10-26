@@ -21,7 +21,7 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-               <li><a href="{:U('admin/index/postDocument')}" >发布文档</a>
+                <li><a href="{:U('admin/index/postDocument')}" >发布文档</a>
                 </li>
                 <li><a href="{:U('admin/index/advertisements')}" >广告设置</a>
                 </li>
@@ -63,7 +63,7 @@
     <!--下面只是说明与程序代码无关-->
     <div id="include" style="width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
         <div class="ht">
-            <h1>审核资料</h1>
+            <h1>管理员列表</h1>
         </div>
         <div id="ins_form">
             <table width="800px;">
@@ -75,28 +75,7 @@
                     <th>审核状态</th>
                     <th>操作</th>
                 </tr>
-                <foreach name="institutions" item="ins">
-                    <tr>
-                        <td>{$ins['name']}</td>
-                        <td>{$ins['type']}</td>
-                        <td>{$ins['address']}</td>
-                        <td>{$ins['manager']}</td>
-                        <td>
-                            <if condition="$ins['status'] eq 0 ">
-                                   未审核
-                                <elseif condition="$ins['status'] eq 1" />
-                                   已通过
-                                <else />
-                                   未通过
-                            </if>
-
-                        </td>
-                        <td>
-                            <span><a href="/mz/index.php/admin/index/viewInstitution/institutionId/{$ins['uid']}">查看</a>
-                            </span>
-                        </td>
-                    </tr>
-                </foreach>
+        
             </table>
             <div class="syxy">
                 <button id="btn-pre" class="submit">上一页</button>
@@ -109,33 +88,7 @@
 </body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
-(function($) {
-    //退出
-    $('#btn-logout').on('click', function() {
-        $.get('/mz/index.php/home/user/logout', function(data) {
-            // console.log(data);
-            if (data.code) {
-                location = '/mz/admin/';
-            } else {
-                console.log(data.msg);
-            }
-        });
-    });
-    //分页
-    var cur_page = "{$page}";
-    var url = "{:U('admin/index/checkInstitution','','')}" +'/checked/'+parseInt("{$checked}") +'/page/';
-
-    //前一页
-    $('#btn-pre').on('click', function() {
-        location = url + (parseInt(cur_page) - 1);
-    });
-
-    //后一页
-    $('#btn-next').on('click', function() {
-        location = url + (parseInt(cur_page) + 1);
-    });
-
-})(jQuery);
+ 
 </script>
 
 </html>
