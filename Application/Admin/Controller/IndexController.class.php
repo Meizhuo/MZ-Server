@@ -201,4 +201,22 @@ class IndexController extends BaseController {
         $this->assign('ad_undisplay',$ad_undisplay['msg']);
         $this->display();
     }
+    /**
+     * 用户列表页
+     */
+    public function userList(){
+        $this->display();
+    }
+    /**
+     * 管理员列表页
+     */
+    public function adminList(){
+        $this->display();
+    }
+    /**
+     * 系统设置页
+     */
+    public function setting(){
+    	$this->display();
+    }
 }
