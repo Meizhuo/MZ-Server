@@ -68,6 +68,39 @@ class UserPersonModel extends BaseModel {
         }
         return $res;
     }
+    
+    public function search($status=null,$nickname=null,$email=null,$work_place=null,$page=1,$limit=10){
+        $res = $this->_getResult();
+        $map = array();
+        $map['level'] =  UserModel::LEVEL_PERSON;
+        if(!is_null($status)){
+            $map['status']  = $status;
+        }
+        if(!is_null($nickname)){
+            $map['nickname']  = $nickname;
+        }
+        if(!is_null($email)){
+            $map['email']  = $email;
+        }
+        if(!is_null($work_place)){
+            $map['work_place']  = $work_place;
+        }
+        // 保证为正数
+        $limit = $limit > 0 ? $limit : 10;
+        $page = $page > 0 ? $page : 1;
+        $users_person = M('User')->join('mz_user_person ON mz_user.uid = mz_user_person.uid')
+                                 ->where($map)
+                                 ->field('mz_user.uid,nickname,phone,email,reg_time,level,status,sex,work_place')
+                                 ->limit(($page - 1) * $limit, $limit)
+                                 ->select();
+        if(!$users_person){
+            $res['msg'] = array();
+        }else{
+            $res['msg'] =$users_person;
+        }
+        $res['status'] = 1;
+        return $res;
+    }
    
 }
 

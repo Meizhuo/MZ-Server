@@ -204,19 +204,25 @@ class IndexController extends BaseController {
     /**
      * 用户列表页
      */
-    public function userList(){
+    public function userList($page=1,$limit=10){
+        $this->reqAdmin();
+        $res = D('UserPerson')->search(null,null,null,null,$page,$limit);
+        $this->assign('page',$page);
+        $this->assign('users',$res['msg']);
         $this->display();
     }
     /**
      * 管理员列表页
      */
     public function adminList(){
+        $this->reqAdmin();
         $this->display();
     }
     /**
      * 系统设置页
      */
     public function setting(){
+        $this->reqAdmin();
     	$this->display();
     }
 }

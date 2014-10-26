@@ -21,11 +21,11 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="{:U('admin/index/postDocument')}" >发布文档</a>
+                <li><a href="{:U('admin/index/postDocument')}">发布文档</a>
                 </li>
-                <li><a href="{:U('admin/index/advertisements')}" >广告设置</a>
+                <li><a href="{:U('admin/index/advertisements')}">广告设置</a>
                 </li>
-                <li><a href="{:U('admin/index/userList')}" >用户列表置</a>
+                <li><a href="{:U('admin/index/userList')}">用户列表置</a>
                 </li>
                 <li><a href="{:U('admin/index/adminList')}">管理员列表置</a>
                 </li>
@@ -49,7 +49,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="{:U('admin/index/setting')}" >系统设置</a>
+                <li><a href="{:U('admin/index/setting')}">系统设置</a>
                 </li>
             </ul>
         </div>
@@ -68,17 +68,41 @@
         <div id="ins_form">
             <table width="800px;">
                 <tr>
-                    <th>培训机构</th>
-                    <th>办学类型</th>
-                    <th>地址</th>
-                    <th>联系人</th>
+                    <th>昵称</th>
+                    <th>注册时间</th>
+                    <th>手机号码</th>
+                    <th>工作地址</th>
                     <th>审核状态</th>
-                    <th>操作</th>
                 </tr>
-        
+                <foreach name="users" item="u">
+                    <tr>
+                        <td>
+                            {$u['nickname']}
+                        </td>
+                        <td name="text-create_time">
+                            {$u['reg_time']}
+                        </td>
+                        <td>
+                            {$u['phone']}
+                        </td>
+                        <td>
+                            {$u['work_place']}
+                        </td>
+                        <td>
+                            <if condition="$u['status'] eq 1">
+                                已通过审核
+                                <elseif condition="$u['status'] eq -1" />未通过审核
+                                <else>
+                                    未审核
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+
             </table>
             <div class="syxy">
                 <button id="btn-pre" class="submit">上一页</button>
+                {$page}
                 <button id="btn-next" class="submit">下一页</button>
             </div>
         </div>
@@ -88,7 +112,38 @@
 </body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
- 
+(function($) {
+    var cur_page = "{$page}";
+    var url_tpl = "{:U('admin/index/userList','','')}/page/{cur_page}";
+
+     //翻页
+
+    //前一页
+    $('#btn-pre').on('click', function() {
+        var page_pre = parseInt(cur_page) - 1;
+        location = url_tpl.replace('{cur_page}', page_pre);
+    });
+
+    //后一页
+    $('#btn-next').on('click', function() {
+        var page_next = parseInt(cur_page) + 1;
+        location = url_tpl.replace('{cur_page}', page_next);
+    });
+
+
+    function timeFormat() {
+            $('[name=text-create_time]').each(function() {
+                // console.log($(this));
+                var millisec = parseInt($(this).text()) * 1000;
+                var date = new Date();
+                date.setTime(millisec);
+                var format_string = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+                $(this).text(format_string)
+            });
+        }
+        //格式化时间
+    timeFormat();
+})(jQuery);
 </script>
 
 </html>
