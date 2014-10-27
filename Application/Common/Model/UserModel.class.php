@@ -133,8 +133,8 @@ class UserModel extends BaseModel {
         return $res;
     }
     
-    public function regAdmin(){
-        
+    private function regAdmin(){
+            //see UserAdminModel.createAdmin
     }
 
     /**
@@ -169,7 +169,7 @@ class UserModel extends BaseModel {
         }
         return $res;
     }
-   
+
     /**
      * 登录
      * @param unknown $account_type 账号(邮箱/手机号码)

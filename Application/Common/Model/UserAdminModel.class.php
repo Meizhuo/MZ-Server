@@ -26,9 +26,53 @@ class UserAdminModel extends BaseModel {
         return $this;
     }
     
-
-    public function register(){
-    
+    /**
+     * 创建管理员
+     * @param string $nickname  
+     * @param string $phone
+     * @param string $email
+     * @param string $psw
+     * @param JSON $per_categorys_post '有权限起草/编辑的栏目 (JSON)
+     * @param JSON $per_categorys_check 有权限管理的群组(JSON) 
+     * @param int $per_institution_check 有权限审核培训机构(0无权限1有权限)
+     * @return Ambigous <string, multitype:number string >
+     */
+    public function createAdmin($nickname,$phone,$email,$psw,$per_categorys_post,$per_categorys_check,$per_institution_check){
+        $res = $this->_getResult();
+        $data['nickname'] = $nickname;
+        if(!is_null($phone)){
+             $data['phone'] = $phone;
+        }
+        $data['email'] = $email;
+        $data['psw'] = $psw;
+        $data['per_categorys_post'] = $per_categorys_post;
+        $data['per_categorys_check'] = $per_categorys_check;
+        $data['per_institution_check'] = $per_institution_check;
+        $data['level'] = UserModel::LEVEL_ADMIN;
+        $data['status'] = UserModel::STATUS_PASS;
+        $User = D('User');
+        if($User->create($data)){
+            $uid = $User->add();
+            if(!$uid){
+                $res['msg'] =  'System Error: Not able to insert.';
+                return $res;
+            }
+        }else{
+            $res['msg'] = $User->getError();
+            return $res;
+        }
+        $data['psw'] = md5($psw);
+        $data['uid'] = $uid;
+        if($this->create($data)){
+            if($this->add()){
+                $res['status'] = 1;
+            }else{
+                $res['msg'] = 'System Error: Not able to insert.';
+            }
+        }else{
+            $res['msg'] = $this->getError();
+        }
+        return $res;
     }
             
     public function update(){
@@ -76,5 +120,33 @@ class UserAdminModel extends BaseModel {
      */
     public function hasPerChckeck($category_id){
         return in_array($category_id,$this->getPermissionCheck());
+    }
+    /**
+     * 管理员列表
+     * @param string $status
+     * @param unknown $nickname
+     * @param unknown $page
+     * @param unknown $limit
+     */
+    public function search($status=null,$nickname=null,$page=1,$limit=10){
+       $map = array();
+       if(!is_null($status)){
+           $map['status'] = $status;
+       }
+       if(!is_null($nickname)){
+           $map['nickname'] = $nickname;
+       }
+       // 保证为正数
+       $limit = $limit > 0 ? $limit : 10;
+       $page = $page > 0 ? $page : 1;
+       $res['msg'] = $this->join('mz_user ON mz_user.uid = mz_user_admin.uid')->where($map)
+                          ->field('mz_user.uid,nickname,phone,email,reg_time,level,status,per_categorys_post,per_categorys_check,per_institution_check')
+                          ->limit(($page - 1) * $limit, $limit)
+                          ->select();
+       if(empty($res['msg'])){
+           $res['msg'] = array();
+       }
+       $res['status'] = 1;
+       return $res;
     }
 }

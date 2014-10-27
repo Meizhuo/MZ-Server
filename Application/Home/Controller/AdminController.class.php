@@ -8,40 +8,36 @@ use Common\Controller\BaseController;
  *
  */
 class AdminController extends BaseController {
-    
+    /**
+     * 创建一个管理员
+     */
     public function create(){
-    	//TODO 保留
-    }
-    
-    public function login(){
-        if(!IS_POST){
-            $this->ajaxReturn(mz_json_error_request());
-            return;
-        }
-        $account = I('post.account');
-        $psw = md5(I('post.psw'));
-        $User = D('User');
-        if(strstr($account,'@')){
-            $res = $User->login('email',$account,$psw);
-        }else{
-            $res = $User->login('phone',$account,$psw);
-        }
+    	$this->reqPost(array('nickname','email','psw','per_categorys_post','per_categorys_check','per_institution_check'))->reqSuperAdmin();
+        $nickname = I('post.nickname');
+        $phone = I('post.phone',null);
+        $email = I('post.email');
+        $psw = I('post.psw');
+        $per_categorys_post = I('post.per_categorys_post');
+        $per_categorys_check = I('post.per_categorys_check');
+        $per_institution_check = I('post.per_institution_check');
+        $res = D('UserAdmin')->createAdmin($nickname,$phone,$email,$psw,$per_categorys_post,$per_categorys_check,$per_institution_check);
         if($res['status']){
-            session('uid',$res['msg']['uid']);
-            $this->ajaxReturn(mz_json_success('login success'));
+            $this->ajaxReturn(mz_json_success());
         }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
-    public function logout(){
-        session(null);
-        $this->ajaxReturn(mz_json_success('logout successfully'));
-    }
-
     /**
-     * 上传附件
+     * 获得管理员列表
+     * @param string $status
+     * @param string $nickname
+     * @param number $page
+     * @param number $limit
      */
-    public function upload(){}
+    public function lists($status=null,$nickname=null,$page=1,$limit=10){
+        $res = D('UserAdmin')->search($status,$nickname,$page,$limit);
+        $this->ajaxReturn(mz_json_success($res['msg']));
+    }
 }
 
  

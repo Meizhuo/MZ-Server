@@ -214,8 +214,10 @@ class IndexController extends BaseController {
     /**
      * 管理员列表页
      */
-    public function adminList(){
+    public function adminList($status=null,$page=1,$limit=10){
         $this->reqAdmin();
+        $res = D('UserAdmin')->search($status,null,$page,$limit);
+        $this->assign('admins',$res['msg']);
         $this->display();
     }
     /**

@@ -105,5 +105,13 @@ class BaseController extends Controller {
     protected function reqAdmin(){
         return $this->reqUser(UserModel::LEVEL_ADMIN,'需要管理员权限');
     }
+    
+    /**
+     * 需要超级管理员登录
+     */
+    protected function reqSuperAdmin(){
+        return $this->reqUser(UserModel::LEVEL_SUPER_ADMIN,'需要超级管理员权限');
+    }
+    
 }
 
