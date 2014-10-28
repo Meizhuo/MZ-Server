@@ -119,7 +119,7 @@ class CourseController extends BaseController {
      */
     public function lists($institution_id='',$subsidy_id='',$name='',$page=1,$limit=10){
         //默认是上线的课程
-        return $this->search($institution_id='',$subsidy_id='',$name='',CourseModel::VISIBILITY_DISPLAY,$page=1,$limit=10);
+        return $this->search($institution_id,$subsidy_id,$name,CourseModel::VISIBILITY_DISPLAY,$page=1,$limit=10);
     }
 }
 
