@@ -104,7 +104,7 @@
                             <span>*</span>补贴项目</div>
                     </td>
                     <td>
-                        <span style="color: black;font-size: 14px;" id="text-subsidy" data-id="{$course['subsidy_id']}">{$subsidy['kind']} {$subsidy['level']} {$subsidy['title']}</span>
+                        <span style="color: black;font-size: 14px;" id="text-subsidy" data-id="{$course['subsidy_id']}">{$subsidy['kind']} {$subsidy['level']} {$subsidy['title']} 补贴金额:{$subsidy['money']}元</span>
                         <input id="btn-select" type="submit" class="submit" value="选 择" style="margin-left: 10px;">
                           <input id="btn-select-cancle"class="submit" type="reset" value="取 消" style="background-color: red"></input>
                         <div style="margin-left:10px;">
@@ -412,7 +412,7 @@ ue.ready(function() {
             title: title,
         }, function(json) {
             if (json.code) {
-                $txt_subsidy.text(kind + '-' + level + '-' + title);
+                $txt_subsidy.text(kind + ' ' + level + ' ' + title + ' 补贴金额:'+json.response[0].money+'元');
                 $txt_subsidy.data('id', json.response[0].id);
                 initSubsidy(1);
             } else {
