@@ -106,7 +106,7 @@
                     <td>
                         <span style="color: black;font-size: 14px;" id="text-subsidy" data-id="{$course['subsidy_id']}">{$subsidy['kind']} {$subsidy['level']} {$subsidy['title']} 补贴金额:{$subsidy['money']}元</span>
                         <input id="btn-select" type="submit" class="submit" value="选 择" style="margin-left: 10px;">
-                          <input id="btn-select-cancle"class="submit" type="reset" value="取 消" style="background-color: red"></input>
+                          <input id="btn-select-cancel"class="submit" type="reset" value="取 消" style="background-color: red"></input>
                         <div style="margin-left:10px;">
                             <div>
                                 证书类别
@@ -315,7 +315,7 @@ ue.ready(function() {
     $txt_subsidy = $('#text-subsidy');
     $btn_select = $('#btn-select');
     $btn_comfirm = $('#btn-select-comfirm');
-    $btn_cancle = $('#btn-select-cancle');
+    $btn_cancel = $('#btn-select-cancel');
     $sel_certificate = $('#select-certificate');
     $sel_kind = $('#select-kind');
     $sel_level = $('#select-level');
@@ -324,7 +324,7 @@ ue.ready(function() {
     function initSubsidy(n) {
         switch (n) {
             case 1:
-                $btn_cancle.fadeOut();
+                $btn_cancel.fadeOut();
                 $sel_certificate.parent().hide();
             case 2:
                 $sel_kind.parent().hide();
@@ -422,7 +422,7 @@ ue.ready(function() {
 
     });
 
-    $btn_cancle.on('click',function(){
+    $btn_cancel.on('click',function(){
          initSubsidy(1);
         
     });
@@ -430,7 +430,7 @@ ue.ready(function() {
     $btn_select.on('click', function() {
         $sel_certificate.parent().show();
         $sel_certificate.val(0);
-        $btn_cancle.fadeIn();
+        $btn_cancel.fadeIn();
     });
 
   
