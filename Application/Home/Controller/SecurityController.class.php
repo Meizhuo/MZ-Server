@@ -45,6 +45,10 @@ class SecurityController extends BaseController {
             if(NOW_TIME - $create_time > 2*60*60){
                 $this->ajaxReturn(mz_json_error('更改密码请求已失效,请重试'));
             }
+            //密码长度
+            if(strlen($psw) <8 || strlen($psw) >16){
+               $this->ajaxReturn(mz_json_error('密码长度8-16,数字+字符'));
+            }
             if(md5($create_time+$rand_str) === $code){
                 if(M('User')->where("email='%s'",$e)->save(array('psw' => md5($psw)))>=0){
                     $this->ajaxReturn(mz_json_success('修改密码成功！'));
