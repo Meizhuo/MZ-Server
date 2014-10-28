@@ -256,6 +256,16 @@ ue.ready(function() {
             return;
         }
 
+        if(start_time === ''){
+            alert("开课时间不能为空");
+            return;
+        }
+        //验证时间格式
+        if(!/^\d{4}-\d{1,2}-\d{1,2}$/.test(start_time)){
+                alert('开课时间格式不对');
+                return ;
+        }
+
         var post_data = {
             name: name,
             address: address,

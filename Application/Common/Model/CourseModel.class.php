@@ -13,7 +13,8 @@ class CourseModel extends BaseModel{
     const VISIBILITY_DISPLAY = 1;
 
     protected $_validate = array(
-        array('cost','number','课程费用应为数字')
+        array('cost','number','课程费用应为数字'),
+        array('start_time', '/^\d{4}-\d{1,2}-\d{1,2}$/','时间格式不正确',self::EXISTS_VALIDATE,'regex')
     );
     /**
      * 发布课程
