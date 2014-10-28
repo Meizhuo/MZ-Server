@@ -288,7 +288,7 @@ ue.ready(function() {
                 if (json.code) {
                     alert('发布课程成功！');
                     setTimeout(function() {
-                        location = "{:U('admin/institution/manage')}";
+                        location = "{:U('admin/institution/courseList')}";
                     }, 1000);
                 } else {
                     alert(json.msg);
@@ -303,7 +303,7 @@ ue.ready(function() {
 
                     alert('更新课程成功！');
                     setTimeout(function() {
-                        location = "{:U('admin/institution/manage')}";
+                        location = "{:U('admin/institution/courseList')}";
                     }, 1000);
                 } else {
                     alert(json.msg);
