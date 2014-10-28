@@ -154,7 +154,8 @@ class CourseModel extends BaseModel{
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
-        $res['msg'] = $this->where($map)
+        $res['msg'] = $this->join('mz_subsidy_standary ON (mz_course.subsidy_id =mz_subsidy_standary.id)')->where($map)
+            ->field('mz_course.id,institution_id,subsidy_id,name,start_time,address,teacher,cost,display,certificate_type,kind,level,money,series,title')
             ->limit(($page - 1) * $limit, $limit)
             ->select();
         if (empty($res['msg'])) {
