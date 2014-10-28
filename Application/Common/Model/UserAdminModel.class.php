@@ -52,6 +52,8 @@ class UserAdminModel extends BaseModel {
         $data['status'] = UserModel::STATUS_PASS;
         $User = D('User');
         if($User->create($data)){
+            //md5
+            $data['psw'] = md5($psw);
             $uid = $User->add();
             if(!$uid){
                 $res['msg'] =  'System Error: Not able to insert.';
@@ -61,7 +63,6 @@ class UserAdminModel extends BaseModel {
             $res['msg'] = $User->getError();
             return $res;
         }
-        $data['psw'] = md5($psw);
         $data['uid'] = $uid;
         if($this->create($data)){
             if($this->add()){
