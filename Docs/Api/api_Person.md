@@ -25,7 +25,7 @@ work_place|  工作地点   | N
 ```
 
 
-## 获得用户资料
+## 获得当前登录的用户资料
 `GET /home/person/info`
 
 **Response**

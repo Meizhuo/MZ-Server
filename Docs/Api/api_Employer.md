@@ -31,7 +31,7 @@ address  |用人单位地址 | N
 
 
 
-## 获取用人单位信息
+## 获取当前登录的用人单位信息
 `GET /home/employer/info`
 
 **Response**  
