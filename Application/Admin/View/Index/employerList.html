@@ -64,19 +64,60 @@
     </div>
 
     <!--下面只是说明与程序代码无关-->
-    <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
-        <span>
-            <h1>欢迎使用ZW管理系统！</h1>
-        </span>
-        <br>
-        <span>使用教程：</span>
-        <br>
-        <span>东莞市职业训练指导中心手机APP及维护平台”的总体建设目标是通过手机APP为全市城乡劳动者提供有关职业培训及职业技术鉴定的各种政策信息及相关服务，构建一个集信息发布、业务管理、咨询、培训和技能鉴定于一体的综合服务平台。</span>
+    <div id="include" style="width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
+        <div class="ht">
+            <h1>企业列表</h1>
+        </div>
+        <div id="ins_form">
+            <table width="800px;">
+                <tr>
+                    <th>名称</th>
+                    <th>注册时间</th>
+                    <th>联系方式</th>
+                    <th>地址</th>
+                    <th>状态</th>
+                </tr>
+                <foreach name="employers" item="e">
+                    <tr>
+                        <td>
+                            {$e['nickname']}
+                        </td>
+                        <td name="text-create_time">
+                            {$e['reg_time']}
+                        </td>
+                        <td>
+                            {$e['contact_phone']}
+                        </td>
+                        <td>
+                            {$e['address']}
+                        </td>
+
+                        <td>
+                            <if condition="$e['status'] eq 1">
+                                已通过审核
+                                <elseif condition="$e['status'] eq -1" />未通过审核
+                                <else>
+                                    未审核
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+
+
+            </table>
+            <div class="syxy">
+                <button id="btn-pre" class="submit">上一页</button>
+                <button id="btn-next" class="submit">下一页</button>
+            </div>
+        </div>
+
     </div>
 </body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+    var cur_page = "{$page}";
+    var url_tpl = "{:U('admin/index/employerList','','')}/page/{cur_page}";
     //退出
     $('#btn-logout').on('click', function() {
         $.get('/mz/index.php/home/user/logout', function(data) {
@@ -88,6 +129,21 @@
             }
         });
     });
+
+    //翻页
+
+    //前一页
+    $('#btn-pre').on('click', function() {
+        var page_pre = parseInt(cur_page) - 1;
+        location = url_tpl.replace('{cur_page}', page_pre);
+    });
+
+    //后一页
+    $('#btn-next').on('click', function() {
+        var page_next = parseInt(cur_page) + 1;
+        location = url_tpl.replace('{cur_page}', page_next);
+    });
+
 
 })(jQuery);
 </script>

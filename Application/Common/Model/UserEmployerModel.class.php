@@ -48,5 +48,47 @@ class UserEmployerModel extends BaseModel {
         }
         return $res;
     }
+    /**
+     * 模糊查询企业用户
+     * @param string $status
+     * @param string $nickname
+     * @param string $address
+     * @param number $page
+     * @param number $limit
+     * @return multitype:number string
+     */
+    public function search($status=null,$nickname=null,$address=null,$page=1,$limit=10){
+        $res  = $this->_getResult();
+        $map = array();
+        $map['level'] = UserModel::LEVEL_EMPLOYER;
+        if(!is_null($status)){
+            $map['status'] = $status;
+        }
+        if(!is_null($nickname)){
+            $map['nickname'] = array('like','%'.$nickname.'%');
+        }
+        if(!is_null($address)){
+            $map['address'] = array('like','%'.$address.'%');;
+        }
+        // 保证为正数
+        $limit = $limit > 0 ? $limit : 10;
+        $page = $page > 0 ? $page : 1;
+        $users_employer= M('User')->join('mz_user_employer ON mz_user.uid = mz_user_employer.uid')
+                                ->where($map)
+                                ->field('mz_user.uid,nickname,phone,email,reg_time,level,status,contact_phone,address')
+                                ->limit(($page - 1) * $limit, $limit)
+                                ->select();
+        if(!$users_employer){
+            $res['msg'] = array();
+        }else{
+            $res['msg'] =$users_employer;
+        }
+        $res['status'] = 1;
+        
+        return $res;
+    }
 }
+
+
+
  

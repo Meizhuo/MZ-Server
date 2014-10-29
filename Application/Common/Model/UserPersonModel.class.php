@@ -69,7 +69,7 @@ class UserPersonModel extends BaseModel {
         return $res;
     }
     /**
-     * 模糊搜索
+     * 模糊搜索个人用户
      * @param string $status 状态
      * @param string $nickname 昵称 
      * @param string $email 邮件
@@ -86,13 +86,13 @@ class UserPersonModel extends BaseModel {
             $map['status']  = $status;
         }
         if(!is_null($nickname)){
-            $map['nickname']  = $nickname;
+            $map['nickname']  = array('like','%'.$nickname.'%');
         }
         if(!is_null($email)){
             $map['email']  = $email;
         }
         if(!is_null($work_place)){
-            $map['work_place']  = $work_place;
+            $map['work_place']  = array('like','%'.$work_place.'%');
         }
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;

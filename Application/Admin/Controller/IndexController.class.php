@@ -217,7 +217,21 @@ class IndexController extends BaseController {
     public function adminList($status=null,$page=1,$limit=10){
         $this->reqAdmin();
         $res = D('UserAdmin')->search($status,null,$page,$limit);
+        $this->assign('page',$page);
         $this->assign('admins',$res['msg']);
+        $this->display();
+    }
+    /**
+     * 企业用户列表页
+     * @param string $status
+     * @param unknown $page
+     * @param number $limit
+     */
+    public function employerList($status=null,$page=1,$limit=10){
+        $this->reqAdmin();
+        $res = D('UserEmployer')->search($status,null,null,$page,$limit);
+        $this->assign('page',$page);
+        $this->assign('employers',$res['msg']);
         $this->display();
     }
     /**
