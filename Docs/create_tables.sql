@@ -78,9 +78,13 @@ CREATE TABLE `mz_user_institution` (
   `contact_member` varchar(64) DEFAULT NULL COMMENT '联系人',
   `contact_phone` varchar(64) DEFAULT NULL COMMENT '联系电话',
   `contact_email` varchar(64) DEFAULT NULL COMMENT '联系邮箱',
+  `vertify_uid` int(11) DEFAULT NULL COMMENT '审核人id',
+  `vertify_time` int(11) DEFAULT NULL COMMENT '审核时间',
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训机构用户表';
 
+-- alter table mz_user_institution add COLUMN vertify_uid int(11) DEFAULT NULL COMMENT '审核人id'; 
+-- alter table mz_user_institution add COLUMN vertify_time int(11) DEFAULT NULL COMMENT '审核时间'; 
 
 -- 培训课程表
 DROP TABLE IF EXISTS `mz_course`;
