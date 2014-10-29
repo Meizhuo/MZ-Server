@@ -68,7 +68,16 @@ class UserPersonModel extends BaseModel {
         }
         return $res;
     }
-    
+    /**
+     * 模糊搜索
+     * @param string $status 状态
+     * @param string $nickname 昵称 
+     * @param string $email 邮件
+     * @param string $work_place 工作地点
+     * @param number $page 页码
+     * @param number $limit 返回数
+     * @return multitype:number string
+     */
     public function search($status=null,$nickname=null,$email=null,$work_place=null,$page=1,$limit=10){
         $res = $this->_getResult();
         $map = array();
