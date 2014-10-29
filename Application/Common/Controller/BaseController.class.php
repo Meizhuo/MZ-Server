@@ -88,6 +88,12 @@ class BaseController extends Controller {
         $this->ajaxReturn(mz_json_error($res[0]));
     }
     /**
+     * 需要企业用户登录
+     */
+    protected  function reqEmployer(){
+        return $this->reqUser(UserModel::LEVEL_EMPLOYER, '需要企业用户权限');
+    }
+    /**
      * 需要机构用户登录
      */
     protected function reqInstitution(){

@@ -3,7 +3,7 @@ namespace Common\Model;
 use Common\Model\BaseModel;
 
 /**
- *
+ * 所有用户公共模型
  * @author Jayin
  *        
  */
@@ -125,7 +125,7 @@ class UserModel extends BaseModel {
                     'uid' => $uid
             );
             //创建user_person资料
-            $res_person = D('UserEmployer')->addPerson(array_merge($_data,I('post.')));
+            $res_person = D('UserEmployer')->addEmployer(array_merge($_data,I('post.')));
             $res = array_merge($res,$res_person);
         }else{
             $res['msg'] = 'System Error: Not able to insert.';

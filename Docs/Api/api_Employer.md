@@ -2,6 +2,7 @@
 ===
 `/home/employer/*`
 
+用人单位就是企业用户
 
 ## 注册    
 `POST /home/employer/register` 
@@ -28,39 +29,6 @@ address  |用人单位地址 | N
 ```
 
 
-## 登录
-`POST /home/employer/login`
-
-字段  |描述 |  是否必须 
------------- | -------------| -------------
-account | 账户(邮箱)    | Y
-psw| 密码  | Y
-
- **Response**  
-
-```json  
-{
-    "code":20000,
-    "response"："operate success"
-}
-```
-
-## 登出
-`POST /home/employer/logout`
-
-字段  |描述 |  是否必须 
------------- | -------------| -------------
-account | 账户(手机号码)      | Y
-psw| 密码  | Y
-
- **Response**  
-
-```json  
-{
-    "code":20000,
-    "response"："operate success"
-}
-```
 
 
 ## 获取用人单位信息

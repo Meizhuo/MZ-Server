@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Common\Controller\BaseController;
 
 /**
- *
+ *用人单位(企业)用户接口
  * @author Jayin
  *        
  */
@@ -23,40 +23,10 @@ class EmployerController extends BaseController {
     }
 
     /**
-     * POST 登录
-     */
-    public function login() {
-        $this->reqPost();
-        
-        $account = I('post.account');
-        $psw = md5(I('post.psw'));
-        $User = D('User');
-        if (strstr($account, '@')) {
-            $res = $User->login('email', $account, $psw);
-        } else {
-            $res = $User->login('phone', $account, $psw);
-        }
-        if ($res['status']) {
-            session('uid', $res['msg']['uid']);
-            $this->ajaxReturn(mz_json_success('login success'));
-        } else {
-            $this->ajaxReturn(mz_json_error($res['msg']));
-        }
-    }
-
-    /**
-     * GET 登出
-     */
-    public function logout() {
-        session(null);
-        $this->ajaxReturn(mz_json_success('logout successfully'));
-    }
-
-    /**
      * 更新用人单位信息
      */
     public function update() {
-        $this->reqPost()->reqLogin();
+        $this->reqPost()->reqEmployer();
         
         $uid = session('uid');
         $data['uid'] = session('uid');
@@ -72,7 +42,7 @@ class EmployerController extends BaseController {
      * GET 获取当前用人单位信息
      */
     public function info() {
-        $this->reqLogin();
+        $this->reqLogin()->reqEmployer();
         
         $data['uid'] = session('uid');
         $res = D('User')->getEmployerInfo(array_merge($data, I('post.')));
