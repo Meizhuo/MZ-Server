@@ -83,8 +83,6 @@ CREATE TABLE `mz_user_institution` (
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='培训机构用户表';
 
--- alter table mz_user_institution add COLUMN vertify_uid int(11) DEFAULT NULL COMMENT '审核人id'; 
--- alter table mz_user_institution add COLUMN vertify_time int(11) DEFAULT NULL COMMENT '审核时间'; 
 
 -- 培训课程表
 DROP TABLE IF EXISTS `mz_course`;
