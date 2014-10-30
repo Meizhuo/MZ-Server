@@ -76,8 +76,11 @@ class UserInstitutionModel extends BaseModel {
     public function verify($institution_id,$operate=UserModel::STATUS_PASS){
         $res = $this->_getResult();
         $data['status'] = $operate;
+        $data['vertify_uid'] = session('uid');
+        $data['vertify_time'] = NOW_TIME;
         $user_ins =M('User'); 
         if($user_ins->where("uid='%s' AND level=%d",$institution_id,UserModel::LEVEL_INSTITUTION)->save($data)>=0){
+            $this->where("uid='%s'",$institution_id)->save($data);
             $res['status'] = 1;
         }else{
             $res['msg'] = $user_ins->getError();
