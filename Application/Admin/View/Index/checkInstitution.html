@@ -76,6 +76,7 @@
                     <th>地址</th>
                     <th>联系人</th>
                     <th>审核状态</th>
+                    <th>审核人</th>
                     <th>操作</th>
                 </tr>
                 <foreach name="institutions" item="ins">
@@ -94,6 +95,7 @@
                             </if>
 
                         </td>
+                         <td>{$ins['vertifyer']['nickname']}</td>
                         <td>
                             <span><a href="/mz/index.php/admin/index/viewInstitution/institutionId/{$ins['uid']}">查看</a>
                             </span>

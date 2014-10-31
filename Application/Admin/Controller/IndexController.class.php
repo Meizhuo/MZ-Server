@@ -61,6 +61,13 @@ class IndexController extends BaseController {
         }
         $res = D('UserInstitution')->search($checked,null,null,$page);
         $institutions = $res['msg'];
+        if($institutions){
+            for($i =0;$i<count($institutions);$i++){
+                $tmp =  M('User')->field('psw',true)->where("uid='%s'",$institutions[$i]['vertify_uid'])
+                                                    ->limit(1)->select();
+                $institutions[$i]['vertifyer'] = $tmp[0];
+            }
+        }
         $this->assign('institutions', $institutions);
         $this->assign('checked',$checked);
         $this->assign('page',$page);

@@ -114,7 +114,7 @@ class UserInstitutionModel extends BaseModel {
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
         $users_ins = M('User')->join('mz_user_institution ON mz_user.uid = mz_user_institution.uid')->where($map)
-            ->field( 'mz_user_institution.uid,nickname,phone,email,reg_time,level,status,name,address,type,description,manager,contact_member,contact_phone,contact_email')
+            ->field( 'mz_user_institution.uid,nickname,phone,email,reg_time,level,status,name,address,type,description,manager,contact_member,contact_phone,contact_email,vertify_uid,vertify_time')
             ->limit(($page - 1) * $limit, $limit)
             ->select();
         if(!$users_ins){
