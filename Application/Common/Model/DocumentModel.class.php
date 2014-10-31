@@ -182,7 +182,7 @@ class DocumentModel extends BaseModel {
         // 保证为正数
         $limit = $limit > 0 ? $limit : 10;
         $page = $page > 0 ? $page : 1;
-        $res['msg']  = $this->where($map)->limit(($page-1)*$limit,$limit)->select();
+        $res['msg']  = $this->field('content',true)->where($map)->limit(($page-1)*$limit,$limit)->select();
         if(empty($res['msg'])){
             $res['msg'] = array();
         }
