@@ -1,6 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Common\Controller\BaseController;
+use Common\Model\UserModel;
 use Common\Model\UserAdminModel;
 use Common\Model\AdvertisementModel;
 /**
@@ -203,33 +204,42 @@ class IndexController extends BaseController {
     }
     /**
      * 用户列表页
+     * @param unknown $status 审核状态,默认审核通过1
+     * @param number $page
+     * @param number $limit
      */
-    public function userList($page=1,$limit=10){
+    public function userList($status=UserModel::STATUS_PASS,$page=1,$limit=10){
         $this->reqAdmin();
-        $res = D('UserPerson')->search(null,null,null,null,$page,$limit);
+        $res = D('UserPerson')->search($status,null,null,null,$page,$limit);
+        $this->assign('status',$status);
         $this->assign('page',$page);
         $this->assign('users',$res['msg']);
         $this->display();
     }
     /**
      * 管理员列表页
+     * @param unknown $status  审核状态,默认审核通过1
+     * @param number $page
+     * @param number $limit
      */
-    public function adminList($status=null,$page=1,$limit=10){
+    public function adminList($status=UserModel::STATUS_PASS,$page=1,$limit=10){
         $this->reqAdmin();
         $res = D('UserAdmin')->search($status,null,$page,$limit);
+        $this->assign('status',$status);
         $this->assign('page',$page);
         $this->assign('admins',$res['msg']);
         $this->display();
     }
     /**
      * 企业用户列表页
-     * @param string $status
+     * @param string $status 审核状态,默认审核通过1
      * @param unknown $page
      * @param number $limit
      */
-    public function employerList($status=null,$page=1,$limit=10){
+    public function employerList($status=UserModel::STATUS_PASS,$page=1,$limit=10){
         $this->reqAdmin();
         $res = D('UserEmployer')->search($status,null,null,$page,$limit);
+        $this->assign('status',$status);
         $this->assign('page',$page);
         $this->assign('employers',$res['msg']);
         $this->display();

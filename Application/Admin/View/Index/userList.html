@@ -68,6 +68,15 @@
         <div class="ht">
             <h1>用户列表</h1>
         </div>
+        <div style="margin: 10px;">
+            <h3>* 审核状态</h3>
+            <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                <option value="-1">未通过</option>
+                <option value="0">等待中</option>
+                <option value="1">已通过</option>
+
+            </select>
+        </div>
         <div id="ins_form">
             <table width="800px;">
                 <tr>
@@ -117,20 +126,39 @@
 <script type="text/javascript">
 (function($) {
     var cur_page = "{$page}";
-    var url_tpl = "{:U('admin/index/userList','','')}/page/{cur_page}";
+    var status = "{$status}";
+    var url_tpl = "{:U('admin/index/userList','','')}/status/{status}/page/{cur_page}";
 
+    $('#select-category').on('change', function() {
+        location = url_tpl.replace('{cur_page}', cur_page).replace('{status}', $(this).val());
+    });
+    //初始化栏目
+    $('#select-category').val(status);
+    console.log(status);
+
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/admin/';
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
     //翻页
 
     //前一页
     $('#btn-pre').on('click', function() {
         var page_pre = parseInt(cur_page) - 1;
-        location = url_tpl.replace('{cur_page}', page_pre);
+        location = url_tpl.replace('{cur_page}', page_pre).replace('{status}', status);
     });
 
     //后一页
     $('#btn-next').on('click', function() {
         var page_next = parseInt(cur_page) + 1;
-        location = url_tpl.replace('{cur_page}', page_next);
+        location = url_tpl.replace('{cur_page}', page_next).replace('{status}', status);
     });
 
 
