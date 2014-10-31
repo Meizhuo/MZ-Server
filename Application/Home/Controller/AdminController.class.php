@@ -27,6 +27,20 @@ class AdminController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
+    
+    /**
+     * 获得管理员的信息
+     * @param unknown $admin_id
+     */
+    public function getInfo($admin_id){
+        $this->reqAdmin();
+        $res = D('UserAdmin')->info($admin_id);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success($res['msg']));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
     /**
      * 获得管理员列表
      * @param string $status

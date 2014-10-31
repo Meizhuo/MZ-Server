@@ -21,35 +21,37 @@ psw  | 密码 8-16位数字or字母 	| Y
 }
 ```
 
-## 登录   
-`POST /home/admin/login` 
 
-字段	|描述 |  是否必须 
+## 获取管理员信息
+`GET /home/employer/getInfo`
+
+**NOTE:需要管理员权限***
+
+字段  |描述 |  是否必须 
 ------------ | -------------| -------------
-email|  邮箱  	| Y
-psw  | 密码 8-16位数字or字母 	| Y
-
+admin_id | 管理员id     | Y
 
 **Response**  
 
-```json
+```json  
 {
-	"code":20000,
-	"response"："login success"
+    "code":200,
+    "response":{
+       "nickname":"foo",
+       "phone":"foo",
+       "email":""foo"",
+       "reg_time":"1412322430",
+       "level":"4",
+       "status":"1",
+       "uid":"15",
+       "per_categorys_post":"[]",
+       "per_categorys_check":"[]",
+       "per_institution_check":"0"
+    }
 }
 ```
 
-## 登出   
-`POST /home/admin/logout` 
 
-**Response**  
-
-```json
-{
-	"code":20000,
-	"response"："logout success"
-}
-```
 
 
 ## 发布文档	

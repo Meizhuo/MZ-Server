@@ -16,9 +16,6 @@ phone| 手机号码 | N
 contact_phone | 联系电话 | N
 address  |用人单位地址 | N
 
-
-
-
 **Response**  
 
 ```json
@@ -30,9 +27,37 @@ address  |用人单位地址 | N
 
 
 
-
 ## 获取当前登录的用人单位信息
 `GET /home/employer/info`
+
+**Response**  
+
+```json  
+{
+    "code":200,
+    "response":{
+       "nickname":"foo",
+       "phone":"foo",
+       "email":""foo"",
+       "reg_time":"1412322430",
+       "level":"4",
+       "status":"1",
+       "uid":"15",
+       "contact_phone":"foo",
+       "address":"foo"
+    }
+}
+```
+
+
+## 获取用人单位信息
+`GET /home/employer/getInfo`
+
+**NOTE:需要管理员权限***
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+employer_id | 用人单位的id     | Y
 
 **Response**  
 

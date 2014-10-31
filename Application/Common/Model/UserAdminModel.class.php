@@ -79,9 +79,23 @@ class UserAdminModel extends BaseModel {
     public function update(){
          
     }
+    /**
+     * 获得管理员的信息
+     * @param int $uid
+     */
+    public function info($uid){
+        $res = $this->_getResult();
+        $info_user = M('User')->field('psw',true)->where("uid='%s'",$uid)->limit(1)->select();
     
-    public function info(){
-    
+        if($info_user){
+            $info_admin = $this->field('uid',true)->where("uid='%s'",$uid)->limit(1)->select();
+          
+            $res['msg'] = array_merge($info_user[0],$info_admin[0]);
+            $res['status']  = 1;
+        }else{
+            $res['msg'] = "admin not found";
+        }
+        return $res;
     }
     /**
      * 获取 有权限起草/编辑的栏目 

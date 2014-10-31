@@ -49,6 +49,22 @@ class UserEmployerModel extends BaseModel {
         return $res;
     }
     /**
+     * 获得企业用户的信息
+     * @param int $uid
+     */
+    public function info($uid){
+        $res = $this->_getResult();
+        $info_user = M('User')->field('psw',true)->where("uid='%s'",$uid)->limit(1)->select();
+        if($info_user){
+            $info_employer = $this->field('uid',true)->where("uid='%s'",$uid)->limit(1)->select();
+            $res['msg'] = array_merge($info_user[0],$info_employer[0]);
+            $res['status']  = 1;
+        }else{
+            $res['msg'] = "employer not found";
+        }
+        return $res;
+    }
+    /**
      * 模糊查询企业用户
      * @param string $status
      * @param string $nickname

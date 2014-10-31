@@ -52,6 +52,19 @@ class EmployerController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
+    /**
+     * 获得企业用户的信息
+     * @param unknown $employer_id
+     */
+    public function getInfo($employer_id){
+        $this->reqAdmin();
+        $res = D('UserEmployer')->info($employer_id);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success($res['msg']));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    }
 }
 
  
