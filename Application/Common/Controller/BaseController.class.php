@@ -81,7 +81,7 @@ class BaseController extends Controller {
      */
     private function reqUser($level,$msg){
         $this->reqLogin();
-        $res= M('User')->where("uid='%s'",session('uid'))->limit(1)->select();
+        $res= M('User')->field('psw',true)->where("uid='%s'",session('uid'))->limit(1)->select();
         if($res && ((int)$res[0]['level']) === $level){
             return $this;
         }
@@ -106,9 +106,9 @@ class BaseController extends Controller {
         return $this->reqUser(UserModel::LEVEL_PERSON,'需要个人用户权限');
     }
     /**
-     * 需要管理员登录
+     * 需要·普通管理·员登录
      */
-    protected function reqAdmin(){
+    protected function reqCommonAdmin(){
         return $this->reqUser(UserModel::LEVEL_ADMIN,'需要管理员权限');
     }
     
@@ -117,6 +117,18 @@ class BaseController extends Controller {
      */
     protected function reqSuperAdmin(){
         return $this->reqUser(UserModel::LEVEL_SUPER_ADMIN,'需要超级管理员权限');
+    }
+    /**
+     * 需要管理员登录
+     * @return \Common\Controller\BaseController
+     */
+    protected function reqAdmin(){
+        $this->reqLogin();
+        $res= M('User')->field('psw',true)->where("uid='%s'",session('uid'))->limit(1)->select();
+        if($res && (intval($res[0]['level']) === UserModel::LEVEL_ADMIN || intval($res[0]['level']) === UserModel::LEVEL_SUPER_ADMIN)){
+            return $this;
+        }
+        $this->ajaxReturn(mz_json_error($res[0]));
     }
     
 }

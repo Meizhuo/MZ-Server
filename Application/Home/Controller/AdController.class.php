@@ -12,18 +12,6 @@ use Common\Model\AdvertisementModel;
 class AdController extends BaseController {
 
     /**
-     * 需要获得管理员权限
-     *
-     * @return \Admin\Controller\IndexController
-     */
-    protected function reqAdmin() {
-        $this->admin = (new UserAdminModel())->createAdminById(session('uid'));
-        if (! $this->admin) {
-            $this->ajaxReturn(mz_json_error('你的权限不足'));
-        }
-        return $this;
-    }
-    /**
      * 获得当前的广告，最多5个
      */
     public function current(){

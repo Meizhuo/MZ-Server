@@ -55,6 +55,11 @@ class IndexController extends BaseController {
         echo "111";
     }
     
+    public function rcommonadmin(){
+        $this->reqCommonAdmin();
+        echo "222222";
+    }
+    
     public function radmin(){
         $this->reqAdmin();
         echo "23333";
