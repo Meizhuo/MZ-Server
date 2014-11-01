@@ -105,15 +105,15 @@
                         <td>
                             <if condition="$a['status'] eq 1">
                                 正常
-                                <else />冻结
+                                <else />锁定
                             </if>
                         </td>
                         <td>
                             <a id="btn-view" href="javascript:void(0);" data-id="{$a['uid']}">查看</a> |
                             <a name="btn-operate" href="javascript:void(0);" data-id="{$a['uid']}">
                                 <if condition="$a['status'] eq 1">
-                                    冻结
-                                    <else />解冻
+                                    锁定
+                                    <else />解锁
                                 </if>
                             </a>
                             <if  condition="$admin['level'] eq 16" >
@@ -167,14 +167,14 @@
     $('#btn-create').on('click', function() {
         location = "{:U('admin/index/createAdmin')}";
     });
-    //冻结/解冻 操作
+    //锁定/解锁 操作
     $('[name=btn-operate]').on('click', function() {
         var $ele = $(this);
         var post_data = {
             admin_id: $ele.data('id')
         };
         if (status == '1') {
-            post_data['op'] = -2; //冻结
+            post_data['op'] = -2; //锁定
         } else {
             post_data['op'] = 1; //正常
         }
