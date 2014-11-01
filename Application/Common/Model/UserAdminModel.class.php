@@ -37,7 +37,7 @@ class UserAdminModel extends BaseModel {
      * @param int $per_institution_check 有权限审核培训机构(0无权限1有权限)
      * @return Ambigous <string, multitype:number string >
      */
-    public function createAdmin($nickname,$phone,$email,$psw,$per_categorys_post,$per_categorys_check,$per_institution_check){
+    public function createAdmin($nickname,$phone,$email,$psw,$per_categorys_post,$per_categorys_check,$per_institution_check,$per_person_man,$per_employer_man){
         $res = $this->_getResult();
         $data['nickname'] = $nickname;
         if(!is_null($phone)){
@@ -48,6 +48,8 @@ class UserAdminModel extends BaseModel {
         $data['per_categorys_post'] = $per_categorys_post;
         $data['per_categorys_check'] = $per_categorys_check;
         $data['per_institution_check'] = $per_institution_check;
+        $data['per_person_man'] =$per_person_man;
+        $data['per_employer_man'] = $per_employer_man;
         $data['level'] = UserModel::LEVEL_ADMIN;
         $data['status'] = UserModel::STATUS_PASS;
         $User = D('User');
