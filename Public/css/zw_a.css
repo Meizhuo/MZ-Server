@@ -320,7 +320,7 @@ td {
     background-color: #6c0;
     color: #fff;
 }
-#text_center {
+.text_center {
     width: 100%;
     text-align: center;
 }

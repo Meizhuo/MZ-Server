@@ -68,29 +68,45 @@
         <div class="ht">
             <h1>系统设置</h1>
         </div>
-        <div id="ins_form">
-            <table width="800px;">
-                <tr>
-                    <th>培训机构</th>
-                    <th>办学类型</th>
-                    <th>地址</th>
-                    <th>联系人</th>
-                    <th>审核状态</th>
-                    <th>操作</th>
-                </tr>
-
-            </table>
-            <div class="syxy">
-                <button id="btn-pre" class="submit">上一页</button>
-                <button id="btn-next" class="submit">下一页</button>
-            </div>
+        <div class="ht_b">
+            <h1>清理数据</h1>
         </div>
+
+        <div id="clear_data">
+            <input id="btn-clean" type="button" value="一键清理" class="bt_big">
+        </div>
+
 
     </div>
 
 </body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
+(function($) {
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/admin/';
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
+
+    //一键清理数据
+    $('#btn-clean').on('click',function(){
+        $.get("{:U('/admin/common/cleanFile')}",function(json){
+            if(json.code){
+                alert(json.response);
+            }else{
+                alert('操作失败');
+            }
+        })
+    });
+
+})(jQuery);
 </script>
 
 </html>
