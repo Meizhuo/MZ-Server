@@ -12,15 +12,17 @@ class AdminController extends BaseController {
      * 创建一个管理员
      */
     public function create(){
-    	$this->reqPost(array('nickname','email','psw','per_categorys_post','per_categorys_check','per_institution_check'))->reqSuperAdmin();
+    	$this->reqPost(array('nickname','email','psw','per_categorys_post','per_categorys_check','per_institution_check','per_person_man','per_employer_man'))->reqSuperAdmin();
         $nickname = I('post.nickname');
         $phone = I('post.phone',null);
         $email = I('post.email');
         $psw = I('post.psw');
-        $per_categorys_post = I('post.per_categorys_post');
-        $per_categorys_check = I('post.per_categorys_check');
-        $per_institution_check = I('post.per_institution_check');
-        $res = D('UserAdmin')->createAdmin($nickname,$phone,$email,$psw,$per_categorys_post,$per_categorys_check,$per_institution_check);
+        $per_categorys_post = I('post.per_categorys_post','[]');
+        $per_categorys_check = I('post.per_categorys_check','[]');
+        $per_institution_check = I('post.per_institution_check','0');
+        $per_person_man = I('post.per_person_man','0');
+        $per_employer_man = I('post.per_employer_man','0');
+        $res = D('UserAdmin')->createAdmin($nickname,$phone,$email,$psw,$per_categorys_post,$per_categorys_check,$per_institution_check,$per_person_man,$per_employer_man);
         if($res['status']){
             $this->ajaxReturn(mz_json_success());
         }else{

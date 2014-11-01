@@ -84,7 +84,7 @@
                                 <span>*</span>密码</div>
                         </td>
                         <td width="400">
-                            <input id="text-psw" class="inp" type="password" style="height:100%;width:100%;">
+                            <input id="text-psw" class="inp" type="password" style="height:100%;width:100%;" placeholder="8-16位，数字+英文">
                         </td>
                     </tr>
                     <tr>
@@ -93,7 +93,7 @@
                                 <span>*</span>再次输入密码</div>
                         </td>
                         <td width="400">
-                            <input id="text-repsw" class="inp" type="password" style="height:100%;width:100%;">
+                            <input id="text-repsw" class="inp" type="password" style="height:100%;width:100%;"placeholder="8-16位，数字+英文">
                         </td>
                     </tr>
 
@@ -149,6 +149,30 @@
                     </tr>
                     <tr>
                         <td>
+                            <div align="right">
+                                <span>*</span>个人用户管理权限</div>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="radio" name="per_person_man" value="1">是
+                                <input type="radio" name="per_person_man" checked="checked" value="0">否
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">
+                                <span>*</span>企业用户管理权限</div>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="radio" name="per_employer_man" value="1">是
+                                <input type="radio" name="per_employer_man" checked="checked" value="0">否
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <div align="right"></div>
                         </td>
                         <td>
@@ -187,6 +211,8 @@
         var per_check = [];
         var per_institution_check = $('[name=per_institution_check]:checked').val();
         var per_post = [];
+        var per_person_man = $('[name=per_institution_check]:checked').val();
+        var per_employer_man = $('[name=per_institution_check]:checked').val();
 
         $('[name=per_post]:checked').each(function(e) {
             per_post.push(e);
@@ -215,17 +241,23 @@
             nickname: nickname,
             email: email,
             psw: psw,
-            per_categorys_post: '['+per_post.toString()+']',
-            per_categorys_check: '['+per_check.toString()+']' ,
-            per_institution_check: per_institution_check ,
+            per_categorys_post: '[' + per_post.toString() + ']',
+            per_categorys_check: '[' + per_check.toString() + ']',
+            per_institution_check: per_institution_check,
+            per_person_man: per_person_man,
+            per_employer_man: per_employer_man
 
         }
+        console.log(post_data);
 
         //submit
         $.post("{:U('home/admin/create')}", post_data,
             function(json) {
                 if (json.code) {
-                    alert('操作成功')
+                    alert('操作成功');
+                    setTimeout(function(){
+                        location = "{:U('admin/index/manage')}"
+                    }, 500);
                 } else {
                     alert(json.msg);
                 }

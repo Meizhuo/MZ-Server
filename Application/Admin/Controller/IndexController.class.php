@@ -238,9 +238,14 @@ function viewEmpoyer($emplyoer_id = 0)
     public function adminList($status=UserModel::STATUS_PASS,$page=1,$limit=10){
         $this->reqAdmin();
         $res = D('UserAdmin')->search($status,null,$page,$limit);
+        $admins = $res['msg'];
+        for($i=0;$i<count($admins);$i++){
+            $admins[$i]['per_categorys_post'] = json_decode($admins[$i]['per_categorys_post']);
+            $admins[$i]['per_categorys_check'] = json_decode($admins[$i]['per_categorys_check']);
+        }
         $this->assign('status',$status);
         $this->assign('page',$page);
-        $this->assign('admins',$res['msg']);
+        $this->assign('admins',$admins);
         $this->display();
     }
     /**
