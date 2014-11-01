@@ -180,7 +180,6 @@
 
 <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
 
-<!-- UEditor END-->
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
@@ -205,9 +204,6 @@
         var per_check = [];
         var per_institution_check = $('[name=per_institution_check]:checked').val();
         var per_post = [];
-        var l = function(msg) {
-            console.log(msg);
-        }
 
         $('[name=per_post]:checked').each(function(e) {
             per_post.push(e);
@@ -217,7 +213,40 @@
             per_check.push(e);
         });
 
+        function emp(o) {
+            return o === '';
+        }
+
+        if (psw !== repsw) {
+            alert('输入的密码不一致！');
+            return;
+        }
+
+        if (emp(nickname) || emp(email) || emp(psw)) {
+            alert('不能为空');
+            return;
+        }
+
+
+        var post_data = {
+            nickname: nickname,
+            email: email,
+            psw: psw,
+            per_categorys_post: '['+per_post.toString()+']',
+            per_categorys_check: '['+per_check.toString()+']' ,
+            per_institution_check: per_institution_check ,
+
+        }
+
         //submit
+        $.post("{:U('home/admin/create')}", post_data,
+            function(json) {
+                if (json.code) {
+                    alert('操作成功')
+                } else {
+                    alert(json.msg);
+                }
+            });
     });
 
 
