@@ -23,29 +23,39 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="{:U('admin/index/postDocument')}" onclick="DoMenu('ChildMenu1')">发布文档</a>
-                    <li><a href="{:U('admin/index/advertisements')}" onclick="DoMenu('ChildMenu2')">广告设置</a>
-                    </li>
-                    <li><a href="#Menu=ChildMenu3" onClick="DoMenu('ChildMenu3')">机构管理</a>
-                        <ul id="ChildMenu3" class="collapsed">
-                            <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核列表</a>
-                            </li>
-                            <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核列表</a>
-                            </li>
-                            <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核列表</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#Menu=ChildMenu4" onClick="DoMenu('ChildMenu4')">文档信息管理</a>
-                        <ul id="ChildMenu4" class="collapsed">
-                            <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核列表</a>
-                            </li>
-                            <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核列表</a>
-                            </li>
-                            <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核列表</a>
-                            </li>
-                        </ul>
-                    </li>
+                <li><a href="{:U('admin/index/postDocument')}">发布文档</a>
+                </li>
+                <li><a href="{:U('admin/index/advertisements')}">广告设置</a>
+
+                </li>
+                <li><a href="{:U('admin/index/adminList')}">管理员列表</a>
+                </li>
+                <li><a href="{:U('admin/index/userList')}">用户列表</a>
+                </li>
+                <li><a href="{:U('admin/index/employerList')}">企业列表</a>
+                </li>
+                <li><a href="#Menu=ChildMenu5" onClick="DoMenu('ChildMenu5')">机构管理</a>
+                    <ul id="ChildMenu5" class="collapsed">
+                        <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核机构</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核机构</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核机构</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#Menu=ChildMenu6" onClick="DoMenu('ChildMenu6')">文档信息管理</a>
+                    <ul id="ChildMenu6" class="collapsed">
+                        <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核文档</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核文档</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核文档</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="{:U('admin/index/setting')}">系统设置</a>
+                </li>
             </ul>
         </div>
     </div>
