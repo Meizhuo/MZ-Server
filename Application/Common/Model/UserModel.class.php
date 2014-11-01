@@ -29,6 +29,9 @@ class UserModel extends BaseModel {
 
     /** 未审核 */
     const STATUS_NOT_VERTIFY = 0;
+    
+    /** 冻结状态*/
+    const STATUS_STOP = -2;
 
     /**  审核通过 */
     const STATUS_PASS = 1;
