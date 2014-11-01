@@ -20,16 +20,14 @@
         <span id="text-time">2014-10-10</span>&nbsp;
         <span>栏目: {$category['category']}-{$category['name']}</span>
     </div>
+            <foreach name="images" item="image">
+        <div class="xwtp">
+            <img src="{$image['url']}">
+        </div>
+            </foreach>
     <div class="xwnr">
 
         {$document['content']}
-        <br/>
-        <div class="xwtp">
-            <foreach name="images" item="image">
-                <img src="{$image['url']}">
-            </foreach>
-
-        </div>
         <br/>
         <div class="fj">
             <notempty name="files">
