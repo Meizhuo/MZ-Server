@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>管理界面</title>
+
+
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <div id="logo">
+        <a href="{:U('admin/index/index')}">
+            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+        </a>
+    </div>
+
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="{:U('admin/index/postDocument')}">发布文档</a>
+                </li>
+                <li><a href="{:U('admin/index/advertisements')}">广告设置</a>
+
+                </li>
+                <li><a href="{:U('admin/index/adminList')}">管理员列表</a>
+                </li>
+                <li><a href="{:U('admin/index/userList')}">用户列表</a>
+                </li>
+                <li><a href="{:U('admin/index/employerList')}">企业列表</a>
+                </li>
+                <li><a href="#Menu=ChildMenu5" onClick="DoMenu('ChildMenu5')">机构管理</a>
+                    <ul id="ChildMenu5" class="collapsed">
+                        <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核机构</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核机构</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核机构</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#Menu=ChildMenu6" onClick="DoMenu('ChildMenu6')">文档信息管理</a>
+                    <ul id="ChildMenu6" class="collapsed">
+                        <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核文档</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核文档</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核文档</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="{:U('admin/index/setting')}">系统设置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="topbar">
+        <span>欢迎 {$admin['nickname']}</span>
+    </div>
+
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
+        <div id="ins_fh">
+            <h1>培训机构注册资料</h1>
+        </div>
+        <div id="ins_form">
+            <table>
+
+                <tr>
+                    <th>机构名称</th>
+                    <td>{$ins['name']}</td>
+                </tr>
+                <tr>
+                    <th>地址</th>
+                    <td>{$ins['address']}</td>
+                </tr>
+                <tr>
+                    <th>机构负责人</th>
+                    <td>{$ins['manager']}</td>
+                </tr>
+                <tr>
+                    <th>办学类型</th>
+                    <td>{$ins['type']}</td>
+                </tr>
+                <tr>
+                    <th>批准文号</th>
+                    <td>{$ins['approval_number']}</td>
+                </tr>
+                <tr>
+                    <th>有效期</th>
+                    <td>{$ins['validity_date']}</td>
+                </tr>
+                <tr>
+                    <th>培训范围</th>
+                    <td>{$ins['training_scope']}</td>
+                </tr>
+
+                <tr>
+                    <th>附件</th>
+                    <td>
+                        <div id="fileList">
+                            <foreach name="files" item="file">
+                                <div>
+                                    <a href="{$file['url']}">{$file['raw_name']}</a>
+                                    <br>
+                                </div>
+                            </foreach>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="100px;">描述</th>
+                    <td width="500px;" style="text-align: center;">
+                        <a href="/mz/index.php/admin/view/insIntro/ins_id/{$ins['uid']}">查看简介</a>
+                    </td>
+
+                </tr>
+            </table>
+            <div class="tab_inp" style="text-align:center;margin-top: 20px">
+                <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="height:40px;width: 100px;"></input>
+                <input id="btn-unpass" data-id="{$ins['uid']}" class="reset" type="reset" value="审核不通过" style="height:40px;;width: 100px;"></input>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    function req(institution_id, op) {
+        $.post('/mz/index.php/home/institution/vertify', {
+                'institution_id': institution_id,
+                'op': op
+            },
+
+            function(json) {
+                console.log(json);
+                if (json.code) {
+                    alert('操作成功');
+                    setTimeout(function() {
+                        location.href = '/mz/index.php/admin/index/checkInstitution';
+                    }, 1000);
+                } else {
+                    alert('请求失败');
+                }
+            });
+    }
+    $('#btn-pass').on('click', function() {
+        var btn = $(this);
+        var institution_id = btn.data('id');
+        req(institution_id, 1);
+    });
+
+    $('#btn-unpass').on('click', function() {
+        var btn = $(this);
+        var institution_id = btn.data('id');
+        req(institution_id, -1);
+    });
+})(jQuery);
+</script>
+
+</html>

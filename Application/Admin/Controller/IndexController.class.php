@@ -1,5 +1,6 @@
 <?php
 namespace Admin\Controller;
+
 use Common\Controller\BaseController;
 use Common\Model\UserModel;
 use Common\Model\UserAdminModel;
@@ -195,6 +196,11 @@ class IndexController extends BaseController {
         }
         $this->display();
     }
+    
+    public 
+
+function viewEmpoyer($emplyoer_id = 0)
+{}
     /**
      * 广告管理页
      */
