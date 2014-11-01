@@ -50,12 +50,12 @@ class UserAdminModel extends BaseModel {
         $data['per_institution_check'] = $per_institution_check;
         $data['per_person_man'] =$per_person_man;
         $data['per_employer_man'] = $per_employer_man;
-        $data['level'] = UserModel::LEVEL_ADMIN;
-        $data['status'] = UserModel::STATUS_PASS;
-        $User = D('User');
+        $User = M('User');
         if($User->create($data)){
             //md5
             $User->data['psw'] =  md5($psw);
+            $User->data['level'] = UserModel::LEVEL_ADMIN;
+            $User->data['status'] = UserModel::STATUS_PASS;
             $uid = $User->add();
             if(!$uid){
                 $res['msg'] =  'System Error: Not able to insert.';
@@ -77,9 +77,23 @@ class UserAdminModel extends BaseModel {
         }
         return $res;
     }
-            
-    public function update(){
-         
+    /**
+     * 验证一用户
+     * @param int $admin_id
+     * @param int $op 	1:正常(审核通过) 0未审核 -1审核不通过 -2:冻结
+     * @return Ambigous <number, string>
+     */
+    public function vertify($admin_id,$op){
+        $res = $this->_getResult();
+        $data['status'] = $op;
+        $user_admin =M('User');
+        if($user_admin->where("uid='%s' AND level=%d",$admin_id,UserModel::LEVEL_ADMIN)->save($data)>=0){
+        	$res['status'] = 1;
+        }else{
+        	$res['msg'] = $user_admin->getError();
+        }
+        
+        return $res;
     }
     /**
      * 获得管理员的信息
@@ -148,11 +162,12 @@ class UserAdminModel extends BaseModel {
     public function search($status=null,$nickname=null,$page=1,$limit=10){
        $map = array();
        if(!is_null($status)){
-           $map['status'] = $status;
+           $map['status'] = array('eq',$status);
        }
        if(!is_null($nickname)){
-           $map['nickname'] = $nickname;
+           $map['nickname'] = array('like','%'.$nickname.'%');
        }
+       $map['level'] = array('eq',UserModel::LEVEL_ADMIN);
        // 保证为正数
        $limit = $limit > 0 ? $limit : 10;
        $page = $page > 0 ? $page : 1;

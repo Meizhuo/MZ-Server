@@ -29,6 +29,22 @@ class AdminController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
+    /**
+     * 验证（更换权限）
+     * 需要超级管理员权限
+     * @post admin_id
+     * @post 1正常 -2冻结
+     */
+    public function vertify(){
+        $this->reqPost(array('admin_id','op'))->reqSuperAdmin();
+        $res = D('UserAdmin')->vertify(I('post.admin_id'),I('post.op'));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success('vertify successfully'));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+        
+    }
     
     /**
      * 获得管理员的信息

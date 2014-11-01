@@ -52,7 +52,7 @@
             <h1>管理员列表</h1>
         </div>
         <div style="margin: 10px;">
-            <h3>* 审核状态</h3>
+            <h3>* 状态</h3>
             <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
                 <option value="1">正常</option>
                 <option value="-2">冻结</option>
@@ -79,8 +79,7 @@
                         <td>
                             <if condition="count($a['per_categorys_post']) eq 7">
                                 全部
-                                <elseif condition="count($a['per_categorys_post']) eq 0"/>
-                                    无权限
+                                <elseif condition="count($a['per_categorys_post']) eq 0" />无权限
                                 <else/>部分
                             </if>
                         </td>
@@ -106,12 +105,17 @@
                         <td>
                             <if condition="$a['status'] eq 1">
                                 正常
-                            <else />
-                                冻结
+                                <else />冻结
                             </if>
                         </td>
                         <td>
-                            <a href="#">查看</a> | <a href="#">冻结</a>
+                            <a id="btn-view" href="javascript:void(0);" data-id="{$a['uid']}">查看</a> |
+                            <a name="btn-operate" href="javascript:void(0);" data-id="{$a['uid']}">
+                                <if condition="$a['status'] eq 1">
+                                    冻结
+                                    <else />解冻
+                                </if>
+                            </a>
                         </td>
                     </tr>
                 </foreach>
@@ -159,6 +163,34 @@
     $('#btn-create').on('click', function() {
         location = "{:U('admin/index/createAdmin')}";
     });
+
+    $('[name=btn-operate]').on('click', function() {
+        var $ele = $(this);
+        var post_data = {
+            admin_id: $ele.data('id')
+        };
+        if (status == '1') {
+            post_data['op'] = -2; //冻结
+        } else {
+            post_data['op'] = 1; //正常
+        }
+        console.log(post_data);
+        $.post("{:U('home/admin/vertify')}", post_data, function(json) {
+            console.log(json);
+            if (json.code) {
+                $ele.parent().parent().fadeOut();
+                console.log(json.response);
+            } else {
+                console.log(json.msg);
+            }
+        });
+    });
+
+    $('#btn-view').on('click', function() {
+
+    });
+
+
 
     //翻页
 

@@ -211,8 +211,8 @@
         var per_check = [];
         var per_institution_check = $('[name=per_institution_check]:checked').val();
         var per_post = [];
-        var per_person_man = $('[name=per_institution_check]:checked').val();
-        var per_employer_man = $('[name=per_institution_check]:checked').val();
+        var per_person_man = $('[name=per_person_man]:checked').val();
+        var per_employer_man = $('[name=per_employer_man]:checked').val();
 
         $('[name=per_post]:checked').each(function(e) {
             per_post.push(e);
@@ -248,7 +248,6 @@
             per_employer_man: per_employer_man
 
         }
-        console.log(post_data);
 
         //submit
         $.post("{:U('home/admin/create')}", post_data,
@@ -256,7 +255,7 @@
                 if (json.code) {
                     alert('操作成功');
                     setTimeout(function(){
-                        location = "{:U('admin/index/manage')}"
+                        location = "{:U('admin/index/adminList')}"
                     }, 500);
                 } else {
                     alert(json.msg);
