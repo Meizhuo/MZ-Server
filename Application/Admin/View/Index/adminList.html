@@ -116,6 +116,10 @@
                                     <else />解冻
                                 </if>
                             </a>
+                            <if  condition="$admin['level'] eq 16" >
+                                |  <a name="btn-delete" href="javascript:void(0);" data-id="{$a['uid']}">删除</a>
+                            </if>
+
                         </td>
                     </tr>
                 </foreach>
@@ -163,7 +167,7 @@
     $('#btn-create').on('click', function() {
         location = "{:U('admin/index/createAdmin')}";
     });
-
+    //冻结/解冻 操作
     $('[name=btn-operate]').on('click', function() {
         var $ele = $(this);
         var post_data = {
@@ -186,8 +190,25 @@
         });
     });
 
+
     $('#btn-view').on('click', function() {
 
+    });
+    //删除操作
+    $('[name=btn-delete]').on('click',function(){
+         var $ele = $(this);
+         var admin_id = $ele.data('id');
+         var post_data = {
+            admin_id:admin_id
+         };
+         $.post("{:U('home/admin/deleteAdmin')}",post_data,function(json){
+            if(json.code){
+                alert('操作成功');
+                $ele.parent().parent().fadeOut();
+            }else{
+                alert(json.msg);
+            }
+         });
     });
 
 
