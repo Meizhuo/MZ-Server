@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>管理界面</title>
+
+
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <div id="logo">
+        <a href="{:U('admin/index/index')}">
+            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+        </a>
+    </div>
+
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="{:U('admin/index/postDocument')}">发布文档</a>
+                </li>
+                <li><a href="{:U('admin/index/advertisements')}">广告设置</a>
+                </li>
+                <li><a href="{:U('admin/index/adminList')}">管理员列表</a>
+                </li>
+                <li><a href="{:U('admin/index/checkInstitution')}">培训机构列表</a>
+                </li>
+                <li><a href="{:U('admin/index/userList')}">个人用户列表</a>
+                </li>
+                <li><a href="{:U('admin/index/employerList')}">单位用户列表</a>
+                </li>
+                <li><a href="{:U('admin/index/checkDocument')}">文档信息管理</a>
+                </li>
+                <li><a href="{:U('admin/index/setting')}">系统设置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="topbar">
+        <span>欢迎 {$admin['nickname']}</span>
+        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
+    </div>
+
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
+        <div id="ins_fh">
+            <h1>管理员信息</h1>
+        </div>
+        <div id="ins_form">
+            <table>
+
+                <tr>
+                    <th width="100px;">管理员姓名</th>
+                    <td width="500px;">{$adm['nickname']}</td>
+                </tr>
+                <tr>
+                    <th>登录邮箱</th>
+                    <td>{$adm['email']}</td>
+                </tr>
+                <tr>
+                    <th>发布/编辑文档权限</th>
+                    <td>{$adm['per_categorys_post']}</td>
+                </tr>
+                <tr>
+                    <th>审核文档权限</th>
+                    <td>{$adm['per_categorys_check']}</td>
+                </tr>
+                <tr>
+                    <th>审核机构权限</th>
+                    <td>{$adm['per_institution_check']}</td>
+                </tr>
+                <tr>
+                    <th>个人用户管理权限</th>
+                    <td>{$adm['per_person_man']}</td>
+                </tr>
+                <tr>
+                    <th>单位用户管理权限</th>
+                    <td>{$adm['per_employer_man']}</td>
+                </tr>
+                <tr>
+                    <th>用户状态</th>
+                    <td>
+                        <switch name="adm.status">
+                            <case value='1'>
+                                正常
+                            </case>
+                            <case value='-2'>
+                                冻结
+                            </case>
+                        </switch>
+
+                    </td>
+                </tr>
+            </table>
+            <div class="tab_inp" style="text-align:center;margin-top: 20px">
+                <switch name="adm.status">
+                    <case value="1">
+                        <input id="btn-lock" data-id="{$adm['uid']}" class="submit" type="submit" value="锁定" style="height:40px;width: 100px;"></input>
+                    </case>
+                    <case value="-2">
+                        <input id="btn-unlock" data-id="{$adm['uid']}" class="reset" type="reset" value="解锁" style="height:40px;;width: 100px;"></input>
+                    </case>
+                    <default />
+                </switch>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    function req(admin_id, op) {
+        $.post('/mz/index.php/home/admin/vertify', {
+                'admin_id': admin_id,
+                'op': op
+            },
+
+            function(json) {
+                console.log(json);
+                if (json.code) {
+                    alert('操作成功');
+                    setTimeout(function() {
+                        location.href = '/mz/index.php/admin/index/adminList';
+                    }, 1000);
+                } else {
+                    alert('请求失败');
+                }
+            });
+    }
+    $('#btn-lock').on('click', function() {
+        var btn = $(this);
+        var admin_id = btn.data('id');
+        req(admin_id, -2);
+    });
+
+    $('#btn-unlock').on('click', function() {
+        var btn = $(this);
+        var admin_id = btn.data('id');
+        req(admin_id, 1);
+    });
+})(jQuery);
+</script>
+
+</html>

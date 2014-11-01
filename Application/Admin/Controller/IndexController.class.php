@@ -175,6 +175,7 @@ class IndexController extends BaseController {
         $this->assign('images', $images);
         $this->display();
     }
+
     /**
      * 查看机构页
      * @param number $institutionId 机构id
@@ -196,11 +197,25 @@ class IndexController extends BaseController {
         }
         $this->display();
     }
-    
-    public 
 
-function viewEmpoyer($emplyoer_id = 0)
-{}
+    /**
+     * 查看管理员页
+     * @param number $adminId 管理员id
+     */
+    public function viewAdmin($admin_id = 0) {
+        $this->reqAdmin();
+        if($admin_id !== 0){
+            $res = D('UserAdmin')->info($admin_id);
+            $ins = $res['msg'];
+            $this->assign('adm',$ins);
+        }
+        $this->display();
+    }
+     
+     
+    public function viewEmpoyer($emplyoer_id = 0)
+		{
+		}
     /**
      * 广告管理页
      */
