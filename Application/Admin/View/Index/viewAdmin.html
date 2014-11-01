@@ -66,23 +66,127 @@
                 </tr>
                 <tr>
                     <th>发布/编辑文档权限</th>
-                    <td>{$adm['per_categorys_post']}</td>
+                    <td>
+                        <if condition="in_array(0,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked">职业培训-基本职能
+                            <else/>
+                            <input type="checkbox">职业培训-基本职能
+                        </if>
+
+                        <if condition="in_array(1,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked">职业培训-法律法规及政策
+                            <else/>
+                            <input type="checkbox">职业培训-法律法规及政策
+                        </if>
+
+                        <if condition="in_array(2,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked">职业培训-相关新闻
+                            <else/>
+                            <input type="checkbox">职业培训-相关新闻
+                        </if>
+
+                        <if condition="in_array(3,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked">职业培训-通知信息
+                            <else/>
+                            <input type="checkbox">职业培训-通知信息
+                        </if>
+
+                        <br/>
+
+                        <if condition="in_array(4,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked">职业技能鉴定-政策法规
+                            <else/>
+                            <input type="checkbox">职业技能鉴定-政策法规
+                        </if>
+
+                        <if condition="in_array(5,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked">职业技能鉴定-办事指南
+                            <else/>
+                            <input type="checkbox">职业技能鉴定-办事指南
+                        </if>
+
+                        <if condition="in_array(6,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked">职业技能鉴定-全国统考
+                            <else/>
+                            <input type="checkbox">职业技能鉴定-全国统考
+                        </if>
+
+                    </td>
                 </tr>
                 <tr>
                     <th>审核文档权限</th>
-                    <td>{$adm['per_categorys_check']}</td>
+                    <td>
+                        <if condition="in_array(0,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked">职业培训-基本职能
+                            <else/>
+                            <input type="checkbox">职业培训-基本职能
+                        </if>
+
+                        <if condition="in_array(1,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked">职业培训-法律法规及政策
+                            <else/>
+                            <input type="checkbox">职业培训-法律法规及政策
+                        </if>
+
+                        <if condition="in_array(2,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked">职业培训-相关新闻
+                            <else/>
+                            <input type="checkbox">职业培训-相关新闻
+                        </if>
+
+                        <if condition="in_array(3,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked">职业培训-通知信息
+                            <else/>
+                            <input type="checkbox">职业培训-通知信息
+                        </if>
+
+                        <br/>
+
+                        <if condition="in_array(4,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked">职业技能鉴定-政策法规
+                            <else/>
+                            <input type="checkbox">职业技能鉴定-政策法规
+                        </if>
+
+                        <if condition="in_array(5,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked">职业技能鉴定-办事指南
+                            <else/>
+                            <input type="checkbox">职业技能鉴定-办事指南
+                        </if>
+
+                        <if condition="in_array(6,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked">职业技能鉴定-全国统考
+                            <else/>
+                            <input type="checkbox">职业技能鉴定-全国统考
+                        </if>
+                    </td>
                 </tr>
                 <tr>
                     <th>审核机构权限</th>
-                    <td>{$adm['per_institution_check']}</td>
+                    <td>
+                        <if condition="$adm['per_institution_check'] eq 1">
+                            是
+                            <else/>否
+                        </if>
+                    </td>
                 </tr>
                 <tr>
                     <th>个人用户管理权限</th>
-                    <td>{$adm['per_person_man']}</td>
+                    <td>
+                        <if condition="$adm['per_person_man'] eq 1">
+                            是
+                            <else/>否
+                        </if>
+                    </td>
                 </tr>
                 <tr>
                     <th>单位用户管理权限</th>
-                    <td>{$adm['per_employer_man']}</td>
+                    <td>
+                        <if condition="$adm['per_employer_man'] eq 1">
+                            是
+                            <else/>否
+                        </if>
+                    </td>
                 </tr>
                 <tr>
                     <th>用户状态</th>

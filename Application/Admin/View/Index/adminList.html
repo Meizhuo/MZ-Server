@@ -109,7 +109,7 @@
                             </if>
                         </td>
                         <td>
-                            <a id="btn-view" href="javascript:void(0);" data-id="{$a['uid']}">查看</a> |
+                            <a name="btn-view" href="javascript:void(0);" data-id="{$a['uid']}">查看</a> |
                             <a name="btn-operate" href="javascript:void(0);" data-id="{$a['uid']}">
                                 <if condition="$a['status'] eq 1">
                                     锁定
@@ -191,8 +191,12 @@
     });
 
 
-    $('#btn-view').on('click', function() {
-
+    $('[name=btn-view]').on('click', function() {
+            var $ele = $(this);
+            var admin_id = $ele.data('id');
+            var url = "/mz/index.php/admin/index/viewAdmin/admin_id/"+admin_id;
+            console.log(url);
+            location = url;
     });
     //删除操作
     $('[name=btn-delete]').on('click',function(){

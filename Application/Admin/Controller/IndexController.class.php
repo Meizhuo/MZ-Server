@@ -204,10 +204,13 @@ class IndexController extends BaseController {
      */
     public function viewAdmin($admin_id = 0) {
         $this->reqAdmin();
+       
         if($admin_id !== 0){
             $res = D('UserAdmin')->info($admin_id);
-            $ins = $res['msg'];
-            $this->assign('adm',$ins);
+            $admin = $res['msg'];
+            $admin['per_categorys_post'] = json_decode($admin['per_categorys_post']);
+            $admin['per_categorys_check'] = json_decode($admin['per_categorys_check']);
+            $this->assign('adm',$admin);
         }
         $this->display();
     }
