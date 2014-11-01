@@ -322,5 +322,24 @@ class UserModel extends BaseModel {
         }
         return $res;
     }
+    /**
+     * 删除一用户
+     * @param unknown $uid
+     * @param unknown $type 类型（admin person，institution，employer）
+     * @return Ambigous <number, string>
+     */
+    public function deleteUser($uid,$type){
+        $res = $this->_getResult();
+        switch ($type){
+        	case UserModel::LEVEL_ADMIN:
+        	    if($this->where("uid='%s'",$uid)->delete() && M('UserAdmin')->where("uid='%s'",$uid)->delete()){
+        	        $res['status'] = 1;
+        	    }else{
+        	        $res['msg'] = '删除失败';
+        	    }
+        	    break;
+        }
+        return $res;
+    }
 }
 

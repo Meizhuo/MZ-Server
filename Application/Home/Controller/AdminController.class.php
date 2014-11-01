@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Common\Model\UserModel;
 
 /**
  * 管理员接口
@@ -40,6 +41,20 @@ class AdminController extends BaseController {
         $res = D('UserAdmin')->vertify(I('post.admin_id'),I('post.op'));
         if($res['status']){
             $this->ajaxReturn(mz_json_success('vertify successfully'));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+        
+    }
+    /**
+     * 删除一个管理员
+     */
+    public function deleteAdmin(){
+        $this->reqPost(array('admin_id'))->reqSuperAdmin();
+        //调用model
+        $res = D('User')->deleteUser(I('post.admin_id'),UserModel::LEVEL_ADMIN);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success());
         }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }

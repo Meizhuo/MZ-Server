@@ -27,9 +27,46 @@ per_employer_man  | 是否有权限管理企业用户(0无权限1有权限,默�
 }
 ```
 
+## 验证(更换管理员权限)
+`POST /home/admin/vertify`
+
+**NOTE:需要超级管理员权限***
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+admin_id | 管理员id     | Y
+
+**Response**  
+
+```json  
+{
+    "code":200,
+    "response":"operate successfully"
+}
+```
+
+## 删除一个管理员
+`POST /home/admin/deleteAdmin`
+
+**NOTE:需要超级管理员权限***
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+admin_id | 管理员id     | Y
+
+**Response**  
+
+```json  
+{
+    "code":200,
+    "response":"operate successfully"
+}
+```
+
+
 
 ## 获取管理员信息
-`GET /home/employer/getInfo`
+`GET /home/admin/getInfo`
 
 **NOTE:需要管理员权限***
 
