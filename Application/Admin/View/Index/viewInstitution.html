@@ -62,6 +62,7 @@
 
     <div id="topbar">
         <span>欢迎 {$admin['nickname']}</span>
+        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
     </div>
 
     <!--下面只是说明与程序代码无关-->
@@ -119,12 +120,39 @@
                     <td width="500px;" style="text-align: center;">
                         <a href="/mz/index.php/admin/view/insIntro/ins_id/{$ins['uid']}">查看简介</a>
                     </td>
+                </tr>
+                <tr>
+                    <th>审核状态</th>
+                    <td>
+                        <switch name="ins.status">
+                            <case value='1'>
+                                通过
+                            </case>
+                            <case value='-1'>
+                                不通过
+                            </case>
+                            <case value='0'>
+                                未审核
+                            </case>
+                        </switch>
 
+                    </td>
                 </tr>
             </table>
             <div class="tab_inp" style="text-align:center;margin-top: 20px">
-                <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="height:40px;width: 100px;"></input>
-                <input id="btn-unpass" data-id="{$ins['uid']}" class="reset" type="reset" value="审核不通过" style="height:40px;;width: 100px;"></input>
+                <switch name="ins.status">
+                    <case value="0">
+                        <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="height:40px;width: 100px;"></input>
+                        <input id="btn-unpass" data-id="{$ins['uid']}" class="reset" type="reset" value="审核不通过" style="height:40px;;width: 100px;"></input>
+                    </case>
+                    <case value="1">
+                        <input id="btn-unpass" data-id="{$ins['uid']}" class="reset" type="reset" value="审核不通过" style="height:40px;;width: 100px;"></input>
+                    </case>
+                    <case value="-1">
+                        <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="height:40px;width: 100px;"></input>
+                    </case>
+                    <default />
+                </switch>
             </div>
         </div>
     </div>
