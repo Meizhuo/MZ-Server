@@ -54,10 +54,8 @@
         <div style="margin: 10px;">
             <h3>* 审核状态</h3>
             <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
-                <option value="-1">未通过</option>
-                <option value="0">等待中</option>
-                <option value="1">已通过</option>
-
+                <option value="1">正常</option>
+                <option value="-2">冻结</option>
             </select>
             <input id="btn-create" style="float:right;width:80px;" type="submit" class="submit" value="创建管理员">
         </div>
@@ -65,11 +63,11 @@
         <div id="ins_form">
             <table width="800px;">
                 <tr>
-                    <th>昵称</th>
-                    <th>注册时间</th>
-                    <th>栏目发布编辑权限</th>
-                    <th>审核的栏目权限</th>
-                    <th>审核培训机构权限</th>
+                    <th>姓名</th>
+                    <th>栏目编辑</th>
+                    <th>培训机构管理</th>
+                    <th>个人用户管理</th>
+                    <th>企业用户管理</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
@@ -78,32 +76,42 @@
                         <td>
                             {$a['nickname']}
                         </td>
-                        <td name="text-create_time">
-                            {$a['reg_time']}
-                        </td>
                         <td>
-                            {$a['per_categorys_post']}
-                        </td>
-                        <td>
-                            {$a['per_categorys_check']}
+                            <if condition="count($a['per_categorys_post']) eq 7">
+                                全部
+                                <elseif condition="count($a['per_categorys_post']) eq 0"/>
+                                    无权限
+                                <else/>部分
+                            </if>
                         </td>
                         <td>
                             <if condition="$a['per_institution_check'] eq 1">
                                 是
-                            <else/>
-                                否
+                                <else/>否
                             </if>
                         </td>
+                        <td>
+                            <if condition="$a['per_person_man'] eq 1">
+                                是
+                                <else/>否
+                            </if>
+                        </td>
+                        <td>
+                            <if condition="$a['per_employer_man'] eq 1">
+                                是
+                                <else/>否
+                            </if>
+                        </td>
+
                         <td>
                             <if condition="$a['status'] eq 1">
-                                已通过审核
-                                <elseif condition="$a['status'] eq -1" />未通过审核
-                                <else/>
-                                    未审核
+                                正常
+                            <else />
+                                冻结
                             </if>
                         </td>
                         <td>
-                            <a href="#">查看</a> | <a href="#">暂停</a>
+                            <a href="#">查看</a> | <a href="#">冻结</a>
                         </td>
                     </tr>
                 </foreach>

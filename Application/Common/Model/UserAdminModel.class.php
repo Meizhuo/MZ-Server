@@ -157,7 +157,7 @@ class UserAdminModel extends BaseModel {
        $limit = $limit > 0 ? $limit : 10;
        $page = $page > 0 ? $page : 1;
        $res['msg'] = $this->join('mz_user ON mz_user.uid = mz_user_admin.uid')->where($map)
-                          ->field('mz_user.uid,nickname,phone,email,reg_time,level,status,per_categorys_post,per_categorys_check,per_institution_check')
+                          ->field('mz_user.uid,nickname,phone,email,reg_time,level,status,per_categorys_post,per_categorys_check,per_institution_check,per_person_man,per_employer_man')
                           ->limit(($page - 1) * $limit, $limit)
                           ->select();
        if(empty($res['msg'])){
