@@ -85,6 +85,7 @@
                     <th>手机号码</th>
                     <th>工作地址</th>
                     <th>审核状态</th>
+                     <th>操作</th>
                 </tr>
                 <foreach name="users" item="u">
                     <tr>
@@ -107,6 +108,9 @@
                                 <else>
                                     未审核
                             </if>
+                        </td>
+                         <td>
+                            <a href="#">查看</a> | <a href="#">暂停</a>
                         </td>
                     </tr>
                 </foreach>

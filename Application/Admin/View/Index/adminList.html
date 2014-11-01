@@ -88,6 +88,7 @@
                     <th>审核的栏目权限</th>
                     <th>审核培训机构权限</th>
                     <th>状态</th>
+                    <th>操作</th>
                 </tr>
                 <foreach name="admins" item="a">
                     <tr>
@@ -104,15 +105,22 @@
                             {$a['per_categorys_check']}
                         </td>
                         <td>
-                            {$a['per_institution_check']}
+                            <if condition="$a['per_institution_check'] eq 1">
+                                是
+                            <else/>
+                                否
+                            </if>
                         </td>
                         <td>
                             <if condition="$a['status'] eq 1">
                                 已通过审核
                                 <elseif condition="$a['status'] eq -1" />未通过审核
-                                <else>
+                                <else/>
                                     未审核
                             </if>
+                        </td>
+                        <td>
+                            <a href="#">查看</a> | <a href="#">暂停</a>
                         </td>
                     </tr>
                 </foreach>
