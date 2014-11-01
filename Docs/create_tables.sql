@@ -27,7 +27,7 @@ CREATE TABLE `mz_user` (
   `psw` varchar(64) NOT NULL COMMENT 'md5,8-16位数字or字母',
   `reg_time` int(11) NOT NULL COMMENT '注册时间',
   `level` int(1) NOT NULL DEFAULT '1' COMMENT '权限等级(1个人用户 2 用人单位 4 培训机构8管理员16超级管理员 )',
-  `status` int(1) NOT NULL DEFAULT '0' COMMENT '审核状态(-1审核不通过 0 未审核1审核通过)',
+  `status` int(1) NOT NULL DEFAULT '0' COMMENT '审核状态(-2冻结状态 -1审核不通过 0 未审核1审核通过 )',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `phone` (`phone`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=1 ;
@@ -52,15 +52,22 @@ CREATE TABLE  `mz_user_employer` (
    PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用人单位';
 
+
 -- 管理员表
 DROP TABLE IF EXISTS `mz_user_admin`;
 CREATE TABLE `mz_user_admin` (
   `uid` int(11) NOT NULL COMMENT '用户id',
-  `per_categorys_post` text  COMMENT '有权限起草/编辑的栏目 (json)',
+  `per_categorys_post` text COMMENT '有权限起草/编辑的栏目 (json)',
   `per_categorys_check` text COMMENT '有权限管理的群组(json)',
-  `per_institution_check` text  COMMENT '有权限审核培训机构(0无权限1有权限)',
-   PRIMARY KEY (`uid`)
+  `per_institution_check` text COMMENT '有权限审核培训机构(0无权限1有权限)',
+  `per_person_man` int(1) DEFAULT '1' COMMENT '是否有权限管理普通用户(0无权限1有权限,默认1)',
+  `per_employer_man` int(1) DEFAULT '1' COMMENT '是否有权限管理企业用户(0无权限1有权限,默认1)',
+  PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员表';
+
+-- alter table mz_user_admin add COLUMN per_person_man int(1) DEFAULT 1 COMMENT '是否有权限管理普通用户';
+-- alter table mz_user_admin add COLUMN per_employer_man int(1) DEFAULT 1 COMMENT '是否有权限管理企业用户';
+
 
 -- 培训机构用户表
 DROP TABLE IF EXISTS `mz_user_institution`;

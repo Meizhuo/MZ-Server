@@ -10,6 +10,12 @@
 nickname | 用户昵称  	| Y
 email|  邮箱  	| Y
 psw  | 密码 8-16位数字or字母 	| Y
+per_categorys_post   | 有权限起草/编辑的栏目(json)   | Y
+per_categorys_check   | 有权限管理（审核）的栏目(json)  | Y
+per_institution_check  | 有权限审核培训机构(0无权 1有权)  | Y
+per_person_man   | 是否有权限管理普通用户(0无权限1有权限,默认1)  | Y
+per_employer_man  | 是否有权限管理企业用户(0无权限1有权限,默认1)  | Y
+
 
 
 **Response**  
