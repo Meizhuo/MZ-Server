@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>管理界面</title>
+
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
+
+
+
+</head>
+
+<body>
+    <div id="logo">
+        <a href="{:U('admin/index/index')}">
+            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+        </a>
+    </div>
+
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="{:U('admin/index/postDocument')}">发布文档</a>
+                </li>
+                <li><a href="{:U('admin/index/advertisements')}">广告设置</a>
+
+                </li>
+                <li><a href="{:U('admin/index/adminList')}">管理员列表</a>
+                </li>
+                <li><a href="{:U('admin/index/userList')}">用户列表</a>
+                </li>
+                <li><a href="{:U('admin/index/employerList')}">企业列表</a>
+                </li>
+                <li><a href="#Menu=ChildMenu5" onClick="DoMenu('ChildMenu5')">机构管理</a>
+                    <ul id="ChildMenu5" class="collapsed">
+                        <li><a href="{:U('admin/index/checkInstitution','checked=0')}">待审核机构</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkInstitution','checked=1')}">已通过审核机构</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkInstitution','checked=-1')}">未通过审核机构</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#Menu=ChildMenu6" onClick="DoMenu('ChildMenu6')">文档信息管理</a>
+                    <ul id="ChildMenu6" class="collapsed">
+                        <li><a href="{:U('admin/index/checkDocument','checked=0&categoryId=1')}">待审核文档</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkDocument','checked=1&categoryId=1')}">已通过审核文档</a>
+                        </li>
+                        <li><a href="{:U('admin/index/checkDocument','checked=-1&categoryId=1')}">未通过审核文档</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="{:U('admin/index/setting')}">系统设置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="topbar">
+        <span>欢迎 {$admin['nickname']}</span>
+        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
+    </div>
+
+
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
+        <div class="ht">
+            <h1>创建管理员</h1>
+        </div>
+
+        <div id="cat_wr">
+
+            <div id="cat_top">
+                <table width="100%" border="0">
+                    <tr>
+                        <td width="100">
+                            <div align="right">
+                                <span>*</span>昵称</div>
+                        </td>
+                        <td width="400">
+                            <input id="text-nickname" class="inp" type="text" style="height:100%;width:100%;">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100">
+                            <div align="right">
+                                <span>*</span>邮箱</div>
+                        </td>
+                        <td width="400">
+                            <input id="text-email" class="inp" type="text" style="height:100%;width:100%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100">
+                            <div align="right">
+                                <span>*</span>密码</div>
+                        </td>
+                        <td width="400">
+                            <input id="text-psw" class="inp" type="password" style="height:100%;width:100%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100">
+                            <div align="right">
+                                <span>*</span>再次输入密码</div>
+                        </td>
+                        <td width="400">
+                            <input id="text-repsw" class="inp" type="password" style="height:100%;width:100%;">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <div align="right">
+                                <span>*</span>发布/编辑文档权限</div>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="per_post" value="checkbox">职业培训-基本职能
+                                <input type="checkbox" name="per_post" value="checkbox">职业培训-法律法规及政策
+                                <input type="checkbox" name="per_post" value="checkbox">职业培训-相关新闻
+                                <input type="checkbox" name="per_post" value="checkbox">职业培训-通知信息
+                                <br/>
+                                <input type="checkbox" name="per_post" value="checkbox">职业技能鉴定-政策法规
+                                <input type="checkbox" name="per_post" value="checkbox">职业技能鉴定-办事指南
+                                <input type="checkbox" name="per_post" value="checkbox">职业技能鉴定-全国统考
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right">
+                                <span>*</span>审核文档权限</div>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="per_check" value="checkbox">职业培训-基本职能
+                                <input type="checkbox" name="per_check" value="checkbox">职业培训-法律法规及政策
+                                <input type="checkbox" name="per_check" value="checkbox">职业培训-相关新闻
+                                <input type="checkbox" name="per_check" value="checkbox">职业培训-通知信息
+                                <br/>
+                                <input type="checkbox" name="per_check" value="checkbox">职业技能鉴定-政策法规
+                                <input type="checkbox" name="per_check" value="checkbox">职业技能鉴定-办事指南
+                                <input type="checkbox" name="per_check" value="checkbox">职业技能鉴定-全国统考
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div align="right">
+                                <span>*</span>审核机构权限</div>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="radio" name="per_institution_check" value="1">是
+                                <input type="radio" name="per_institution_check" checked="checked" value="0">否
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="right"></div>
+                        </td>
+                        <td>
+                            <input id="btn-create" type="submit" class="submit" id="btn-submit" value="创 建">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+</body>
+
+
+<script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+
+<!-- UEditor END-->
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            if (data.code) {
+                location = '/mz/admin/';
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
+
+    $('#btn-create').on('click', function() {
+        var nickname = $('#text-nickname').val();
+        var email = $('#text-email').val();
+        var psw = $('#text-psw').val();
+        var repsw = $('#text-repsw').val();
+        var per_post = [];
+        var per_check = [];
+        var per_institution_check = $('[name=per_institution_check]:checked').val();
+        var per_post = [];
+        var l = function(msg) {
+            console.log(msg);
+        }
+
+        $('[name=per_post]:checked').each(function(e) {
+            per_post.push(e);
+        });
+
+        $('[name=per_check]:checked').each(function(e) {
+            per_check.push(e);
+        });
+
+        //submit
+    });
+
+
+})(jQuery);
+</script>
+
+</html>

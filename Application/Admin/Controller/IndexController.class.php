@@ -258,4 +258,12 @@ class IndexController extends BaseController {
         $this->reqAdmin();
     	$this->display();
     }
+    /**
+     * 创建管理员页
+     */
+    public function createAdmin(){
+        $this->reqAdmin();
+        $this->display();
+    }
+    
 }
