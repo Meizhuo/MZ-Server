@@ -24,36 +24,6 @@ class InstitutionController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
-
-    /**
-     * POST 登录
-     */
-    public function login() {
-        $this->reqPost();
-        
-        $account = I('post.account');
-        $psw = md5(I('post.psw'));
-        $User = D('User');
-        if (strstr($account, '@')) {
-            $res = $User->login('email', $account, $psw);
-        } else {
-            $res = $User->login('phone', $account, $psw);
-        }
-        if ($res['status']) {
-            session('uid', $res['msg']['uid']);
-            $this->ajaxReturn(mz_json_success('login success'));
-        } else {
-            $this->ajaxReturn(mz_json_error($res['msg']));
-        }
-    }
-
-    /**
-     * GET 登出
-     */
-    public function logout() {
-        session(null);
-        $this->ajaxReturn(mz_json_success('logout successfully'));
-    }
     /**
      * POST 更新机构用户信息
      */
@@ -115,6 +85,22 @@ class InstitutionController extends BaseController {
         }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
+    }
+    /**
+     * 删除一机构
+     * NOTE:需要管理员拥有管理机构的权限
+     */
+    public function delete(){
+    	$this->reqPost(array('ins_id'))->reqAdmin();
+    	if(!D('UserAdmin')->createAdminById(session('uid'))->hasPerCheckInstitution()){
+    		$this->ajaxReturn(mz_json_error("权限不足"));
+    	}
+   		$res = D('User')->deleteUser(I('post.ins_id'),UserModel::LEVEL_INSTITUTION);
+   		if($res['status']){
+   			$this->ajaxReturn(mz_json_success());
+   		}else{
+   			$this->ajaxReturn(mz_json_error($res['msg']));
+   		}
     }
 
     /**
