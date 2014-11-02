@@ -236,6 +236,15 @@
             return;
         }
 
+        if(!/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(email)){
+            alert('邮箱格式不对');
+            return;
+        }
+        if(psw.length >16 || psw.length <8){
+            alert('密码长度应为8-16');
+            return;
+        }
+
 
         var post_data = {
             nickname: nickname,
