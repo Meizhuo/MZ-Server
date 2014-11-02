@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Common\Model\UserAdminModel;
 
 class IndexController extends BaseController {
 
@@ -68,9 +69,31 @@ class IndexController extends BaseController {
         $this->reqInstitution();
         echo "!!";
     }
-    
-    public function tt(){
-        $res = D('User')->getInsInfo(94);
-        $this->ajaxReturn($res);
-    }
+	public function tt() {
+		// 'per_institution_check' => string '1' (length=1)
+		// 'per_person_man' => string '1' (length=1)
+		// 'per_employer_man' => string '1' (length=1)
+		// echo (new UserAdminModel())->createAdminById(1)->status;
+// 		if ((new UserAdminModel ())->createAdminById ( 173 )->hasPerCheck ( 6 )) {
+// 			echo 'hasPerCheck 6 ';
+// 		}
+// 		echo "<br>";
+// 		if ((new UserAdminModel ())->createAdminById ( 173 )->hasPerPost ( 6 )) {
+// 			echo 'hasPerPost 6 ';
+// 		}
+// 		echo "<br>";
+// 		if ((new UserAdminModel ())->createAdminById ( 173 )->hasPerEmployerMan ()) {
+// 			echo 'hasPerEmployerMan';
+// 		}
+// 		echo "<br>";
+// 		if ((new UserAdminModel ())->createAdminById ( 173 )->hasPerPersonMan ()) {
+// 			echo 'hasPerPersonMan';
+// 		}
+// 		echo "<br>";
+// 		if ((new UserAdminModel ())->createAdminById ( 173 )->hasPerCheckInstitution ()) {
+// 			echo 'hasPerCheckInstitution';
+// 		}
+// 		echo "<br>";
+// 		var_dump ( (new UserAdminModel ())->createAdminById ( 173 ) );
+	}
 }
