@@ -49,6 +49,25 @@ class UserPersonModel extends BaseModel {
         }
         return $res;   
     }
+
+    /**
+     * 验证一用户
+     * @param int $user_id
+     * @param int $op 	1:正常 -2:锁定
+     * @return Ambigous <number, string>
+     */
+    public function vertify($user_id,$op){
+        $res = $this->_getResult();
+        $data['status'] = $op;
+        $user =M('User');
+        if($user->where("uid='%s' AND level=1",$user_id)->save($data)>=0){
+        	$res['status'] = 1;
+        }else{
+        	$res['msg'] = $user->getError();
+        }
+        
+        return $res;
+    }
     
     /**
      * 更新个人用户信息
@@ -68,6 +87,26 @@ class UserPersonModel extends BaseModel {
         }
         return $res;
     }
+
+    /**
+     * 获得个人用户的信息
+     * @param int $uid  
+     */
+    public function info($uid){
+        $res = $this->_getResult();
+        $info_user = M('User')->field('psw',true)->where("uid='%s'",$uid)->limit(1)->select();
+    
+        if($info_user){
+            $info_person = $this->field('uid',true)->where("uid='%s'",$uid)->limit(1)->select();
+          
+            $res['msg'] = array_merge($info_user[0],$info_person[0]);
+            $res['status']  = 1;
+        }else{
+            $res['msg'] = "user not found";
+        }
+        return $res;
+    }
+
     /**
      * 模糊搜索个人用户
      * @param string $status 状态

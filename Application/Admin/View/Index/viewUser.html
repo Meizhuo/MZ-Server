@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>个人用户注册资料</title>
+
+
+    <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
+    <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
+    <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <div id="logo">
+        <a href="{:U('admin/index/index')}">
+            <img src="/mz/Public/images/zw_w.png" width="80px" height="55px">
+        </a>
+    </div>
+
+    <div id="parent_a">
+        <div id="PARENT">
+            <ul id="nav">
+                <li><a href="{:U('admin/index/postDocument')}">发布文档</a>
+                </li>
+                <li><a href="{:U('admin/index/advertisements')}">广告设置</a>
+                </li>
+                <li><a href="{:U('admin/index/adminList')}">管理员列表</a>
+                </li>
+                <li><a href="{:U('admin/index/checkInstitution')}">培训机构列表</a>
+                </li>
+                <li><a href="{:U('admin/index/userList')}">个人用户列表</a>
+                </li>
+                <li><a href="{:U('admin/index/employerList')}">单位用户列表</a>
+                </li>
+                <li><a href="{:U('admin/index/checkDocument')}">文档信息管理</a>
+                </li>
+                <li><a href="{:U('admin/index/setting')}">系统设置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="topbar">
+        <span>欢迎 {$admin['nickname']}</span>
+    </div>
+
+    <!--下面只是说明与程序代码无关-->
+    <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
+        <div id="ins_fh">
+            <h1>个人用户注册资料</h1>
+        </div>
+        <div id="ins_form">
+            <table>
+                <tr>
+                    <th width="100px" >姓名</th>
+                    <td width="500px">{$usr['nickname']}</td>
+                </tr>
+                <tr>
+                    <th>性别</th>
+                    <td>{$usr['sex']}</td>
+                </tr>
+                <tr>
+                    <th>注册手机</th>
+                    <td>{$usr['phone']}</td>
+                </tr>
+                <tr>
+                    <th>注册邮箱</th>
+                    <td>{$usr['email']}</td>
+                </tr>
+                <tr>
+                    <th>注册时间</th>
+                    <td>{$usr['reg_time']}</td>
+                </tr>
+                <tr>
+                    <th>工作地址</th>
+                    <td>{$usr['work_place']}</td>
+                </tr>
+                <tr>
+                    <th>用户状态</th>
+                    <td>
+                    <if condition="$usr['status'] eq 1">正常
+                      <else />锁定
+                      </if>
+                    </td>
+                </tr>
+            </table>
+            <div class="tab_inp" style="text-align:center;margin-top: 20px">
+              <if condition="($usr['status'] eq 1) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))">
+                <input id="btn-op" data-id="{$usr['uid']}" class="submit" type="submit" value="锁定" style="height:40px;width: 100px;"></input>
+              <elseif condition="($usr['status'] eq -2) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))" />
+                <input id="btn-op" data-id="{$usr['uid']}" class="reset" type="reset" value="解锁" style="height:40px;;width: 100px;"></input>
+              </if> 
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    //锁定/解锁 操作 
+     var status="{$usr['status']}";
+    $('#btn-op').on('click', function() {
+        var $ele = $(this);
+        var post_data = {
+            user_id: $ele.data('id')
+        };
+        if (status == '1') {
+            post_data['op'] = -2; //锁定
+        } else {
+            post_data['op'] = 1; //正常
+        }
+            console.log(post_data);
+        $.post("{:U('home/Person/vertify','','')}", post_data, function(json) {
+            console.log(json);
+            if (json.code) { 
+                    alert('操作成功');            
+                    setTimeout(function(){
+                    location = "{:U('admin/index/userList')}"}, 500);
+             } else {
+                alert(json.msg);
+            }
+        });
+    });
+})(jQuery);
+</script>
+
+</html>

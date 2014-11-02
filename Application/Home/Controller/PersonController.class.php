@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Common\Model\UserModel;
 
 /**
  * 个人用户接口
@@ -48,5 +49,44 @@ class PersonController extends BaseController {
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
     }
+
+    /**
+     * 验证（更换权限）
+     * 需要管理员权限
+     * @post user_id
+     * @post 1正常 -2锁定
+     */
+    public function vertify(){
+        $this->reqPost(array('user_id','op'))->reqAdmin();
+         
+         //todo 检查权限
+         
+        $res = D('UserPerson')->vertify(I('post.user_id'),I('post.op'));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success('vertify successfully'));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+        
+    }
+
+    /**
+     * 删除一个个人用户
+     */
+    public function deleteUser(){
+        $this->reqPost(array('user_id'))->reqAdmin();
+         
+         //todo:检查权限
+         
+        //调用model
+        $res = D('User')->deleteUser(I('post.user_id'),UserModel::LEVEL_PERSON);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+        
+    }
+
 }
  

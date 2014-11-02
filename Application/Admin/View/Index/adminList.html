@@ -192,7 +192,7 @@
             post_data['op'] = 1; //正常
         }
         console.log(post_data);
-        $.post("{:U('home/admin/vertify')}", post_data, function(json) {
+        $.post("{:U('home/admin/vertify','','')}", post_data, function(json) {
             console.log(json);
             if (json.code) {
                 $ele.parent().parent().fadeOut();

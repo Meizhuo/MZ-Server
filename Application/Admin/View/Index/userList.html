@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>管理界面</title>
+    <title>个人用户管理</title>
 
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
@@ -49,27 +49,27 @@
     <!--下面只是说明与程序代码无关-->
     <div id="include" style="width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
         <div class="ht">
-            <h1>用户列表</h1>
+            <h1>个人用户列表</h1>
         </div>
         <div style="margin: 10px;">
-            <h3>* 审核状态</h3>
+            <h3>* 用户状态</h3>
             <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
-                <option value="-1">未通过</option>
-                <option value="0">等待中</option>
-                <option value="1">已通过</option>
+                <option value="1">正常</option>
+                <option value="-2">锁定</option>
 
             </select>
         </div>
         <div id="ins_form">
             <table width="800px;">
                 <tr>
-                    <th>昵称</th>
+                    <th>姓名</th>
                     <th>注册时间</th>
                     <th>手机号码</th>
-                    <th>工作地址</th>
-                    <th>审核状态</th>
+                    <th>注册邮箱</th>
+                    <th>用户状态</th>
                      <th>操作</th>
                 </tr>
+                
                 <foreach name="users" item="u">
                     <tr>
                         <td>
@@ -82,7 +82,7 @@
                             {$u['phone']}
                         </td>
                         <td>
-                            {$u['work_place']}
+                            {$u['email']}
                         </td>
                         <td>
                             <if condition="$u['status'] eq 1">
@@ -92,12 +92,19 @@
                                     未审核
                             </if>
                         </td>
-                         <td>
-                            <a href="#">查看</a> | <a href="#">暂停</a>
+                        <td>
+                            <a name="btn-view" href="#" data-id="{$u['uid']}">查看</a>
+                              <if condition="($u['status'] eq 1) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))">
+  	                          | <a name="btn-operate" href="javascript:void(0);" data-id="{$u['uid']}">锁定</a>
+                             <elseif condition="($u['status'] eq -2) and (($admin['level'] eq 16) OR (($admin['level'] eq 8) and ($admin['per_person_man'] eq 1)))" />
+ 														  | <a name="btn-operate" href="javascript:void(0);" data-id="{$u['uid']}">解锁</a>
+                             </if>
+                             <if condition="($admin['level'] eq 16) OR (($admin['level'] eq 8) and ($admin['per_person_man'] eq 1))">
+                                |  <a name="btn-delete" href="javascript:void(0);" data-id="{$u['uid']}">删除</a>
+                            </if>
                         </td>
                     </tr>
                 </foreach>
-
             </table>
             <div class="syxy">
                 <button id="btn-pre" class="submit">上一页</button>
@@ -148,6 +155,55 @@
         location = url_tpl.replace('{cur_page}', page_next).replace('{status}', status);
     });
 
+    //锁定/解锁 操作
+    $('[name=btn-operate]').on('click', function() {
+        var $ele = $(this);
+        var post_data = {
+            user_id: $ele.data('id')
+        };
+        if (status == '1') {
+            post_data['op'] = -2; //锁定
+        } else {
+            post_data['op'] = 1; //正常
+        }
+        console.log(post_data);
+        $.post("{:U('home/Person/vertify','','')}", post_data, function(json) {
+            console.log(json);
+            if (json.code) {
+                $ele.parent().parent().fadeOut();
+                console.log(json.response);
+            } else {
+                console.log(json.msg);
+            }
+        });
+    });
+
+
+    $('[name=btn-view]').on('click', function() {
+            var $ele = $(this);
+            var user_id = $ele.data('id');
+            var url = "/mz/index.php/admin/index/viewUser/user_id/"+user_id;
+            console.log(url);
+            location = url;
+    });
+    //删除操作
+    $('[name=btn-delete]').on('click',function(){
+
+         if (!confirm('确认要删除此个人用户吗?')) return;
+         var $ele = $(this);
+         var user_id = $ele.data('id');
+         var post_data = {
+            user_id:user_id
+         };
+         $.post("{:U('home/Person/deleteUser','','')}",post_data,function(json){
+            if(json.code){
+                alert('操作成功');
+                $ele.parent().parent().fadeOut();
+            }else{
+                alert(json.msg);
+            }
+         });
+    });
 
     function timeFormat() {
             $('[name=text-create_time]').each(function() {

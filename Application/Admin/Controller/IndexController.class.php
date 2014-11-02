@@ -214,8 +214,27 @@ class IndexController extends BaseController {
         }
         $this->display();
     }
+
+    /**
+     * 查看个人用户页
+     * @param number $user_id 管理员id
+     */
+    public function viewUser($user_id = 0) {
+        $this->reqAdmin();
+         //todo 权限判断
+        if($user_id !== 0){
+            $res = D('UserPerson')->info($user_id);
+            $admin = $res['msg'];
+            $this->assign('usr',$admin);
+        }
+        $this->display();
+    }
      
      
+    /**
+     * 查看企业用户页
+     * @param number $adminId 管理员id
+     */
     public function viewEmpoyer($emplyoer_id = 0)
 		{
 		}

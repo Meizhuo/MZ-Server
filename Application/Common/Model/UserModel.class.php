@@ -338,6 +338,15 @@ class UserModel extends BaseModel {
         	        $res['msg'] = '删除失败';
         	    }
         	    break;
+        	case UserModel::LEVEL_PERSON:
+        	    if($this->where("uid='%s'",$uid)->delete() && M('UserPerson')->where("uid='%s'",$uid)->delete()){
+        	        $res['status'] = 1;
+        	    }
+        	    else
+        	    {
+        	        $res['msg'] = '删除失败';
+        	    }
+        	    break;
         }
         return $res;
     }
