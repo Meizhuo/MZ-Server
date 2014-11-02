@@ -51,6 +51,15 @@
         <div class="ht">
             <h1>审核资料</h1>
         </div>
+        <div style="margin: 10px;">
+            <h3>* 审核状态</h3>
+            <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                <option value="-1">不通过</option>
+                <option value="0">未审核</option>
+                <option value="1">已通过</option>
+
+            </select>
+        </div>
         <div id="ins_form">
             <table width="800px;">
                 <tr>
@@ -70,15 +79,13 @@
                         <td>{$ins['manager']}</td>
                         <td>
                             <if condition="$ins['status'] eq 0 ">
-                                   未审核
-                                <elseif condition="$ins['status'] eq 1" />
-                                   已通过
-                                <else />
-                                   未通过
+                                未审核
+                                <elseif condition="$ins['status'] eq 1" />已通过
+                                <else />未通过
                             </if>
 
                         </td>
-                         <td>{$ins['vertifyer']['nickname']}</td>
+                        <td>{$ins['vertifyer']['nickname']}</td>
                         <td>
                             <span><a href="/mz/index.php/admin/index/viewInstitution/institutionId/{$ins['uid']}">查看</a>
                             </span>
@@ -88,6 +95,7 @@
             </table>
             <div class="syxy">
                 <button id="btn-pre" class="submit">上一页</button>
+                {$page}
                 <button id="btn-next" class="submit">下一页</button>
             </div>
         </div>
@@ -98,10 +106,14 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+    //分页
+    var cur_page = "{$page}";
+    var status = "{$status}";
+    var url_tpl = "{:U('admin/index/checkInstitution','','')}/status/{status}/page/{page}";
+
     //退出
     $('#btn-logout').on('click', function() {
         $.get('/mz/index.php/home/user/logout', function(data) {
-            // console.log(data);
             if (data.code) {
                 location = '/mz/admin/';
             } else {
@@ -109,18 +121,23 @@
             }
         });
     });
-    //分页
-    var cur_page = "{$page}";
-    var url = "{:U('admin/index/checkInstitution','','')}" +'/checked/'+parseInt("{$checked}") +'/page/';
 
+
+    $('#select-category').on('change', function() {
+        location = url_tpl.replace('{page}', cur_page).replace('{status}', $(this).val());
+    });
+    //初始化栏目
+    $('#select-category').val(status);
     //前一页
     $('#btn-pre').on('click', function() {
-        location = url + (parseInt(cur_page) - 1);
+        var page_pre = parseInt(cur_page) - 1;
+        location = url_tpl.replace('{page}',page_pre).replace('{status}',status);
     });
 
     //后一页
     $('#btn-next').on('click', function() {
-        location = url + (parseInt(cur_page) + 1);
+        var page_next = parseInt(cur_page) + 1;
+        location = url_tpl.replace('{page}',page_next).replace('{status}',status);
     });
 
 })(jQuery);

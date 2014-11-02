@@ -53,14 +53,14 @@ class IndexController extends BaseController {
      * @param number $checked -1审核未通过 0待审核 1已审核
      * @param number $page 页码
      */
-    public function checkInstitution($checked = 0,$page = 1) {
+    public function checkInstitution($status = 1,$page = 1) {
         $this->reqAdmin();
         
         //默认为等待审核
-        if($checked != 0 && $checked != 1 && $checked != -1){
-            $checked = 0;
+        if($status != 0 && $status != 1 && $status != -1){
+            $status = 1;
         }
-        $res = D('UserInstitution')->search($checked,null,null,$page);
+        $res = D('UserInstitution')->search($status,null,null,$page);
         $institutions = $res['msg'];
         if($institutions){
             for($i =0;$i<count($institutions);$i++){
@@ -70,7 +70,7 @@ class IndexController extends BaseController {
             }
         }
         $this->assign('institutions', $institutions);
-        $this->assign('checked',$checked);
+        $this->assign('status',$status);
         $this->assign('page',$page);
         $this->display();
     }
