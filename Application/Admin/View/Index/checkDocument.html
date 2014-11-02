@@ -52,6 +52,15 @@
             <h1>审核文档</h1>
         </div>
         <div style="margin: 10px;">
+            <h3>* 审核状态</h3>
+            <select id="select-status" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
+                <option value="-1">不通过</option>
+                <option value="0">未审核</option>
+                <option value="1">已通过</option>
+            </select>
+        </div>
+        <div style="margin: 10px;">
+
             <h3>* 栏目选择</h3>
             <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
                 <option value="1">职业培训-基本职能</option>
@@ -119,17 +128,24 @@
 <script type="text/javascript">
 (function($) {
     //初始化
-    var checked = "{$checked}";
+    var status = "{$status}";
     var cur_page = "{$page}";
-    var cur_category = "{$categoryId}";
-    var url_tpl = "{:U('admin/index/checkDocument','','')}/checked/{checked}/categoryId/{cur_category}/page/{cur_page}";
-    var url = "{:U('admin/index/checkDocument','','')}" + "/categoryId/" + cur_category + '/page/';
+    var cur_category = "{$category_id}";
+    var url_tpl = "{:U('admin/index/checkDocument','','')}/status/{status}/category_id/{cur_category}/page/{cur_page}";
+
+
+    $('#select-status').on('change', function() {
+        location = url_tpl.replace('{cur_category}', cur_category).replace('{cur_page}', cur_page).replace('{status}', $(this).val());
+    });
+    //初始化审核状态
+    $('#select-status').val(status);
 
     $('#select-category').on('change', function() {
-        location = url_tpl.replace('{cur_category}', $(this).val()).replace('{cur_page}', cur_page).replace('{checked}', checked);
+        location = url_tpl.replace('{cur_category}', $(this).val()).replace('{cur_page}', cur_page).replace('{status}', status);
     });
     //初始化栏目
     $('#select-category').val(cur_category);
+
 
     //退出
     $('#btn-logout').on('click', function() {
@@ -147,13 +163,13 @@
     //前一页
     $('#btn-pre').on('click', function() {
         var page_pre = parseInt(cur_page) - 1;
-        location = url_tpl.replace('{cur_category}', $('#select-category').val()).replace('{cur_page}', page_pre).replace('{checked}', checked);
+        location = url_tpl.replace('{cur_category}', $('#select-category').val()).replace('{cur_page}', page_pre).replace('{status}', status);
     });
 
     //后一页
     $('#btn-next').on('click', function() {
         var page_next = parseInt(cur_page) + 1;
-        location = url_tpl.replace('{cur_category}', $('#select-category').val()).replace('{cur_page}', page_next).replace('{checked}', checked);
+        location = url_tpl.replace('{cur_category}', $('#select-category').val()).replace('{cur_page}', page_next).replace('{status}', status);
     });
 
     //审核通过
