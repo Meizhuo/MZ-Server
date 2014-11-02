@@ -340,6 +340,7 @@ ue.ready(function() {
 
     $sel_certificate.on('change', function() {
         if ($sel_certificate.val() !== 0) {
+            $sel_kind.val(0);
             $sel_kind.parent().fadeIn();
             initSubsidy(3);
         } else {
