@@ -65,6 +65,7 @@
                 <tr>
                     <th>姓名</th>
                     <th>栏目编辑</th>
+                    <th>栏目审核</th>
                     <th>培训机构管理</th>
                     <th>个人用户管理</th>
                     <th>企业用户管理</th>
@@ -80,6 +81,13 @@
                             <if condition="count($a['per_categorys_post']) eq 7">
                                 全部
                                 <elseif condition="count($a['per_categorys_post']) eq 0" />无权限
+                                <else/>部分
+                            </if>
+                        </td>
+                        <td>
+                            <if condition="count($a['per_categorys_check']) eq 7">
+                                全部
+                                <elseif condition="count($a['per_categorys_check']) eq 0" />无权限
                                 <else/>部分
                             </if>
                         </td>
