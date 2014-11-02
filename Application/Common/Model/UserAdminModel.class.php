@@ -102,6 +102,7 @@ class UserAdminModel extends BaseModel {
             // 除了uid还有更新其他项,那么更新，不然会报SQL错误
             if(count($this->data)>1){
                 $this->save();
+                M('User')->where("uid='%s' AND level=%d",$admin_id,UserModel::LEVEL_ADMIN)->save(array('status'=>$status));
                 $res['status'] = 1; 
             }
         }else{
