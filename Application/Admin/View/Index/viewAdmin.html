@@ -224,7 +224,9 @@
                 </tr>
             </table>
             <div class="tab_inp" style="text-align:center;margin-top: 20px">
+             <if condition="$admin['level'] eq 16">
                <input id="btn-save" data-id="{$adm['uid']}" class="submit" type="submit" value="保存" style="height:40px;width: 100px;"></input>
+             </if> 
             </div>
         </div>
     </div>
@@ -244,6 +246,7 @@
         });
     });
 
+  <if condition="$admin['level'] eq 16">
     $('#btn-save').on('click', function() {
         var admin_id = "{$adm['uid']}";
         var per_categorys_post = [];
@@ -283,7 +286,7 @@
                 }
             });
     });
-
+    </if>
 
 })(jQuery);
 </script>
