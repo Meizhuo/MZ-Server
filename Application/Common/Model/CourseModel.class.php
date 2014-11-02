@@ -23,8 +23,10 @@ class CourseModel extends BaseModel{
      */
     public function post($data) {
         $res = $this->_getResult();
-        //任何课程已发布都是默认未上线
-        $data['display'] = self::VISIBILITY_UNDISPLAY;
+        //若无设置则都是默认未上线
+        if(!isset($data['display'])){
+             $data['display'] = self::VISIBILITY_UNDISPLAY;
+        }
         if ($this->create($data)) {
             //前端已处理转义
             if(!is_null($this->data['introduction'])){
