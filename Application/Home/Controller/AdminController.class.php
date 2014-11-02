@@ -9,6 +9,7 @@ use Common\Model\UserModel;
  *
  */
 class AdminController extends BaseController {
+
     /**
      * 创建一个管理员
      */
@@ -29,7 +30,28 @@ class AdminController extends BaseController {
         }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
-    }
+    } 
+     
+    /**
+     * 修改管理员权限 by wharry
+     */
+    public function update(){
+    	$this->reqPost(array('admin_id','per_categorys_post','per_categorys_check','per_institution_check','per_person_man','per_employer_man','status'))->reqSuperAdmin();
+        $admin_id = I('post.admin_id');
+        $per_categorys_post = I('post.per_categorys_post','[]');
+        $per_categorys_check = I('post.per_categorys_check','[]');
+        $per_institution_check = I('post.per_institution_check','0');
+        $per_person_man = I('post.per_person_man','0');
+        $per_employer_man = I('post.per_employer_man','0');
+        $status = I('status','0');
+        $res = D('UserAdmin')->updateAdmin($admin_id,$per_categorys_post,$per_categorys_check,$per_institution_check,$per_person_man,$per_employer_man,$status);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+    } 
+     
     /**
      * 验证（更换权限）
      * 需要超级管理员权限

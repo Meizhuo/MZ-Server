@@ -77,6 +77,39 @@ class UserAdminModel extends BaseModel {
         }
         return $res;
     }
+
+    /**
+     * 修改管理员 by wharry
+      *@param int admin_id
+     * @param JSON $per_categorys_post '有权限起草/编辑的栏目 (JSON)
+     * @param JSON $per_categorys_check 有权限管理的群组(JSON) 
+     * @param int $per_institution_check 有无权限审核培训机构(0无权限1有权限)
+     * @param int $per_person_man 有无权限管理个人用户(0无权限1有权限)
+     * @param int $per_employer_man 有无权限管理单位用户(0无权限1有权限)
+     * @param int $status 当前管理员用户状态(1正常-2锁定)
+     * @return Ambigous <string, multitype:number string >
+     */
+    public function updateAdmin($admin_id,$per_categorys_post, $per_categorys_check,$per_institution_check,
+    $per_person_man,$per_employer_man,$status){
+        $res = $this->_getResult();
+        $data['uid'] = $admin_id;
+        $data['per_categorys_post'] = $per_categorys_post;
+        $data['per_categorys_check'] = $per_categorys_check;
+        $data['per_institution_check'] = $per_institution_check;
+        $data['per_person_man'] =$per_person_man;
+        $data['per_employer_man'] = $per_employer_man;
+        if($this->create($data)){
+            // 除了uid还有更新其他项,那么更新，不然会报SQL错误
+            if(count($this->data)>1){
+                $this->save();
+                $res['status'] = 1; 
+            }
+        }else{
+            $res['msg'] = $this->getError();
+        }
+        return $res;
+    }
+
     /**
      * 验证一用户
      * @param int $admin_id
