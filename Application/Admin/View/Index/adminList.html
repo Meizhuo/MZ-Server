@@ -213,11 +213,17 @@
     });
     //删除操作
     $('[name=btn-delete]').on('click',function(){
+
+         if (!confirm('确认要删除此管理员用户吗?')) return;
          var $ele = $(this);
          var admin_id = $ele.data('id');
          var post_data = {
             admin_id:admin_id
          };
+
+
+
+
          $.post("{:U('home/admin/deleteAdmin')}",post_data,function(json){
             if(json.code){
                 alert('操作成功');
