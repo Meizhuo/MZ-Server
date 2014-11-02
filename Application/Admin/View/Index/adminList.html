@@ -55,7 +55,7 @@
             <h3>* 状态</h3>
             <select id="select-category" name="select" style="font-family: 微软雅黑; border: 2px solid #ededed; border-radius: 3px;">
                 <option value="1">正常</option>
-                <option value="-2">冻结</option>
+                <option value="-2">锁定</option>
             </select>
             <input id="btn-create" style="float:right;width:80px;" type="submit" class="submit" value="创建管理员">
         </div>
@@ -68,7 +68,7 @@
                     <th>栏目审核</th>
                     <th>培训机构管理</th>
                     <th>个人用户管理</th>
-                    <th>企业用户管理</th>
+                    <th>单位用户管理</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
@@ -117,13 +117,18 @@
                             </if>
                         </td>
                         <td>
-                            <a name="btn-view" href="javascript:void(0);" data-id="{$a['uid']}">查看</a> |
-                            <a name="btn-operate" href="javascript:void(0);" data-id="{$a['uid']}">
-                                <if condition="$a['status'] eq 1">
+                            <a name="btn-view" href="javascript:void(0);" data-id="{$a['uid']}">查看</a>
+                                <if condition="($a['status'] eq 1) and ($admin['level'] eq 16)"> 
+                                  |
+		                            <a name="btn-operate" href="javascript:void(0);" data-id="{$a['uid']}">
                                     锁定
-                                    <else />解锁
+    		                        </a>
+                                    <elseif condition="($a['status'] eq -2) and ($admin['level'] eq 16)"/>
+ 																 |
+ 		                            <a name="btn-operate" href="javascript:void(0);" data-id="{$a['uid']}">
+																		解锁	
+																</a>
                                 </if>
-                            </a>
                             <if  condition="$admin['level'] eq 16" >
                                 |  <a name="btn-delete" href="javascript:void(0);" data-id="{$a['uid']}">删除</a>
                             </if>
