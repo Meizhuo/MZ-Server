@@ -220,6 +220,18 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
+    //退出
+    $('#btn-logout').on('click', function() {
+        $.get('/mz/index.php/home/user/logout', function(data) {
+            // console.log(data);
+            if (data.code) {
+                location = '/mz/admin/';
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
+
     function req(admin_id, op) {
         $.post('/mz/index.php/home/admin/vertify', {
                 'admin_id': admin_id,
