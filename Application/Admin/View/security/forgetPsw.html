@@ -76,6 +76,7 @@
         },function(json){
             if(json.code){
                 alert(json.response);
+                location = "{:U('admin/institution/index')}";
             }else{
                 alert(json.msg);
             }

@@ -50,7 +50,7 @@ class IndexController extends BaseController {
     }
     /**
      * 审核机构页面
-     * @param number $checked -1审核未通过 0待审核 1已审核
+     * @param number $status -1审核未通过 0待审核 1已审核
      * @param number $page 页码
      */
     public function checkInstitution($status = 1,$page = 1) {
@@ -76,23 +76,23 @@ class IndexController extends BaseController {
     }
     /**
      * 审核文档页面
-     * @param number $checked -1审核未通过 0待审核 1已审核
-     * @param number $categoryId 文档目录id
+     * @param number $status -1审核未通过 0待审核 1已审核
+     * @param number $category_id 文档目录id
      * @param number $page 页码
      */
-    public function checkDocument($checked = 0, $categoryId = 1, $page = 1) {
+    public function checkDocument($status = 0, $category_id = 1, $page = 1) {
         // TODO MZ:: 注意文档状态
         $this->reqAdmin();
         // 默认为等待审核
-        if ($checked != 0 && $checked != 1 && $checked != - 1) {
-            $checked = 0;
+        if ($status != 0 && $status != 1 && $status != - 1) {
+            $status = 0;
         }
-        $categoryId = (int)$categoryId;
-        if($categoryId <1 || $categoryId > 7 ){
-            $categoryId = 1;
+        $category_id = (int)$category_id;
+        if($category_id <1 || $category_id > 7 ){
+            $category_id = 1;
         }
-        $res = D('Document')->search($categoryId, null, null, 
-                $checked,null, $page);
+        $res = D('Document')->search($category_id, null, null, 
+                $status,null, $page);
         $documents = $res['msg'];
         for($i=0;$i<count($documents);$i++){
             $authors = D('UserAdmin')->createAdminById($documents[$i]['uid'])->getData();
@@ -115,8 +115,8 @@ class IndexController extends BaseController {
         }
         
         $this->assign('documents', $documents);
-        $this->assign('checked',$checked);
-        $this->assign('categoryId', $categoryId);
+        $this->assign('status',$status);
+        $this->assign('category_id', $category_id);
         $this->assign('page', $page);
         $this->display();
     }

@@ -14,7 +14,7 @@ class SecurityController extends BaseController {
     public function changePsw(){
         $this->reqPost('old_psw,new_psw')->reqLogin();
         $uid = session('uid');
-        if(strlen(I('post.new_psw')) < 8 && strlen(I('post.new_psw')) >16){
+        if(strlen(I('post.new_psw')) < 8 || strlen(I('post.new_psw')) >16){
             $this->ajaxReturn(mz_json_error('密码长度为8-16'));
         }
         $User = M('User');

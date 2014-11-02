@@ -82,7 +82,7 @@
         var e = "{$e}";
         var code = "{$code}";
         if (psw !== repsw || psw === '' || psw.length < 8 || psw.length > 16) {
-            alert('输入有无,请注意输入条件');
+            alert('输入有误!');
             return;
         }
         $.post("{:U('home/security/vertify','','')}", {
@@ -95,7 +95,7 @@
             } else {
                 alert(json.msg);
             }
-            location = "{:U('admin/institution/index')}"
+            location = "{:U('admin/institution/index')}";
         });
     });
 })(jQuery);

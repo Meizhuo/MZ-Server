@@ -38,41 +38,6 @@ contact_email  | 联系邮箱 | N
 ```
 
 
-## 登录
-`POST /home/institution/login`
-
-字段	|描述 |  是否必须 
------------- | -------------| -------------
-account | 账户(邮箱)  	| Y
-psw| 密码  | Y
-
- **Response**  
-
-```json  
-{
-	"code":20000,
-	"response"："operate success"
-}
-```
-
-## 登出
-`POST /home/institution/logout`
-
-字段	|描述 |  是否必须 
------------- | -------------| -------------
-account | 账户(手机号码)  	| Y
-psw| 密码  | Y
-
- **Response**  
-
-```json  
-{
-	"code":20000,
-	"response"："operate success"
-}
-```
-
-
 ## 获取机构信息
 `GET /home/institution/info`
 
@@ -163,6 +128,26 @@ ins_id | 机构id| Y
  **Response**  
 
  html网页
+
+
+ ## 删除机构
+`POST /home/institution/delete`
+
+
+**NOTE:管理员要有管理机构的权限**
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+ins_id | 机构id| Y
+
+ **Response**  
+
+```json
+{
+	"code":200,
+	"response":"delete successfully"
+}
+```
 
 
 ## 更新机构信息
