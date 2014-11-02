@@ -23,9 +23,35 @@ per_employer_man  | 是否有权限管理企业用户(0无权限1有权限,默�
 ```json
 {
 	"code":20000,
-	"response"："create success"
+	"response"："operate successfully"
 }
 ```
+
+##  更新管理员
+`POST /home/admin/update` 
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+admin_id | 管理员id  | Y
+per_categorys_post|  有权限发布/编辑的栏目(json) | Y
+per_categorys_check  |  有权限管理（审核）的栏目(json)   | Y
+per_institution_check   | 有权限审核培训机构(0无权 1有权)   | Y
+per_person_man   | 是否有权限管理普通用户(0无权限1有权限)  | Y
+per_employer_man  | 有是否有权限管理企业(单位)用户(0无权限1有权限)  | Y
+status   | 当前装填（1正常 -2冻结）  | Y
+
+
+
+**Response**  
+
+```json
+{
+  "code":20000,
+  "response"："create success"
+}
+```
+
+
 
 ## 验证(更换管理员权限)
 `POST /home/admin/vertify`
