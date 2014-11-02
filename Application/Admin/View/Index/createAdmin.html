@@ -105,14 +105,14 @@
                         </td>
                         <td>
                             <label>
-                                <input type="checkbox" name="per_post" value="checkbox">职业培训-基本职能
-                                <input type="checkbox" name="per_post" value="checkbox">职业培训-法律法规及政策
-                                <input type="checkbox" name="per_post" value="checkbox">职业培训-相关新闻
-                                <input type="checkbox" name="per_post" value="checkbox">职业培训-通知信息
+                                <input type="checkbox" name="per_post" value=1>职业培训-基本职能
+                                <input type="checkbox" name="per_post" value=2>职业培训-法律法规及政策
+                                <input type="checkbox" name="per_post" value=3>职业培训-相关新闻
+                                <input type="checkbox" name="per_post" value=4>职业培训-通知信息
                                 <br/>
-                                <input type="checkbox" name="per_post" value="checkbox">职业技能鉴定-政策法规
-                                <input type="checkbox" name="per_post" value="checkbox">职业技能鉴定-办事指南
-                                <input type="checkbox" name="per_post" value="checkbox">职业技能鉴定-全国统考
+                                <input type="checkbox" name="per_post" value=5>职业技能鉴定-政策法规
+                                <input type="checkbox" name="per_post" value=6>职业技能鉴定-办事指南
+                                <input type="checkbox" name="per_post" value=7>职业技能鉴定-全国统考
                             </label>
                         </td>
                     </tr>
@@ -123,14 +123,14 @@
                         </td>
                         <td>
                             <label>
-                                <input type="checkbox" name="per_check" value="checkbox">职业培训-基本职能
-                                <input type="checkbox" name="per_check" value="checkbox">职业培训-法律法规及政策
-                                <input type="checkbox" name="per_check" value="checkbox">职业培训-相关新闻
-                                <input type="checkbox" name="per_check" value="checkbox">职业培训-通知信息
+                                <input type="checkbox" name="per_check"  value=1>职业培训-基本职能
+                                <input type="checkbox" name="per_check"  value=2>职业培训-法律法规及政策
+                                <input type="checkbox" name="per_check"  value=3>职业培训-相关新闻
+                                <input type="checkbox" name="per_check"  value=4>职业培训-通知信息
                                 <br/>
-                                <input type="checkbox" name="per_check" value="checkbox">职业技能鉴定-政策法规
-                                <input type="checkbox" name="per_check" value="checkbox">职业技能鉴定-办事指南
-                                <input type="checkbox" name="per_check" value="checkbox">职业技能鉴定-全国统考
+                                <input type="checkbox" name="per_check"  value=5>职业技能鉴定-政策法规
+                                <input type="checkbox" name="per_check"  value=6>职业技能鉴定-办事指南
+                                <input type="checkbox" name="per_check"  value=7>职业技能鉴定-全国统考
                             </label>
                         </td>
                     </tr>
@@ -215,11 +215,11 @@
         var per_employer_man = $('[name=per_employer_man]:checked').val();
 
         $('[name=per_post]:checked').each(function(e) {
-            per_post.push(e);
+            per_post.push($(this).val());
         });
 
         $('[name=per_check]:checked').each(function(e) {
-            per_check.push(e);
+            per_check.push($(this).val());
         });
 
         function emp(o) {
