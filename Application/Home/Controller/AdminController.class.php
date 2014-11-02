@@ -33,7 +33,8 @@ class AdminController extends BaseController {
     } 
      
     /**
-     * 修改管理员权限 by wharry
+     * 修改管理员权限 
+     * @author wharry
      */
     public function update(){
     	$this->reqPost(array('admin_id','per_categorys_post','per_categorys_check','per_institution_check','per_person_man','per_employer_man','status'))->reqSuperAdmin();
@@ -43,7 +44,7 @@ class AdminController extends BaseController {
         $per_institution_check = I('post.per_institution_check','0');
         $per_person_man = I('post.per_person_man','0');
         $per_employer_man = I('post.per_employer_man','0');
-        $status = I('status','0');
+        $status = I('status','1');
         $res = D('UserAdmin')->updateAdmin($admin_id,$per_categorys_post,$per_categorys_check,$per_institution_check,$per_person_man,$per_employer_man,$status);
         if($res['status']){
             $this->ajaxReturn(mz_json_success());

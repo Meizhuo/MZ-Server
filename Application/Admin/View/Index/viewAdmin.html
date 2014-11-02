@@ -201,7 +201,7 @@
 																 </if>
                                  value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
                                 <input type="radio" name="per_employer_man"
-                                 <if condition="$adm['per_person_man'] eq 0">
+                                 <if condition="$adm['per_employer_man'] eq 0">
                                    checked="checked"
 																 </if>
                                  value="0">否
@@ -219,7 +219,7 @@
                                  <if condition="$adm['status'] eq -2">
                                    checked="checked"
 																 </if>
-                                 value="0">锁定
+                                 value="-2">锁定
                     </td>
                 </tr>
             </table>
@@ -267,10 +267,9 @@
             per_categorys_check: '[' + per_categorys_check.toString() + ']',
             per_institution_check: per_institution_check,
             per_person_man: per_person_man,
-            per_employer_man: per_employer_man
-
+            per_employer_man: per_employer_man,
+            status:status
         }
-				//alert(per_categorys_post.toString()) ;
         //submit
         $.post("{:U('home/admin/update')}", post_data,
             function(json) {
