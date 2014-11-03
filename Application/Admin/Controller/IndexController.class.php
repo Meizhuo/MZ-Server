@@ -308,9 +308,10 @@ class IndexController extends BaseController {
     }
     /**
      * 创建管理员页
+     * NOTE:只有超级管理员才能进入
      */
     public function createAdmin(){
-        $this->reqAdmin();
+        $this->reqSuperAdmin();
         $this->display();
     }
     

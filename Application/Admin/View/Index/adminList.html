@@ -57,7 +57,9 @@
                 <option value="1">正常</option>
                 <option value="-2">锁定</option>
             </select>
-            <input id="btn-create" style="float:right;width:80px;" type="submit" class="submit" value="创建管理员">
+            <if condition="$admin['level'] eq 16">
+                <input id="btn-create" style="float:right;width:80px;" type="submit" class="submit" value="创建管理员">
+            </if>
         </div>
 
         <div id="ins_form">
