@@ -55,7 +55,7 @@
         <div id="ins_form">
             <table>
                 <tr>
-                    <th width="100px" >姓名</th>
+                    <th width="100px">姓名</th>
                     <td width="500px">{$usr['nickname']}</td>
                 </tr>
                 <tr>
@@ -81,18 +81,18 @@
                 <tr>
                     <th>用户状态</th>
                     <td>
-                    <if condition="$usr['status'] eq 1">正常
-                      <else />锁定
-                      </if>
+                        <if condition="$usr['status'] eq 1">正常
+                            <else />锁定
+                        </if>
                     </td>
                 </tr>
             </table>
             <div class="tab_inp" style="text-align:center;margin-top: 20px">
-              <if condition="($usr['status'] eq 1) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))">
-                <input id="btn-op" data-id="{$usr['uid']}" class="submit" type="submit" value="锁定" style="height:40px;width: 100px;"></input>
-              <elseif condition="($usr['status'] eq -2) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))" />
-                <input id="btn-op" data-id="{$usr['uid']}" class="reset" type="reset" value="解锁" style="height:40px;;width: 100px;"></input>
-              </if> 
+                <if condition="($usr['status'] eq 1) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))">
+                    <input id="btn-op" data-id="{$usr['uid']}" class="submit" type="submit" value="锁定" style="height:40px;width: 100px;"></input>
+                    <elseif condition="($usr['status'] eq -2) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))" />
+                    <input id="btn-op" data-id="{$usr['uid']}" class="reset" type="reset" value="解锁" style="height:40px;;width: 100px;"></input>
+                </if>
             </div>
         </div>
     </div>
@@ -101,7 +101,7 @@
 <script type="text/javascript">
 (function($) {
     //锁定/解锁 操作 
-     var status="{$usr['status']}";
+    var status = "{$usr['status']}";
     $('#btn-op').on('click', function() {
         var $ele = $(this);
         var post_data = {
@@ -112,14 +112,16 @@
         } else {
             post_data['op'] = 1; //正常
         }
-            console.log(post_data);
+        console.log(post_data);
         $.post("{:U('home/Person/vertify','','')}", post_data, function(json) {
             console.log(json);
-            if (json.code) { 
-                    alert('操作成功');            
-                    setTimeout(function(){
-                    location = "{:U('admin/index/userList')}"}, 500);
-             } else {
+            if (json.code) {
+
+                alert('操作成功');
+                setTimeout(function() {
+                    location = "{:U('admin/index/userList')}"
+                }, 500);
+            } else {
                 alert(json.msg);
             }
         });

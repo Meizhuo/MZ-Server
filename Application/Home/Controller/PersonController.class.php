@@ -73,7 +73,7 @@ class PersonController extends BaseController {
     /**
      * 删除一个个人用户
      */
-    public function deleteUser(){
+    public function delete(){
         $this->reqPost(array('user_id'))->reqAdmin();
          
          //todo:检查权限

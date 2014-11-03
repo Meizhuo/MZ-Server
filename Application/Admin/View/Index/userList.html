@@ -86,17 +86,16 @@
                         </td>
                         <td>
                             <if condition="$u['status'] eq 1">
-                                已通过审核
-                                <elseif condition="$u['status'] eq -1" />未通过审核
-                                <else>
-                                    未审核
+                                正常
+                                <elseif condition="$u['status'] eq -2" />锁定
                             </if>
                         </td>
                         <td>
                             <a name="btn-view" href="#" data-id="{$u['uid']}">查看</a>
                               <if condition="($u['status'] eq 1) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_person_man'] eq 1)))">
   	                          | <a name="btn-operate" href="javascript:void(0);" data-id="{$u['uid']}">锁定</a>
-                             <elseif condition="($u['status'] eq -2) and (($admin['level'] eq 16) OR (($admin['level'] eq 8) and ($admin['per_person_man'] eq 1)))" />
+                             <elseif condition="($u['status'] eq -2) 
+and (($admin['level'] eq 16) OR (($admin['level'] eq 8) and ($admin['per_person_man'] eq 1)))" />
  														  | <a name="btn-operate" href="javascript:void(0);" data-id="{$u['uid']}">解锁</a>
                              </if>
                              <if condition="($admin['level'] eq 16) OR (($admin['level'] eq 8) and ($admin['per_person_man'] eq 1))">
@@ -168,7 +167,7 @@
         }
         console.log(post_data);
         $.post("{:U('home/Person/vertify','','')}", post_data, function(json) {
-            console.log(json);
+            // console.log(json);
             if (json.code) {
                 $ele.parent().parent().fadeOut();
                 console.log(json.response);
@@ -195,7 +194,7 @@
          var post_data = {
             user_id:user_id
          };
-         $.post("{:U('home/Person/deleteUser','','')}",post_data,function(json){
+         $.post("{:U('home/Person/delete','','')}",post_data,function(json){
             if(json.code){
                 alert('操作成功');
                 $ele.parent().parent().fadeOut();

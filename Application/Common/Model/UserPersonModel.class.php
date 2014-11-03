@@ -90,7 +90,8 @@ class UserPersonModel extends BaseModel {
 
     /**
      * 获得个人用户的信息
-     * @param int $uid  
+     * @param int $uid
+     *
      */
     public function info($uid){
         $res = $this->_getResult();
