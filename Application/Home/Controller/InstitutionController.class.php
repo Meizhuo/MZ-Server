@@ -72,11 +72,9 @@ class InstitutionController extends BaseController {
     public function vertify(){
         $this->reqPost(array('institution_id','op'))->reqAdmin();
     
-        //查询获得category_id
-        $Admin = new UserAdminModel();
         //检验权限
-        if(! $Admin->createAdminById(session('uid'))->hasPerCheckInstitution()){
-            $this->ajaxReturn(mz_json_error("You have not permission!"));
+        if(! D('UserAdmin')->createAdminById(session('uid'))->hasPerCheckInstitution()){
+            $this->ajaxReturn(mz_json_error("权限不足!"));
             return;
         }
         $res = D('UserInstitution')->verify(I('post.institution_id'),I('post.op',UserModel::STATUS_PASS));
@@ -93,7 +91,7 @@ class InstitutionController extends BaseController {
     public function delete(){
     	$this->reqPost(array('ins_id'))->reqAdmin();
     	if(!D('UserAdmin')->createAdminById(session('uid'))->hasPerCheckInstitution()){
-    		$this->ajaxReturn(mz_json_error("权限不足"));
+    		$this->ajaxReturn(mz_json_error("权限不足!"));
     	}
    		$res = D('User')->deleteUser(I('post.ins_id'),UserModel::LEVEL_INSTITUTION);
    		if($res['status']){

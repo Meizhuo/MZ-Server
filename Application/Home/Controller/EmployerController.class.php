@@ -75,7 +75,11 @@ class EmployerController extends BaseController {
      */
     public function vertify(){
         $this->reqPost(array('employer_id','op'))->reqAdmin();
-        // todo 检查权限
+        //检验权限
+        if(! D('UserAdmin')->createAdminById(session('uid'))->hasPerEmployerMan()){
+            $this->ajaxReturn(mz_json_error("权限不足!"));
+            return;
+        }
         $res = D('UserEmployer')->vertify(I('post.employer_id'),I('post.op'));
         if($res['status']){
             $this->ajaxReturn(mz_json_success('vertify successfully'));
@@ -91,7 +95,11 @@ class EmployerController extends BaseController {
     public function delete(){
         $this->reqPost(array('employer_id'))->reqAdmin();
          
-         //todo:检查权限
+        //检验权限
+        if(! D('UserAdmin')->createAdminById(session('uid'))->hasPerEmployerMan()){
+            $this->ajaxReturn(mz_json_error("权限不足!"));
+            return;
+        }
          
         //调用model
         $res = D('User')->deleteUser(I('post.employer_id'),UserModel::LEVEL_EMPLOYER);

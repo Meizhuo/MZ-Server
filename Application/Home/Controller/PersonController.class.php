@@ -59,7 +59,11 @@ class PersonController extends BaseController {
     public function vertify(){
         $this->reqPost(array('user_id','op'))->reqAdmin();
          
-         //todo 检查权限
+         //检验权限
+        if(! D('UserAdmin')->createAdminById(session('uid'))->hasPerPersonMan()){
+            $this->ajaxReturn(mz_json_error("权限不足!"));
+            return;
+        }
          
         $res = D('UserPerson')->vertify(I('post.user_id'),I('post.op'));
         if($res['status']){
@@ -76,7 +80,11 @@ class PersonController extends BaseController {
     public function delete(){
         $this->reqPost(array('user_id'))->reqAdmin();
          
-         //todo:检查权限
+        //检验权限
+        if(! D('UserAdmin')->createAdminById(session('uid'))->hasPerPersonMan()){
+            $this->ajaxReturn(mz_json_error("权限不足!"));
+            return;
+        }
          
         //调用model
         $res = D('User')->deleteUser(I('post.user_id'),UserModel::LEVEL_PERSON);
