@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>管理界面</title>
+    <title>企业用户注册资料</title>
 
 
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
@@ -50,64 +50,45 @@
     <!--下面只是说明与程序代码无关-->
     <div id="include" style="width: 80%; height: auto; display: block; margin: 0 auto; font-size: 10pt; line-height: 150%;">
         <div id="ins_fh">
-            <h1>培训机构注册资料</h1>
+            <h1>个人用户注册资料</h1>
         </div>
         <div id="ins_form">
             <table>
-
                 <tr>
-                    <th>机构名称</th>
-                    <td>{$ins['name']}</td>
+                    <th width="100px">名称</th>
+                    <td width="500px">{$usr['nickname']}</td>
                 </tr>
                 <tr>
-                    <th>地址</th>
-                    <td>{$ins['address']}</td>
+                    <th>注册手机</th>
+                    <td>{$usr['contact_phone']}</td>
                 </tr>
                 <tr>
-                    <th>机构负责人</th>
-                    <td>{$ins['manager']}</td>
+                    <th>注册邮箱</th>
+                    <td>{$usr['email']}</td>
                 </tr>
                 <tr>
-                    <th>办学类型</th>
-                    <td>{$ins['type']}</td>
+                    <th>注册时间</th>
+                    <td>{$usr['reg_time']}</td>
                 </tr>
                 <tr>
-                    <th>批准文号</th>
-                    <td>{$ins['approval_number']}</td>
+                    <th>工作地址</th>
+                    <td>{$usr['address']}</td>
                 </tr>
                 <tr>
-                    <th>有效期</th>
-                    <td>{$ins['validity_date']}</td>
-                </tr>
-                <tr>
-                    <th>培训范围</th>
-                    <td>{$ins['training_scope']}</td>
-                </tr>
-
-                <tr>
-                    <th>附件</th>
+                    <th>用户状态</th>
                     <td>
-                        <div id="fileList">
-                            <foreach name="files" item="file">
-                                <div>
-                                    <a href="{$file['url']}">{$file['raw_name']}</a>
-                                    <br>
-                                </div>
-                            </foreach>
-                        </div>
+                        <if condition="$usr['status'] eq 1">正常
+                            <else />锁定
+                        </if>
                     </td>
-                </tr>
-                <tr>
-                    <th width="100px;">描述</th>
-                    <td width="500px;" style="text-align: center;">
-                        <a href="/mz/index.php/admin/view/insIntro/ins_id/{$ins['uid']}">查看简介</a>
-                    </td>
-
                 </tr>
             </table>
             <div class="tab_inp" style="text-align:center;margin-top: 20px">
-                <input id="btn-pass" data-id="{$ins['uid']}" class="submit" type="submit" value="通过审核" style="height:40px;width: 100px;"></input>
-                <input id="btn-unpass" data-id="{$ins['uid']}" class="reset" type="reset" value="审核不通过" style="height:40px;;width: 100px;"></input>
+                <if condition="($usr['status'] eq 1) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_employer_man'] eq 1)))">
+                    <input id="btn-op" data-id="{$usr['uid']}" class="submit" type="submit" value="锁定" style="height:40px;width: 100px;"></input>
+                    <elseif condition="($usr['status'] eq -2) AND (($admin['level'] eq 16) OR (($admin['level'] eq 8) AND ($admin['per_employer_man'] eq 1)))" />
+                    <input id="btn-op" data-id="{$usr['uid']}" class="reset" type="reset" value="解锁" style="height:40px;;width: 100px;"></input>
+                </if>
             </div>
         </div>
     </div>
@@ -115,34 +96,31 @@
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
 <script type="text/javascript">
 (function($) {
-    function req(institution_id, op) {
-        $.post('/mz/index.php/home/institution/vertify', {
-                'institution_id': institution_id,
-                'op': op
-            },
+    //锁定/解锁 操作 
+    var status = "{$usr['status']}";
+    $('#btn-op').on('click', function() {
+        var $ele = $(this);
+        var post_data = {
+            employer_id: $ele.data('id')
+        };
+        if (status == '1') {
+            post_data['op'] = -2; //锁定
+        } else {
+            post_data['op'] = 1; //正常
+        }
+        // console.log(post_data);
+        $.post("{:U('home/Employer/vertify','','')}", post_data, function(json) {
+            console.log(json);
+            if (json.code) {
 
-            function(json) {
-                console.log(json);
-                if (json.code) {
-                    alert('操作成功');
-                    setTimeout(function() {
-                        location.href = '/mz/index.php/admin/index/checkInstitution';
-                    }, 1000);
-                } else {
-                    alert('请求失败');
-                }
-            });
-    }
-    $('#btn-pass').on('click', function() {
-        var btn = $(this);
-        var institution_id = btn.data('id');
-        req(institution_id, 1);
-    });
-
-    $('#btn-unpass').on('click', function() {
-        var btn = $(this);
-        var institution_id = btn.data('id');
-        req(institution_id, -1);
+                alert('操作成功');
+                setTimeout(function() {
+                    location = "{:U('admin/index/employerList')}"
+                }, 500);
+            } else {
+                alert(json.msg);
+            }
+        });
     });
 })(jQuery);
 </script>

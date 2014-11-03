@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Common\Model\UserModel;
 
 /**
  *用人单位(企业)用户接口
@@ -64,6 +65,42 @@ class EmployerController extends BaseController {
         }else{
             $this->ajaxReturn(mz_json_error($res['msg']));
         }
+    }
+
+    /**
+     * 验证（更换权限）
+     * 需要管理员权限
+     * @post user_id
+     * @post 1正常 -2锁定
+     */
+    public function vertify(){
+        $this->reqPost(array('employer_id','op'))->reqAdmin();
+        // todo 检查权限
+        $res = D('UserEmployer')->vertify(I('post.employer_id'),I('post.op'));
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success('vertify successfully'));
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+        
+    }
+
+    /**
+     * 删除企业用户
+     */
+    public function delete(){
+        $this->reqPost(array('employer_id'))->reqAdmin();
+         
+         //todo:检查权限
+         
+        //调用model
+        $res = D('User')->deleteUser(I('post.employer_id'),UserModel::LEVEL_EMPLOYER);
+        if($res['status']){
+            $this->ajaxReturn(mz_json_success());
+        }else{
+            $this->ajaxReturn(mz_json_error($res['msg']));
+        }
+        
     }
 }
 

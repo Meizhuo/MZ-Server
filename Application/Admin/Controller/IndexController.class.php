@@ -224,20 +224,27 @@ class IndexController extends BaseController {
          //todo 权限判断
         if($user_id !== 0){
             $res = D('UserPerson')->info($user_id);
-            $admin = $res['msg'];
-            $this->assign('usr',$admin);
-        }
-        $this->display();
-    }
+            $usr = $res['msg'];
+			$this->assign ( 'usr', $usr );
+		}
+		$this->display ();
+	}
      
      
     /**
      * 查看企业用户页
      * @param number $adminId 管理员id
      */
-    public function viewEmpoyer($emplyoer_id = 0)
-		{
-		}
+    public function viewEmployer($employer_id = 0){
+    	$this->reqAdmin();
+    	//TODO 权限判断
+    	if($employer_id !== 0 ){
+    		$res = D('UserEmployer')->info($employer_id);
+    		$usr = $res['msg'];
+    		$this->assign('usr',$usr);
+    	} 
+    	$this->display();
+	}
     /**
      * 广告管理页
      */
@@ -311,7 +318,7 @@ class IndexController extends BaseController {
      * NOTE:只有超级管理员才能进入
      */
     public function createAdmin(){
-        $this->reqSuperAdmin();
+        $this->reqAdmin()->reqSuperAdmin();
         $this->display();
     }
     

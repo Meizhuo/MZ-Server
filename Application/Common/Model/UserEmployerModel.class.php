@@ -30,6 +30,25 @@ class UserEmployerModel extends BaseModel {
     }
 
     /**
+     * 验证一用户
+     * @param int $user_id
+     * @param int $op   1:正常 -2:锁定
+     * @return Ambigous <number, string>
+     */
+    public function vertify($user_id,$op){
+        $res = $this->_getResult();
+        $data['status'] = $op;
+        $user =M('User');
+        if($user->where("uid='%s' AND level=%d",$user_id,UserModel::LEVEL_EMPLOYER)->save($data)>=0){
+            $res['status'] = 1;
+        }else{
+            $res['msg'] = $user->getError();
+        }
+        
+        return $res;
+    }
+
+    /**
      * 更新企业信息
      * 
      * @param unknown $data            
