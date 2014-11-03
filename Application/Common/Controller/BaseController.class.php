@@ -85,7 +85,7 @@ class BaseController extends Controller {
         if($res && ((int)$res[0]['level']) === $level){
             return $this;
         }
-        $this->ajaxReturn(mz_json_error($res[0]));
+        $this->ajaxReturn(mz_json_error($msg));
     }
     /**
      * 需要企业用户登录
