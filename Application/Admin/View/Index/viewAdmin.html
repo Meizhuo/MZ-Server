@@ -45,7 +45,7 @@
 
     <div id="topbar">
         <span>欢迎 {$admin['nickname']}</span>
-        <input id="btn-logout" type="submit" value="退出登录" style="float:right;height: 30px;font-size: 16px;">
+        <input id="btn-logout" type="submit" value="退出登录" style="float: right; height: 30px; font-size: 16px;">
     </div>
 
     <!--下面只是说明与程序代码无关-->
@@ -67,166 +67,126 @@
                 <tr>
                     <th>发布/编辑文档权限</th>
                     <td>
-                        <input type="checkbox"                              
-                            <if condition="in_array(1,$adm['per_categorys_post'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_post" value=1 >职业培训-基本职能
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(2,$adm['per_categorys_post'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_post" value=2>职业培训-法律法规及政策
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(3,$adm['per_categorys_post'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_post" value=3>职业培训-相关新闻
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(4,$adm['per_categorys_post'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_post" value=4>职业培训-通知信息
-
-                        <br/>
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(5,$adm['per_categorys_post'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_post" value=5>职业技能鉴定-政策法规
-
-                       <input type="checkbox"                              
-                            <if condition="in_array(6,$adm['per_categorys_post'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_post" value=6>职业技能鉴定-办事指南
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(7,$adm['per_categorys_post'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_post" value=7>职业技能鉴定-全国统考
+                        <if condition="in_array(1,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_post" value=1>职业培训-基本职能
+                            <else />
+                            <input type="checkbox" name="per_categorys_post" value=1>职业培训-基本职能</if>
+                        <if condition="in_array(2,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_post" value=2>职业培训-法律法规及政策
+                            <else />
+                            <input type="checkbox" name="per_categorys_post" value=2>职业培训-法律法规及政策</if>
+                        <if condition="in_array(3,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_post" value=3>职业培训-相关新闻
+                            <else />
+                            <input type="checkbox" name="per_categorys_post" value=3>职业培训-相关新闻</if>
+                        <if condition="in_array(4,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_post" value=4>职业培训-通知信息
+                            <else />
+                            <input type="checkbox" name="per_categorys_post" value=4>职业培训-通知信息</if>
+                        <br />
+                        <if condition="in_array(5,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_post" value=5>职业技能鉴定-政策法规
+                            <else />
+                            <input type="checkbox" name="per_categorys_post" value=5>职业技能鉴定-政策法规</if>
+                        <if condition="in_array(6,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_post" value=6>职业技能鉴定-办事指南
+                            <else />
+                            <input type="checkbox" name="per_categorys_post" value=6>职业技能鉴定-办事指南</if>
+                        <if condition="in_array(7,$adm['per_categorys_post'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_post" value=7>职业技能鉴定-全国统考
+                            <else />
+                            <input type="checkbox" name="per_categorys_post" value=7>职业技能鉴定-全国统考</if>
                     </td>
                 </tr>
                 <tr>
                     <th>审核文档权限</th>
                     <td>
-                        <input type="checkbox"                              
-                            <if condition="in_array(1,$adm['per_categorys_check'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_check" value=1>职业培训-基本职能
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(2,$adm['per_categorys_check'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_check" value=2>职业培训-法律法规及政策
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(3,$adm['per_categorys_check'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_check" value=3>职业培训-相关新闻
-
-                        <input type="checkbox"                              
-                            <if condition="in_array(4,$adm['per_categorys_check'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_check" value=4>职业培训-通知信息
-
-                        <br/>
-
-                         <input type="checkbox"                              
-                            <if condition="in_array(5,$adm['per_categorys_check'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_check" value=5>职业技能鉴定-政策法规
-
-                         <input type="checkbox"                              
-                            <if condition="in_array(6,$adm['per_categorys_check'])">
-                            checked="checked"
-                             </if>
-												  name="per_categorys_check" value=6>职业技能鉴定-办事指南
-
-                         <input type="checkbox" 
-                             <if condition="in_array(7,$adm['per_categorys_check'])">
-                            checked="checked"
-                             </if>
-                          name="per_categorys_check"  value=7>职业技能鉴定-全国统考
-                        
+                        <if condition="in_array(1,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_check" value=1>职业培训-基本职能
+                            <else />
+                            <input type="checkbox" name="per_categorys_check" value=1>职业培训-基本职能
+                        </if>
+                        <if condition="in_array(2,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_check" value=2>职业培训-法律法规及政策
+                            <else />
+                            <input type="checkbox" name="per_categorys_check" value=2>职业培训-法律法规及政策</if>
+                        <if condition="in_array(3,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_check" value=3>职业培训-相关新闻
+                            <else />
+                            <input type="checkbox" name="per_categorys_check" value=3>职业培训-相关新闻</if>
+                        <if condition="in_array(4,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_check" value=4>职业培训-通知信息
+                            <else />
+                            <input type="checkbox" name="per_categorys_check" value=4>职业培训-通知信息</if>
+                        <br />
+                        <if condition="in_array(5,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_check" value=5>职业技能鉴定-政策法规
+                            <else />
+                            <input type="checkbox" name="per_categorys_check" value=5>职业技能鉴定-政策法规</if>
+                        <if condition="in_array(6,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_check" value=6>职业技能鉴定-办事指南
+                            <else />
+                            <input type="checkbox" name="per_categorys_check" value=6>职业技能鉴定-办事指南</if>
+                        <if condition="in_array(7,$adm['per_categorys_check'])">
+                            <input type="checkbox" checked="checked" name="per_categorys_check" value=7>职业技能鉴定-全国统考
+                            <else />
+                            <input type="checkbox" name="per_categorys_check" value=7>职业技能鉴定-全国统考</if>
                     </td>
                 </tr>
                 <tr>
                     <th>审核机构权限</th>
                     <td>
-                                <input type="radio" name="per_institution_check"
-                                 <if condition="$adm['per_institution_check'] eq 1">
-                                   checked="checked"
-																 </if>
-                                 value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
-                                <input type="radio" name="per_institution_check"
-                                 <if condition="$adm['per_institution_check'] eq 0">
-                                   checked="checked"
-																 </if>
-                                 value="0">否
-
+                        <if condition="$adm['per_institution_check'] eq 1">
+                            <input type="radio" name="per_institution_check" checked="checked" value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="per_institution_check" value="0">否
+                            <else />
+                            <input type="radio" name="per_institution_check" value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="per_institution_check" checked="checked" value="0">否
+                        </if>
                     </td>
                 </tr>
                 <tr>
                     <th>个人用户管理权限</th>
                     <td>
-                                <input type="radio" name="per_person_man"
-                                 <if condition="$adm['per_person_man'] eq 1">
-                                   checked="checked"
-																 </if>
-                                 value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
-                                <input type="radio" name="per_person_man"
-                                 <if condition="$adm['per_person_man'] eq 0">
-                                   checked="checked"
-																 </if>
-                                 value="0">否
+                        <if condition="$adm['per_person_man'] eq 1">
+                            <input type="radio" name="per_person_man" checked="checked" value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="per_person_man" value="0">否
+                            <else />
+                            <input type="radio" name="per_person_man" value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="per_person_man" checked="checked" value="0">否
+                        </if>
                     </td>
                 </tr>
                 <tr>
                     <th>单位用户管理权限</th>
                     <td>
-                                <input type="radio" name="per_employer_man"
-                                 <if condition="$adm['per_employer_man'] eq 1">
-                                   checked="checked"
-																 </if>
-                                 value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
-                                <input type="radio" name="per_employer_man"
-                                 <if condition="$adm['per_employer_man'] eq 0">
-                                   checked="checked"
-																 </if>
-                                 value="0">否
+                         <if condition="$adm['per_employer_man'] eq 1">
+                            <input type="radio" name="per_employer_man" checked="checked" value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="per_employer_man" value="0">否
+                            <else />
+                            <input type="radio" name="per_employer_man" value="1">是&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="per_employer_man" checked="checked" value="0">否
+                        </if>
                     </td>
                 </tr>
                 <tr>
                     <th>用户状态</th>
                     <td>
-                                <input type="radio" name="status"
-                                 <if condition="$adm['status'] eq 1">
-                                   checked="checked"
-																 </if>
-                                 value="1">正常&nbsp; &nbsp; &nbsp; &nbsp;
-                                <input type="radio" name="status"
-                                 <if condition="$adm['status'] eq -2">
-                                   checked="checked"
-																 </if>
-                                 value="-2">锁定
+                     
+                        <if condition="$adm['status'] eq 1">
+                            <input type="radio" name="status" checked="checked" value="1">正常&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="status" value="-2">锁定
+                            <else />
+                            <input type="radio" name="status" value="1">正常&nbsp; &nbsp; &nbsp; &nbsp;
+                            <input type="radio" name="status" checked="checked" value="-2">锁定
+                        </if>
                     </td>
                 </tr>
             </table>
-            <div class="tab_inp" style="text-align:center;margin-top: 20px">
-             <if condition="$admin['level'] eq 16">
-               <input id="btn-save" data-id="{$adm['uid']}" class="submit" type="submit" value="保存" style="height:40px;width: 100px;"></input>
-             </if> 
+            <div class="tab_inp" style="text-align: center; margin-top: 20px">
+                <if condition="$admin['level'] eq 16">
+                    <input id="btn-save" data-id="{$adm['uid']}" class="submit" type="submit" value="保存" style="height: 40px; width: 100px;"></input>
+                </if>
             </div>
         </div>
     </div>
@@ -246,47 +206,47 @@
         });
     });
 
-  <if condition="$admin['level'] eq 16">
-    $('#btn-save').on('click', function() {
-        var admin_id = "{$adm['uid']}";
-        var per_categorys_post = [];
-        var per_categorys_check = [];
-        var per_institution_check = $('[name=per_institution_check]:checked').val();
-        var per_person_man = $('[name=per_person_man]:checked').val();
-        var per_employer_man = $('[name=per_employer_man]:checked').val();
-        var status = $('[name=status]:checked').val();
+    <
+    if condition = "$admin['level'] eq 16" >
+        $('#btn-save').on('click', function() {
+            var admin_id = "{$adm['uid']}";
+            var per_categorys_post = [];
+            var per_categorys_check = [];
+            var per_institution_check = $('[name=per_institution_check]:checked').val();
+            var per_person_man = $('[name=per_person_man]:checked').val();
+            var per_employer_man = $('[name=per_employer_man]:checked').val();
+            var status = $('[name=status]:checked').val();
 
-        $('[name=per_categorys_post]:checked').each(function(e) {
-            per_categorys_post.push($(this).val());
-        });
-
-        $('[name=per_categorys_check]:checked').each(function(e) {
-            per_categorys_check.push($(this).val());
-        });
-
-        var post_data = {
-            admin_id: admin_id,
-            per_categorys_post: '[' + per_categorys_post.toString() + ']',
-            per_categorys_check: '[' + per_categorys_check.toString() + ']',
-            per_institution_check: per_institution_check,
-            per_person_man: per_person_man,
-            per_employer_man: per_employer_man,
-            status:status
-        }
-        //submit
-        $.post("{:U('home/admin/update')}", post_data,
-            function(json) {
-                if (json.code) {
-                    alert('操作成功');
-                    setTimeout(function(){
-                        location = "{:U('admin/index/adminList')}"
-                    }, 500);
-                } else {
-                    alert(json.msg);
-                }
+            $('[name=per_categorys_post]:checked').each(function(e) {
+                per_categorys_post.push($(this).val());
             });
-    });
-    </if>
+
+            $('[name=per_categorys_check]:checked').each(function(e) {
+                per_categorys_check.push($(this).val());
+            });
+
+            var post_data = {
+                    admin_id: admin_id,
+                    per_categorys_post: '[' + per_categorys_post.toString() + ']',
+                    per_categorys_check: '[' + per_categorys_check.toString() + ']',
+                    per_institution_check: per_institution_check,
+                    per_person_man: per_person_man,
+                    per_employer_man: per_employer_man,
+                    status: status
+                }
+                //submit
+            $.post("{:U('home/admin/update')}", post_data,
+                function(json) {
+                    if (json.code) {
+                        alert('操作成功');
+                        setTimeout(function() {
+                            location = "{:U('admin/index/adminList')}"
+                        }, 500);
+                    } else {
+                        alert(json.msg);
+                    }
+                });
+        }); < /if>
 
 })(jQuery);
 </script>
