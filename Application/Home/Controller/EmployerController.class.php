@@ -69,7 +69,7 @@ class EmployerController extends BaseController {
 
     /**
      * 验证（更换权限）
-     * 需要管理员权限
+     * 需要管理员有管理企业用户的权限 per_employer_man
      * @post user_id
      * @post 1正常 -2锁定
      */
@@ -91,6 +91,7 @@ class EmployerController extends BaseController {
 
     /**
      * 删除企业用户
+     * 需要管理员有管理企业用户的权限 per_employer_man
      */
     public function delete(){
         $this->reqPost(array('employer_id'))->reqAdmin();

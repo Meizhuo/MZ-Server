@@ -52,9 +52,9 @@ class PersonController extends BaseController {
 
     /**
      * 验证（更换权限）
-     * 需要管理员权限
+     * 需要管理员有管理个人用户的权限 per_person_man
      * @post user_id
-     * @post 1正常 -2锁定
+     * @post op 1正常 -2锁定
      */
     public function vertify(){
         $this->reqPost(array('user_id','op'))->reqAdmin();
@@ -75,7 +75,8 @@ class PersonController extends BaseController {
     }
 
     /**
-     * 删除一个个人用户
+     * 删除个人用户
+     * 需要管理员有管理个人用户的权限 per_person_man
      */
     public function delete(){
         $this->reqPost(array('user_id'))->reqAdmin();

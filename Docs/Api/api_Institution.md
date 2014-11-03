@@ -37,6 +37,44 @@ contact_email  | 联系邮箱 | N
 }
 ```
 
+## 验证(修改机构用户的审核状态)
+`POST /home/institution/vertify`
+
+**NOTE:需要管理员有管理机构权限 per_institution_check**
+
+字段	|描述 |  是否必须 
+------------ | -------------| -------------
+institution_id | 机构的id 	| Y
+op | 审核状态(-2 冻结 -1审核不通过  0未审核 1审核通过 ) | Y
+
+**Response**  
+
+```json  
+{
+	"code":200,
+	"response":"operate successfully"
+}
+```
+
+
+## 删除机构用户
+`POST /home/institution/delete`
+
+**NOTE:需要管理员有管理机构权限 per_institution_check**
+
+字段	|描述 |  是否必须 
+------------ | -------------| -------------
+institution_id | 机构的id 	| Y
+
+**Response**  
+
+```json  
+{
+	"code":200,
+	"response":"operate successfully"
+}
+```
+
 
 ## 获取机构信息
 `GET /home/institution/info`

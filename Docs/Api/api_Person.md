@@ -24,6 +24,46 @@ work_place|  工作地点   | N
 }
 ```
 
+## 验证(修改个人用户的审核状态)
+`POST /home/person/vertify`
+
+**NOTE:需要管理员有管理个人用户的权限 per_person_man**
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+user_id | 个人用户id  | Y
+op | 审核状态(只有（-2 冻结  1审核通过）,其他均不合理) | Y
+
+**Response**  
+
+```json  
+{
+    "code":200,
+    "response":"operate successfully"
+}
+```
+
+
+## 删除个人用户
+`POST /home/person/delete`
+
+**NOTE:需要管理员有管理个人用户的权限 per_person_man**
+
+字段  |描述 |  是否必须 
+------------ | -------------| -------------
+user_id | 个人用户id  | Y
+
+**Response**  
+
+```json  
+{
+    "code":200,
+    "response":"operate successfully"
+}
+```
+
+
+
 
 ## 获得当前登录的用户资料
 `GET /home/person/info`

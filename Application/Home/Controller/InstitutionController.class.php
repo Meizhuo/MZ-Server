@@ -1,7 +1,6 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
-use Common\Model\UserAdminModel;
 use Common\Model\UserModel;
 
 
@@ -68,6 +67,7 @@ class InstitutionController extends BaseController {
     
     /**
      * POST 审核机构
+     * NOTE:需要管理员拥有管理机构的权限  per_institution_check
      */
     public function vertify(){
         $this->reqPost(array('institution_id','op'))->reqAdmin();
@@ -86,7 +86,7 @@ class InstitutionController extends BaseController {
     }
     /**
      * 删除一机构
-     * NOTE:需要管理员拥有管理机构的权限
+     * NOTE:需要管理员拥有管理机构的权限 per_institution_check
      */
     public function delete(){
     	$this->reqPost(array('ins_id'))->reqAdmin();
