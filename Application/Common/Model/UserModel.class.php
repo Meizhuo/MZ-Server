@@ -349,7 +349,9 @@ class UserModel extends BaseModel {
         	    break;
             case UserModel::LEVEL_INSTITUTION:
                 if($this->where("uid='%s'",$uid)->delete() && M('UserInstitution')->where("uid='%s'",$uid)->delete()){
-                    $res['status'] = 1;
+                   M('DocumentFile')->where("ins_id='%s'",$uid)->delete();
+                   M('Course')->where("institution_id='%s'",$uid)->delete();
+                   $res['status'] = 1;
                 }else{
                     $res['msg'] = '删除失败';
                 }

@@ -87,8 +87,10 @@
                         </td>
                         <td>{$ins['vertifyer']['nickname']}</td>
                         <td>
-                            <span><a href="/mz/index.php/admin/index/viewInstitution/institutionId/{$ins['uid']}">查看</a>
-                            </span>
+                            <a href="{:U('admin/index/viewInstitution','','')}/institutionId/{$ins['uid']}">查看</a>
+                            <if condition="$admin['per_institution_check'] eq 1">
+                                | <a href="#" name="btn-delete" data-id="{$ins['uid']}">删除</a>
+                            </if>
                         </td>
                     </tr>
                 </foreach>
@@ -138,6 +140,25 @@
     $('#btn-next').on('click', function() {
         var page_next = parseInt(cur_page) + 1;
         location = url_tpl.replace('{page}',page_next).replace('{status}',status);
+    });
+
+    //删除操作
+    $('[name=btn-delete]').on('click',function(){
+
+         if (!confirm('确认要删除此用户吗?')) return;
+         var $ele = $(this);
+         var ins_id = $ele.data('id');
+         var post_data = {
+            ins_id:ins_id
+         };
+         $.post("{:U('home/institution/delete','','')}",post_data,function(json){
+            if(json.code){
+                alert('操作成功');
+                $ele.parent().parent().fadeOut();
+            }else{
+                alert(json.msg);
+            }
+         });
     });
 
 })(jQuery);

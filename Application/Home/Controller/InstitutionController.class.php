@@ -70,7 +70,7 @@ class InstitutionController extends BaseController {
      * POST 审核机构
      */
     public function vertify(){
-        $this->reqPost(array('institution_id'))->reqLogin();
+        $this->reqPost(array('institution_id','op'))->reqAdmin();
     
         //查询获得category_id
         $Admin = new UserAdminModel();
