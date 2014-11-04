@@ -29,7 +29,8 @@ CREATE TABLE `mz_user` (
   `level` int(1) NOT NULL DEFAULT '1' COMMENT '权限等级(1个人用户 2 用人单位 4 培训机构8管理员16超级管理员 )',
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '审核状态(-2冻结状态 -1审核不通过 0 未审核1审核通过 )',
   PRIMARY KEY (`uid`),
-  UNIQUE KEY `phone` (`phone`,`email`)
+  UNIQUE KEY `phone` (`phone`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=1 ;
 
 
