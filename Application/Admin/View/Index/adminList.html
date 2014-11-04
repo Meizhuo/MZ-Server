@@ -162,7 +162,7 @@
     var url_tpl = "{:U('admin/index/adminList','','')}/status/{status}/page/{cur_page}";
 
     $('#select-category').on('change', function() {
-        location = url_tpl.replace('{cur_page}', cur_page).replace('{status}', $(this).val());
+        location = url_tpl.replace('{cur_page}', 1).replace('{status}', $(this).val());
     });
     //初始化栏目
     $('#select-category').val(status);

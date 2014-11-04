@@ -123,7 +123,7 @@ and (($admin['level'] eq 16) OR (($admin['level'] eq 8) and ($admin['per_person_
     var url_tpl = "{:U('admin/index/employerList','','')}/status/{status}/page/{cur_page}";
 
     $('#select-category').on('change', function() {
-        location = url_tpl.replace('{cur_page}', cur_page).replace('{status}', $(this).val());
+        location = url_tpl.replace('{cur_page}', 1).replace('{status}', $(this).val());
     });
     //初始化栏目
     $('#select-category').val(status);

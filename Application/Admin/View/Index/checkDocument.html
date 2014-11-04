@@ -135,13 +135,13 @@
 
 
     $('#select-status').on('change', function() {
-        location = url_tpl.replace('{cur_category}', cur_category).replace('{cur_page}', cur_page).replace('{status}', $(this).val());
+        location = url_tpl.replace('{cur_category}', cur_category).replace('{cur_page}', 1).replace('{status}', $(this).val());
     });
     //初始化审核状态
     $('#select-status').val(status);
 
     $('#select-category').on('change', function() {
-        location = url_tpl.replace('{cur_category}', $(this).val()).replace('{cur_page}', cur_page).replace('{status}', status);
+        location = url_tpl.replace('{cur_category}', $(this).val()).replace('{cur_page}', 1).replace('{status}', status);
     });
     //初始化栏目
     $('#select-category').val(cur_category);

@@ -126,7 +126,7 @@
 
 
     $('#select-category').on('change', function() {
-        location = url_tpl.replace('{page}', cur_page).replace('{status}', $(this).val());
+        location = url_tpl.replace('{page}', 1).replace('{status}', $(this).val());
     });
     //初始化栏目
     $('#select-category').val(status);
