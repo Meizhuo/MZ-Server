@@ -73,7 +73,7 @@ class UserEmployerModel extends BaseModel {
      */
     public function info($uid){
         $res = $this->_getResult();
-        $info_user = M('User')->field('psw',true)->where("uid='%s'",$uid)->limit(1)->select();
+        $info_user = M('User')->field('psw',true)->where("uid='%s' AND level=%d",$uid,UserModel::LEVEL_EMPLOYER)->limit(1)->select();
         if($info_user){
             $info_employer = $this->field('uid',true)->where("uid='%s'",$uid)->limit(1)->select();
             $res['msg'] = array_merge($info_user[0],$info_employer[0]);

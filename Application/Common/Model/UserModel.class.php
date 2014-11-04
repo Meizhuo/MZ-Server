@@ -206,7 +206,7 @@ class UserModel extends BaseModel {
      */
     public function getUserInfo($uid){
         $res = $this->_getResult();
-        $user_person= $this->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        $user_person= $this->field('nickname,phone,email,reg_time,level,status')->where("uid='%s' AND level=%d",$uid,UserModel::LEVEL_PERSON)->select();
         if($user_person){
             $_result = M('UserPerson')->field('sex,work_place')->where("uid='%s'",$uid)->select();
             $res['status'] = 1;
@@ -223,7 +223,7 @@ class UserModel extends BaseModel {
      */
     public function getInsInfo($uid){
         $res = $this->_getResult();
-        $user_ins = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        $user_ins = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s' AND level=%d",$uid,UserModel::LEVEL_INSTITUTION)->select();
         $user_ins_files = D('DocumentFile')->getDocFilesByIns($uid)['msg'];
         if($user_ins){
             $_result = M('UserInstitution')->where("uid='%s'",$uid)->select();
@@ -247,7 +247,7 @@ class UserModel extends BaseModel {
      */
     public function getEmployerInfo($uid){
         $res = $this->_getResult();
-        $user_employers = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s'",$uid)->select();
+        $user_employers = M('User')->field('nickname,phone,email,reg_time,level,status')->where("uid='%s' AND level=%d",$uid,UserModel::LEVEL_EMPLOYER)->select();
         if($user_employers){
             $_result = M('UserEmployer')->where("uid='%s'",$uid)->select();
             $res['status'] = 1;

@@ -139,7 +139,7 @@ class UserAdminModel extends BaseModel {
      */
     public function info($uid){
         $res = $this->_getResult();
-        $info_user = M('User')->field('psw',true)->where("uid='%s'",$uid)->limit(1)->select();
+        $info_user = M('User')->field('psw',true)->where("uid='%s' AND level=%d",$uid,UserModel::LEVEL_ADMIN)->limit(1)->select();
     
         if($info_user){
             $info_admin = $this->field('uid',true)->where("uid='%s'",$uid)->limit(1)->select();
