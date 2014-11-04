@@ -9,7 +9,7 @@
 
 字段	|描述 |  是否必须 
 ------------ | -------------| -------------
-account | 账户(手机号码)  	| Y
+account | 账户(手机号码,邮箱)  	| Y
 psw| 密码  | Y
 
  **Response**  
@@ -17,7 +17,15 @@ psw| 密码  | Y
 ```json  
 {
 	"code":20000,
-	"response"："operate success"
+	"response"： {
+        "uid": "1",
+        "nickname": "superadmin",
+        "phone": null,
+        "email": "superadmin@mz.com",
+        "reg_time": "1411877304",
+        "level": "16",
+        "status": "1"
+    }
 }
 ```
 
@@ -30,7 +38,7 @@ psw| 密码  | Y
 ```json  
 {
 	"code":20000,
-	"response"："operate success"
+	"response"："operate successfully"
 }
 ```
 

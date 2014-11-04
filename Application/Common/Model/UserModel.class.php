@@ -181,18 +181,22 @@ class UserModel extends BaseModel {
      */
     public function login($account_type,$account,$psw){
        $res = $this->_getResult();
-       $map['psw'] = $psw;
        if($account_type === 'phone' ){
            $map['phone'] =$account;
        }else{
            $map['email'] =$account;
        }
-       $u = $this->where($map)->select();
+       $u = $this->where($map)->limit(1)->select();
        if($u){
-          $res['status'] = 1;
-          $res['msg']  = $u[0];
+       	 	if($psw == $u[0]['psw']){
+       	 		$res['status'] = 1;
+       	 		unset($u[0]['psw']);
+       	 		$res['msg']  = $u[0];
+       	 	}else{
+       	 		$res['msg'] = '密码不正确';
+       	 	}
        }else{
-           $res['msg']='密码不对';
+           $res['msg']='账号尚未注册';
        }
        return $res;
     }
