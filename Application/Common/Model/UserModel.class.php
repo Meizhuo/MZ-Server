@@ -12,7 +12,7 @@ class UserModel extends BaseModel {
     /** 个人用户 */
     const LEVEL_PERSON = 1;
 
-    /**  用人单位*/
+    /**  用人单位(企业)*/
     const LEVEL_EMPLOYER = 2;
 
     /** 培训机构用户 */
@@ -107,7 +107,7 @@ class UserModel extends BaseModel {
         return $res;
     }
     /**
-     * 注册用人单位用户
+     * 注册用人单位(企业)用户
      */
     public function regEmployer(){
         $res = $this->_getResult();
@@ -241,7 +241,7 @@ class UserModel extends BaseModel {
     }
     
     /**
-     * 根据id获得用人单位信息
+     * 根据id获得用人单位(企业)信息
      * @param unknown $uid
      * @return Ambigous <string, multitype:, multitype:number string >
      */
@@ -305,7 +305,7 @@ class UserModel extends BaseModel {
         return $res;
     }
     /**
-     * 更新用人单位信息
+     * 更新用人单位(企业)信息
      * @param unknown $data
      * @return number
      */

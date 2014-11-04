@@ -198,7 +198,7 @@ class UserAdminModel extends BaseModel {
     	return $this->status == UserModel::STATUS_PASS && $this->per_person_man == 1;
     }
     /**
-     * 是否有管理单位用户的权限
+     * 是否有管理单位用户(企业)的权限
      * @return boolean true if it has permission
      */
     public function hasPerEmployerMan(){

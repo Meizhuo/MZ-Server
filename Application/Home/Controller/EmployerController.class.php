@@ -24,7 +24,7 @@ class EmployerController extends BaseController {
     }
 
     /**
-     * 更新用人单位信息
+     * 更新用人单位(企业)信息
      */
     public function update() {
         $this->reqPost()->reqEmployer();
@@ -40,7 +40,7 @@ class EmployerController extends BaseController {
     }
 
     /**
-     * GET 获取当前用人单位信息
+     * GET 获取当前用人单位(企业)信息
      */
     public function info() {
         $this->reqLogin()->reqEmployer();
