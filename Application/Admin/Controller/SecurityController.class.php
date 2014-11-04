@@ -12,8 +12,8 @@ class SecurityController extends BaseController {
      * 更换密码页
      */
     public function changePsw(){
-        $this->assign('code',I('get.code'));
-        $this->assign('e',I('get.e'));
+        $this->assign('code',I('get.code',null));
+        $this->assign('e',I('get.e',null));
         $this->display();
     }
     /**

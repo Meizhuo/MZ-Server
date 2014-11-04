@@ -19,7 +19,8 @@ class SecurityController extends BaseController {
         }
         $User = M('User');
         if($User->where("uid='%s' AND psw='%s'",$uid,md5(I('post.old_psw')))
-                ->save(array('psw' => md5(I('post.new_psw')))) > 0){
+                ->save(array('psw' => md5(I('post.new_psw')))) >= 0){
+            $this->logout();
             $this->ajaxReturn(mz_json_success('修改成功'));
         }else{
             $this->ajaxReturn(mz_json_error('修改失败'));
@@ -51,6 +52,7 @@ class SecurityController extends BaseController {
             }
             if(md5($create_time+$rand_str) === $code){
                 if(M('User')->where("email='%s'",$e)->save(array('psw' => md5($psw)))>=0){
+                    $this->logout();
                     $this->ajaxReturn(mz_json_success('修改密码成功！'));
                 }else{
                     $this->ajaxReturn(mz_json_error('修改密码失败,请重试'));

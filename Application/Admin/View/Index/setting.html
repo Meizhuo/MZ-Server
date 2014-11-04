@@ -59,6 +59,14 @@
             <input id="btn-clean" type="button" value="一键清理" class="bt_big">
         </div>
 
+         <div class="ht_b">
+            <h1>账号管理</h1>
+        </div>
+
+        <div id="clear_data">
+            <input id="btn-changPsw" type="button" value="修改密码" class="bt_big">
+        </div>
+
 
     </div>
 
@@ -87,6 +95,11 @@
                 alert('操作失败');
             }
         })
+    });
+
+    //修改密码
+    $('#btn-changPsw').on('click',function(){
+        location = "{:U('admin/security/changePsw')}";
     });
 
 })(jQuery);

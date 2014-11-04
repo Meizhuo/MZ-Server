@@ -23,14 +23,16 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="{:U('admin/institution/updateInfo')}" onclick="DoMenu('ChildMenu1')">登记信息</a>
+                <li><a href="{:U('admin/institution/updateInfo')}" >登记信息</a>
 
                 </li>
-                <li><a href="{:U('admin/institution/postCourse')}" onClick="DoMenu('ChildMenu2')">发布课程</a>
+                <li><a href="{:U('admin/institution/postCourse')}" >发布课程</a>
 
                 </li>
-                <li><a href="{:U('admin/institution/courseList')}" onClick="DoMenu('ChildMenu3')">开课列表</a>
+                <li><a href="{:U('admin/institution/courseList')}" >开课列表</a>
 
+                </li>
+                <li><a href="{:U('admin/security/changePsw')}">修改密码</a>
                 </li>
 
             </ul>
@@ -246,7 +248,7 @@ ue.ready(function() {
     var uid = "{$uid}";
     var ins_id = "{$uid}";
     var file_ids = {};
-    if ('{$file_ids}' !== '' && '{$file_ids}' !=='null' ) {
+    if ('{$file_ids}' !== '' && '{$file_ids}' !== 'null') {
         file_ids = JSON.parse('{$file_ids}'); //附件 init..
     }
 

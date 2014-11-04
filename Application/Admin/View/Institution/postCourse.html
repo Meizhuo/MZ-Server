@@ -32,6 +32,8 @@
                 <li><a href="{:U('admin/institution/courseList')}" onClick="DoMenu('ChildMenu3')">开课列表</a>
 
                 </li>
+                <li><a href="{:U('admin/security/changePsw')}">修改密码</a>
+                </li>
 
             </ul>
         </div>
@@ -106,7 +108,7 @@
                     <td>
                         <span style="color: black;font-size: 14px;" id="text-subsidy" data-id="{$course['subsidy_id']}">{$subsidy['kind']} {$subsidy['level']} {$subsidy['title']} 补贴金额:{$subsidy['money']}元</span>
                         <input id="btn-select" type="submit" class="submit" value="选 择" style="margin-left: 10px;">
-                          <input id="btn-select-cancel"class="submit" type="reset" value="取 消" style="background-color: red"></input>
+                        <input id="btn-select-cancel" class="submit" type="reset" value="取 消" style="background-color: red"></input>
                         <div style="margin-left:10px;">
                             <div>
                                 证书类别
@@ -137,7 +139,7 @@
                             </div>
                             <div>
                                 <input id="btn-select-comfirm" type="submit" class="submit" value="确 认" data-subsidy="">
-                              
+
                             </div>
 
                     </td>
@@ -259,14 +261,14 @@ ue.ready(function() {
             return;
         }
 
-        if(start_time === ''){
+        if (start_time === '') {
             alert("开课时间不能为空");
             return;
         }
         //验证时间格式
-        if(!/^\d{4}-\d{1,2}-\d{1,2}$/.test(start_time)){
-                alert('开课时间格式不对');
-                return ;
+        if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(start_time)) {
+            alert('开课时间格式不对');
+            return;
         }
 
         var post_data = {
@@ -413,7 +415,7 @@ ue.ready(function() {
             title: title,
         }, function(json) {
             if (json.code) {
-                $txt_subsidy.text(kind + ' ' + level + ' ' + title + ' 补贴金额:'+json.response[0].money+'元');
+                $txt_subsidy.text(kind + ' ' + level + ' ' + title + ' 补贴金额:' + json.response[0].money + '元');
                 $txt_subsidy.data('id', json.response[0].id);
                 initSubsidy(1);
             } else {
@@ -423,9 +425,9 @@ ue.ready(function() {
 
     });
 
-    $btn_cancel.on('click',function(){
-         initSubsidy(1);
-        
+    $btn_cancel.on('click', function() {
+        initSubsidy(1);
+
     });
 
     $btn_select.on('click', function() {
@@ -434,7 +436,7 @@ ue.ready(function() {
         $btn_cancel.fadeIn();
     });
 
-  
+
     initSubsidy(1);
 
 })(jQuery);

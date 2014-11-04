@@ -23,14 +23,16 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="{:U('admin/institution/updateInfo')}" onclick="DoMenu('ChildMenu1')">登记信息</a>
+                <li><a href="{:U('admin/institution/updateInfo')}">登记信息</a>
 
                 </li>
-                <li><a href="{:U('admin/institution/postCourse')}" onClick="DoMenu('ChildMenu2')">发布课程</a>
+                <li><a href="{:U('admin/institution/postCourse')}">发布课程</a>
 
                 </li>
-                <li><a href="{:U('admin/institution/courseList')}" onClick="DoMenu('ChildMenu3')">开课列表</a>
+                <li><a href="{:U('admin/institution/courseList')}">开课列表</a>
+                </li>
 
+                <li><a href="{:U('admin/security/changePsw')}">修改密码</a>
                 </li>
 
             </ul>
@@ -126,56 +128,56 @@
     //翻页
     //前一页
     $('#btn-pre').on('click', function() {
-        if(cur_page === 1){
+        if (cur_page === 1) {
             alert('已经是第一页！');
             return;
         }
-        location = url_tpl.replace('{display}', $('#select-display').val()).replace('{page}', cur_page-1);
+        location = url_tpl.replace('{display}', $('#select-display').val()).replace('{page}', cur_page - 1);
     });
 
     //后一页
-     $('#btn-next').on('click', function() {
+    $('#btn-next').on('click', function() {
         // location = url + (parseInt(cur_page) - 1);
-        location = url_tpl.replace('{display}', $('#select-display').val()).replace('{page}', cur_page+1);
+        location = url_tpl.replace('{display}', $('#select-display').val()).replace('{page}', cur_page + 1);
     });
 
-     //下线课程
-     $('[name=btn-display]').on('click',function(){
-         var $ele = $(this);
-         var course_id = $(this).data('id');
-         $.post("{:U('/home/course/undisplayCourse')}",{
-            course_id : course_id,
-         },function(json){
-                if(json.code){
-                      alert('操作成功');
-                      setTimeout(function(){
-                        $ele.parent().parent().fadeOut();
-                      }, 500);
-                }else{
-                    alert('操作失败，'+json.msg);
-                    console.log(json.msg);
-                }
-         });
-     });
+    //下线课程
+    $('[name=btn-display]').on('click', function() {
+        var $ele = $(this);
+        var course_id = $(this).data('id');
+        $.post("{:U('/home/course/undisplayCourse')}", {
+            course_id: course_id,
+        }, function(json) {
+            if (json.code) {
+                alert('操作成功');
+                setTimeout(function() {
+                    $ele.parent().parent().fadeOut();
+                }, 500);
+            } else {
+                alert('操作失败，' + json.msg);
+                console.log(json.msg);
+            }
+        });
+    });
 
-     //上线课程
-     $('[name=btn-undisplay]').on('click',function(){
-         var $ele = $(this);
-         var course_id = $(this).data('id');
-         $.post("{:U('/home/course/displayCourse')}",{
-            course_id : course_id,
-         },function(json){
-                if(json.code){
-                      alert('操作成功');
-                      setTimeout(function(){
-                        $ele.parent().parent().fadeOut();
-                      }, 500);
-                }else{
-                    alert('操作失败，'+json.msg);
-                    console.log('操作失败，'+json.msg);
-                }
-         });
-     });
+    //上线课程
+    $('[name=btn-undisplay]').on('click', function() {
+        var $ele = $(this);
+        var course_id = $(this).data('id');
+        $.post("{:U('/home/course/displayCourse')}", {
+            course_id: course_id,
+        }, function(json) {
+            if (json.code) {
+                alert('操作成功');
+                setTimeout(function() {
+                    $ele.parent().parent().fadeOut();
+                }, 500);
+            } else {
+                alert('操作失败，' + json.msg);
+                console.log('操作失败，' + json.msg);
+            }
+        });
+    });
 
 
 

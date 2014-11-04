@@ -23,7 +23,7 @@
     <div id="parent_a">
         <div id="PARENT">
             <ul id="nav">
-                <li><a href="{:U('admin/institution/updateInfo')}" onclick="DoMenu('ChildMenu1')">返回首页</a>
+                <li><a href="{:U('admin/institution/updateInfo')}" >返回首页</a>
 
                 </li>
 
@@ -35,17 +35,27 @@
 
 
     <div id="topbar">
-        <span>找回密码</span>
+        <span>密码管理</span>
 
     </div>
 
     <!--下面只是说明与程序代码无关-->
     <div id="include" style=" width:80%;height:auto; display:block; margin:0 auto;  font-size:10pt; line-height:150%; ">
         <div class="ht">
-            <h1>密码管理 - 找回密码</h1>
+            <h1>修改密码</h1>
         </div>
         <div id="cat_wr">
             <table width="100%" border="0">
+                <if condition="is_null($e) AND is_null($code)">
+                    <tr>
+                        <td width="50">
+                            <div align="right">原密码</div>
+                        </td>
+                        <td width="400">
+                            <input id="text-oldpsw" class="inp" type="password" style="height:100%;width:60%;" placeholder="长度8-16位,字符+数字">
+                        </td>
+                    </tr>
+                </if>
                 <tr>
                     <td width="50">
                         <div align="right">新密码</div>
@@ -79,24 +89,43 @@
     $('#btn-comfirm').on('click', function() {
         var psw = $('#text-psw').val();
         var repsw = $('#text-repsw').val();
+        var old_psw = $('#text-oldpsw').val();
         var e = "{$e}";
         var code = "{$code}";
         if (psw !== repsw || psw === '' || psw.length < 8 || psw.length > 16) {
             alert('输入有误!');
             return;
         }
-        $.post("{:U('home/security/vertify','','')}", {
-            psw: psw,
-            e: e,
-            code: code,
-        }, function(json) {
-            if (json.code) {
-                alert(json.response);
-            } else {
-                alert(json.msg);
-            }
-            location = "{:U('admin/institution/index')}";
-        });
+        if (e && code) {
+            //找回密码 
+            $.post("{:U('home/security/vertify','','')}", {
+                psw: psw,
+                e: e,
+                code: code,
+            }, function(json) {
+                if (json.code) {
+                    alert(json.response);
+                } else {
+                    alert(json.msg);
+                }
+                location = "{:U('admin/institution/index')}";
+            });
+        } else {
+            //修改密码
+            $.post("{:U('home/security/changePsw','','')}",{
+                old_psw :old_psw,
+                new_psw :psw,
+
+            },function(json){
+                if(json.code){
+                    alert('修改成功');
+                    location = "{:U('admin/institution/index')}";
+                }else{
+                    alert(json.msg);
+                }
+            });
+        }
+
     });
 })(jQuery);
 </script>
