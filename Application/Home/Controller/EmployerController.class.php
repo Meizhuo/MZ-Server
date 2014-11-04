@@ -44,9 +44,8 @@ class EmployerController extends BaseController {
      */
     public function info() {
         $this->reqLogin()->reqEmployer();
-        
-        $data['uid'] = session('uid');
-        $res = D('User')->getEmployerInfo(array_merge($data, I('post.')));
+
+        $res = D('UserEmployer')->info(session('uid'));
         if ($res['status']) {
             $this->ajaxReturn(mz_json_success($res['msg']));
         } else {
