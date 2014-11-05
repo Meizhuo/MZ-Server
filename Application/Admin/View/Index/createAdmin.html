@@ -259,7 +259,7 @@
         }
 
         //submit
-        $.post("{:U('home/admin/create')}", post_data,
+        $.post("{:U('home/admin/create','','')}", post_data,
             function(json) {
                 if (json.code) {
                     alert('操作成功');

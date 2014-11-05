@@ -52,7 +52,7 @@ class UserAdminModel extends BaseModel {
         $data['per_institution_check'] = $per_institution_check;
         $data['per_person_man'] =$per_person_man;
         $data['per_employer_man'] = $per_employer_man;
-        $User = M('User');
+        $User = D('User');
         if($User->create($data)){
             //md5
             $User->data['reg_time'] = NOW_TIME;
