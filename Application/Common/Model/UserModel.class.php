@@ -44,9 +44,8 @@ class UserModel extends BaseModel {
             array('nickname','require','缺少昵称',self::MUST_VALIDATE,'',self::MODEL_INSERT),
             array('psw','require','缺少密码',self::MUST_VALIDATE,'',self::MODEL_INSERT),
             //插入时唯一性验证
-            array('nickname','','昵称已存在',self::EXISTS_VALIDATE,'unique',self::MODEL_INSERT),
-            array('phone','','手机号码已存在',self::EXISTS_VALIDATE,'unique',self::MODEL_INSERT),
-            array('email','','邮箱已存在',self::EXISTS_VALIDATE,'unique',self::MODEL_INSERT),
+            array('phone','','电话号码已被注册',self::EXISTS_VALIDATE,'unique',self::MODEL_INSERT),
+            array('email','','邮箱已注册',self::EXISTS_VALIDATE,'unique',self::MODEL_INSERT),
             //任何时刻,字段存在就进行格式检查
             array('phone','number','手机号码必须为数字'),
             array('phone','11','电话号码长度为11',self::EXISTS_VALIDATE,'length'),
@@ -84,10 +83,6 @@ class UserModel extends BaseModel {
         $res = $this->_getResult();
         if(!$this->create()){
             $res['msg'] = $this->getError();
-            return $res;
-        }
-        if(empty($this->data['phone']) && empty($this->data['email'])){
-            $res['msg'] = 'Reigister operation requires `phone` or email';
             return $res;
         }
         $this->data['level']=UserModel::LEVEL_PERSON;

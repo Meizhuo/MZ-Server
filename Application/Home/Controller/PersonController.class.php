@@ -15,7 +15,7 @@ class PersonController extends BaseController {
      * POST 注册
      */
     public function register() {
-        $this->reqPost();
+        $this->reqPost(array('nickname','email','phone','psw'));
         
         $User = D('User');
         $result = $User->regPerson();
