@@ -110,7 +110,7 @@ class DocumentController extends BaseController {
             'rootPath'   =>  './Uploads/', // 设置附件上传根目录
             'savePath'   =>  '',// 设置附件上传（子）目录
             'saveName'   =>  array('uniqid',''),//上传文件的保存名称
-            'exts'       =>  array('doc','docx','xls','jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
+            'exts'       =>  array('zip','doc','docx','xls','jpg', 'gif', 'png', 'jpeg'),// 设置附件上传类型
             'subName'    =>  array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
         );
         //创建新目录的同时创建index.html
