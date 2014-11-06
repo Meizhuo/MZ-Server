@@ -311,6 +311,8 @@ class IndexController extends BaseController {
      */
     public function setting(){
         $this->reqAdmin();
+        $app = M('appinfo')->order('id desc')->limit(1)->select();
+        $this->assign('app',$app[0]);
     	$this->display();
     }
     /**
