@@ -18,7 +18,7 @@ class SecurityController extends BaseController {
             $this->ajaxReturn(mz_json_error('密码长度为8-16'));
         }
         $User = M('User');
-        if(M('User')->where("uid='%s' AND psw='%s'",$uid,md5(I('post.old_psw')))->selete()){
+        if(!M('User')->where("uid='%s' AND psw='%s'",$uid,md5(I('post.old_psw')))->select()){
             $this->ajaxReturn(mz_json_error('旧密码错误'));
         }
         if($User->where("uid='%s' AND psw='%s'",$uid,md5(I('post.old_psw')))
