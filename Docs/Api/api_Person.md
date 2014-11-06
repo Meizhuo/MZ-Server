@@ -9,7 +9,7 @@
 ------------ | -------------| -------------
 nickname | 用户昵称     | Y
 phone| 手机号码 | Y
-email|  邮箱      | N
+email|  邮箱      | Y
 psw  | 密码 8-16位数字or字母   | Y
 sex|    性别(男或女) 默认为男    | N
 work_place|  工作地点   | N
