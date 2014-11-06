@@ -7,9 +7,10 @@
 
     <script type="text/javascript" src="/mz/Public/js/sidebar.js"></script>
     <link href="/mz/Public/css/zw_a.css" rel="stylesheet" type="text/css" />
-    <link href="/mz/Public/css/ins_form.css" rel="stylesheet" type="text/css" />
     <link href="/mz/Public/css/cat_fb.css" rel="stylesheet" type="text/css" />
-</head>
+    <link href="/mz/Public/css/ins_wd.css" rel="stylesheet" type="text/css" />
+
+    </head>
 
 <body>
     <div id="logo">
@@ -52,7 +53,11 @@
             <h1>系统设置</h1>
         </div>
         <div class="ht_b">
-            <h1>清理垃圾数据</h1>
+<!--             <img src="images/bt_hl.jpg" width="30px" height="30px">
+ -->            <h1>清理垃圾数据</h1>
+        </div>
+        <div class="ht_c">
+            <p>使用说明：若系统存在因重复发布或者发布错误而删除的文档，可以点击“一键清理”来清理垃圾数据。</p>
         </div>
 
         <div id="clear_data">
@@ -62,9 +67,77 @@
          <div class="ht_b">
             <h1>账号管理</h1>
         </div>
+        <div class="ht_c">
+            <p>使用说明：若想修改账号密码，请点击下方的“修改密码”按钮，进入修改密码页面，输入原密码与新密码，即可完成修改。</p>
+        </div>
 
         <div id="clear_data">
             <input id="btn-changPsw" type="button" value="修改密码" class="bt_big">
+        </div>
+
+         <div class="ht_b">
+            <h1>版本信息</h1>
+        </div>
+        <div id="ins_form">
+            <table width="800px;">
+
+          <tr>
+            <th width="100">版本号</th>
+            <td>V1.0.0</td>
+          </tr>
+          <tr>
+            <th>版本名</th>
+            <td>职业技术培训管理系统</td>
+          </tr>
+          <tr>
+            <th>更新信息</th>
+            <td>2014-11-06   20:51 p.m   Thu</td>
+
+        </table>
+
+        </div>
+
+         <div class="ht_b">
+            <h1>推送消息</h1>
+        </div>
+
+        <div id="cat_wr">
+            <div id="cat_top">
+                <table width="100%" border="0">
+                    <tr>
+                        <td>
+                            <div align="right">内容</div>
+                        </td>
+                        <td height="100">
+                            <label>
+                                <textarea name="textfield" style="width:100%;height:100%;"></textarea>
+                            </label>                        
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="70">
+                            <div align="right">群组</div>
+                        </td>
+                        <td width="400">
+                          <label>
+                          <input type="checkbox" name="checkbox" value="checkbox">
+                          个人用户</label>                      
+                          <label>
+                          <input type="checkbox" name="checkbox2" value="checkbox">
+                          企业用户</label></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div align="right"></div>
+                        </td>
+                        <td>
+                            <input id="btn-submit" name="submit3" type="submit" class="submit" id="btn-submit" value="发布">
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
 
@@ -72,6 +145,7 @@
 
 </body>
 <script type="text/javascript" src="/mz/Public/js/jquery.min.js"></script>
+
 <script type="text/javascript">
 (function($) {
     //退出
