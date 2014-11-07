@@ -33,3 +33,6 @@ $a->join('user_info ON user.id = user_info.id')->field('user.id,psw',true)->sele
 好了，到了这里，还是报`column id is ambiguous`的错误，依旧无法排除其中id的，个人感觉 ，其实这是ThinkPHP的一个Bug
 
 解决办法：不用过滤咯，自行指定返回字段
+
+
+### D('model') vs M('model')
