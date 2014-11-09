@@ -36,7 +36,7 @@ $ mysql>create database `mz` CHARACTER SET = utf8;
 
 MySql密码修改  
 ```shell
-$ mysql>bin>mysqladmin -u 用户密码 -p 旧密码 password 新密码
+$ mysql>bin>mysqladmin -u 用户密码 -p 旧密码 password 
 ```
 
 修改密码后，进入phpmyadmin会会报错：  
