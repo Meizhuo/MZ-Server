@@ -1,0 +1,49 @@
+/* CSS Document */
+body{
+background:url(../images/bg_dl2.jpg) no-repeat;
+background-size:100% 100%;
+color:#FFFFFF;
+height:100%;
+width:100%;
+margin:0px;
+background-attachment:fixed;
+}
+#btn-dl-big{
+width:130px;
+margin-top:20px;
+}
+.info_a{
+font-size:12px;
+margin-top:10px;
+}
+#container_dl{
+margin-bottom:auto;
+margin-top:auto;
+text-align:center;
+}
+.black{
+background-color:#fff;
+color:#000000;
+border-radius:3px;
+filter:alpha(opacity=40);  /*支持 IE 浏览器*/
+-moz-opacity:0.40; /*支持 FireFox 浏览器*/
+opacity:0.40;  /*支持 Chrome, Opera, Safari 等浏览器*/
+padding:5px;
+width:150px;
+margin:0 auto;
+margin-bottom:20px;
+margin-top:20px;
+}
+.span_dl_bt img{
+float:left;
+}
+.span_dl_bt{
+width:250px;
+margin:0 auto;
+margin-bottom:70px;
+}
+.hl{
+font-size:24px;
+text-shadow:2px 2px 2px #000;
+margin-bottom:20px;
+}

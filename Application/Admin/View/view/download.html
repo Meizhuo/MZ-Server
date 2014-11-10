@@ -2,49 +2,61 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-<title>下载</title>
-
-<link href="/mz/Public/css/index.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <title>下载</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/bootstrap_controller.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-	<div id="ind_container">
-		<div id="ind_center">
-			<div id="ind_head">
-				<div id="logo">
-					<img src="/mz/Public/images/zw_gr.png" height="120px" width="150px">
-				</div>
-			</div>
-			<div id="ind_ht">
-				<p>
-				<h1>东莞技能培训</h1>
-				</p>
-				<p>
-				<h1>Skills training in Dongguan</h1>
-				</p>
-			</div>
-			<div id="line"></div>
-			<div id="ind_login">
-				<div class="maxdiv">
-					<div class="centerdiv">
-						<div class="u">
-							 <span>及时了解培训信息</span><br /> 
-							 <span>查询相关培训课程</span><br /> 
-							 <span>选择靠谱的培训企业</span><br /> 
-							  <span>完成课程,领取国家补贴</span><br />
-							<a href="{$app['url']}">点击下载最新应用</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer">
-				<p>Skills training in Dongguan</p>
-				<p>2014</p>
-			</div>
-		</div>
-	</div>
+    <div class="container-fluid" id="container_dl">
+        <div class="row-fluid">
+            <div class="span_dl_bt">
+                <img src="__PUBLIC__/images/ic_icon.png" width="50px" height="50px" />
+                <h3>
+                    <br/>东莞技能培训
+                </h3>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <h3 class="hl">
+                    最新版本 {$app['version_name']}
+                </h3>
+                <div class="black">
+                    <p>
+                        <strong>及时了解培训信息</strong>
+                    </p>
+                    <p>
+                        <strong>查询相关培训课程</strong>
+                    </p>
+                    <p>
+                        <strong>选择靠谱培训企业</strong>
+                    </p>
+                    <p>
+                        <strong>完成课程,领取补贴</strong>
+                    </p>
+
+                </div>
+
+
+                <p>
+                    <em>支持Android 2.3.3及以上版本的系统
+                    </em>
+                </p>
+                <a href="{$app['url']}">
+                	  <button class="btn btn-info btn-large" type="button">立即下载</button>
+                </a>
+              
+                <p class="info_a">
+                    2.85M|2014-11-10 更新
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
