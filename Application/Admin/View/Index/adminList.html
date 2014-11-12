@@ -205,7 +205,7 @@
         });
     });
 
-
+    //查看
     $('[name=btn-view]').on('click', function() {
             var $ele = $(this);
             var admin_id = $ele.data('id');
@@ -223,13 +223,13 @@
             admin_id:admin_id
          };
 
-
-
-
          $.post("{:U('home/admin/deleteAdmin')}",post_data,function(json){
             if(json.code){
                 alert('操作成功');
-                $ele.parent().parent().fadeOut();
+                $ele.parent().parent().fadeOut(function(){
+                    location = location.href;
+                });
+
             }else{
                 alert(json.msg);
             }

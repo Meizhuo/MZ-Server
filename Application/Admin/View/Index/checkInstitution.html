@@ -154,7 +154,9 @@
          $.post("{:U('home/institution/delete','','')}",post_data,function(json){
             if(json.code){
                 alert('操作成功');
-                $ele.parent().parent().fadeOut();
+                $ele.parent().parent().fadeOut(function(){
+                    location = location.href;
+                });
             }else{
                 alert(json.msg);
             }
