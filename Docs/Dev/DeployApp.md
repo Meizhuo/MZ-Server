@@ -35,8 +35,9 @@ MySQL备份的脚本在`Scripts/backup` 运行run.bat即可
  'MYSQL_BACKUP_FOLDER' => 'E:\phpenv\mysql_backup\\', //指定MySQL备份的目录
  'DEFAULT_MYSQL_BACKUP_FOLDER' => '../../Backup/',//也就是项目目录的'Backup/'
 ```
+**注意** 务必把php 和 mysql的bin目录配置到系统变量中！
 
-也可以加入定时任务计划来进行备份
+More: 可以加入定时任务计划来进行备份
 
 
 
