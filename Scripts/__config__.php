@@ -1,7 +1,7 @@
 <?php
 //服务端应该配置一个server_config.php
-if(file_exists('server_config.php')){
-	return require 'server_config.php';
+if(file_exists('../server_config.php')){
+	return require '../server_config.php';
 }
 return array(
 	'DB_HOST' => 'localhost', // 服务器地址
