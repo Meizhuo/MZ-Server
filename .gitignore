@@ -2,3 +2,5 @@
 Runtime/
 Uploads/
 Backup/
+# 忽略所有server_config.php
+server_config.php
