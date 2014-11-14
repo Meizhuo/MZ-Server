@@ -17,16 +17,14 @@
     margin-top: 10px;
 }
 .xwnr {
-    margin-top: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
+
+    margin-left: 0.62em;
+    margin-right: 0.62em;
     font-size: 1em;
-    line-height: 30px;
-    padding-left: 0.9em;
-    padding-right: 0.9em;
+    line-height: 1.8em;
 }
 .xwnr p {
-    margin-bottom: 15px;
+    margin-bottom: 0.5em;
 }
 .xwtp {
     text-align: center;
