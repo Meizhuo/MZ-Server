@@ -1,49 +1,118 @@
 /* CSS Document */
+
+
+/*------------二次修改-------------------*/
 body{
-background:url(../images/bg_dl2.jpg) no-repeat;
-background-size:100% 100%;
-color:#FFFFFF;
-height:100%;
-width:100%;
-margin:0px;
-background-attachment:fixed;
+	margin: 0px;
+	height:100%;
+	width:100%;
+	font-family: 微软雅黑;
 }
-#btn-dl-big{
-width:130px;
-margin-top:20px;
+#container-body{
+    padding: 0px;
 }
-.info_a{
-font-size:12px;
-margin-top:10px;
+#container-header {
+	background: url('../images/bg_dl6.jpg') no-repeat scroll center 0px transparent;
+	background-size:100% 100%;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-attachment:fixed;
+	color: #fff;
+    text-shadow:0px 0px 4px #666;
 }
-#container_dl{
-margin-bottom:auto;
-margin-top:auto;
-text-align:center;
+#info-container{
+	width: 970px;
+    height: 560px;
+	padding: 20px;
+	margin: 0 auto;
 }
-.black{
-background-color:#fff;
-color:#000000;
-border-radius:3px;
-filter:alpha(opacity=40);  /*支持 IE 浏览器*/
--moz-opacity:0.40; /*支持 FireFox 浏览器*/
-opacity:0.40;  /*支持 Chrome, Opera, Safari 等浏览器*/
-padding:5px;
-width:150px;
-margin:0 auto;
-margin-bottom:20px;
-margin-top:20px;
+#header img{
+	float: left;
 }
-.span_dl_bt img{
-float:left;
+#header h3{
+	font-size: 30px;
+	font-weight: lighter;
+    margin-top: 10px;
 }
-.span_dl_bt{
-width:250px;
-margin:0 auto;
-margin-bottom:70px;
+.header-span{
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+/*    text-shadow:0px 0px 2px #000;
+*/    margin-bottom: 40px;
+    background-color:#fff;
+    font-weight: bold;
+    text-shadow:none;
+    color:#000000;
+    padding: 5px;
+    width: 320px;
+    border-radius:3px;
+    filter:alpha(opacity=40);  /*支持 IE 浏览器*/
+    -moz-opacity:0.40; /*支持 FireFox 浏览器*/
+    opacity:0.40;  /*支持 Chrome, Opera, Safari 等浏览器*/
 }
-.hl{
-font-size:24px;
-text-shadow:2px 2px 2px #000;
-margin-bottom:20px;
+#header h2{
+	font-size: 38px;
+	padding-top: 50px;
+}
+#header{
+    margin-top: 40px;
+    width: 400px;
+    float: left;
+}
+#dl-btn-left{
+	float: left;
+	padding-right: 10px;
+    color: #CCC;
+}
+#dl-btn-left p{
+    line-height: 10px;
+    text-shadow:none;
+}
+#dl-btn-left button{
+    background: url('../images/header-download.png') no-repeat scroll 0px 0px / 100% auto transparent;
+    width: 250px;
+    height: 117px;
+    border: 0px;
+} 
+#app-tamplate{
+    float: right;
+    top: 0px;
+    padding-right: 20px;
+}
+
+
+#container-middle{
+    padding-top: 100px;
+    width: 970px;
+    margin: 0 auto;
+    height: 550px;
+}
+#middle-example1{
+    float: left;
+background: url('../images/home.jpg') no-repeat scroll right 0px transparent;    height: 400px;
+    width:550px;
+}
+#middle-sub1 h3{
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 40px;
+    margin-bottom: 40px;
+}
+#middle-sub1{
+    font-size: 20px;
+    margin-top: 70px;
+}
+#middle-sub1 ul{
+    margin: 30px;
+    list-style-position: inside;
+}
+
+#footer{
+    width: 100%;
+    background-color: #222;
+    text-align: center;
+    padding: 20px;
+    color: #ccc;
+    line-height: 30px;
 }

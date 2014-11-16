@@ -17,6 +17,18 @@ class AppController extends BaseController {
         }
     }
     /**
+     * GET 获得当前最新版本的下载链接
+     */
+    public function lastDownloadUrl(){
+    	$new_version = M('appinfo');
+    	$data = $new_version->order('id desc')->limit(1)->select();
+    	if(count($data) > 0){
+			 header('Location: ' . $data[0]['url']);
+    	}else{
+    		$this->redirect('/admin/view/download');
+    	}
+    }
+    /**
      * POST 添加版本信息
      */
     public function addNewVersion() {
