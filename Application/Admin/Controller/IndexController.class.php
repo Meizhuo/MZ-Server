@@ -80,12 +80,12 @@ class IndexController extends BaseController {
      * @param number $category_id 文档目录id
      * @param number $page 页码
      */
-    public function checkDocument($status = 0, $category_id = 1, $page = 1) {
+    public function checkDocument($status = 1, $category_id = 1, $page = 1) {
         // TODO MZ:: 注意文档状态
         $this->reqAdmin();
-        // 默认为等待审核
+        // 默认为已审核
         if ($status != 0 && $status != 1 && $status != - 1) {
-            $status = 0;
+            $status = 1;
         }
         $category_id = (int)$category_id;
         if($category_id <1 || $category_id > 7 ){
