@@ -164,7 +164,7 @@
 
     //一键清理数据
     $('#btn-clean').on('click', function() {
-        $.get("{:U('/admin/common/cleanFile')}", function(json) {
+        $.get("{:U('/home/common/cleanFile','','')}", function(json) {
             if (json.code) {
                 alert(json.response);
             } else {

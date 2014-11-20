@@ -3,7 +3,7 @@ Common
 >后台通用接口
 
 ## 清除垃圾文件
-`GET /admin/common/cleanFile`
+`GET /home/common/cleanFile`
 满足以下条件就删除：
 * doc_id 为0 or 空
 * ins_id 为0 or 空
