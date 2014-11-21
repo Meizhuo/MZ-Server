@@ -31,10 +31,10 @@ $common_config = array(
 $_Server_Config_File = CONF_PATH.'/server_config.php';
 if(file_exists($_Server_Config_File)){
     $config = require($_Server_Config_File);
-    return array($config,$common_config);
+    return array_merge($config,$common_config);
 }else{
     //默认的测试环境配置
-    return array($common_config,array(
+    return array_merge($common_config,array(
             'SHOW_PAGE_TRACE' => true, // 显示页面Trace信息
             'DB_USER' => 'root', // 用户名
             'DB_PWD' => 'root', // 密码
