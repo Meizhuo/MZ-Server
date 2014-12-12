@@ -24,6 +24,8 @@ class Model {
 
     // 当前数据库操作对象
     protected $db               =   null;
+	// 数据库对象池
+	private   $_db				=	array();
     // 主键名称
     protected $pk               =   'id';
     // 主键是否自动增长
@@ -107,10 +109,12 @@ class Model {
             // 如果数据表字段没有定义则自动获取
             if(C('DB_FIELDS_CACHE')) {
                 $db   =  $this->dbName?:C('DB_NAME');
-                $fields = F('_fields/'.strtolower($db.'.'.$this->name));
+                $fields = F('_fields/'.strtolower($db.'.'.$this->tablePrefix.$this->name));
                 if($fields) {
                     $this->fields   =   $fields;
-                    $this->pk       =   $fields['_pk'];
+                    if(!empty($fields['_pk'])){
+                        $this->pk       =   $fields['_pk'];
+                    }
                     return ;
                 }
             }
@@ -159,7 +163,7 @@ class Model {
         if(C('DB_FIELDS_CACHE')){
             // 永久缓存数据表信息
             $db   =  $this->dbName?:C('DB_NAME');
-            F('_fields/'.strtolower($db.'.'.$this->name),$this->fields);
+            F('_fields/'.strtolower($db.'.'.$this->tablePrefix.$this->name),$this->fields);
         }
     }
 
@@ -305,10 +309,10 @@ class Model {
                 return false;
             }
         }
-        // 分析表达式
-        $options    =   $this->_parseOptions($options);
         // 数据处理
         $data       =   $this->_facade($data);
+        // 分析表达式
+        $options    =   $this->_parseOptions($options);
         if(false === $this->_before_insert($data,$options)) {
             return false;
         }
@@ -343,12 +347,12 @@ class Model {
             $this->error = L('_DATA_TYPE_INVALID_');
             return false;
         }
-        // 分析表达式
-        $options =  $this->_parseOptions($options);
         // 数据处理
         foreach ($dataList as $key=>$data){
             $dataList[$key] = $this->_facade($data);
         }
+        // 分析表达式
+        $options =  $this->_parseOptions($options);
         // 写入数据到数据库
         $result = $this->db->insertAll($dataList,$options,$replace);
         if(false !== $result ) {
@@ -419,14 +423,14 @@ class Model {
             } elseif (is_array($pk)) {
                 // 增加复合主键支持
                 foreach ($pk as $field) {
-                    if(isset($data[$pk])) {
+                    if(isset($data[$field])) {
                         $where[$field]      =   $data[$field];
                     } else {
                            // 如果缺少复合主键数据则不执行
                         $this->error        =   L('_OPERATION_WRONG_');
                         return false;
                     }
-                    unset($data[$pk]);
+                    unset($data[$field]);
                 }
             }
             if(!isset($where)){
@@ -652,7 +656,9 @@ class Model {
                 if(in_array($key,$fields,true)){
                     if(is_scalar($val)) {
                         $this->_parseType($options['where'],$key);
-                    }
+                    }elseif(is_array($val) && isset($_REQUEST[$key]) && is_array($_REQUEST[$key])){
+						$options['where'][$key]	=	(string)$val;
+					}
                 }elseif(!is_numeric($key) && '_' != substr($key,0,1) && false === strpos($key,'.') && false === strpos($key,'(') && false === strpos($key,'|') && false === strpos($key,'&')){
                     if(!empty($this->options['strict'])){
                         E(L('_ERROR_QUERY_EXPRESS_').':['.$key.'=>'.$val.']');
@@ -1186,7 +1192,7 @@ class Model {
                 // 验证因子定义格式
                 // array(field,rule,message,condition,type,when,params)
                 // 判断是否需要执行验证
-                if(empty($val[5]) || $val[5]== self::MODEL_BOTH || $val[5]== $type ) {
+                if(empty($val[5]) || ( $val[5]== self::MODEL_BOTH && $type < 3 ) || $val[5]== $type ) {
                     if(0==strpos($val[2],'{%') && strpos($val[2],'}'))
                         // 支持提示信息的多语言 使用 {%语言定义} 方式
                         $val[2]  =  L(substr($val[2],2,-1));
@@ -1409,21 +1415,20 @@ class Model {
             return $this->db;
         }
 
-        static $_db = array();
-        if(!isset($_db[$linkNum]) || $force ) {
+        if(!isset($this->_db[$linkNum]) || $force ) {
             // 创建一个新的实例
             if(!empty($config) && is_string($config) && false === strpos($config,'/')) { // 支持读取配置参数
                 $config  =  C($config);
             }
-            $_db[$linkNum]            =    Db::getInstance($config);
+            $this->_db[$linkNum]            =    Db::getInstance($config);
         }elseif(NULL === $config){
-            $_db[$linkNum]->close(); // 关闭数据库连接
-            unset($_db[$linkNum]);
+            $this->_db[$linkNum]->close(); // 关闭数据库连接
+            unset($this->_db[$linkNum]);
             return ;
         }
 
         // 切换数据库连接
-        $this->db   =    $_db[$linkNum];
+        $this->db   =    $this->_db[$linkNum];
         $this->_after_db();
         // 字段检测
         if(!empty($this->name) && $this->autoCheckFields)    $this->_checkTableInfo();
@@ -1552,9 +1557,13 @@ class Model {
      */
     public function getDbFields(){
         if(isset($this->options['table'])) {// 动态指定表名
-            $array      =   explode(' ',$this->options['table']);
-            $fields     =   $this->db->getFields($array[0]);
-            return  $fields?array_keys($fields):false;
+            if(is_array($this->options['table'])){
+                $table  =   key($this->options['table']);
+            }else{
+                $table  =   $this->options['table'];
+            }
+            $fields     =   $this->db->getFields($table);
+            return  $fields ? array_keys($fields) : false;
         }
         if($this->fields) {
             $fields     =  $this->fields;
