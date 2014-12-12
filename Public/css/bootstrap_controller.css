@@ -70,7 +70,7 @@ body{
     text-shadow:none;
 }
 #dl-btn-left button{
-    background: url('../images/header-download.png') no-repeat scroll 0px 0px / 100% auto transparent;
+   /* background: url('../images/header-download.png') no-repeat scroll 0px 0px / 100% auto transparent;*/
     width: 250px;
     height: 117px;
     border: 0px;
